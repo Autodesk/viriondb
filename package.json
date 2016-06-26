@@ -62,6 +62,7 @@
     "postcss-nested": "^1.0.0",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.0.1",
     "rimraf": "^2.3.4",
     "selenium-standalone": "4.9.1",
     "sinon": "^1.17.2",
