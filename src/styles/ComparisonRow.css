@@ -1,0 +1,30 @@
+@import './variables.css';
+
+/* could use SCSS extends language equivalent for CSS4, but this is pretty clean just not modular */
+
+.ComparisonActions,
+.ComparisonRow {
+	display: table-row;
+	background-color: var(--colors-blueGreyLighter);
+	transition: background-color var(--timing-fast) ease-out;
+
+	&-key,
+	&-value {
+		padding: 0.5em 1em;
+		display: table-cell;
+	}
+
+	&-key {
+		width: 250px;
+		text-align: right;
+		border-right: 1px solid var(--colors-greyMedLight);
+	}
+
+	&-value {
+
+	}
+
+	&.active {
+		background-color: var(--colors-white);
+	}
+}

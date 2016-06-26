@@ -1,0 +1,6 @@
+@import './variables.css';
+
+.Footer {
+	height: 2em;
+	background-color: var(--background-color-footer);
+}

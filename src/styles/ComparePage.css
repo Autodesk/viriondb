@@ -1,0 +1,11 @@
+@import './variables.css';
+
+.ComparePage {
+	background-color: var(--colors-blueGreyLighter);
+
+	&-table {
+		display: table;
+		padding: 1em;
+		overflow: scroll;
+	}
+}

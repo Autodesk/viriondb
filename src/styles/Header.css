@@ -1,0 +1,6 @@
+@import './variables.css';
+
+.Header {
+	height: 2em;
+	background-color: var(--background-color-header);
+}
