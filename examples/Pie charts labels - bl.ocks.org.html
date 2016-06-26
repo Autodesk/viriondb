@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://bl.ocks.org/dbuezas/9306799 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=1000">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mbostock">
+<meta property="og:url" content="http://bl.ocks.org/dbuezas/9306799">
+<meta property="og:title" content="Pie charts labels">
+<meta property="og:description" content="David Buezas’s Block 9306799">
+<meta property="og:image" content="http://bl.ocks.org/dbuezas/raw/9306799/dcd5e3bc795cd0bc878223a1aa00c0a18b4dd291/thumbnail.png">
+<title>Pie charts labels - bl.ocks.org</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css");
+
+</style>
+
+</head><body><header>
+  <div class="column">
+    <div class="navigation">
+      <a href="http://bl.ocks.org/">Popular</a>
+      / <a href="http://bl.ocks.org/-/about">About</a>
+    </div>
+    <a class="user" href="http://bl.ocks.org/dbuezas"><img class="avatar" src="./Pie charts labels - bl.ocks.org_files/777196" width="30" height="30">David Buezas</a>’s
+    Block <a class="gist gist-id self" title="View Gist on GitHub." href="https://gist.github.com/dbuezas/9306799">9306799</a>    <div class="date">Updated February 16, 2016</div>
+  </div>
+</header>
+
+<div class="column">
+  <h1>Pie charts labels</h1>
+  <div class="index">
+    <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="./Pie charts labels - bl.ocks.org_files/saved_resource.html" marginwidth="0" marginheight="0" style="height:500px;" scrolling="no"></iframe>
+  </div>
+  <div class="index-pop">
+    <a target="_blank" title="Open Block 9306799 a new window." href="http://bl.ocks.org/dbuezas/raw/9306799">Open<svg height="16" width="12"><path d="M11 10h1v3c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3v1H1v10h10V10zM6 2l2.25 2.25-3.25 3.25 1.5 1.5 3.25-3.25 2.25 2.25V2H6z"></path></svg></a>
+  </div>
+  <div class="gist-readme" data-key="README.md"><p>This variation of a donut chart demonstrates how to add labels with lines. Clicking on the button changes the displayed data.
+Check <a href="http://bl.ocks.org/dbuezas/9572040">Pie Chart with Labels and Missing Data</a> to see how to handle transitions with missing/new data.</p></div>
+  <div class="gist-sources">
+    <div class="gist-source" data-key="index.html">
+      <h2>index.html<a name="index.html" class="anchor" href="http://bl.ocks.org/dbuezas/9306799#index.html">#</a></h2>
+      <pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+<span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-family</span>:<span class="value"> <span class="string">"Helvetica Neue"</span>, Helvetica, Arial, sans-serif</span>;</span>
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">960</span>px</span>;</span>
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">500</span>px</span>;</span>
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="tag">svg</span> <span class="rules">{
+	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span>;</span>
+	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100</span>%</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="tag">path</span><span class="class">.slice</span><span class="rules">{
+	<span class="rule"><span class="attribute">stroke-width</span>:<span class="value"><span class="number">2</span>px</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="tag">polyline</span><span class="rules">{
+	<span class="rule"><span class="attribute">opacity</span>:<span class="value"> .<span class="number">3</span></span>;</span>
+	<span class="rule"><span class="attribute">stroke</span>:<span class="value"> black</span>;</span>
+	<span class="rule"><span class="attribute">stroke-width</span>:<span class="value"> <span class="number">2</span>px</span>;</span>
+	<span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+<span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"randomize"</span>&gt;</span>randomize<span class="tag">&lt;/<span class="title">button</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://d3js.org/d3.v3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+
+<span class="keyword">var</span> svg = d3.select(<span class="string">"body"</span>)
+	.append(<span class="string">"svg"</span>)
+	.append(<span class="string">"g"</span>)
+
+svg.append(<span class="string">"g"</span>)
+	.attr(<span class="string">"class"</span>, <span class="string">"slices"</span>);
+svg.append(<span class="string">"g"</span>)
+	.attr(<span class="string">"class"</span>, <span class="string">"labels"</span>);
+svg.append(<span class="string">"g"</span>)
+	.attr(<span class="string">"class"</span>, <span class="string">"lines"</span>);
+
+<span class="keyword">var</span> width = <span class="number">960</span>,
+    height = <span class="number">450</span>,
+	radius = Math.min(width, height) / <span class="number">2</span>;
+
+<span class="keyword">var</span> pie = d3.layout.pie()
+	.sort(<span class="literal">null</span>)
+	.value(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+		<span class="keyword">return</span> d.value;
+	});
+
+<span class="keyword">var</span> arc = d3.svg.arc()
+	.outerRadius(radius * <span class="number">0.8</span>)
+	.innerRadius(radius * <span class="number">0.4</span>);
+
+<span class="keyword">var</span> outerArc = d3.svg.arc()
+	.innerRadius(radius * <span class="number">0.9</span>)
+	.outerRadius(radius * <span class="number">0.9</span>);
+
+svg.attr(<span class="string">"transform"</span>, <span class="string">"translate("</span> + width / <span class="number">2</span> + <span class="string">","</span> + height / <span class="number">2</span> + <span class="string">")"</span>);
+
+<span class="keyword">var</span> key = <span class="function"><span class="keyword">function</span><span class="params">(d)</span>{</span> <span class="keyword">return</span> d.data.label; };
+
+<span class="keyword">var</span> color = d3.scale.ordinal()
+	.domain([<span class="string">"Lorem ipsum"</span>, <span class="string">"dolor sit"</span>, <span class="string">"amet"</span>, <span class="string">"consectetur"</span>, <span class="string">"adipisicing"</span>, <span class="string">"elit"</span>, <span class="string">"sed"</span>, <span class="string">"do"</span>, <span class="string">"eiusmod"</span>, <span class="string">"tempor"</span>, <span class="string">"incididunt"</span>])
+	.range([<span class="string">"#98abc5"</span>, <span class="string">"#8a89a6"</span>, <span class="string">"#7b6888"</span>, <span class="string">"#6b486b"</span>, <span class="string">"#a05d56"</span>, <span class="string">"#d0743c"</span>, <span class="string">"#ff8c00"</span>]);
+
+<span class="function"><span class="keyword">function</span> <span class="title">randomData</span> <span class="params">()</span>{</span>
+	<span class="keyword">var</span> labels = color.domain();
+	<span class="keyword">return</span> labels.map(<span class="function"><span class="keyword">function</span><span class="params">(label)</span>{</span>
+		<span class="keyword">return</span> { label: label, value: Math.random() }
+	});
+}
+
+change(randomData());
+
+d3.select(<span class="string">".randomize"</span>)
+	.on(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+		change(randomData());
+	});
+
+
+<span class="function"><span class="keyword">function</span> <span class="title">change</span><span class="params">(data)</span> {</span>
+
+	<span class="comment">/* ------- PIE SLICES -------*/</span>
+	<span class="keyword">var</span> slice = svg.select(<span class="string">".slices"</span>).selectAll(<span class="string">"path.slice"</span>)
+		.data(pie(data), key);
+
+	slice.enter()
+		.insert(<span class="string">"path"</span>)
+		.style(<span class="string">"fill"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> color(d.data.label); })
+		.attr(<span class="string">"class"</span>, <span class="string">"slice"</span>);
+
+	slice		
+		.transition().duration(<span class="number">1000</span>)
+		.attrTween(<span class="string">"d"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+			<span class="keyword">this</span>._current = <span class="keyword">this</span>._current || d;
+			<span class="keyword">var</span> interpolate = d3.interpolate(<span class="keyword">this</span>._current, d);
+			<span class="keyword">this</span>._current = interpolate(<span class="number">0</span>);
+			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(t)</span> {</span>
+				<span class="keyword">return</span> arc(interpolate(t));
+			};
+		})
+
+	slice.exit()
+		.remove();
+
+	<span class="comment">/* ------- TEXT LABELS -------*/</span>
+
+	<span class="keyword">var</span> text = svg.select(<span class="string">".labels"</span>).selectAll(<span class="string">"text"</span>)
+		.data(pie(data), key);
+
+	text.enter()
+		.append(<span class="string">"text"</span>)
+		.attr(<span class="string">"dy"</span>, <span class="string">".35em"</span>)
+		.text(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+			<span class="keyword">return</span> d.data.label;
+		});
+	
+	<span class="function"><span class="keyword">function</span> <span class="title">midAngle</span><span class="params">(d)</span>{</span>
+		<span class="keyword">return</span> d.startAngle + (d.endAngle - d.startAngle)/<span class="number">2</span>;
+	}
+
+	text.transition().duration(<span class="number">1000</span>)
+		.attrTween(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span>
+			<span class="keyword">this</span>._current = <span class="keyword">this</span>._current || d;
+			<span class="keyword">var</span> interpolate = d3.interpolate(<span class="keyword">this</span>._current, d);
+			<span class="keyword">this</span>._current = interpolate(<span class="number">0</span>);
+			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(t)</span> {</span>
+				<span class="keyword">var</span> d2 = interpolate(t);
+				<span class="keyword">var</span> pos = outerArc.centroid(d2);
+				pos[<span class="number">0</span>] = radius * (midAngle(d2) &lt; Math.PI ? <span class="number">1</span> : -<span class="number">1</span>);
+				<span class="keyword">return</span> <span class="string">"translate("</span>+ pos +<span class="string">")"</span>;
+			};
+		})
+		.styleTween(<span class="string">"text-anchor"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span>{</span>
+			<span class="keyword">this</span>._current = <span class="keyword">this</span>._current || d;
+			<span class="keyword">var</span> interpolate = d3.interpolate(<span class="keyword">this</span>._current, d);
+			<span class="keyword">this</span>._current = interpolate(<span class="number">0</span>);
+			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(t)</span> {</span>
+				<span class="keyword">var</span> d2 = interpolate(t);
+				<span class="keyword">return</span> midAngle(d2) &lt; Math.PI ? <span class="string">"start"</span>:<span class="string">"end"</span>;
+			};
+		});
+
+	text.exit()
+		.remove();
+
+	<span class="comment">/* ------- SLICE TO TEXT POLYLINES -------*/</span>
+
+	<span class="keyword">var</span> polyline = svg.select(<span class="string">".lines"</span>).selectAll(<span class="string">"polyline"</span>)
+		.data(pie(data), key);
+	
+	polyline.enter()
+		.append(<span class="string">"polyline"</span>);
+
+	polyline.transition().duration(<span class="number">1000</span>)
+		.attrTween(<span class="string">"points"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span>{</span>
+			<span class="keyword">this</span>._current = <span class="keyword">this</span>._current || d;
+			<span class="keyword">var</span> interpolate = d3.interpolate(<span class="keyword">this</span>._current, d);
+			<span class="keyword">this</span>._current = interpolate(<span class="number">0</span>);
+			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(t)</span> {</span>
+				<span class="keyword">var</span> d2 = interpolate(t);
+				<span class="keyword">var</span> pos = outerArc.centroid(d2);
+				pos[<span class="number">0</span>] = radius * <span class="number">0.95</span> * (midAngle(d2) &lt; Math.PI ? <span class="number">1</span> : -<span class="number">1</span>);
+				<span class="keyword">return</span> [arc.centroid(d2), outerArc.centroid(d2), pos];
+			};			
+		});
+	
+	polyline.exit()
+		.remove();
+};
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></pre>
+    </div>
+  </div>
+  <div class="gist-license">
+    <h2>LICENSE<a name="license" class="anchor" href="http://bl.ocks.org/dbuezas/9306799#license">#</a></h2>
+    This block appears to have <a target="_blank" href="http://choosealicense.com/no-license/">no license</a>. Please contact <a target="_blank" href="https://github.com/dbuezas">the author</a> to request a license.
+  </div>
+</div>
+
+<script src="./Pie charts labels - bl.ocks.org_files/d3.v3.min.js"></script>
+<script src="./Pie charts labels - bl.ocks.org_files/highlight.min.js"></script>
+<script>
+
+var gist = {"public":true,"sha":"dcd5e3bc795cd0bc878223a1aa00c0a18b4dd291","files":{"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":266,"sha":"48d61d9544f94b933519307f3d0b42a01227f699"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":3827,"sha":"241fbe2d8045df88402eebba0eecd35460339e14"},"thumbnail.gif":{"language":null,"type":"image/gif","filename":"thumbnail.gif","size":474399,"sha":"ceb4d5cdaeebe4acd83d7cb1b1fe9cccb624ab5a"},"thumbnail.png":{"language":null,"type":"image/png","filename":"thumbnail.png","size":7483,"sha":"9332a3b79ad79668537e1ebf2b9284ec54d6d63c"}},"created_at":"2014-03-02T13:47:41Z","updated_at":"2016-02-16T18:24:25Z","description":"Pie charts labels","owner":{"login":"dbuezas"},"id":"9306799"};
+
+var files = d3.values(gist.files);
+
+d3.select(".gist-readme")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/dbuezas/raw/9306799/dcd5e3bc795cd0bc878223a1aa00c0a18b4dd291/" + d.filename, function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+d3.selectAll(".gist-source")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+  .select("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/dbuezas/raw/9306799/dcd5e3bc795cd0bc878223a1aa00c0a18b4dd291/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+</script>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "auto");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Pie charts labels - bl.ocks.org_files/analytics.js"></script>
+</body></html>

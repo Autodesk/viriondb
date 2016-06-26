@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://bl.ocks.org/davidwclin/ad5d13db260caeffe9b3 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=1000">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mbostock">
+<meta property="og:url" content="http://bl.ocks.org/davidwclin/ad5d13db260caeffe9b3">
+<meta property="og:title" content="Radial Boxplot">
+<meta property="og:description" content="David Lin’s Block ad5d13db260caeffe9b3">
+<meta property="og:image" content="http://bl.ocks.org/davidwclin/raw/ad5d13db260caeffe9b3/d845d44a593cd90f3391375ba301ca3503950a0e/thumbnail.png">
+<title>Radial Boxplot - bl.ocks.org</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css");
+
+</style>
+
+</head><body><header>
+  <div class="column">
+    <div class="navigation">
+      <a href="http://bl.ocks.org/">Popular</a>
+      / <a href="http://bl.ocks.org/-/about">About</a>
+    </div>
+    <a class="user" href="http://bl.ocks.org/davidwclin"><img class="avatar" src="./Radial Boxplot - bl.ocks.org_files/1607383" width="30" height="30">David Lin</a>’s
+    Block <a class="gist gist-id self" title="View Gist on GitHub." href="https://gist.github.com/davidwclin/ad5d13db260caeffe9b3">ad5d13db260caeffe9b3</a>    <div class="date">Updated August 29, 2015</div>
+  </div>
+</header>
+
+<div class="column">
+  <h1>Radial Boxplot</h1>
+  <div class="index">
+    <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="./Radial Boxplot - bl.ocks.org_files/saved_resource.html" marginwidth="0" marginheight="0" style="height:500px;" scrolling="no"></iframe>
+  </div>
+  <div class="index-pop">
+    <a target="_blank" title="Open Block ad5d13db260caeffe9b3 a new window." href="http://bl.ocks.org/davidwclin/raw/ad5d13db260caeffe9b3">Open<svg height="16" width="12"><path d="M11 10h1v3c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3v1H1v10h10V10zM6 2l2.25 2.25-3.25 3.25 1.5 1.5 3.25-3.25 2.25 2.25V2H6z"></path></svg></a>
+  </div>
+  <div class="gist-readme" data-key="README.md"><p><a href="http://en.wikipedia.org/wiki/Box_plot">Boxplots</a> are a great way to quickly summarize probability distributions using a high <a href="http://www.infovis-wiki.net/index.php/Data-Ink_Ratio">data-ink ratio</a>.</p>
+
+<p>At <a href="http://getliquidlandscape.com/">LiquidLandscape</a>, we toyed around with the idea of a boxplot for continuous data, in particular, cyclical data. We came up with a natural extension, the radial boxplot. It's easy to imagine how one would look once you hear its name.</p>
+
+<h3 id="notes">Notes</h3>
+
+<ul>
+<li>Sample data from the <a href="http://map.datacanvas.org/#!/data">Data Canvas - Sense Your City</a> project. Taken from San Francisco between 1/1/15 and 4/1/15.</li>
+<li>rbox.js uses a <a href="http://bl.ocks.org/davidwclin/square.github.io/crossfilter/">crossfilter</a>.</li>
+</ul></div>
+  <div class="gist-sources">
+    <div class="gist-source" data-key="index.html">
+      <h2>index.html<a name="index.html" class="anchor" href="http://bl.ocks.org/davidwclin/ad5d13db260caeffe9b3#index.html">#</a></h2>
+      <pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+    <span class="tag">body</span> <span class="rules">{
+      <span class="rule"><span class="attribute">font</span>:<span class="value"> <span class="number">10</span>px sans-serif</span>;</span>
+    <span class="rule">}</span></span>
+
+    <span class="class">.axis</span> <span class="tag">line</span> <span class="rules">{
+      <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="number">#000</span></span>;</span>
+    <span class="rule">}</span></span>
+
+    <span class="class">.axis</span> <span class="tag">path</span> <span class="rules">{
+      <span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+      <span class="rule"><span class="attribute">stroke</span>:<span class="value"> <span class="number">#000</span></span>;</span>
+    <span class="rule">}</span></span>
+
+    <span class="class">.layer</span> <span class="rules">{
+      <span class="rule"><span class="attribute">stroke</span>:<span class="value"> black</span>;</span>
+      <span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+    <span class="rule">}</span></span>
+
+    <span class="class">.outlier</span> <span class="rules">{
+      <span class="rule"><span class="attribute">stroke</span>:<span class="value"> black</span>;</span>
+      <span class="rule"><span class="attribute">fill</span>:<span class="value"> none</span>;</span>
+      <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0.3</span></span>;</span>
+    <span class="rule">}</span></span>
+
+    <span class="class">.axis</span> + <span class="class">.axis</span> <span class="tag">g</span> <span class="tag">text</span> <span class="rules">{
+      <span class="rule"><span class="attribute">display</span>:<span class="value"> none</span>;</span>
+    <span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"rbox1"</span> <span class="attribute">class</span>=<span class="value">"rbox"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.11/crossfilter.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"rbox.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+        <span class="keyword">var</span> formatDate = d3.time.format(<span class="string">"%a"</span>),
+            formatDay = <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> formatDate(<span class="keyword">new</span> Date(<span class="number">2007</span>, <span class="number">0</span>, d)); },
+            formatHourX = d3.time.format(<span class="string">"%H"</span>),
+            formatHour = <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> formatHourX(<span class="keyword">new</span> Date(<span class="number">2007</span>, <span class="number">0</span>, <span class="number">0</span>, d)); }
+        ;
+
+
+        d3.csv(<span class="string">"san-francisco.csv"</span>, toType, <span class="function"><span class="keyword">function</span><span class="params">(error, csv)</span> {</span>
+            <span class="keyword">var</span> metric = <span class="string">"temperature"</span>,
+                xf = toXf(csv, metric);
+
+            <span class="keyword">var</span> rbox1 = rbox()
+                .width(<span class="number">500</span>).height(<span class="number">500</span>)
+                .dimension(xf.day).group(xf.days)
+                .axisText(formatDay)
+                .label(<span class="string">"SF Temp 1/1/15~4/1/15"</span>)
+                .scaleOverride([<span class="number">5</span>,<span class="number">35</span>]);
+
+            <span class="keyword">var</span> chart = d3.selectAll(<span class="string">"#rbox1"</span>).call(rbox1);
+            console.log(<span class="string">"should be done"</span>);
+        });
+
+        <span class="function"><span class="keyword">function</span> <span class="title">toXf</span><span class="params">(csv, metric)</span> {</span>
+            <span class="keyword">var</span> data = crossfilter(csv),
+                all = data.groupAll(),
+                hour = data.dimension(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> Math.floor((d.day % <span class="number">1</span>) * <span class="number">24</span>); }),
+                hours = setReduceStats(hour.group(Object), metric),
+                day = data.dimension(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.day; }),
+                days = setReduceStats(day.group(Object), metric),
+                date = data.dimension(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.date; }),
+                dates = date.group(d3.time.day);
+            <span class="keyword">return</span> {all:all, hour:hour, hours:hours, day:day, days:days, date:date, dates:dates};
+        }
+
+        <span class="function"><span class="keyword">function</span> <span class="title">toType</span><span class="params">(d)</span> {</span>
+            <span class="keyword">var</span> date = <span class="keyword">new</span> Date(Date.parse(d.timestamp));
+            d.day = (date.getDay() + date.getHours() / <span class="number">24</span>) % <span class="number">7</span>; <span class="comment">// [0, 7)</span>
+            d.date = date;
+            d.longitude = +d.longitude;
+            d.latitude = +d.latitude;
+            d.temperature = +d.temperature;
+            d.humidity = +d.humidity;
+            d.light = +d.light;
+            d.dust = +d.dust;
+            d.airquality_raw = +d.airquality_raw;
+            <span class="keyword">return</span> d;
+        }
+
+    </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+</code></pre>
+    </div>
+    <div class="gist-source" data-key="rbox.js">
+      <h2>rbox.js<a name="rbox.js" class="anchor" href="http://bl.ocks.org/davidwclin/ad5d13db260caeffe9b3#rbox.js">#</a></h2>
+      <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">binarySearch</span><span class="params">(a, key)</span> {</span>
+  <span class="keyword">var</span> low = <span class="number">0</span>,
+      high = a.length - <span class="number">1</span>;
+  <span class="keyword">while</span>(low &lt;= high) {
+    <span class="keyword">var</span> mid = Math.floor((low + high) / <span class="number">2</span>),
+        midVal = a[mid];
+    <span class="keyword">if</span>(midVal &lt; key) {
+      low = mid + <span class="number">1</span>;
+    } <span class="keyword">else</span> <span class="keyword">if</span> (midVal &gt; key) {
+      high = mid - <span class="number">1</span>;
+    } <span class="keyword">else</span> {
+      <span class="keyword">return</span> mid;
+    }
+  }
+  <span class="keyword">return</span> low; <span class="comment">//returns insertion index if not found</span>
+}
+
+<span class="comment">// add boxplot stats.</span>
+<span class="comment">// m has .sortedVals</span>
+<span class="function"><span class="keyword">function</span> <span class="title">addStats</span><span class="params">(m)</span> {</span>
+  <span class="keyword">var</span> vs = m.sortedVals,
+      q1 = d3.quantile(vs, <span class="number">0.25</span>),
+      q2 = d3.quantile(vs, <span class="number">0.5</span>),
+      q3 = d3.quantile(vs, <span class="number">0.75</span>),
+      iqr = q3 - q1;
+  <span class="keyword">var</span> i = -<span class="number">1</span>,
+      j = vs.length;
+  <span class="keyword">while</span> (vs[++i] &lt; q1 - <span class="number">1.5</span> * iqr);
+  <span class="keyword">while</span> (vs[--j] &gt; q3 + <span class="number">1.5</span> * iqr);
+
+  <span class="keyword">var</span> wl = vs[i], <span class="comment">//whisker low</span>
+      wh = vs[j], <span class="comment">//whisker high</span>
+      ol = vs.slice(<span class="number">0</span>, i),        <span class="comment">//outliers low</span>
+      oh = vs.slice(++j, vs.length); <span class="comment">//outliers high</span>
+  m.min = vs[<span class="number">0</span>];
+  m.max = vs[vs.length-<span class="number">1</span>];
+  m.q1 = q1;
+  m.q2 = q2;
+  m.q3 = q3;
+  m.wl = wl;
+  m.wh = wh;
+  m.ol = ol;
+  m.oh = oh;
+}
+
+<span class="comment">// sets group.reduce</span>
+<span class="comment">// group =&gt; crossfilter group.</span>
+<span class="function"><span class="keyword">function</span> <span class="title">setReduceStats</span><span class="params">(group, metric)</span> {</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">reduceAdd</span><span class="params">(p, v)</span> {</span>
+    <span class="keyword">var</span> i = binarySearch(p.sortedVals,v[metric]);
+    p.sortedVals.splice(i, <span class="number">0</span>, v[metric]);
+    <span class="keyword">return</span> p;
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">reduceRemove</span><span class="params">(p, v)</span> {</span>
+    <span class="keyword">var</span> i = binarySearch(p.sortedVals, v[metric]);
+    p.sortedVals.splice(i, <span class="number">1</span>);
+    <span class="keyword">return</span> p;
+  }
+
+  <span class="function"><span class="keyword">function</span> <span class="title">reduceInitial</span><span class="params">()</span> {</span>
+    <span class="keyword">return</span> {sortedVals:[], min:<span class="number">0</span>, max:<span class="number">0</span>, wl:<span class="number">0</span>, q1:<span class="number">0</span>, q2:<span class="number">0</span>, q3:<span class="number">0</span>, wh:<span class="number">0</span>, ol:[], oh:[]};
+  }
+  <span class="keyword">return</span> group.reduce(reduceAdd, reduceRemove, reduceInitial);
+}
+
+<span class="keyword">var</span> rbox = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">var</span> width = <span class="number">960</span>,
+      height = <span class="number">500</span>,
+      innerRadius = <span class="number">80</span>,
+      scaleOverride = <span class="literal">null</span>,
+      label = <span class="string">""</span>,
+      dimension,
+      group,
+      axisText = Object,
+      color = <span class="string">"#3399FF"</span>
+  ;
+
+  <span class="comment">// selection =&gt; nested data</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">my</span><span class="params">(selection)</span> {</span>
+    <span class="keyword">var</span> svg = selection.select(<span class="string">"svg g"</span>);
+    <span class="keyword">if</span>(svg.empty()) {
+      selection = selection.append(<span class="string">"svg"</span>)
+          .attr(<span class="string">"width"</span>, width)
+          .attr(<span class="string">"height"</span>, height)
+          .attr(<span class="string">'class'</span>, <span class="string">'star-container'</span>)
+        .append(<span class="string">"g"</span>)
+          .attr(<span class="string">"transform"</span>, <span class="string">"translate("</span> + width / <span class="number">2</span> + <span class="string">","</span> + height / <span class="number">2</span> + <span class="string">")"</span>);
+      selection.append(<span class="string">"g"</span>).attr(<span class="string">"class"</span>, <span class="string">"layers"</span>);
+      selection.append(<span class="string">"g"</span>).attr(<span class="string">"class"</span>, <span class="string">"axes"</span>);
+      selection.append(<span class="string">"g"</span>).attr(<span class="string">"class"</span>, <span class="string">"outliers"</span>)
+    } <span class="keyword">else</span> {
+      selection = svg;
+    }
+
+    <span class="keyword">var</span> fill = [d3.rgb(color).brighter(), color, color, d3.rgb(color).brighter()];
+
+    <span class="keyword">var</span> outerRadius = height / <span class="number">2</span> - <span class="number">10</span>;
+    <span class="keyword">var</span> angle = d3.time.scale()
+      .range([<span class="number">0</span>, <span class="number">2</span> * Math.PI]);
+
+    <span class="keyword">var</span> radius = d3.scale.linear()
+      .range([innerRadius, outerRadius]);
+
+    <span class="keyword">var</span> stack = d3.layout.stack()
+      .offset(<span class="string">"zero"</span>)
+      .x(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.key; })
+      .y(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.value; })
+    ;
+
+    <span class="keyword">var</span> area = d3.svg.area.radial()
+      .interpolate(<span class="string">"cardinal-closed"</span>)
+      .angle(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> angle(d.key); })
+      .innerRadius(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> radius(d.y0); })
+      .outerRadius(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> radius(d.y0 + d.y); });
+
+    selection.each(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="comment">//groups</span>
+      <span class="keyword">var</span> selection = d3.select(<span class="keyword">this</span>),
+          g = selection.select(<span class="string">"g"</span>);
+
+      <span class="keyword">var</span> gs = group.all();
+      gs.forEach(<span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span> addStats(g.value); });
+      <span class="keyword">var</span> ks = [<span class="string">"wl"</span>, <span class="string">"q1"</span>, <span class="string">"q2"</span>, <span class="string">"q3"</span>, <span class="string">"wh"</span>];
+      <span class="keyword">var</span> nested = ks.map(<span class="function"><span class="keyword">function</span><span class="params">(k, i)</span> {</span>
+        <span class="keyword">return</span> gs.map(<span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span>
+          <span class="keyword">var</span> tmp = Object.create(g); <span class="comment">//clone(ish)</span>
+          tmp.value = tmp.value[k] - (tmp.value[ks[i - <span class="number">1</span>]] || <span class="number">0.0</span>);
+          <span class="keyword">return</span> tmp;
+        });
+      });
+      <span class="keyword">var</span> layers = stack(nested);
+      layers.shift(); <span class="comment">//no need to draw first layer</span>
+
+      <span class="comment">// Extend the domain slightly to match the range of [0, 2π].</span>
+      angle.domain([<span class="number">0</span>, Math.floor(d3.max(gs, <span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span> <span class="keyword">return</span> g.key; })) + <span class="number">0.999</span>]); <span class="comment">// hour =&gt; [0, 24), day =&gt; [0, 7)</span>
+      <span class="keyword">if</span>(scaleOverride) {
+        radius.domain(scaleOverride);
+      } <span class="keyword">else</span> {
+        radius.domain([d3.min(gs, <span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span> <span class="keyword">return</span> g.value.min; }),
+                       d3.max(gs, <span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span> <span class="keyword">return</span> g.value.max; })]);
+      }
+
+      <span class="keyword">var</span> selLabel = selection.selectAll(<span class="string">".label"</span>)
+          .data([label]);
+      selLabel.enter().append(<span class="string">"text"</span>)
+          .attr(<span class="string">"class"</span>, <span class="string">"label"</span>)
+          .attr(<span class="string">"text-anchor"</span>, <span class="string">"middle"</span>);
+      selLabel
+          .text(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d; })
+          .style(<span class="string">"opacity"</span>, <span class="number">1</span>);
+
+
+      <span class="keyword">var</span> selLayer = selection.select(<span class="string">".layers"</span>).selectAll(<span class="string">".layer"</span>)
+          .data(layers);
+      selLayer.enter().append(<span class="string">"path"</span>)
+          .attr(<span class="string">"class"</span>, <span class="string">"layer"</span>)
+          .attr(<span class="string">"d"</span>, <span class="function"><span class="keyword">function</span><span class="params">(ds)</span> {</span> <span class="keyword">return</span> area(ds.map(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> {key:d.key, y0:<span class="number">0</span>, y:<span class="number">0</span>}; })); })
+          .style(<span class="string">"fill"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d, i)</span> {</span> <span class="keyword">return</span> fill[i]; })
+      selLayer
+        .transition().duration(<span class="number">200</span>)
+          .attr(<span class="string">"d"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> area(d); })
+          .style(<span class="string">"fill"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d, i)</span> {</span> <span class="keyword">return</span> fill[i]; });
+
+
+      <span class="keyword">var</span> outliersss = [<span class="string">"ol"</span>, <span class="string">"oh"</span>].map(<span class="function"><span class="keyword">function</span><span class="params">(k)</span> {</span>
+          <span class="keyword">return</span> gs.map(<span class="function"><span class="keyword">function</span><span class="params">(g)</span> {</span>
+              <span class="keyword">var</span> theta = angle(g.key) - <span class="number">0.5</span>* Math.PI; <span class="comment">//0 is at 12 o clock.</span>
+              <span class="keyword">return</span> g.value[k].map(<span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+                  <span class="keyword">var</span> h = radius(v);
+                  <span class="keyword">var</span> coord = {x: h * Math.cos(theta),
+                               y: h * Math.sin(theta)};
+                  <span class="keyword">return</span> coord;
+              });
+          });
+      });
+      <span class="keyword">var</span> outlierss = [].concat.apply([], outliersss),
+          outliers = [].concat.apply([], outlierss);
+      <span class="keyword">var</span> selOutlier = selection.select(<span class="string">".outliers"</span>).selectAll(<span class="string">".outlier"</span>)
+          .data(outliers);
+      selOutlier.enter()
+          .append(<span class="string">"circle"</span>)
+          .attr(<span class="string">"class"</span>, <span class="string">"outlier"</span>)
+      selOutlier
+          .attr(<span class="string">"cx"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.x; })
+          .attr(<span class="string">"cy"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.y; })
+          .attr(<span class="string">"r"</span>, <span class="number">2</span>);
+      selOutlier.exit()
+          .remove();
+
+      <span class="keyword">var</span> selAxis = selection.select(<span class="string">".axes"</span>).selectAll(<span class="string">".axis"</span>)
+        .data(d3.range(Math.floor(+angle.domain()[<span class="number">1</span>]) + <span class="number">1</span>))
+      selAxis.enter().append(<span class="string">"g"</span>)
+          .attr(<span class="string">"class"</span>, <span class="string">"axis"</span>)
+        .append(<span class="string">"text"</span>)
+          .attr(<span class="string">"class"</span>, <span class="string">"axisLabel"</span>);
+      selAxis <span class="comment">//.transition().duration(1000)</span>
+          .attr(<span class="string">"transform"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> <span class="string">"rotate("</span> + angle(d) * <span class="number">180</span> / Math.PI + <span class="string">")"</span>; })
+          .call(d3.svg.axis()
+              .scale(radius.copy().range([-innerRadius, -outerRadius]))
+              .orient(<span class="string">"left"</span>));
+      selAxis.selectAll(<span class="string">"text.axisLabel"</span>)
+          .text(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> axisText(d); })
+          .attr(<span class="string">"y"</span>, -innerRadius + <span class="number">6</span>)
+          .attr(<span class="string">"dy"</span>, <span class="string">".71em"</span>)
+          .attr(<span class="string">"text-anchor"</span>, <span class="string">"middle"</span>);
+      selAxis.exit()
+          .remove();
+    });
+  }
+
+  <span class="comment">/** Getter/Setters **/</span>
+  my.width = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> width;
+    width = v;
+    <span class="keyword">return</span> my;
+  }
+  my.height = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> height;
+    height = v;
+    <span class="keyword">return</span> my;
+  }
+  my.innerRadius = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> innerRadius;
+    innerRadius = v;
+    <span class="keyword">return</span> my;
+  }
+  my.outerRadius = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> outerRadius;
+    outerRadius = v;
+    <span class="keyword">return</span> my;
+  }
+  my.file = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> file;
+    file = v;
+    <span class="keyword">return</span> my;
+  }
+  my.scaleOverride = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> scaleOverride;
+    scaleOverride = (v[<span class="number">0</span>] == <span class="number">0</span> &amp;&amp; v[<span class="number">1</span>] == <span class="number">0</span>) ? <span class="literal">null</span> : v; <span class="comment">//maybe do something better here?</span>
+    <span class="keyword">return</span> my;
+  }
+  my.label = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> label;
+    label = v;
+    <span class="keyword">return</span> my;
+  }
+  my.dimension = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> dimension;
+    dimension = v;
+    <span class="keyword">return</span> my;
+  }
+  my.group = <span class="function"><span class="keyword">function</span><span class="params">(v)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> group;
+    group = v;
+    <span class="keyword">return</span> my;
+  }
+  my.axisText = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> axisText;
+    axisText = _;
+    <span class="keyword">return</span> my;
+  };
+  my.color = <span class="function"><span class="keyword">function</span><span class="params">(_)</span> {</span>
+    <span class="keyword">if</span> (!arguments.length) <span class="keyword">return</span> color;
+    color = _;
+    <span class="keyword">return</span> my;
+  };
+  <span class="keyword">return</span> my;
+};
+</code></pre>
+    </div>
+  </div>
+  <div class="gist-license">
+    <h2>LICENSE<a name="license" class="anchor" href="http://bl.ocks.org/davidwclin/ad5d13db260caeffe9b3#license">#</a></h2>
+    This block appears to have <a target="_blank" href="http://choosealicense.com/no-license/">no license</a>. Please contact <a target="_blank" href="https://github.com/davidwclin">the author</a> to request a license.
+  </div>
+</div>
+
+<script src="./Radial Boxplot - bl.ocks.org_files/d3.v3.min.js"></script>
+<script src="./Radial Boxplot - bl.ocks.org_files/highlight.min.js"></script>
+<script>
+
+var gist = {"public":true,"sha":"d845d44a593cd90f3391375ba301ca3503950a0e","files":{"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":693,"sha":"578c5f595625b911afd9da9e4fc1d479b61c9f83"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":2633,"sha":"5101f03affd8a601f15fb23493c9c0518bd7c438"},"rbox.js":{"language":"JavaScript","type":"application/javascript","filename":"rbox.js","size":7810,"sha":"67aa7cd2d488705f6eef7df1e55833100c249bd7"},"san-francisco.csv":{"language":"CSV","type":"text/csv","filename":"san-francisco.csv","size":221998,"sha":"d30cc4db687fb62fcbe0368330775663eec4eca9"},"thumbnail.png":{"language":null,"type":"image/png","filename":"thumbnail.png","size":183994,"sha":"4f601b609153e0ac5ca48a2aa9aadb62e8ff11ba"}},"created_at":"2015-03-31T15:37:42Z","updated_at":"2015-08-29T14:18:05Z","description":"Radial Boxplot","owner":{"login":"davidwclin"},"id":"ad5d13db260caeffe9b3"};
+
+var files = d3.values(gist.files);
+
+d3.select(".gist-readme")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/davidwclin/raw/ad5d13db260caeffe9b3/d845d44a593cd90f3391375ba301ca3503950a0e/" + d.filename, function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+d3.selectAll(".gist-source")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+  .select("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/davidwclin/raw/ad5d13db260caeffe9b3/d845d44a593cd90f3391375ba301ca3503950a0e/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+</script>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "auto");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Radial Boxplot - bl.ocks.org_files/analytics.js"></script>
+</body></html>

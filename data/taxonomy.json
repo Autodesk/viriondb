@@ -1,0 +1,2637 @@
+{
+  "Viruses": {
+    "ssDNA viruses": {
+      "Parvoviridae": {
+        "Parvovirinae": {
+          "Dependoparvovirus": {
+            "instances": 13,
+            "unclassified Dependovirus": {
+              "instances": 3
+            }
+          },
+          "Amdoparvovirus": {
+            "instances": 2,
+            "unclassified Amdoparvovirus": {
+              "instances": 1
+            }
+          },
+          "Protoparvovirus": {
+            "instances": 6,
+            "unclassified Protoparvovirus": {
+              "instances": 7
+            }
+          },
+          "Bocaparvovirus": {
+            "instances": 12,
+            "unclassified Bocaparvovirus": {
+              "instances": 8
+            }
+          },
+          "Erythroparvovirus": {
+            "instances": 1,
+            "unclassified Erythrovirus": {
+              "instances": 1
+            }
+          },
+          "Copiparvovirus": {
+            "instances": 2
+          },
+          "Tetraparvovirus": {
+            "instances": 3
+          },
+          "instances": 4,
+          "Aveparvovirus": {
+            "instances": 1
+          }
+        },
+        "Densovirinae": {
+          "Ambidensovirus": {
+            "instances": 9,
+            "unclassified Densovirus": {
+              "instances": 2
+            }
+          },
+          "Penstyldensovirus": {
+            "instances": 1
+          },
+          "Brevidensovirus": {
+            "instances": 3,
+            "unclassified Brevidensovirus": {
+              "instances": 1
+            }
+          },
+          "Iteradensovirus": {
+            "instances": 6,
+            "unclassified Iteravirus": {
+              "instances": 1
+            }
+          },
+          "unclassified Densovirinae": {
+            "instances": 3
+          },
+          "Hepandensovirus": {
+            "instances": 3
+          }
+        },
+        "unclassified Parvoviridae": {
+          "instances": 2
+        }
+      },
+      "Geminiviridae": {
+        "Mastrevirus": {
+          "instances": 108,
+          "unclassified Mastrevirus": {
+            "instances": 6
+          }
+        },
+        "Begomovirus": {
+          "instances": 657,
+          "unclassified Begomovirus": {
+            "instances": 205
+          }
+        },
+        "unclassified Geminiviridae": {
+          "instances": 12
+        },
+        "Curtovirus": {
+          "instances": 3
+        },
+        "Topocuvirus": {
+          "instances": 1
+        },
+        "Becurtovirus": {
+          "instances": 2
+        },
+        "Eragrovirus": {
+          "instances": 1
+        },
+        "Turncurtovirus": {
+          "instances": 1,
+          "unclassified Turncurtovirus": {
+            "instances": 1
+          }
+        }
+      },
+      "Circoviridae": {
+        "Circovirus": {
+          "instances": 40,
+          "unclassified Circovirus": {
+            "instances": 17
+          }
+        },
+        "Gyrovirus": {
+          "instances": 3,
+          "unclassified Gyrovirus": {
+            "instances": 9
+          }
+        },
+        "unclassified Circoviridae": {
+          "instances": 76
+        },
+        "environmental samples": {
+          "instances": 18
+        }
+      },
+      "Microviridae": {
+        "Gokushovirinae": {
+          "Chlamydiamicrovirus": {
+            "instances": 6,
+            "unclassified Chlamydiamicrovirus": {
+              "instances": 1
+            }
+          },
+          "Bdellomicrovirus": {
+            "instances": 1
+          },
+          "Spiromicrovirus": {
+            "instances": 1
+          },
+          "unclassified Gokushovirinae": {
+            "instances": 8
+          }
+        },
+        "unclassified Microviridae": {
+          "instances": 18
+        },
+        "Microvirus": {
+          "instances": 10,
+          "unclassified Enterobacteria phage G4 clade": {
+            "instances": 1
+          }
+        }
+      },
+      "Anelloviridae": {
+        "unclassified Anelloviridae": {
+          "instances": 103
+        },
+        "Alphatorquevirus": {
+          "instances": 17,
+          "unclassified Alphatorquevirus": {
+            "instances": 5
+          }
+        },
+        "Betatorquevirus": {
+          "instances": 9,
+          "unclassified Betatorquevirus": {
+            "instances": 2
+          }
+        },
+        "Gammatorquevirus": {
+          "instances": 2
+        },
+        "Lambdatorquevirus": {
+          "instances": 1
+        },
+        "Iotatorquevirus": {
+          "instances": 2
+        },
+        "Thetatorquevirus": {
+          "instances": 1
+        },
+        "Etatorquevirus": {
+          "instances": 1
+        },
+        "Kappatorquevirus": {
+          "instances": 1
+        },
+        "Epsilontorquevirus": {
+          "instances": 1
+        },
+        "Zetatorquevirus": {
+          "instances": 1
+        }
+      },
+      "Inoviridae": {
+        "Inovirus": {
+          "instances": 15,
+          "unclassified Inovirus": {
+            "instances": 14
+          }
+        },
+        "unclassified Inoviridae": {
+          "instances": 8
+        },
+        "Plectrovirus": {
+          "instances": 3,
+          "unclassified Plectrovirus": {
+            "instances": 3
+          }
+        },
+        "environmental samples": {
+          "instances": 3
+        }
+      },
+      "Nanoviridae": {
+        "Nanovirus": {
+          "instances": 40
+        },
+        "Babuvirus": {
+          "instances": 12
+        },
+        "unclassified Nanoviridae": {
+          "instances": 16
+        }
+      },
+      "Spiraviridae": {
+        "Alphaspiravirus": {
+          "instances": 1
+        }
+      },
+      "unclassified ssDNA viruses": {
+        "instances": 98
+      }
+    },
+    "Retro-transcribing viruses": {
+      "Retroviridae": {
+        "Orthoretrovirinae": {
+          "Alpharetrovirus": {
+            "unclassified Alpharetrovirus": {
+              "instances": 3
+            },
+            "instances": 10
+          },
+          "Lentivirus": {
+            "Primate lentivirus group": {
+              "instances": 51
+            },
+            "Bovine lentivirus group": {
+              "instances": 3
+            },
+            "Ovine/caprine lentivirus group": {
+              "instances": 7
+            },
+            "Feline lentivirus group": {
+              "instances": 3
+            },
+            "Equine lentivirus group": {
+              "instances": 3
+            },
+            "unclassified Lentivirus": {
+              "instances": 2
+            }
+          },
+          "Deltaretrovirus": {
+            "instances": 9,
+            "unclassified Deltaretrovirus": {
+              "instances": 2
+            }
+          },
+          "Gammaretrovirus": {
+            "Murine leukemia virus": {
+              "instances": 7
+            },
+            "unclassified Gammaretrovirus": {
+              "instances": 12
+            },
+            "instances": 7
+          },
+          "Betaretrovirus": {
+            "instances": 6,
+            "unclassified Betaretrovirus": {
+              "instances": 5
+            }
+          },
+          "unclassified Orthoretrovirinae": {
+            "instances": 1
+          },
+          "Epsilonretrovirus": {
+            "instances": 1
+          }
+        },
+        "instances": 6,
+        "Spumaretrovirinae": {
+          "Spumavirus": {
+            "instances": 10
+          }
+        }
+      },
+      "Hepadnaviridae": {
+        "Avihepadnavirus": {
+          "instances": 14,
+          "unclassified Avihepadnavirus": {
+            "instances": 1
+          }
+        },
+        "Orthohepadnavirus": {
+          "instances": 533,
+          "unclassified Orthohepadnavirus": {
+            "instances": 3
+          }
+        },
+        "unclassified Hepadnaviridae": {
+          "instances": 5
+        }
+      },
+      "Caulimoviridae": {
+        "Badnavirus": {
+          "instances": 44
+        },
+        "Caulimovirus": {
+          "instances": 13,
+          "unclassified Caulimovirus": {
+            "instances": 3
+          }
+        },
+        "Tungrovirus": {
+          "instances": 2
+        },
+        "Petuvirus": {
+          "instances": 1
+        },
+        "Soymovirus": {
+          "instances": 5
+        },
+        "Cavemovirus": {
+          "instances": 2,
+          "unclassified Cavemovirus": {
+            "instances": 1
+          }
+        },
+        "unclassified Caulimoviridae": {
+          "instances": 2
+        },
+        "Solendovirus": {
+          "instances": 1
+        },
+        "Rosadnavirus": {
+          "instances": 1
+        }
+      }
+    },
+    "dsDNA viruses": {
+      "no RNA stage": {
+        "Adenoviridae": {
+          "Mastadenovirus": {
+            "instances": 32,
+            "Canine mastadenovirus A": {
+              "instances": 2
+            },
+            "Human mastadenovirus B": {
+              "instances": 3
+            },
+            "Human mastadenovirus E": {
+              "instances": 2
+            },
+            "Porcine mastadenovirus A": {
+              "instances": 1
+            },
+            "Tree shrew adenovirus A": {
+              "instances": 1
+            },
+            "Ovine mastadenovirus A": {
+              "instances": 1
+            },
+            "Bovine mastadenovirus B": {
+              "instances": 1
+            },
+            "Porcine mastadenovirus C": {
+              "instances": 1
+            },
+            "Murine mastadenovirus C": {
+              "instances": 1
+            },
+            "Human mastadenovirus D": {
+              "instances": 1
+            },
+            "Bat mastadenovirus B": {
+              "instances": 1
+            },
+            "Bat mastadenovirus A": {
+              "instances": 1
+            },
+            "unclassified Mastadenovirus": {
+              "instances": 2
+            },
+            "Equine mastadenovirus B": {
+              "instances": 1
+            },
+            "Human mastadenovirus A": {
+              "instances": 1
+            }
+          },
+          "Atadenovirus": {
+            "instances": 9
+          },
+          "Aviadenovirus": {
+            "instances": 6,
+            "unclassified Aviadenovirus": {
+              "Pigeon aviadenovirus A": {
+                "instances": 2
+              },
+              "instances": 2,
+              "Duck aviadenovirus B": {
+                "instances": 1
+              }
+            },
+            "Turkey aviadenovirus B": {
+              "instances": 1
+            },
+            "Goose aviadenovirus A": {
+              "instances": 1
+            },
+            "Fowl aviadenovirus B": {
+              "instances": 1
+            }
+          },
+          "Siadenovirus": {
+            "instances": 5
+          },
+          "unclassified Adenoviridae": {
+            "instances": 1
+          }
+        },
+        "Herpesvirales": {
+          "Herpesviridae": {
+            "Alphaherpesvirinae": {
+              "Varicellovirus": {
+                "instances": 13
+              },
+              "Simplexvirus": {
+                "instances": 10,
+                "unclassified Simplexvirus": {
+                  "instances": 1
+                }
+              },
+              "Mardivirus": {
+                "instances": 4,
+                "unclassified Mardivirus": {
+                  "instances": 1
+                }
+              },
+              "Iltovirus": {
+                "instances": 2
+              },
+              "instances": 1,
+              "Scutavirus": {
+                "unclassified Scutavirus": {
+                  "instances": 1
+                },
+                "instances": 1
+              }
+            },
+            "Gammaherpesvirinae": {
+              "Lymphocryptovirus": {
+                "instances": 5
+              },
+              "Macavirus": {
+                "instances": 4
+              },
+              "Rhadinovirus": {
+                "instances": 8
+              },
+              "Percavirus": {
+                "instances": 2
+              },
+              "instances": 2
+            },
+            "Betaherpesvirinae": {
+              "Muromegalovirus": {
+                "instances": 10
+              },
+              "instances": 4,
+              "Roseolovirus": {
+                "instances": 3,
+                "unclassified Roseolovirus": {
+                  "instances": 1
+                }
+              },
+              "Cytomegalovirus": {
+                "instances": 8
+              },
+              "Proboscivirus": {
+                "instances": 1,
+                "unclassified Proboscivirus": {
+                  "instances": 2
+                }
+              }
+            }
+          },
+          "Alloherpesviridae": {
+            "Ictalurivirus": {
+              "instances": 1
+            },
+            "Batrachovirus": {
+              "instances": 2
+            },
+            "Cyprinivirus": {
+              "instances": 4
+            }
+          },
+          "Malacoherpesviridae": {
+            "Ostreavirus": {
+              "instances": 1
+            }
+          },
+          "unclassified Herpesvirales": {
+            "instances": 1
+          }
+        },
+        "Caudovirales": {
+          "Siphoviridae": {
+            "instances": 690,
+            "Phic3unalikevirus": {
+              "instances": 3,
+              "unclassified Phic3unalikevirus": {
+                "instances": 1
+              }
+            },
+            "Lambdalikevirus": {
+              "unclassified Lambda-like viruses": {
+                "instances": 32
+              },
+              "instances": 4
+            },
+            "Yualikevirus": {
+              "instances": 4
+            },
+            "Tunalikevirus": {
+              "instances": 8,
+              "unclassified Tunalikevirus": {
+                "instances": 4
+              }
+            },
+            "C2likevirus": {
+              "instances": 3
+            },
+            "D3112likevirus": {
+              "instances": 8
+            },
+            "Jerseylikevirus": {
+              "instances": 6
+            },
+            "Sap6likevirus": {
+              "instances": 4
+            },
+            "L5likevirus": {
+              "instances": 31,
+              "unclassified L5likevirus": {
+                "instances": 4
+              }
+            },
+            "N15likevirus": {
+              "instances": 1
+            },
+            "Skunalikevirus": {
+              "instances": 10
+            },
+            "Sfi21dtunalikevirus": {
+              "instances": 5
+            },
+            "Spbetalikevirus": {
+              "instances": 1,
+              "unclassified Spbetalikevirus": {
+                "instances": 1
+              }
+            },
+            "Phie125likevirus": {
+              "instances": 3
+            },
+            "Sfi1unalikevirus": {
+              "instances": 5
+            },
+            "D3likevirus": {
+              "instances": 2
+            },
+            "3alikevirus": {
+              "instances": 6
+            },
+            "Phietalikevirus": {
+              "instances": 29,
+              "unclassified Phietalikevirus": {
+                "instances": 3
+              }
+            },
+            "Tm4likevirus": {
+              "instances": 5
+            },
+            "77likevirus": {
+              "instances": 3
+            },
+            "Che8likevirus": {
+              "instances": 17
+            },
+            "Cjwunalikevirus": {
+              "instances": 5,
+              "unclassified Cjwunalikevirus": {
+                "instances": 1
+              }
+            },
+            "Che9clikevirus": {
+              "instances": 3
+            },
+            "Pgonelikevirus": {
+              "instances": 7
+            },
+            "Corndoglikevirus": {
+              "instances": 2
+            },
+            "Omegalikevirus": {
+              "instances": 3
+            },
+            "Barnyardlikevirus": {
+              "instances": 4
+            },
+            "Xp10likevirus": {
+              "instances": 5
+            },
+            "T5likevirus": {
+              "instances": 4,
+              "unclassified T5likevirus": {
+                "instances": 5
+              }
+            },
+            "Phijlunalikevirus": {
+              "instances": 3
+            },
+            "Wbetalikevirus": {
+              "instances": 1
+            },
+            "Pbiunalikevirus": {
+              "instances": 1
+            },
+            "Halolikevirus": {
+              "instances": 2
+            },
+            "P23likevirus": {
+              "instances": 2
+            },
+            "Iebhlikevirus": {
+              "instances": 2
+            },
+            "Hk578likevirus": {
+              "instances": 5
+            },
+            "Phifllikevirus": {
+              "instances": 3
+            },
+            "Bronlikevirus": {
+              "instances": 3
+            },
+            "Phicbklikevirus": {
+              "instances": 5
+            },
+            "Chilikevirus": {
+              "instances": 5
+            },
+            "C5likevirus": {
+              "instances": 2
+            },
+            "Tp2unalikevirus": {
+              "instances": 1
+            },
+            "Andromedalikevirus": {
+              "instances": 7
+            },
+            "Bignuzlikevirus": {
+              "instances": 1
+            },
+            "Charlielikevirus": {
+              "instances": 2
+            }
+          },
+          "Myoviridae": {
+            "instances": 342,
+            "Phikzlikevirus": {
+              "instances": 3,
+              "unclassified phiKZ-like viruses": {
+                "instances": 2
+              }
+            },
+            "Tevenvirinae": {
+              "T4likevirus": {
+                "instances": 98
+              },
+              "Schizot4likevirus": {
+                "instances": 2,
+                "unclassified Schizot4likevirus": {
+                  "instances": 1
+                }
+              }
+            },
+            "VHML-like phages": {
+              "instances": 3
+            },
+            "Cp220likevirus": {
+              "instances": 6
+            },
+            "Punalikevirus": {
+              "instances": 2
+            },
+            "Cp8unalikevirus": {
+              "instances": 3
+            },
+            "unclassified PhiCD119likevirus": {
+              "instances": 2
+            },
+            "Mulikevirus": {
+              "instances": 1,
+              "unclassified Mu-like viruses": {
+                "instances": 4
+              }
+            },
+            "Peduovirinae": {
+              "Hpunalikevirus": {
+                "instances": 5
+              },
+              "P2likevirus": {
+                "instances": 26
+              }
+            },
+            "Spounavirinae": {
+              "Twortlikevirus": {
+                "instances": 7,
+                "unclassified Twortlikevirus": {
+                  "instances": 10
+                }
+              },
+              "unassigned Spounavirinae": {
+                "instances": 2
+              },
+              "Spounalikevirus": {
+                "instances": 1,
+                "unclassified SPO1-like viruses": {
+                  "instances": 7
+                }
+              },
+              "unclassified Spounavirinae": {
+                "instances": 1
+              }
+            },
+            "I3likevirus": {
+              "unclassified I3-like viruses": {
+                "instances": 15
+              }
+            },
+            "unclassified FelixO1likevirus": {
+              "instances": 1
+            }
+          },
+          "Podoviridae": {
+            "Autographivirinae": {
+              "instances": 12,
+              "T7likevirus": {
+                "instances": 38
+              },
+              "unclassified phiKMV-like phages": {
+                "instances": 20
+              },
+              "unclassified Autographivirinae": {
+                "instances": 24
+              },
+              "unassigned Autographivirinae": {
+                "instances": 4
+              },
+              "unclassified Sp6likevirus": {
+                "instances": 5
+              }
+            },
+            "instances": 193,
+            "N4likevirus": {
+              "unclassified N4likevirus": {
+                "instances": 32
+              },
+              "instances": 1
+            },
+            "unclassified Luz24likevirus": {
+              "instances": 4
+            },
+            "Picovirinae": {
+              "unassigned Picovirinae": {
+                "instances": 5
+              },
+              "Phi29likevirus": {
+                "instances": 4
+              },
+              "Ahjdlikevirus": {
+                "unclassified AHJD-like viruses": {
+                  "instances": 4
+                },
+                "instances": 2
+              },
+              "unclassified Picovirinae": {
+                "instances": 4
+              }
+            },
+            "P22likevirus": {
+              "instances": 10
+            },
+            "Phieco32likevirus": {
+              "instances": 1,
+              "unclassified Phieco32likevirus": {
+                "instances": 1
+              }
+            },
+            "unclassified Epsilon15likevirus": {
+              "instances": 1
+            }
+          },
+          "instances": 24
+        },
+        "Ascoviridae": {
+          "Ascovirus": {
+            "instances": 5
+          }
+        },
+        "Tectiviridae": {
+          "Tectivirus": {
+            "instances": 4,
+            "unclassified Tectivirus": {
+              "instances": 2
+            }
+          }
+        },
+        "Poxviridae": {
+          "Chordopoxvirinae": {
+            "Avipoxvirus": {
+              "instances": 5,
+              "unclassified Avipoxvirus": {
+                "instances": 1
+              }
+            },
+            "unassigned Chordopoxvirinae": {
+              "instances": 2
+            },
+            "Leporipoxvirus": {
+              "instances": 2
+            },
+            "Orthopoxvirus": {
+              "instances": 11,
+              "unclassified Orthopoxvirus": {
+                "instances": 1
+              },
+              "Vaccinia virus": {
+                "instances": 1
+              }
+            },
+            "Molluscipoxvirus": {
+              "instances": 1
+            },
+            "Capripoxvirus": {
+              "instances": 3
+            },
+            "Yatapoxvirus": {
+              "instances": 2
+            },
+            "Suipoxvirus": {
+              "instances": 1
+            },
+            "Parapoxvirus": {
+              "instances": 3,
+              "unclassified Parapoxvirus": {
+                "instances": 1
+              }
+            },
+            "Crocodylidpoxvirus": {
+              "instances": 1
+            },
+            "Cervidpoxvirus": {
+              "unclassified Cervidpoxvirus": {
+                "instances": 2
+              }
+            }
+          },
+          "Entomopoxvirinae": {
+            "Betaentomopoxvirus": {
+              "unclassified Betaentomopoxvirus": {
+                "instances": 6
+              },
+              "instances": 3
+            },
+            "instances": 1,
+            "Alphaentomopoxvirus": {
+              "instances": 1
+            }
+          },
+          "unclassified Poxviridae": {
+            "instances": 2
+          }
+        },
+        "Ligamenvirales": {
+          "Lipothrixviridae": {
+            "Gammalipothrixvirus": {
+              "instances": 2
+            },
+            "Betalipothrixvirus": {
+              "instances": 6
+            },
+            "Deltalipothrixvirus": {
+              "instances": 1
+            }
+          },
+          "Rudiviridae": {
+            "Rudivirus": {
+              "instances": 4,
+              "unclassified Rudivirus": {
+                "instances": 4
+              }
+            }
+          }
+        },
+        "Papillomaviridae": {
+          "Gammapapillomavirus": {
+            "instances": 24,
+            "unclassified Gammapapillomavirus": {
+              "instances": 7
+            }
+          },
+          "Alphapapillomavirus": {
+            "instances": 271
+          },
+          "Betapapillomavirus": {
+            "instances": 18,
+            "unclassified Betapapillomavirus": {
+              "instances": 1
+            }
+          },
+          "unclassified Papillomaviridae": {
+            "instances": 31,
+            "primate papillomaviruses": {
+              "instances": 1
+            }
+          },
+          "Mupapillomavirus": {
+            "instances": 3
+          },
+          "Deltapapillomavirus": {
+            "instances": 10,
+            "unclassified Deltapapillomavirus": {
+              "instances": 1
+            }
+          },
+          "Kappapapillomavirus": {
+            "instances": 3
+          },
+          "Thetapapillomavirus": {
+            "instances": 1
+          },
+          "Nupapillomavirus": {
+            "instances": 1
+          },
+          "Etapapillomavirus": {
+            "instances": 1
+          },
+          "Iotapapillomavirus": {
+            "instances": 1
+          },
+          "Lambdapapillomavirus": {
+            "instances": 5,
+            "unclassified Lambdapapillomavirus": {
+              "instances": 1
+            }
+          },
+          "Omikronpapillomavirus": {
+            "instances": 1
+          },
+          "Zetapapillomavirus": {
+            "instances": 1
+          },
+          "Epsilonpapillomavirus": {
+            "instances": 1
+          },
+          "Xipapillomavirus": {
+            "instances": 2
+          },
+          "Rhopapillomavirus": {
+            "instances": 1
+          },
+          "Taupapillomavirus": {
+            "instances": 2,
+            "unclassified Taupapillomavirus": {
+              "instances": 2
+            }
+          },
+          "Sigmapapillomavirus": {
+            "instances": 1
+          },
+          "Phipapillomavirus": {
+            "instances": 1
+          },
+          "Upsilonpapillomavirus": {
+            "instances": 2
+          },
+          "Dyoxipapillomavirus": {
+            "instances": 1
+          },
+          "Chipapillomavirus": {
+            "instances": 3
+          },
+          "Psipapillomavirus": {
+            "instances": 1
+          },
+          "Pipapillomavirus": {
+            "instances": 3,
+            "unclassified Pipapillomavirus": {
+              "instances": 1
+            }
+          },
+          "Dyodeltapapillomavirus": {
+            "instances": 1
+          },
+          "Dyozetapapillomavirus": {
+            "instances": 1
+          },
+          "Omegapapillomavirus": {
+            "instances": 1
+          },
+          "Dyoetapapillomavirus": {
+            "instances": 1
+          },
+          "Dyoiotapapillomavirus": {
+            "unclassified Dyoiotapapillomavirus": {
+              "instances": 1
+            }
+          },
+          "Dyoepsilonpapillomavirus": {
+            "instances": 1
+          },
+          "Dyolambdapapillomavirus": {
+            "instances": 1
+          },
+          "Dyonupapillomavirus": {
+            "instances": 1
+          },
+          "Dyomupapillomavirus": {
+            "instances": 1
+          },
+          "Dyorhopapillomavirus": {
+            "instances": 1
+          },
+          "Dyopipapillomavirus": {
+            "instances": 1
+          },
+          "Dyosigmapapillomavirus": {
+            "instances": 1
+          },
+          "Dyoomikronpapillomavirus": {
+            "instances": 1
+          }
+        },
+        "Bicaudaviridae": {
+          "Bicaudavirus": {
+            "instances": 2
+          },
+          "unclassified Bicaudaviridae": {
+            "instances": 3
+          }
+        },
+        "Phycodnaviridae": {
+          "Coccolithovirus": {
+            "instances": 2
+          },
+          "unclassified Phycodnaviridae": {
+            "instances": 9
+          },
+          "Phaeovirus": {
+            "instances": 2
+          },
+          "Chlorovirus": {
+            "instances": 4,
+            "unclassified Chlorovirus": {
+              "instances": 1
+            }
+          },
+          "Prasinovirus": {
+            "instances": 1,
+            "unclassified Prasinovirus": {
+              "instances": 6
+            }
+          },
+          "Prymnesiovirus": {
+            "unclassified Prymnesiovirus": {
+              "instances": 1
+            }
+          }
+        },
+        "Iridoviridae": {
+          "Iridovirus": {
+            "instances": 12
+          },
+          "Lymphocystivirus": {
+            "instances": 1,
+            "unclassified Lymphocystivirus": {
+              "instances": 1
+            }
+          },
+          "Megalocytivirus": {
+            "instances": 1
+          },
+          "Ranavirus": {
+            "instances": 5
+          },
+          "Chloriridovirus": {
+            "instances": 1
+          },
+          "unclassified Iridoviridae": {
+            "instances": 2
+          }
+        },
+        "Asfarviridae": {
+          "Asfivirus": {
+            "instances": 5
+          }
+        },
+        "Plasmaviridae": {
+          "Plasmavirus": {
+            "instances": 2
+          }
+        },
+        "Polydnaviridae": {
+          "Bracovirus": {
+            "instances": 45
+          },
+          "Ichnovirus": {
+            "instances": 184
+          }
+        },
+        "Polyomaviridae": {
+          "Polyomavirus": {
+            "unclassified Polyomavirus": {
+              "instances": 78
+            },
+            "instances": 33
+          },
+          "instances": 6
+        },
+        "unclassified dsDNA viruses": {
+          "instances": 23,
+          "unclassified archaeal dsDNA viruses": {
+            "Haloviruses": {
+              "instances": 15
+            },
+            "instances": 1
+          }
+        },
+        "Baculoviridae": {
+          "Alphabaculovirus": {
+            "instances": 35,
+            "unclassified Alphabaculovirus": {
+              "instances": 15
+            }
+          },
+          "Betabaculovirus": {
+            "instances": 8,
+            "unclassified Betabaculovirus": {
+              "instances": 11
+            }
+          },
+          "Deltabaculovirus": {
+            "instances": 1
+          },
+          "Gammabaculovirus": {
+            "instances": 2,
+            "unclassified Gammabaculovirus": {
+              "instances": 1
+            }
+          },
+          "instances": 1
+        },
+        "Corticoviridae": {
+          "Corticovirus": {
+            "instances": 1
+          }
+        },
+        "unclassified dsDNA phages": {
+          "instances": 42
+        },
+        "Fuselloviridae": {
+          "Alphafusellovirus": {
+            "instances": 5,
+            "unclassified Fusellovirus": {
+              "instances": 2
+            }
+          },
+          "Betafusellovirus": {
+            "instances": 2
+          },
+          "unclassified Fuselloviridae": {
+            "instances": 1
+          }
+        },
+        "Nimaviridae": {
+          "Whispovirus": {
+            "instances": 1
+          }
+        },
+        "Marseillevirus": {
+          "instances": 1,
+          "unclassified Marseillevirus": {
+            "instances": 1
+          }
+        },
+        "Nudiviridae": {
+          "Betanudivirus": {
+            "instances": 1
+          },
+          "Alphanudivirus": {
+            "instances": 2
+          },
+          "unclassified Nudiviridae": {
+            "instances": 2
+          }
+        },
+        "Globuloviridae": {
+          "Globulovirus": {
+            "instances": 2
+          }
+        },
+        "Turriviridae": {
+          "Alphaturrivirus": {
+            "instances": 2
+          }
+        },
+        "Salterprovirus": {
+          "instances": 1,
+          "unclassified Salterprovirus": {
+            "instances": 1
+          }
+        },
+        "Ampullaviridae": {
+          "Ampullavirus": {
+            "instances": 1,
+            "unclassified Ampullavirus": {
+              "instances": 2
+            }
+          }
+        },
+        "Mimiviridae": {
+          "Cafeteriavirus": {
+            "instances": 1
+          },
+          "Mimivirus": {
+            "instances": 1
+          },
+          "unclassified Mimiviridae": {
+            "instances": 5
+          }
+        },
+        "unassigned Marseilleviridae": {
+          "instances": 1
+        },
+        "unclassified Marseilleviridae": {
+          "instances": 1
+        },
+        "Guttaviridae": {
+          "Betaguttavirus": {
+            "instances": 1
+          }
+        }
+      }
+    },
+    "ssRNA viruses": {
+      "ssRNA positive-strand viruses": {
+        "no DNA stage": {
+          "Nidovirales": {
+            "Coronaviridae": {
+              "Coronavirinae": {
+                "Betacoronavirus": {
+                  "instances": 9,
+                  "unclassified Betacoronavirus": {
+                    "instances": 5
+                  }
+                },
+                "Gammacoronavirus": {
+                  "instances": 5
+                },
+                "Alphacoronavirus": {
+                  "instances": 10,
+                  "unclassified Alphacoronavirus": {
+                    "instances": 10
+                  }
+                },
+                "instances": 2,
+                "unclassified coronaviruses": {
+                  "instances": 1
+                },
+                "unclassified Deltacoronavirus": {
+                  "instances": 7
+                }
+              },
+              "Torovirinae": {
+                "Torovirus": {
+                  "instances": 2
+                },
+                "Bafinivirus": {
+                  "instances": 1,
+                  "unclassified Bafinivirus": {
+                    "instances": 1
+                  }
+                }
+              }
+            },
+            "Arteriviridae": {
+              "Arterivirus": {
+                "instances": 5
+              },
+              "unclassified Arteriviridae": {
+                "instances": 8
+              }
+            },
+            "Roniviridae": {
+              "Okavirus": {
+                "instances": 1
+              }
+            },
+            "Mesoniviridae": {
+              "Alphamesonivirus": {
+                "instances": 2
+              },
+              "unclassified Mesoniviridae": {
+                "instances": 4
+              }
+            },
+            "unclassified Nidovirales": {
+              "instances": 2
+            }
+          },
+          "Flaviviridae": {
+            "Hepacivirus": {
+              "instances": 16,
+              "unclassified Hepacivirus": {
+                "instances": 5
+              }
+            },
+            "Flavivirus": {
+              "Dengue virus group": {
+                "instances": 57
+              },
+              "Japanese encephalitis virus group": {
+                "instances": 7
+              },
+              "tick-borne encephalitis virus group": {
+                "instances": 7
+              },
+              "instances": 21,
+              "Yellow fever virus group": {
+                "instances": 3
+              },
+              "Modoc virus group": {
+                "instances": 2
+              },
+              "Rio Bravo virus group": {
+                "instances": 3
+              },
+              "Ntaya virus group": {
+                "instances": 4
+              },
+              "mosquito-borne viruses": {
+                "instances": 2
+              },
+              "Kokobera virus group": {
+                "instances": 1
+              },
+              "Seaborne tick-borne virus group": {
+                "instances": 1
+              }
+            },
+            "Pestivirus": {
+              "instances": 32
+            },
+            "Pegivirus": {
+              "unclassified Pegivirus": {
+                "instances": 8
+              },
+              "instances": 1
+            },
+            "instances": 7
+          },
+          "Virgaviridae": {
+            "Furovirus": {
+              "instances": 14
+            },
+            "Tobamovirus": {
+              "instances": 86,
+              "unclassified Tobamovirus": {
+                "instances": 4
+              }
+            },
+            "Tobravirus": {
+              "instances": 7
+            },
+            "Hordeivirus": {
+              "instances": 3
+            },
+            "Pomovirus": {
+              "instances": 12,
+              "unclassified Pomovirus": {
+                "instances": 3
+              }
+            },
+            "Pecluvirus": {
+              "instances": 4
+            },
+            "unclassified Virgaviridae": {
+              "instances": 1
+            }
+          },
+          "Picornavirales": {
+            "Picornaviridae": {
+              "Enterovirus": {
+                "Enterovirus B": {
+                  "instances": 10
+                },
+                "Enterovirus A": {
+                  "instances": 3
+                },
+                "Enterovirus C": {
+                  "instances": 12
+                },
+                "instances": 16,
+                "Enterovirus G": {
+                  "instances": 1
+                },
+                "Rhinovirus A": {
+                  "instances": 1
+                }
+              },
+              "Aphthovirus": {
+                "instances": 11
+              },
+              "Cardiovirus": {
+                "instances": 12
+              },
+              "Parechovirus": {
+                "unclassified Parechovirus": {
+                  "instances": 4
+                }
+              },
+              "Hepatovirus": {
+                "instances": 6,
+                "unclassified Hepatovirus": {
+                  "instances": 6
+                }
+              },
+              "Kobuvirus": {
+                "instances": 4,
+                "unclassified Kobuvirus": {
+                  "instances": 5
+                }
+              },
+              "Erbovirus": {
+                "instances": 1
+              },
+              "Teschovirus": {
+                "instances": 1
+              },
+              "Sapelovirus": {
+                "Sapelovirus A": {
+                  "instances": 1
+                },
+                "instances": 2
+              },
+              "Tremovirus": {
+                "instances": 1
+              },
+              "Avihepatovirus": {
+                "instances": 1
+              },
+              "Aquamavirus": {
+                "instances": 1
+              },
+              "Senecavirus": {
+                "instances": 1
+              },
+              "Cosavirus": {
+                "unclassified Cosavirus": {
+                  "instances": 5
+                },
+                "instances": 1
+              },
+              "instances": 31,
+              "Passerivirus": {
+                "instances": 1
+              },
+              "Oscivirus": {
+                "instances": 2
+              },
+              "Pasivirus": {
+                "instances": 1
+              },
+              "Gallivirus": {
+                "instances": 1,
+                "unclassified Gallivirus": {
+                  "instances": 2
+                }
+              },
+              "Hunnivirus": {
+                "instances": 1,
+                "unclassified Hunnivirus": {
+                  "instances": 1
+                }
+              },
+              "Dicipivirus": {
+                "instances": 1
+              },
+              "Megrivirus": {
+                "instances": 1,
+                "unclassified Megrivirus": {
+                  "instances": 3
+                }
+              },
+              "Sakobuvirus": {
+                "instances": 1
+              },
+              "Sicinivirus": {
+                "instances": 1
+              },
+              "Mosavirus": {
+                "instances": 1
+              },
+              "Rosavirus": {
+                "instances": 1
+              }
+            },
+            "Secoviridae": {
+              "Comovirinae": {
+                "Nepovirus": {
+                  "Subgroup C": {
+                    "instances": 10
+                  },
+                  "Subgroup A": {
+                    "instances": 12
+                  },
+                  "Subgroup B": {
+                    "instances": 10
+                  }
+                },
+                "Fabavirus": {
+                  "instances": 8
+                },
+                "Comovirus": {
+                  "instances": 16,
+                  "unclassified Comovirus": {
+                    "instances": 2
+                  }
+                }
+              },
+              "Waikavirus": {
+                "instances": 3,
+                "unclassified Waikavirus": {
+                  "instances": 1
+                }
+              },
+              "unassigned Secoviridae": {
+                "instances": 8
+              },
+              "Sequivirus": {
+                "instances": 1
+              },
+              "Sadwavirus": {
+                "instances": 2
+              },
+              "Cheravirus": {
+                "instances": 4,
+                "unclassified Cheravirus": {
+                  "instances": 4
+                }
+              },
+              "Torradovirus": {
+                "instances": 4,
+                "unclassified Torradovirus": {
+                  "instances": 4
+                }
+              }
+            },
+            "Dicistroviridae": {
+              "Cripavirus": {
+                "instances": 9,
+                "unclassified Cripavirus": {
+                  "instances": 1
+                }
+              },
+              "Aparavirus": {
+                "instances": 5
+              },
+              "unclassified Dicistroviridae": {
+                "instances": 4
+              }
+            },
+            "Iflaviridae": {
+              "Iflavirus": {
+                "instances": 7,
+                "unclassified Iflavirus": {
+                  "instances": 5
+                }
+              },
+              "unclassified Iflaviridae": {
+                "instances": 13
+              }
+            },
+            "Marnaviridae": {
+              "Marnavirus": {
+                "instances": 1
+              }
+            },
+            "unassigned Picornavirales": {
+              "Labyrnavirus": {
+                "instances": 1
+              },
+              "Bacillarnavirus": {
+                "instances": 2,
+                "unclassified Bacillarnavirus": {
+                  "instances": 1
+                }
+              }
+            },
+            "environmental samples": {
+              "instances": 2
+            },
+            "unclassified Picornavirales": {
+              "instances": 8
+            }
+          },
+          "Tombusviridae": {
+            "Tombusvirus": {
+              "instances": 14
+            },
+            "Aureusvirus": {
+              "instances": 5,
+              "unclassified Aureusvirus": {
+                "instances": 1
+              }
+            },
+            "Carmovirus": {
+              "instances": 19
+            },
+            "Umbravirus": {
+              "instances": 9,
+              "unclassified Umbravirus": {
+                "instances": 2
+              }
+            },
+            "Betanecrovirus": {
+              "instances": 11
+            },
+            "Alphanecrovirus": {
+              "instances": 3
+            },
+            "Gallantivirus": {
+              "instances": 2
+            },
+            "Panicovirus": {
+              "instances": 2,
+              "unclassified Panicovirus": {
+                "instances": 1
+              }
+            },
+            "Dianthovirus": {
+              "instances": 6
+            },
+            "Machlomovirus": {
+              "instances": 1
+            },
+            "Avenavirus": {
+              "instances": 1
+            },
+            "instances": 5,
+            "Zeavirus": {
+              "instances": 1
+            },
+            "Macanavirus": {
+              "instances": 1
+            }
+          },
+          "Tymovirales": {
+            "Betaflexiviridae": {
+              "Trichovirus": {
+                "instances": 10
+              },
+              "Carlavirus": {
+                "instances": 48,
+                "unclassified Carlavirus": {
+                  "instances": 10
+                }
+              },
+              "Foveavirus": {
+                "instances": 9,
+                "unclassified Foveavirus": {
+                  "instances": 4
+                }
+              },
+              "Capillovirus": {
+                "instances": 3,
+                "unclassified Capillovirus": {
+                  "instances": 1
+                }
+              },
+              "unassigned Betaflexiviridae": {
+                "instances": 8
+              },
+              "Vitivirus": {
+                "instances": 5
+              },
+              "Citrivirus": {
+                "instances": 1
+              },
+              "Tepovirus": {
+                "instances": 1,
+                "unclassified Tepovirus": {
+                  "instances": 1
+                }
+              },
+              "unclassified Betaflexiviridae": {
+                "instances": 5
+              }
+            },
+            "Tymoviridae": {
+              "unassigned Tymoviridae": {
+                "instances": 2
+              },
+              "Maculavirus": {
+                "instances": 2,
+                "unclassified Maculavirus": {
+                  "instances": 4
+                }
+              },
+              "Tymovirus": {
+                "instances": 21,
+                "unclassified Tymovirus": {
+                  "instances": 3
+                }
+              },
+              "Marafivirus": {
+                "instances": 6
+              },
+              "unclassified Tymoviridae": {
+                "instances": 3
+              }
+            },
+            "Alphaflexiviridae": {
+              "Potexvirus": {
+                "instances": 53,
+                "unclassified Potexvirus": {
+                  "instances": 3
+                }
+              },
+              "Allexivirus": {
+                "instances": 7
+              },
+              "Mandarivirus": {
+                "instances": 2
+              },
+              "Botrexvirus": {
+                "instances": 1
+              },
+              "Sclerodarnavirus": {
+                "instances": 1
+              },
+              "Lolavirus": {
+                "instances": 1
+              },
+              "unclassified Alphaflexiviridae": {
+                "instances": 1
+              }
+            },
+            "Gammaflexiviridae": {
+              "Mycoflexivirus": {
+                "instances": 1
+              }
+            },
+            "unclassified Flexiviridae": {
+              "instances": 1
+            }
+          },
+          "Potyviridae": {
+            "Potyvirus": {
+              "instances": 107,
+              "unclassified Potyvirus": {
+                "instances": 17
+              }
+            },
+            "Ipomovirus": {
+              "instances": 10
+            },
+            "Tritimovirus": {
+              "instances": 7
+            },
+            "Rymovirus": {
+              "instances": 4
+            },
+            "Bymovirus": {
+              "instances": 10
+            },
+            "Brambyvirus": {
+              "instances": 1
+            },
+            "Poacevirus": {
+              "instances": 2,
+              "unclassified Poacevirus": {
+                "instances": 1
+              }
+            },
+            "instances": 5,
+            "Macluravirus": {
+              "instances": 1,
+              "unclassified Macluravirus": {
+                "instances": 1
+              }
+            }
+          },
+          "Bromoviridae": {
+            "Cucumovirus": {
+              "instances": 28
+            },
+            "Alfamovirus": {
+              "instances": 8
+            },
+            "Bromovirus": {
+              "instances": 18
+            },
+            "Ilarvirus": {
+              "instances": 54,
+              "unclassified Ilarvirus": {
+                "instances": 6
+              }
+            },
+            "Anulavirus": {
+              "instances": 3,
+              "unclassified Anulavirus": {
+                "instances": 6
+              }
+            },
+            "Oleavirus": {
+              "instances": 4
+            }
+          },
+          "Sobemovirus": {
+            "instances": 36,
+            "unclassified Sobemovirus": {
+              "instances": 5
+            }
+          },
+          "Togaviridae": {
+            "Alphavirus": {
+              "instances": 11,
+              "SFV complex": {
+                "instances": 12
+              },
+              "VEEV complex": {
+                "instances": 1
+              },
+              "WEEV complex": {
+                "instances": 6
+              },
+              "EEEV complex": {
+                "instances": 1
+              }
+            },
+            "Rubivirus": {
+              "instances": 1
+            }
+          },
+          "Caliciviridae": {
+            "Vesivirus": {
+              "unclassified Vesivirus": {
+                "instances": 7
+              },
+              "instances": 4
+            },
+            "Norovirus": {
+              "instances": 33
+            },
+            "Sapovirus": {
+              "instances": 5,
+              "unclassified Sapovirus": {
+                "instances": 1
+              }
+            },
+            "Lagovirus": {
+              "instances": 4,
+              "unclassified Lagovirus": {
+                "instances": 1
+              }
+            },
+            "Nebovirus": {
+              "instances": 2
+            },
+            "instances": 3,
+            "St-Valerien swine virus": {
+              "instances": 1
+            }
+          },
+          "Luteoviridae": {
+            "Luteovirus": {
+              "unclassified Luteovirus": {
+                "instances": 2
+              },
+              "instances": 6
+            },
+            "Polerovirus": {
+              "instances": 32
+            },
+            "unclassified Luteoviridae": {
+              "instances": 4
+            },
+            "Enamovirus": {
+              "instances": 1
+            }
+          },
+          "Closteroviridae": {
+            "Ampelovirus": {
+              "unclassified Ampelovirus": {
+                "instances": 5
+              },
+              "instances": 8
+            },
+            "Closterovirus": {
+              "instances": 8,
+              "unclassified Closterovirus": {
+                "instances": 3
+              }
+            },
+            "Velarivirus": {
+              "instances": 3,
+              "unclassified Velarivirus": {
+                "instances": 1
+              }
+            },
+            "Crinivirus": {
+              "instances": 23,
+              "unclassified Crinivirus": {
+                "instances": 2
+              }
+            },
+            "unclassified Closteroviridae": {
+              "instances": 3
+            }
+          },
+          "Hepeviridae": {
+            "unassigned Hepeviridae": {
+              "instances": 3
+            },
+            "Hepevirus": {
+              "instances": 1
+            },
+            "Piscihepevirus": {
+              "instances": 1
+            },
+            "unclassified Hepeviridae": {
+              "instances": 1
+            }
+          },
+          "Ourmiavirus": {
+            "unclassified Ourmiavirus": {
+              "instances": 1
+            },
+            "instances": 9
+          },
+          "Narnaviridae": {
+            "Mitovirus": {
+              "unclassified Mitovirus": {
+                "instances": 16
+              },
+              "instances": 4
+            },
+            "Narnavirus": {
+              "instances": 2,
+              "unclassified Narnavirus": {
+                "instances": 1
+              }
+            },
+            "unclassified Narnaviridae": {
+              "instances": 1
+            }
+          },
+          "instances": 67,
+          "Alphatetraviridae": {
+            "Omegatetravirus": {
+              "instances": 2,
+              "unclassified Omegatetravirus": {
+                "instances": 2
+              }
+            },
+            "Betatetravirus": {
+              "instances": 1
+            }
+          },
+          "Nodaviridae": {
+            "Alphanodavirus": {
+              "instances": 10
+            },
+            "Betanodavirus": {
+              "instances": 10
+            },
+            "unclassified Nodaviridae": {
+              "instances": 10
+            }
+          },
+          "Leviviridae": {
+            "Levivirus": {
+              "instances": 8
+            },
+            "Allolevivirus": {
+              "instances": 3
+            },
+            "unclassified Leviviridae": {
+              "instances": 3
+            }
+          },
+          "Barnaviridae": {
+            "Barnavirus": {
+              "instances": 1
+            }
+          },
+          "Astroviridae": {
+            "Mamastrovirus": {
+              "instances": 4,
+              "unclassified Mamastrovirus": {
+                "instances": 16
+              }
+            },
+            "Avastrovirus": {
+              "unclassified Avastrovirus": {
+                "instances": 3
+              },
+              "instances": 1
+            },
+            "unclassified Astroviridae": {
+              "instances": 11
+            }
+          },
+          "Permutotetraviridae": {
+            "Alphapermutotetravirus": {
+              "instances": 1
+            }
+          },
+          "Benyviridae": {
+            "Benyvirus": {
+              "instances": 11
+            }
+          },
+          "Idaeovirus": {
+            "instances": 2
+          },
+          "environmental samples": {
+            "instances": 1
+          },
+          "Polemovirus": {
+            "instances": 1
+          },
+          "Carmotetraviridae": {
+            "Alphacarmotetravirus": {
+              "instances": 1
+            }
+          },
+          "unclassified Higrevirus": {
+            "instances": 3
+          }
+        }
+      },
+      "ssRNA negative-strand viruses": {
+        "Mononegavirales": {
+          "Bornaviridae": {
+            "Bornavirus": {
+              "instances": 9
+            },
+            "unclassified Bornaviridae": {
+              "instances": 1
+            }
+          },
+          "Paramyxoviridae": {
+            "Paramyxovirinae": {
+              "Morbillivirus": {
+                "Cetacean morbillivirus": {
+                  "instances": 2
+                },
+                "instances": 8,
+                "unclassified Morbillivirus": {
+                  "instances": 1
+                }
+              },
+              "Henipavirus": {
+                "instances": 6,
+                "unclassified Henipavirus": {
+                  "instances": 2
+                }
+              },
+              "Rubulavirus": {
+                "instances": 8,
+                "unclassified Rubulavirus": {
+                  "instances": 8
+                }
+              },
+              "Avulavirus": {
+                "instances": 9,
+                "unclassified Avulavirus": {
+                  "instances": 4
+                }
+              },
+              "Respirovirus": {
+                "instances": 6,
+                "unclassified Respirovirus": {
+                  "instances": 1
+                }
+              },
+              "instances": 6,
+              "Ferlavirus": {
+                "instances": 1
+              },
+              "Aquaparamyxovirus": {
+                "instances": 1
+              }
+            },
+            "Pneumovirinae": {
+              "Pneumovirus": {
+                "instances": 3,
+                "unclassified Pneumovirus": {
+                  "instances": 2
+                }
+              },
+              "Metapneumovirus": {
+                "instances": 2
+              }
+            },
+            "unclassified Paramyxoviridae": {
+              "instances": 4
+            }
+          },
+          "Rhabdoviridae": {
+            "Perhabdovirus": {
+              "instances": 3
+            },
+            "Novirhabdovirus": {
+              "instances": 7
+            },
+            "Lyssavirus": {
+              "instances": 19
+            },
+            "Ephemerovirus": {
+              "instances": 5,
+              "unclassified Ephemerovirus": {
+                "instances": 4
+              }
+            },
+            "Vesiculovirus": {
+              "instances": 13
+            },
+            "Nucleorhabdovirus": {
+              "instances": 9
+            },
+            "Cytorhabdovirus": {
+              "instances": 4,
+              "unclassified Cytorhabdovirus": {
+                "instances": 2
+              }
+            },
+            "Sprivivirus": {
+              "instances": 2
+            },
+            "Tupavirus": {
+              "instances": 1
+            },
+            "unclassified Rhabdoviridae": {
+              "instances": 25
+            },
+            "unassigned Rhabdoviridae": {
+              "instances": 4
+            },
+            "Sigmavirus": {
+              "instances": 2
+            },
+            "Tibrovirus": {
+              "instances": 2
+            }
+          },
+          "Filoviridae": {
+            "Marburgvirus": {
+              "instances": 2
+            },
+            "Ebolavirus": {
+              "instances": 5
+            },
+            "Cuevavirus": {
+              "instances": 1
+            }
+          },
+          "Nyamiviridae": {
+            "Nyavirus": {
+              "instances": 2
+            },
+            "unclassified Nyamiviridae": {
+              "instances": 1
+            },
+            "unassigned Nyamiviridae": {
+              "instances": 1
+            }
+          },
+          "unclassified Mononegavirales": {
+            "instances": 3
+          }
+        },
+        "Orthomyxoviridae": {
+          "Influenzavirus A": {
+            "instances": 84
+          },
+          "Influenzavirus B": {
+            "instances": 8
+          },
+          "Influenzavirus C": {
+            "instances": 7
+          },
+          "Isavirus": {
+            "instances": 8
+          },
+          "Thogotovirus": {
+            "instances": 6
+          },
+          "Quaranjavirus": {
+            "unclassified Quaranjavirus": {
+              "instances": 7
+            }
+          },
+          "unclassified Orthomyxoviridae": {
+            "Influenzavirus D": {
+              "instances": 7
+            }
+          }
+        },
+        "Unassigned ssRNA negative-strand viruses": {
+          "Emaravirus": {
+            "instances": 32,
+            "unclassified Emaravirus": {
+              "instances": 9
+            }
+          },
+          "Tenuivirus": {
+            "instances": 10
+          }
+        },
+        "Arenaviridae": {
+          "Mammarenavirus": {
+            "instances": 54
+          },
+          "Arenavirus": {
+            "Old world arenaviruses": {
+              "unclassified Old world arenaviruses": {
+                "instances": 6
+              }
+            }
+          },
+          "Reptarenavirus": {
+            "instances": 8
+          },
+          "unclassified Arenaviridae": {
+            "instances": 8
+          }
+        },
+        "Bunyaviridae": {
+          "Hantavirus": {
+            "instances": 27,
+            "unclassified Hantavirus": {
+              "instances": 3
+            }
+          },
+          "Orthobunyavirus": {
+            "instances": 27,
+            "unclassified Orthobunyavirus": {
+              "instances": 6
+            }
+          },
+          "Tospovirus": {
+            "instances": 33
+          },
+          "Nairovirus": {
+            "instances": 6,
+            "unclassified Nairovirus": {
+              "instances": 6
+            }
+          },
+          "Phlebovirus": {
+            "instances": 18,
+            "unclassified Phlebovirus": {
+              "instances": 22
+            }
+          },
+          "unclassified Bunyaviridae": {
+            "instances": 12
+          }
+        },
+        "Ophioviridae": {
+          "Ophiovirus": {
+            "instances": 8
+          }
+        },
+        "unclassified ssRNA negative-strand viruses": {
+          "instances": 10
+        },
+        "Varicosavirus": {
+          "instances": 2
+        }
+      },
+      "unassigned ssRNA viruses": {
+        "Alvernaviridae": {
+          "Dinornavirus": {
+            "instances": 1
+          }
+        }
+      },
+      "unclassified ssRNA viruses": {
+        "instances": 7
+      }
+    },
+    "Deltavirus": {
+      "instances": 6
+    },
+    "unclassified virophages": {
+      "instances": 7
+    },
+    "dsRNA viruses": {
+      "instances": 34,
+      "Reoviridae": {
+        "Sedoreovirinae": {
+          "Rotavirus": {
+            "instances": 78,
+            "Rotavirus A": {
+              "instances": 11
+            },
+            "unclassified rotaviruses": {
+              "instances": 11
+            }
+          },
+          "Orbivirus": {
+            "instances": 172
+          },
+          "Phytoreovirus": {
+            "instances": 24,
+            "unclassified Phytoreovirus": {
+              "instances": 12
+            }
+          },
+          "Seadornavirus": {
+            "instances": 36
+          },
+          "Mimoreovirus": {
+            "instances": 11
+          }
+        },
+        "Spinareovirinae": {
+          "Fijivirus": {
+            "Fijivirus group 2": {
+              "instances": 40
+            },
+            "unclassified Fijivirus": {
+              "instances": 21
+            },
+            "instances": 10,
+            "Fijivirus group 1": {
+              "instances": 10
+            }
+          },
+          "Cypovirus": {
+            "instances": 51,
+            "unclassified Cypovirus": {
+              "instances": 16
+            }
+          },
+          "Coltivirus": {
+            "instances": 24
+          },
+          "Oryzavirus": {
+            "instances": 10
+          },
+          "Aquareovirus": {
+            "instances": 33
+          },
+          "Mycoreovirus": {
+            "instances": 23
+          },
+          "Dinovernavirus": {
+            "instances": 9,
+            "unclassified Dinovernavirus": {
+              "instances": 9
+            }
+          },
+          "Orthoreovirus": {
+            "instances": 30,
+            "unclassified Orthoreovirus": {
+              "instances": 40
+            }
+          }
+        },
+        "unclassified Reoviridae": {
+          "instances": 57
+        }
+      },
+      "Birnaviridae": {
+        "Avibirnavirus": {
+          "instances": 8
+        },
+        "Aquabirnavirus": {
+          "instances": 4,
+          "unclassified Aquabirnavirus": {
+            "instances": 2
+          }
+        },
+        "Entomobirnavirus": {
+          "instances": 2
+        },
+        "Blosnavirus": {
+          "instances": 2
+        },
+        "instances": 2
+      },
+      "Totiviridae": {
+        "Totivirus": {
+          "instances": 9
+        },
+        "Victorivirus": {
+          "instances": 13,
+          "unclassified Victorivirus": {
+            "instances": 10
+          }
+        },
+        "Leishmaniavirus": {
+          "instances": 3,
+          "unclassified Leishmaniavirus": {
+            "instances": 1
+          }
+        },
+        "instances": 23,
+        "Giardiavirus": {
+          "instances": 1
+        },
+        "Trichomonasvirus": {
+          "instances": 3
+        }
+      },
+      "Partitiviridae": {
+        "unclassified Partitiviridae": {
+          "instances": 41
+        },
+        "Deltapartitivirus": {
+          "instances": 4
+        },
+        "Gammapartitivirus": {
+          "instances": 16
+        },
+        "Betapartitivirus": {
+          "instances": 23,
+          "unclassified Betapartitivirus": {
+            "instances": 2
+          }
+        },
+        "Alphapartitivirus": {
+          "instances": 8
+        }
+      },
+      "Hypoviridae": {
+        "Hypovirus": {
+          "instances": 5,
+          "unclassified Hypovirus": {
+            "instances": 6
+          }
+        }
+      },
+      "Cystoviridae": {
+        "instances": 12,
+        "Cystovirus": {
+          "instances": 3
+        }
+      },
+      "Chrysoviridae": {
+        "Chrysovirus": {
+          "instances": 29
+        }
+      },
+      "Picobirnaviridae": {
+        "Picobirnavirus": {
+          "instances": 2,
+          "unclassified Picobirnavirus": {
+            "instances": 2
+          }
+        }
+      },
+      "Endornaviridae": {
+        "Endornavirus": {
+          "instances": 7,
+          "unclassified Endornavirus": {
+            "instances": 14
+          }
+        }
+      },
+      "Amalgaviridae": {
+        "Amalgavirus": {
+          "instances": 3
+        }
+      },
+      "Quadriviridae": {
+        "Quadrivirus": {
+          "instances": 4
+        }
+      }
+    },
+    "unclassified phages": {
+      "instances": 34,
+      "environmental samples": {
+        "instances": 1
+      }
+    },
+    "Satellites": {
+      "Satellite Nucleic Acids": {
+        "Single stranded DNA satellites": {
+          "Betasatellites": {
+            "instances": 225
+          },
+          "Alphasatellites": {
+            "Begomovirus-associated alphasatellites": {
+              "unclassified Begomovirus-associated alphasatellites": {
+                "instances": 48
+              },
+              "instances": 27
+            },
+            "Babu- and nanovirus-associated alphasatellites": {
+              "instances": 8,
+              "unclassified Babu- and nanovirus-associated alphasatellites": {
+                "instances": 6
+              }
+            }
+          },
+          "unclassified Single stranded DNA satellites": {
+            "instances": 10
+          }
+        },
+        "Double-stranded RNA satellites": {
+          "unclassified Double-stranded satellite RNAs": {
+            "instances": 4
+          },
+          "instances": 3
+        },
+        "Single stranded RNA satellites": {
+          "unclassified Single stranded RNA satellites": {
+            "instances": 9
+          },
+          "Small linear single stranded RNA satellites": {
+            "instances": 8
+          },
+          "Large single stranded RNA satellites": {
+            "instances": 5
+          },
+          "Circular single stranded RNA satellites": {
+            "instances": 9
+          }
+        },
+        "unclassified Satellite Nucleic Acids": {
+          "instances": 5
+        },
+        "RNA satellites": {
+          "instances": 2
+        }
+      },
+      "Satellite Viruses": {
+        "instances": 4
+      },
+      "ssDNA satellites": {
+        "unclassified ssDNA satellites": {
+          "instances": 3
+        }
+      }
+    },
+    "unclassified viruses": {
+      "instances": 155
+    },
+    "Virus families not assigned to an order": {
+      "Sphaerolipoviridae": {
+        "Gammasphaerolipovirus": {
+          "instances": 2
+        },
+        "Alphasphaerolipovirus": {
+          "instances": 3
+        }
+      }
+    },
+    "unassigned viruses": {
+      "Bacilladnavirus": {
+        "instances": 1,
+        "unclassified Bacilladnavirus": {
+          "instances": 3
+        },
+        "environmental samples": {
+          "instances": 1
+        }
+      },
+      "Glossinavirus": {
+        "instances": 1
+      },
+      "Muscavirus": {
+        "instances": 1
+      },
+      "Megabirnavirus": {
+        "instances": 2,
+        "unclassified Megabirnavirus": {
+          "instances": 4
+        }
+      },
+      "Bidensovirus": {
+        "instances": 2
+      }
+    },
+    "unclassified archaeal viruses": {
+      "instances": 3
+    },
+    "environmental samples": {
+      "instances": 1
+    },
+    "Virus-associated RNAs": {
+      "instances": 1
+    }
+  }
+}

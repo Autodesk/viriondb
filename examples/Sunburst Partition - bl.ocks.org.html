@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://bl.ocks.org/mbostock/4063423 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=1000">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mbostock">
+<meta property="og:url" content="http://bl.ocks.org/mbostock/4063423">
+<meta property="og:title" content="Sunburst Partition">
+<meta property="og:description" content="Mike Bostock’s Block 4063423">
+<meta property="og:image" content="http://bl.ocks.org/mbostock/raw/4063423/20e64dd96d0d857f39f20ee44a2f9fc508473cc5/thumbnail.png">
+<title>Sunburst Partition - bl.ocks.org</title>
+<link rel="icon" href="http://bl.ocks.org/favicon.png">
+<style>
+
+@import url("/style.css");
+
+</style>
+
+</head><body><header>
+  <div class="column">
+    <div class="navigation">
+      <a href="http://bl.ocks.org/">Popular</a>
+      / <a href="http://bl.ocks.org/-/about">About</a>
+    </div>
+    <a class="user" href="http://bl.ocks.org/mbostock"><img class="avatar" src="./Sunburst Partition - bl.ocks.org_files/230541" width="30" height="30">Mike Bostock</a>’s
+    Block <a class="gist gist-id self" title="View Gist on GitHub." href="https://gist.github.com/mbostock/4063423">4063423</a>    <div class="date">Updated May 8, 2016</div>
+  </div>
+</header>
+
+<div class="column">
+  <h1>Sunburst Partition</h1>
+  <div class="index">
+    <iframe sandbox="allow-popups allow-scripts allow-forms allow-same-origin" src="./Sunburst Partition - bl.ocks.org_files/saved_resource.html" marginwidth="0" marginheight="0" style="height: 700px;" scrolling="no"></iframe>
+  </div>
+  <div class="index-pop">
+    <a target="_blank" title="Open Block 4063423 a new window." href="http://bl.ocks.org/mbostock/raw/4063423">Open<svg height="16" width="12"><path d="M11 10h1v3c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V3c0-0.55 0.45-1 1-1h3v1H1v10h10V10zM6 2l2.25 2.25-3.25 3.25 1.5 1.5 3.25-3.25 2.25 2.25V2H6z"></path></svg></a>
+  </div>
+  <div class="gist-readme" data-key="README.md"><p>A sunburst is similar to the treemap, except it uses a radial layout. The root node of the tree is at the center, with leaves on the circumference. The area (or angle, depending on implementation) of each arc corresponds to its value. Sunburst design by <a href="http://www.cc.gatech.edu/gvu/ii/sunburst/">John Stasko</a>. Data courtesy <a href="http://flare.prefuse.org/">Jeff Heer</a>.</p></div>
+  <div class="gist-sources">
+    <div class="gist-source" data-key="index.html">
+      <h2>index.html<a name="index.html" class="anchor" href="http://bl.ocks.org/mbostock/4063423#index.html">#</a></h2>
+      <pre><code class="html xml"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+
+<span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">font-family</span>:<span class="value"> <span class="string">"Helvetica Neue"</span>, Helvetica, Arial, sans-serif</span>;</span>
+  <span class="rule"><span class="attribute">margin</span>:<span class="value"> auto</span>;</span>
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span>;</span>
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">960</span>px</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="tag">form</span> <span class="rules">{
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span>;</span>
+  <span class="rule"><span class="attribute">right</span>:<span class="value"> <span class="number">10</span>px</span>;</span>
+  <span class="rule"><span class="attribute">top</span>:<span class="value"> <span class="number">10</span>px</span>;</span>
+<span class="rule">}</span></span>
+
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;<span class="title">form</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">label</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">name</span>=<span class="value">"mode"</span> <span class="attribute">value</span>=<span class="value">"size"</span>&gt;</span> Size<span class="tag">&lt;/<span class="title">label</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">label</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"radio"</span> <span class="attribute">name</span>=<span class="value">"mode"</span> <span class="attribute">value</span>=<span class="value">"count"</span> <span class="attribute">checked</span>&gt;</span> Count<span class="tag">&lt;/<span class="title">label</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">form</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//d3js.org/d3.v3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+
+<span class="keyword">var</span> width = <span class="number">960</span>,
+    height = <span class="number">700</span>,
+    radius = Math.min(width, height) / <span class="number">2</span>,
+    color = d3.scale.category20c();
+
+<span class="keyword">var</span> svg = d3.select(<span class="string">"body"</span>).append(<span class="string">"svg"</span>)
+    .attr(<span class="string">"width"</span>, width)
+    .attr(<span class="string">"height"</span>, height)
+  .append(<span class="string">"g"</span>)
+    .attr(<span class="string">"transform"</span>, <span class="string">"translate("</span> + width / <span class="number">2</span> + <span class="string">","</span> + height * .<span class="number">52</span> + <span class="string">")"</span>);
+
+<span class="keyword">var</span> partition = d3.layout.partition()
+    .sort(<span class="literal">null</span>)
+    .size([<span class="number">2</span> * Math.PI, radius * radius])
+    .value(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> <span class="number">1</span>; });
+
+<span class="keyword">var</span> arc = d3.svg.arc()
+    .startAngle(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.x; })
+    .endAngle(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.x + d.dx; })
+    .innerRadius(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> Math.sqrt(d.y); })
+    .outerRadius(<span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> Math.sqrt(d.y + d.dy); });
+
+d3.json(<span class="string">"flare.json"</span>, <span class="function"><span class="keyword">function</span><span class="params">(error, root)</span> {</span>
+  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;
+
+  <span class="keyword">var</span> path = svg.datum(root).selectAll(<span class="string">"path"</span>)
+      .data(partition.nodes)
+    .enter().append(<span class="string">"path"</span>)
+      .attr(<span class="string">"display"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.depth ? <span class="literal">null</span> : <span class="string">"none"</span>; }) <span class="comment">// hide inner ring</span>
+      .attr(<span class="string">"d"</span>, arc)
+      .style(<span class="string">"stroke"</span>, <span class="string">"#fff"</span>)
+      .style(<span class="string">"fill"</span>, <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> color((d.children ? d : d.parent).name); })
+      .style(<span class="string">"fill-rule"</span>, <span class="string">"evenodd"</span>)
+      .each(stash);
+
+  d3.selectAll(<span class="string">"input"</span>).on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span> <span class="title">change</span><span class="params">()</span> {</span>
+    <span class="keyword">var</span> value = <span class="keyword">this</span>.value === <span class="string">"count"</span>
+        ? <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="keyword">return</span> <span class="number">1</span>; }
+        : <span class="function"><span class="keyword">function</span><span class="params">(d)</span> {</span> <span class="keyword">return</span> d.size; };
+
+    path
+        .data(partition.value(value).nodes)
+      .transition()
+        .duration(<span class="number">1500</span>)
+        .attrTween(<span class="string">"d"</span>, arcTween);
+  });
+});
+
+<span class="comment">// Stash the old values for transition.</span>
+<span class="function"><span class="keyword">function</span> <span class="title">stash</span><span class="params">(d)</span> {</span>
+  d.x0 = d.x;
+  d.dx0 = d.dx;
+}
+
+<span class="comment">// Interpolate the arcs in data space.</span>
+<span class="function"><span class="keyword">function</span> <span class="title">arcTween</span><span class="params">(a)</span> {</span>
+  <span class="keyword">var</span> i = d3.interpolate({x: a.x0, dx: a.dx0}, a);
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(t)</span> {</span>
+    <span class="keyword">var</span> b = i(t);
+    a.x0 = b.x;
+    a.dx0 = b.dx;
+    <span class="keyword">return</span> arc(b);
+  };
+}
+
+d3.select(self.frameElement).style(<span class="string">"height"</span>, height + <span class="string">"px"</span>);
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</code></pre>
+    </div>
+    <div class="gist-source" data-key="flare.json">
+      <h2>flare.json<a name="flare.json" class="anchor" href="http://bl.ocks.org/mbostock/4063423#flare.json">#</a></h2>
+      <pre><code class="javascript">{
+ <span class="string">"name"</span>: <span class="string">"flare"</span>,
+ <span class="string">"children"</span>: [
+  {
+   <span class="string">"name"</span>: <span class="string">"analytics"</span>,
+   <span class="string">"children"</span>: [
+    {
+     <span class="string">"name"</span>: <span class="string">"cluster"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"AgglomerativeCluster"</span>, <span class="string">"size"</span>: <span class="number">3938</span>},
+      {<span class="string">"name"</span>: <span class="string">"CommunityStructure"</span>, <span class="string">"size"</span>: <span class="number">3812</span>},
+      {<span class="string">"name"</span>: <span class="string">"HierarchicalCluster"</span>, <span class="string">"size"</span>: <span class="number">6714</span>},
+      {<span class="string">"name"</span>: <span class="string">"MergeEdge"</span>, <span class="string">"size"</span>: <span class="number">743</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"graph"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"BetweennessCentrality"</span>, <span class="string">"size"</span>: <span class="number">3534</span>},
+      {<span class="string">"name"</span>: <span class="string">"LinkDistance"</span>, <span class="string">"size"</span>: <span class="number">5731</span>},
+      {<span class="string">"name"</span>: <span class="string">"MaxFlowMinCut"</span>, <span class="string">"size"</span>: <span class="number">7840</span>},
+      {<span class="string">"name"</span>: <span class="string">"ShortestPaths"</span>, <span class="string">"size"</span>: <span class="number">5914</span>},
+      {<span class="string">"name"</span>: <span class="string">"SpanningTree"</span>, <span class="string">"size"</span>: <span class="number">3416</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"optimization"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"AspectRatioBanker"</span>, <span class="string">"size"</span>: <span class="number">7074</span>}
+     ]
+    }
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"animate"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"Easing"</span>, <span class="string">"size"</span>: <span class="number">17010</span>},
+    {<span class="string">"name"</span>: <span class="string">"FunctionSequence"</span>, <span class="string">"size"</span>: <span class="number">5842</span>},
+    {
+     <span class="string">"name"</span>: <span class="string">"interpolate"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"ArrayInterpolator"</span>, <span class="string">"size"</span>: <span class="number">1983</span>},
+      {<span class="string">"name"</span>: <span class="string">"ColorInterpolator"</span>, <span class="string">"size"</span>: <span class="number">2047</span>},
+      {<span class="string">"name"</span>: <span class="string">"DateInterpolator"</span>, <span class="string">"size"</span>: <span class="number">1375</span>},
+      {<span class="string">"name"</span>: <span class="string">"Interpolator"</span>, <span class="string">"size"</span>: <span class="number">8746</span>},
+      {<span class="string">"name"</span>: <span class="string">"MatrixInterpolator"</span>, <span class="string">"size"</span>: <span class="number">2202</span>},
+      {<span class="string">"name"</span>: <span class="string">"NumberInterpolator"</span>, <span class="string">"size"</span>: <span class="number">1382</span>},
+      {<span class="string">"name"</span>: <span class="string">"ObjectInterpolator"</span>, <span class="string">"size"</span>: <span class="number">1629</span>},
+      {<span class="string">"name"</span>: <span class="string">"PointInterpolator"</span>, <span class="string">"size"</span>: <span class="number">1675</span>},
+      {<span class="string">"name"</span>: <span class="string">"RectangleInterpolator"</span>, <span class="string">"size"</span>: <span class="number">2042</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"ISchedulable"</span>, <span class="string">"size"</span>: <span class="number">1041</span>},
+    {<span class="string">"name"</span>: <span class="string">"Parallel"</span>, <span class="string">"size"</span>: <span class="number">5176</span>},
+    {<span class="string">"name"</span>: <span class="string">"Pause"</span>, <span class="string">"size"</span>: <span class="number">449</span>},
+    {<span class="string">"name"</span>: <span class="string">"Scheduler"</span>, <span class="string">"size"</span>: <span class="number">5593</span>},
+    {<span class="string">"name"</span>: <span class="string">"Sequence"</span>, <span class="string">"size"</span>: <span class="number">5534</span>},
+    {<span class="string">"name"</span>: <span class="string">"Transition"</span>, <span class="string">"size"</span>: <span class="number">9201</span>},
+    {<span class="string">"name"</span>: <span class="string">"Transitioner"</span>, <span class="string">"size"</span>: <span class="number">19975</span>},
+    {<span class="string">"name"</span>: <span class="string">"TransitionEvent"</span>, <span class="string">"size"</span>: <span class="number">1116</span>},
+    {<span class="string">"name"</span>: <span class="string">"Tween"</span>, <span class="string">"size"</span>: <span class="number">6006</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"data"</span>,
+   <span class="string">"children"</span>: [
+    {
+     <span class="string">"name"</span>: <span class="string">"converters"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"Converters"</span>, <span class="string">"size"</span>: <span class="number">721</span>},
+      {<span class="string">"name"</span>: <span class="string">"DelimitedTextConverter"</span>, <span class="string">"size"</span>: <span class="number">4294</span>},
+      {<span class="string">"name"</span>: <span class="string">"GraphMLConverter"</span>, <span class="string">"size"</span>: <span class="number">9800</span>},
+      {<span class="string">"name"</span>: <span class="string">"IDataConverter"</span>, <span class="string">"size"</span>: <span class="number">1314</span>},
+      {<span class="string">"name"</span>: <span class="string">"JSONConverter"</span>, <span class="string">"size"</span>: <span class="number">2220</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"DataField"</span>, <span class="string">"size"</span>: <span class="number">1759</span>},
+    {<span class="string">"name"</span>: <span class="string">"DataSchema"</span>, <span class="string">"size"</span>: <span class="number">2165</span>},
+    {<span class="string">"name"</span>: <span class="string">"DataSet"</span>, <span class="string">"size"</span>: <span class="number">586</span>},
+    {<span class="string">"name"</span>: <span class="string">"DataSource"</span>, <span class="string">"size"</span>: <span class="number">3331</span>},
+    {<span class="string">"name"</span>: <span class="string">"DataTable"</span>, <span class="string">"size"</span>: <span class="number">772</span>},
+    {<span class="string">"name"</span>: <span class="string">"DataUtil"</span>, <span class="string">"size"</span>: <span class="number">3322</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"display"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"DirtySprite"</span>, <span class="string">"size"</span>: <span class="number">8833</span>},
+    {<span class="string">"name"</span>: <span class="string">"LineSprite"</span>, <span class="string">"size"</span>: <span class="number">1732</span>},
+    {<span class="string">"name"</span>: <span class="string">"RectSprite"</span>, <span class="string">"size"</span>: <span class="number">3623</span>},
+    {<span class="string">"name"</span>: <span class="string">"TextSprite"</span>, <span class="string">"size"</span>: <span class="number">10066</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"flex"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"FlareVis"</span>, <span class="string">"size"</span>: <span class="number">4116</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"physics"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"DragForce"</span>, <span class="string">"size"</span>: <span class="number">1082</span>},
+    {<span class="string">"name"</span>: <span class="string">"GravityForce"</span>, <span class="string">"size"</span>: <span class="number">1336</span>},
+    {<span class="string">"name"</span>: <span class="string">"IForce"</span>, <span class="string">"size"</span>: <span class="number">319</span>},
+    {<span class="string">"name"</span>: <span class="string">"NBodyForce"</span>, <span class="string">"size"</span>: <span class="number">10498</span>},
+    {<span class="string">"name"</span>: <span class="string">"Particle"</span>, <span class="string">"size"</span>: <span class="number">2822</span>},
+    {<span class="string">"name"</span>: <span class="string">"Simulation"</span>, <span class="string">"size"</span>: <span class="number">9983</span>},
+    {<span class="string">"name"</span>: <span class="string">"Spring"</span>, <span class="string">"size"</span>: <span class="number">2213</span>},
+    {<span class="string">"name"</span>: <span class="string">"SpringForce"</span>, <span class="string">"size"</span>: <span class="number">1681</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"query"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"AggregateExpression"</span>, <span class="string">"size"</span>: <span class="number">1616</span>},
+    {<span class="string">"name"</span>: <span class="string">"And"</span>, <span class="string">"size"</span>: <span class="number">1027</span>},
+    {<span class="string">"name"</span>: <span class="string">"Arithmetic"</span>, <span class="string">"size"</span>: <span class="number">3891</span>},
+    {<span class="string">"name"</span>: <span class="string">"Average"</span>, <span class="string">"size"</span>: <span class="number">891</span>},
+    {<span class="string">"name"</span>: <span class="string">"BinaryExpression"</span>, <span class="string">"size"</span>: <span class="number">2893</span>},
+    {<span class="string">"name"</span>: <span class="string">"Comparison"</span>, <span class="string">"size"</span>: <span class="number">5103</span>},
+    {<span class="string">"name"</span>: <span class="string">"CompositeExpression"</span>, <span class="string">"size"</span>: <span class="number">3677</span>},
+    {<span class="string">"name"</span>: <span class="string">"Count"</span>, <span class="string">"size"</span>: <span class="number">781</span>},
+    {<span class="string">"name"</span>: <span class="string">"DateUtil"</span>, <span class="string">"size"</span>: <span class="number">4141</span>},
+    {<span class="string">"name"</span>: <span class="string">"Distinct"</span>, <span class="string">"size"</span>: <span class="number">933</span>},
+    {<span class="string">"name"</span>: <span class="string">"Expression"</span>, <span class="string">"size"</span>: <span class="number">5130</span>},
+    {<span class="string">"name"</span>: <span class="string">"ExpressionIterator"</span>, <span class="string">"size"</span>: <span class="number">3617</span>},
+    {<span class="string">"name"</span>: <span class="string">"Fn"</span>, <span class="string">"size"</span>: <span class="number">3240</span>},
+    {<span class="string">"name"</span>: <span class="string">"If"</span>, <span class="string">"size"</span>: <span class="number">2732</span>},
+    {<span class="string">"name"</span>: <span class="string">"IsA"</span>, <span class="string">"size"</span>: <span class="number">2039</span>},
+    {<span class="string">"name"</span>: <span class="string">"Literal"</span>, <span class="string">"size"</span>: <span class="number">1214</span>},
+    {<span class="string">"name"</span>: <span class="string">"Match"</span>, <span class="string">"size"</span>: <span class="number">3748</span>},
+    {<span class="string">"name"</span>: <span class="string">"Maximum"</span>, <span class="string">"size"</span>: <span class="number">843</span>},
+    {
+     <span class="string">"name"</span>: <span class="string">"methods"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"add"</span>, <span class="string">"size"</span>: <span class="number">593</span>},
+      {<span class="string">"name"</span>: <span class="string">"and"</span>, <span class="string">"size"</span>: <span class="number">330</span>},
+      {<span class="string">"name"</span>: <span class="string">"average"</span>, <span class="string">"size"</span>: <span class="number">287</span>},
+      {<span class="string">"name"</span>: <span class="string">"count"</span>, <span class="string">"size"</span>: <span class="number">277</span>},
+      {<span class="string">"name"</span>: <span class="string">"distinct"</span>, <span class="string">"size"</span>: <span class="number">292</span>},
+      {<span class="string">"name"</span>: <span class="string">"div"</span>, <span class="string">"size"</span>: <span class="number">595</span>},
+      {<span class="string">"name"</span>: <span class="string">"eq"</span>, <span class="string">"size"</span>: <span class="number">594</span>},
+      {<span class="string">"name"</span>: <span class="string">"fn"</span>, <span class="string">"size"</span>: <span class="number">460</span>},
+      {<span class="string">"name"</span>: <span class="string">"gt"</span>, <span class="string">"size"</span>: <span class="number">603</span>},
+      {<span class="string">"name"</span>: <span class="string">"gte"</span>, <span class="string">"size"</span>: <span class="number">625</span>},
+      {<span class="string">"name"</span>: <span class="string">"iff"</span>, <span class="string">"size"</span>: <span class="number">748</span>},
+      {<span class="string">"name"</span>: <span class="string">"isa"</span>, <span class="string">"size"</span>: <span class="number">461</span>},
+      {<span class="string">"name"</span>: <span class="string">"lt"</span>, <span class="string">"size"</span>: <span class="number">597</span>},
+      {<span class="string">"name"</span>: <span class="string">"lte"</span>, <span class="string">"size"</span>: <span class="number">619</span>},
+      {<span class="string">"name"</span>: <span class="string">"max"</span>, <span class="string">"size"</span>: <span class="number">283</span>},
+      {<span class="string">"name"</span>: <span class="string">"min"</span>, <span class="string">"size"</span>: <span class="number">283</span>},
+      {<span class="string">"name"</span>: <span class="string">"mod"</span>, <span class="string">"size"</span>: <span class="number">591</span>},
+      {<span class="string">"name"</span>: <span class="string">"mul"</span>, <span class="string">"size"</span>: <span class="number">603</span>},
+      {<span class="string">"name"</span>: <span class="string">"neq"</span>, <span class="string">"size"</span>: <span class="number">599</span>},
+      {<span class="string">"name"</span>: <span class="string">"not"</span>, <span class="string">"size"</span>: <span class="number">386</span>},
+      {<span class="string">"name"</span>: <span class="string">"or"</span>, <span class="string">"size"</span>: <span class="number">323</span>},
+      {<span class="string">"name"</span>: <span class="string">"orderby"</span>, <span class="string">"size"</span>: <span class="number">307</span>},
+      {<span class="string">"name"</span>: <span class="string">"range"</span>, <span class="string">"size"</span>: <span class="number">772</span>},
+      {<span class="string">"name"</span>: <span class="string">"select"</span>, <span class="string">"size"</span>: <span class="number">296</span>},
+      {<span class="string">"name"</span>: <span class="string">"stddev"</span>, <span class="string">"size"</span>: <span class="number">363</span>},
+      {<span class="string">"name"</span>: <span class="string">"sub"</span>, <span class="string">"size"</span>: <span class="number">600</span>},
+      {<span class="string">"name"</span>: <span class="string">"sum"</span>, <span class="string">"size"</span>: <span class="number">280</span>},
+      {<span class="string">"name"</span>: <span class="string">"update"</span>, <span class="string">"size"</span>: <span class="number">307</span>},
+      {<span class="string">"name"</span>: <span class="string">"variance"</span>, <span class="string">"size"</span>: <span class="number">335</span>},
+      {<span class="string">"name"</span>: <span class="string">"where"</span>, <span class="string">"size"</span>: <span class="number">299</span>},
+      {<span class="string">"name"</span>: <span class="string">"xor"</span>, <span class="string">"size"</span>: <span class="number">354</span>},
+      {<span class="string">"name"</span>: <span class="string">"_"</span>, <span class="string">"size"</span>: <span class="number">264</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"Minimum"</span>, <span class="string">"size"</span>: <span class="number">843</span>},
+    {<span class="string">"name"</span>: <span class="string">"Not"</span>, <span class="string">"size"</span>: <span class="number">1554</span>},
+    {<span class="string">"name"</span>: <span class="string">"Or"</span>, <span class="string">"size"</span>: <span class="number">970</span>},
+    {<span class="string">"name"</span>: <span class="string">"Query"</span>, <span class="string">"size"</span>: <span class="number">13896</span>},
+    {<span class="string">"name"</span>: <span class="string">"Range"</span>, <span class="string">"size"</span>: <span class="number">1594</span>},
+    {<span class="string">"name"</span>: <span class="string">"StringUtil"</span>, <span class="string">"size"</span>: <span class="number">4130</span>},
+    {<span class="string">"name"</span>: <span class="string">"Sum"</span>, <span class="string">"size"</span>: <span class="number">791</span>},
+    {<span class="string">"name"</span>: <span class="string">"Variable"</span>, <span class="string">"size"</span>: <span class="number">1124</span>},
+    {<span class="string">"name"</span>: <span class="string">"Variance"</span>, <span class="string">"size"</span>: <span class="number">1876</span>},
+    {<span class="string">"name"</span>: <span class="string">"Xor"</span>, <span class="string">"size"</span>: <span class="number">1101</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"scale"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"IScaleMap"</span>, <span class="string">"size"</span>: <span class="number">2105</span>},
+    {<span class="string">"name"</span>: <span class="string">"LinearScale"</span>, <span class="string">"size"</span>: <span class="number">1316</span>},
+    {<span class="string">"name"</span>: <span class="string">"LogScale"</span>, <span class="string">"size"</span>: <span class="number">3151</span>},
+    {<span class="string">"name"</span>: <span class="string">"OrdinalScale"</span>, <span class="string">"size"</span>: <span class="number">3770</span>},
+    {<span class="string">"name"</span>: <span class="string">"QuantileScale"</span>, <span class="string">"size"</span>: <span class="number">2435</span>},
+    {<span class="string">"name"</span>: <span class="string">"QuantitativeScale"</span>, <span class="string">"size"</span>: <span class="number">4839</span>},
+    {<span class="string">"name"</span>: <span class="string">"RootScale"</span>, <span class="string">"size"</span>: <span class="number">1756</span>},
+    {<span class="string">"name"</span>: <span class="string">"Scale"</span>, <span class="string">"size"</span>: <span class="number">4268</span>},
+    {<span class="string">"name"</span>: <span class="string">"ScaleType"</span>, <span class="string">"size"</span>: <span class="number">1821</span>},
+    {<span class="string">"name"</span>: <span class="string">"TimeScale"</span>, <span class="string">"size"</span>: <span class="number">5833</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"util"</span>,
+   <span class="string">"children"</span>: [
+    {<span class="string">"name"</span>: <span class="string">"Arrays"</span>, <span class="string">"size"</span>: <span class="number">8258</span>},
+    {<span class="string">"name"</span>: <span class="string">"Colors"</span>, <span class="string">"size"</span>: <span class="number">10001</span>},
+    {<span class="string">"name"</span>: <span class="string">"Dates"</span>, <span class="string">"size"</span>: <span class="number">8217</span>},
+    {<span class="string">"name"</span>: <span class="string">"Displays"</span>, <span class="string">"size"</span>: <span class="number">12555</span>},
+    {<span class="string">"name"</span>: <span class="string">"Filter"</span>, <span class="string">"size"</span>: <span class="number">2324</span>},
+    {<span class="string">"name"</span>: <span class="string">"Geometry"</span>, <span class="string">"size"</span>: <span class="number">10993</span>},
+    {
+     <span class="string">"name"</span>: <span class="string">"heap"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"FibonacciHeap"</span>, <span class="string">"size"</span>: <span class="number">9354</span>},
+      {<span class="string">"name"</span>: <span class="string">"HeapNode"</span>, <span class="string">"size"</span>: <span class="number">1233</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"IEvaluable"</span>, <span class="string">"size"</span>: <span class="number">335</span>},
+    {<span class="string">"name"</span>: <span class="string">"IPredicate"</span>, <span class="string">"size"</span>: <span class="number">383</span>},
+    {<span class="string">"name"</span>: <span class="string">"IValueProxy"</span>, <span class="string">"size"</span>: <span class="number">874</span>},
+    {
+     <span class="string">"name"</span>: <span class="string">"math"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"DenseMatrix"</span>, <span class="string">"size"</span>: <span class="number">3165</span>},
+      {<span class="string">"name"</span>: <span class="string">"IMatrix"</span>, <span class="string">"size"</span>: <span class="number">2815</span>},
+      {<span class="string">"name"</span>: <span class="string">"SparseMatrix"</span>, <span class="string">"size"</span>: <span class="number">3366</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"Maths"</span>, <span class="string">"size"</span>: <span class="number">17705</span>},
+    {<span class="string">"name"</span>: <span class="string">"Orientation"</span>, <span class="string">"size"</span>: <span class="number">1486</span>},
+    {
+     <span class="string">"name"</span>: <span class="string">"palette"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"ColorPalette"</span>, <span class="string">"size"</span>: <span class="number">6367</span>},
+      {<span class="string">"name"</span>: <span class="string">"Palette"</span>, <span class="string">"size"</span>: <span class="number">1229</span>},
+      {<span class="string">"name"</span>: <span class="string">"ShapePalette"</span>, <span class="string">"size"</span>: <span class="number">2059</span>},
+      {<span class="string">"name"</span>: <span class="string">"SizePalette"</span>, <span class="string">"size"</span>: <span class="number">2291</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"Property"</span>, <span class="string">"size"</span>: <span class="number">5559</span>},
+    {<span class="string">"name"</span>: <span class="string">"Shapes"</span>, <span class="string">"size"</span>: <span class="number">19118</span>},
+    {<span class="string">"name"</span>: <span class="string">"Sort"</span>, <span class="string">"size"</span>: <span class="number">6887</span>},
+    {<span class="string">"name"</span>: <span class="string">"Stats"</span>, <span class="string">"size"</span>: <span class="number">6557</span>},
+    {<span class="string">"name"</span>: <span class="string">"Strings"</span>, <span class="string">"size"</span>: <span class="number">22026</span>}
+   ]
+  },
+  {
+   <span class="string">"name"</span>: <span class="string">"vis"</span>,
+   <span class="string">"children"</span>: [
+    {
+     <span class="string">"name"</span>: <span class="string">"axis"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"Axes"</span>, <span class="string">"size"</span>: <span class="number">1302</span>},
+      {<span class="string">"name"</span>: <span class="string">"Axis"</span>, <span class="string">"size"</span>: <span class="number">24593</span>},
+      {<span class="string">"name"</span>: <span class="string">"AxisGridLine"</span>, <span class="string">"size"</span>: <span class="number">652</span>},
+      {<span class="string">"name"</span>: <span class="string">"AxisLabel"</span>, <span class="string">"size"</span>: <span class="number">636</span>},
+      {<span class="string">"name"</span>: <span class="string">"CartesianAxes"</span>, <span class="string">"size"</span>: <span class="number">6703</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"controls"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"AnchorControl"</span>, <span class="string">"size"</span>: <span class="number">2138</span>},
+      {<span class="string">"name"</span>: <span class="string">"ClickControl"</span>, <span class="string">"size"</span>: <span class="number">3824</span>},
+      {<span class="string">"name"</span>: <span class="string">"Control"</span>, <span class="string">"size"</span>: <span class="number">1353</span>},
+      {<span class="string">"name"</span>: <span class="string">"ControlList"</span>, <span class="string">"size"</span>: <span class="number">4665</span>},
+      {<span class="string">"name"</span>: <span class="string">"DragControl"</span>, <span class="string">"size"</span>: <span class="number">2649</span>},
+      {<span class="string">"name"</span>: <span class="string">"ExpandControl"</span>, <span class="string">"size"</span>: <span class="number">2832</span>},
+      {<span class="string">"name"</span>: <span class="string">"HoverControl"</span>, <span class="string">"size"</span>: <span class="number">4896</span>},
+      {<span class="string">"name"</span>: <span class="string">"IControl"</span>, <span class="string">"size"</span>: <span class="number">763</span>},
+      {<span class="string">"name"</span>: <span class="string">"PanZoomControl"</span>, <span class="string">"size"</span>: <span class="number">5222</span>},
+      {<span class="string">"name"</span>: <span class="string">"SelectionControl"</span>, <span class="string">"size"</span>: <span class="number">7862</span>},
+      {<span class="string">"name"</span>: <span class="string">"TooltipControl"</span>, <span class="string">"size"</span>: <span class="number">8435</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"data"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"Data"</span>, <span class="string">"size"</span>: <span class="number">20544</span>},
+      {<span class="string">"name"</span>: <span class="string">"DataList"</span>, <span class="string">"size"</span>: <span class="number">19788</span>},
+      {<span class="string">"name"</span>: <span class="string">"DataSprite"</span>, <span class="string">"size"</span>: <span class="number">10349</span>},
+      {<span class="string">"name"</span>: <span class="string">"EdgeSprite"</span>, <span class="string">"size"</span>: <span class="number">3301</span>},
+      {<span class="string">"name"</span>: <span class="string">"NodeSprite"</span>, <span class="string">"size"</span>: <span class="number">19382</span>},
+      {
+       <span class="string">"name"</span>: <span class="string">"render"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"ArrowType"</span>, <span class="string">"size"</span>: <span class="number">698</span>},
+        {<span class="string">"name"</span>: <span class="string">"EdgeRenderer"</span>, <span class="string">"size"</span>: <span class="number">5569</span>},
+        {<span class="string">"name"</span>: <span class="string">"IRenderer"</span>, <span class="string">"size"</span>: <span class="number">353</span>},
+        {<span class="string">"name"</span>: <span class="string">"ShapeRenderer"</span>, <span class="string">"size"</span>: <span class="number">2247</span>}
+       ]
+      },
+      {<span class="string">"name"</span>: <span class="string">"ScaleBinding"</span>, <span class="string">"size"</span>: <span class="number">11275</span>},
+      {<span class="string">"name"</span>: <span class="string">"Tree"</span>, <span class="string">"size"</span>: <span class="number">7147</span>},
+      {<span class="string">"name"</span>: <span class="string">"TreeBuilder"</span>, <span class="string">"size"</span>: <span class="number">9930</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"events"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"DataEvent"</span>, <span class="string">"size"</span>: <span class="number">2313</span>},
+      {<span class="string">"name"</span>: <span class="string">"SelectionEvent"</span>, <span class="string">"size"</span>: <span class="number">1880</span>},
+      {<span class="string">"name"</span>: <span class="string">"TooltipEvent"</span>, <span class="string">"size"</span>: <span class="number">1701</span>},
+      {<span class="string">"name"</span>: <span class="string">"VisualizationEvent"</span>, <span class="string">"size"</span>: <span class="number">1117</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"legend"</span>,
+     <span class="string">"children"</span>: [
+      {<span class="string">"name"</span>: <span class="string">"Legend"</span>, <span class="string">"size"</span>: <span class="number">20859</span>},
+      {<span class="string">"name"</span>: <span class="string">"LegendItem"</span>, <span class="string">"size"</span>: <span class="number">4614</span>},
+      {<span class="string">"name"</span>: <span class="string">"LegendRange"</span>, <span class="string">"size"</span>: <span class="number">10530</span>}
+     ]
+    },
+    {
+     <span class="string">"name"</span>: <span class="string">"operator"</span>,
+     <span class="string">"children"</span>: [
+      {
+       <span class="string">"name"</span>: <span class="string">"distortion"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"BifocalDistortion"</span>, <span class="string">"size"</span>: <span class="number">4461</span>},
+        {<span class="string">"name"</span>: <span class="string">"Distortion"</span>, <span class="string">"size"</span>: <span class="number">6314</span>},
+        {<span class="string">"name"</span>: <span class="string">"FisheyeDistortion"</span>, <span class="string">"size"</span>: <span class="number">3444</span>}
+       ]
+      },
+      {
+       <span class="string">"name"</span>: <span class="string">"encoder"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"ColorEncoder"</span>, <span class="string">"size"</span>: <span class="number">3179</span>},
+        {<span class="string">"name"</span>: <span class="string">"Encoder"</span>, <span class="string">"size"</span>: <span class="number">4060</span>},
+        {<span class="string">"name"</span>: <span class="string">"PropertyEncoder"</span>, <span class="string">"size"</span>: <span class="number">4138</span>},
+        {<span class="string">"name"</span>: <span class="string">"ShapeEncoder"</span>, <span class="string">"size"</span>: <span class="number">1690</span>},
+        {<span class="string">"name"</span>: <span class="string">"SizeEncoder"</span>, <span class="string">"size"</span>: <span class="number">1830</span>}
+       ]
+      },
+      {
+       <span class="string">"name"</span>: <span class="string">"filter"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"FisheyeTreeFilter"</span>, <span class="string">"size"</span>: <span class="number">5219</span>},
+        {<span class="string">"name"</span>: <span class="string">"GraphDistanceFilter"</span>, <span class="string">"size"</span>: <span class="number">3165</span>},
+        {<span class="string">"name"</span>: <span class="string">"VisibilityFilter"</span>, <span class="string">"size"</span>: <span class="number">3509</span>}
+       ]
+      },
+      {<span class="string">"name"</span>: <span class="string">"IOperator"</span>, <span class="string">"size"</span>: <span class="number">1286</span>},
+      {
+       <span class="string">"name"</span>: <span class="string">"label"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"Labeler"</span>, <span class="string">"size"</span>: <span class="number">9956</span>},
+        {<span class="string">"name"</span>: <span class="string">"RadialLabeler"</span>, <span class="string">"size"</span>: <span class="number">3899</span>},
+        {<span class="string">"name"</span>: <span class="string">"StackedAreaLabeler"</span>, <span class="string">"size"</span>: <span class="number">3202</span>}
+       ]
+      },
+      {
+       <span class="string">"name"</span>: <span class="string">"layout"</span>,
+       <span class="string">"children"</span>: [
+        {<span class="string">"name"</span>: <span class="string">"AxisLayout"</span>, <span class="string">"size"</span>: <span class="number">6725</span>},
+        {<span class="string">"name"</span>: <span class="string">"BundledEdgeRouter"</span>, <span class="string">"size"</span>: <span class="number">3727</span>},
+        {<span class="string">"name"</span>: <span class="string">"CircleLayout"</span>, <span class="string">"size"</span>: <span class="number">9317</span>},
+        {<span class="string">"name"</span>: <span class="string">"CirclePackingLayout"</span>, <span class="string">"size"</span>: <span class="number">12003</span>},
+        {<span class="string">"name"</span>: <span class="string">"DendrogramLayout"</span>, <span class="string">"size"</span>: <span class="number">4853</span>},
+        {<span class="string">"name"</span>: <span class="string">"ForceDirectedLayout"</span>, <span class="string">"size"</span>: <span class="number">8411</span>},
+        {<span class="string">"name"</span>: <span class="string">"IcicleTreeLayout"</span>, <span class="string">"size"</span>: <span class="number">4864</span>},
+        {<span class="string">"name"</span>: <span class="string">"IndentedTreeLayout"</span>, <span class="string">"size"</span>: <span class="number">3174</span>},
+        {<span class="string">"name"</span>: <span class="string">"Layout"</span>, <span class="string">"size"</span>: <span class="number">7881</span>},
+        {<span class="string">"name"</span>: <span class="string">"NodeLinkTreeLayout"</span>, <span class="string">"size"</span>: <span class="number">12870</span>},
+        {<span class="string">"name"</span>: <span class="string">"PieLayout"</span>, <span class="string">"size"</span>: <span class="number">2728</span>},
+        {<span class="string">"name"</span>: <span class="string">"RadialTreeLayout"</span>, <span class="string">"size"</span>: <span class="number">12348</span>},
+        {<span class="string">"name"</span>: <span class="string">"RandomLayout"</span>, <span class="string">"size"</span>: <span class="number">870</span>},
+        {<span class="string">"name"</span>: <span class="string">"StackedAreaLayout"</span>, <span class="string">"size"</span>: <span class="number">9121</span>},
+        {<span class="string">"name"</span>: <span class="string">"TreeMapLayout"</span>, <span class="string">"size"</span>: <span class="number">9191</span>}
+       ]
+      },
+      {<span class="string">"name"</span>: <span class="string">"Operator"</span>, <span class="string">"size"</span>: <span class="number">2490</span>},
+      {<span class="string">"name"</span>: <span class="string">"OperatorList"</span>, <span class="string">"size"</span>: <span class="number">5248</span>},
+      {<span class="string">"name"</span>: <span class="string">"OperatorSequence"</span>, <span class="string">"size"</span>: <span class="number">4190</span>},
+      {<span class="string">"name"</span>: <span class="string">"OperatorSwitch"</span>, <span class="string">"size"</span>: <span class="number">2581</span>},
+      {<span class="string">"name"</span>: <span class="string">"SortOperator"</span>, <span class="string">"size"</span>: <span class="number">2023</span>}
+     ]
+    },
+    {<span class="string">"name"</span>: <span class="string">"Visualization"</span>, <span class="string">"size"</span>: <span class="number">16540</span>}
+   ]
+  }
+ ]
+}</code></pre>
+    </div>
+  </div>
+  <div class="gist-license">
+    <h2>LICENSE<a name="license" class="anchor" href="http://bl.ocks.org/mbostock/4063423#license">#</a></h2>
+    Released under the <a target="_blank" href="https://opensource.org/licenses/GPL-3.0">GNU General Public License, version 3</a>.
+  </div>
+</div>
+
+<script src="./Sunburst Partition - bl.ocks.org_files/d3.v3.min.js"></script>
+<script src="./Sunburst Partition - bl.ocks.org_files/highlight.min.js"></script>
+<script>
+
+var gist = {"public":true,"sha":"20e64dd96d0d857f39f20ee44a2f9fc508473cc5","files":{".block":{"language":null,"type":"text/plain","filename":".block","size":17,"sha":"703d310b399098a243a76a50bc209167e924cfd2"},"README.md":{"language":"Markdown","type":"text/plain","filename":"README.md","size":366,"sha":"8aa8312ce50e24d2c46243c9de8f779b00392192"},"flare.json":{"language":"JSON","type":"application/json","filename":"flare.json","size":11413,"sha":"a05a94858375bd0ae023f6950a2b13fac5127637"},"index.html":{"language":"HTML","type":"text/html","filename":"index.html","size":2305,"sha":"1b2a58c82db4ede06ce41cfc1e5c184d51d59e64"},"thumbnail.png":{"language":null,"type":"image/png","filename":"thumbnail.png","size":20658,"sha":"3ec428c06d314c67f4e29df3acbed655d251be71"}},"created_at":"2012-11-13T01:52:00Z","updated_at":"2016-05-08T19:53:02Z","description":"Sunburst Partition","owner":{"login":"mbostock"},"id":"4063423"};
+
+var files = d3.values(gist.files);
+
+d3.select(".gist-readme")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+    .each(function(d) {
+      var readme = d3.select(this);
+      d3.text("/mbostock/raw/4063423/20e64dd96d0d857f39f20ee44a2f9fc508473cc5/" + d.filename, function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        readme.html(new Showdown.converter().makeHtml(content));
+        readme.selectAll("code").each(function() { hljs.highlightBlock(this); });
+      });
+    });
+
+d3.selectAll(".gist-source")
+    .data(files, function(d) { return d ? d.filename : this.getAttribute("data-key"); })
+  .select("code")
+    .attr("class", function(d) { return d.language && (d.language === "JSON" ? "javascript" : d.language.toLowerCase()); })
+    .each(function(d) {
+      var code = d3.select(this);
+      d3.text("/mbostock/raw/4063423/20e64dd96d0d857f39f20ee44a2f9fc508473cc5/" + (d.filename === "index.html" ? "" : d.filename), function(error, content) {
+        if (error) content = "Sorry, an error occurred.";
+        code.text(content);
+        hljs.highlightBlock(code.node());
+      });
+    });
+
+</script>
+
+<script>
+
+GoogleAnalyticsObject = "ga", ga = function() { ga.q.push(arguments); }, ga.q = [], ga.l = +new Date;
+ga("create", "UA-48272912-1", "auto");
+ga("send", "pageview");
+
+</script>
+<script async="" src="./Sunburst Partition - bl.ocks.org_files/analytics.js"></script>
+</body></html>
