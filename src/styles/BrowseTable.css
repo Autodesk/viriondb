@@ -5,8 +5,9 @@
 	border-bottom: 1px solid var(--colors-greyLight);
 
 	&-heading {
-		font-size: 1.5rem;
-		font-weight: bold;
+		padding: 0.5em 0.5em 1em;
+		font-size: 1.75rem;
+		font-weight: 500;
 		color: var(colors-grey);
 
 		&-detail {

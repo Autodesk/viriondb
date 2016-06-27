@@ -17,7 +17,7 @@
     "no-use-before-define": [2, "nofunc"],
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "no-shadow": [0], //this is used for Redux in the connect, and need to get from component props this way
-    "id-length": [1,  {"properties": "never", "exceptions" : ["x", "y", "w", "h", "i"]}],
+    "id-length": [1,  {"properties": "never", "exceptions" : ["_"]}],
     "new-cap": [2, {"capIsNewExceptions": ["DragSource", "DropTarget", "DragDropContext"]}]
   }
 }
