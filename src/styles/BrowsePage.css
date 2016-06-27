@@ -1,0 +1,11 @@
+.BrowsePage {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: row;
+
+	&-content {
+		display: flex;
+		flex-direction: column;
+	}
+	
+}

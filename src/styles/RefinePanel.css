@@ -1,0 +1,6 @@
+@import './variables.css';
+
+.RefinePanel {
+	background-color: var(--colors-blueGreyLighter);	
+	width: 300px;
+}

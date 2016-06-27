@@ -5,7 +5,7 @@
 .ComparisonActions,
 .ComparisonRow {
 	display: table-row;
-	background-color: var(--colors-blueGreyLighter);
+	background-color: transparent;
 	transition: background-color var(--timing-fast) ease-out;
 
 	&-key,

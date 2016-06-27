@@ -2,16 +2,6 @@
 @import 'variables.css';
 @import 'base.css';
 
-.App {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background-color-page);
-  height: 100vh;
-  overflow: hidden;
-}
+.App {}
 
-.App-pageContent {
-  flex-grow: 1;
-  display: flex;
-  overflow: scroll;
-}
+.App-content {}

@@ -1,0 +1,17 @@
+@import './variables.css';
+
+.BrowseTable {
+	min-height: 300px;
+	border-bottom: 1px solid var(--colors-greyLight);
+
+	&-heading {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: var(colors-grey);
+
+		&-detail {
+			padding-left: 0.5em;
+			color: var(--colors-greyLight);
+		}
+	}
+}
