@@ -17,7 +17,7 @@
 	&-key {
 		width: 250px;
 		text-align: right;
-		border-right: 1px solid var(--colors-greyMedLight);
+		border-right: 1px solid var(--colors-grey);
 	}
 
 	&-value {

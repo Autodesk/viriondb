@@ -2,6 +2,11 @@
 @import 'variables.css';
 @import 'base.css';
 
-.App {}
+.App {
 
-.App-content {}
+}
+
+.App-content {
+  max-width: 100vw;
+  overflow-x: scroll;
+}

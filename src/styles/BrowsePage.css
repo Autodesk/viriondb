@@ -1,11 +1,16 @@
 .BrowsePage {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
 
-	&-content {
-		display: flex;
-		flex-direction: column;
-	}
-	
+  > * {
+    flex-shrink: 0;
+  }
+
+  &-main {
+    width: 0; /* will grow */
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+  }
 }

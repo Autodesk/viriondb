@@ -1,6 +1,13 @@
 @import './variables.css';
 
 .RefinePanel {
-	background-color: var(--colors-blueGreyLighter);	
-	width: 300px;
+  background-color: var(--colors-blueGreyLight);
+  width: var(--width-panel);
+  flex-shrink: 0;
+  padding: 1rem;
+
+  &-heading {
+    color: var(--colors-grey);
+    font-size: 1.25rem;
+  }
 }

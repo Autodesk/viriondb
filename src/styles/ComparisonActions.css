@@ -5,7 +5,7 @@
 
 	&-remove {
 		padding: 0.5em;
-		font-color: var(--colors-grey);
+		font-color: var(--colors-greyDark);
 		background-color: var(--colors-greyLight);
 		margin-right: 1em;
 		cursor: pointer;

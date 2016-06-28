@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'lodash';
-import instanceMap from '../../data/keyedData';
+import instanceMap from '../../data/testSet';
 
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
@@ -14,15 +14,19 @@ export default class BrowsePage extends Component {
   static defaultProps = {};
 
   state = {
-    filters: {},
+    filters: {
+      derived_baltimore: ['2'],
+    },
   };
 
   setFilter = (filter) => {
-    this.setState(Object.assign({}, this.state.filters, filter));
+    this.setState({ filters: Object.assign({}, this.state.filters, filter) });
   };
 
   render() {
     const instances = _.values(instanceMap);
+
+    //todo
     const filtered = instances.slice(0, 10);
 
     return (

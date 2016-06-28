@@ -8,7 +8,7 @@ const jsonParser = bodyParser.json({
 });
 
 router.route('/:route')
-  .use(jsonParser)
+  .all(jsonParser)
   .get((req, res, next) => {
     res.send('yay');
   });

@@ -1,0 +1,36 @@
+@import './variables';
+
+.BrowseTableSection {
+  display: inline-block;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: var(--table-padding);
+  border-right: 1px solid var(--colors-greyLight);
+
+  &-heading {
+    color: var(--colors-grey);
+    font-size: var(--font-size-table-heading);
+  }
+
+  &-column {
+    display: inline-block;
+    padding: 0 var(--table-padding);
+  }
+
+  &-title {
+    color: var(--colors-grey);
+  }
+
+  &-values {
+
+  }
+
+  &-cell {
+    padding: var(--table-padding) 0;
+    min-width: 100px;
+
+    &:empty {
+      background-color: var(--colors-greyLight);
+    }
+  }
+}

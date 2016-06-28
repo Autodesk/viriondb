@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { capitalize } from 'lodash';
 import instanceMap from '../../data/keyedData.js';
-import { rows, rowNames } from '../constants/rows';
+import { rows, fieldName, rowNames } from '../constants/rows';
 
 import '../styles/ComparisonRow.css';
 
@@ -28,7 +28,7 @@ export default class ComparisonRow extends Component {
       <div className={'ComparisonRow' + (isActive ? ' active' : '')}
            onClick={() => onClick(row)}>
         <div className="ComparisonRow-key">
-          {rowNames[row] || capitalize(row)}
+          {fieldName(row)}
         </div>
 
         {instances.map(instance => {

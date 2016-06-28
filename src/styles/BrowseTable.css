@@ -1,18 +1,25 @@
 @import './variables.css';
 
 .BrowseTable {
-	min-height: 300px;
-	border-bottom: 1px solid var(--colors-greyLight);
+  min-height: 300px;
+  border-bottom: 1px solid var(--colors-greyLight);
+  overflow: hidden;
 
-	&-heading {
-		padding: 0.5em 0.5em 1em;
-		font-size: 1.75rem;
-		font-weight: 500;
-		color: var(colors-grey);
+  &-heading {
+    padding: 0.5em 0.5em 1em;
+    font-size: var(--font-size-table-heading);
+    font-weight: 500;
+    color: var(--colors-grey);
 
-		&-detail {
-			padding-left: 0.5em;
-			color: var(--colors-greyLight);
-		}
-	}
+    &-detail {
+      padding-left: 0.5em;
+      color: var(--colors-greyLight);
+    }
+  }
+
+  &-values {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+  }
 }

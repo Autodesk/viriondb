@@ -1,3 +1,5 @@
+import { capitalize } from 'lodash';
+
 export const rows = [
   'name',
   'accession',
@@ -5,7 +7,7 @@ export const rows = [
   'derived_baltimore',
   'nucleid_acid_structure',
   'nucleic_acid_shape',
-  'sequenced_mol',
+  'genome_shape',
   'derived_sense',
   'length',
   'derived_protein_count',
@@ -25,9 +27,10 @@ export const rowNames = {
   accession: 'Accession Number',
   derived_baltimore: 'Baltimore Group',
   derived_sense: 'Sense',
+  sequence_mol: 'Nucleic Acid Molecule',
   nucleid_acid_structure: 'Amino Acid Structure',
   nucleic_acid_shape: 'Nucleid Acid Shape',
-  sequenced_mol: 'Nucleid Acid Strandedness',
+  genome_shape: 'Nucleid Acid Strandedness',
   derived_protein_count: 'Protein Number',
   capsid_morphology: 'Capsid Morphology',
   capsid_envelope: 'Capsid Envelope',
@@ -35,6 +38,10 @@ export const rowNames = {
   derived_taxonomy_family: 'Family',
   derived_taxonomy_order: 'Order',
   derived_taxonomy_genus: 'Genus',
+};
+
+export const fieldName = (field) => {
+  return rowNames[field] || capitalize(field)
 };
 
 export const rowHierarchy = [
@@ -51,8 +58,33 @@ export const rowHierarchy = [
       'derived_baltimore',
       'nucleid_acid_structure',
       'nucleic_acid_shape',
-      'sequenced_mol',
+      'genome_shape',
+      'length',
+      'derived_sense',
     ],
   },
-  //todo
+  {
+    name: 'Morphology',
+    fields: [
+      'capsid_morphology',
+      'capsid_envolope',
+      'derived_protein_count',
+    ],
+  },
+  {
+    name: 'Host',
+    fields: [
+      'host',
+      'temperature',
+    ],
+  },
+  {
+    name: 'Taxonomy',
+    fields: [
+      'derived_taxonomy_family',
+      'subfamily',
+      'derived_taxonomy_order',
+      'derived_taxonomy_genus',
+    ],
+  },
 ];

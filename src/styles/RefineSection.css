@@ -1,0 +1,32 @@
+@import './variables.css';
+
+
+.RefineSection {
+  position: relative;
+  margin-bottom: 1em;
+
+  &-heading {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  &-reset {
+    padding: 0.25em 0.5em;
+    background-color: white;
+    color: var(--colors-selected);
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: default;
+  }
+
+  &.active &-reset {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  &-control {
+
+  }
+}
