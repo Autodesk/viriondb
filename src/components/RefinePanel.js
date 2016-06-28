@@ -21,7 +21,9 @@ export default class RefinePanel extends Component {
 
     return (
       <div className="RefinePanel">
-        <div className="RefinePanel-heading">Refine By</div>
+        <div className="RefinePanel-heading">
+          Refine By
+        </div>
 
         {['derived_baltimore'].map(name => {
           return (

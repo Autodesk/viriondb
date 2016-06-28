@@ -7,7 +7,7 @@ import '../styles/RefineSection.css';
 export default class RefineSection extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
-    filter: PropTypes.any.isRequired,
+    filter: PropTypes.any,
     name: PropTypes.string.isRequired,
   };
 

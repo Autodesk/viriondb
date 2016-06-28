@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import instanceMap from '../../data/keyedData.js';
+import instanceMap from '../../data/testSet.js';
 import {rows, rowNames} from '../constants/rows';
 
 import ComparisonRow from './ComparisonRow';

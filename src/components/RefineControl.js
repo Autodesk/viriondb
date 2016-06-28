@@ -7,7 +7,7 @@ export default class RefineControl extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
     name: PropTypes.oneOf(rows).isRequired,
-    filter: PropTypes.any.isRequired,
+    filter: PropTypes.any,
   };
 
   static defaultProps = {};

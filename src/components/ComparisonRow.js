@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { capitalize } from 'lodash';
-import instanceMap from '../../data/keyedData.js';
 import { rows, fieldName, rowNames } from '../constants/rows';
 
 import '../styles/ComparisonRow.css';

@@ -34,7 +34,7 @@ export default class BrowseTableSection extends Component {
                   return (
                     <div className="BrowseTableSection-cell"
                          key={instance.id}>
-                      {instance[field]}
+                      {instance[field] || '-'}
                     </div>
                   );
                 })}
