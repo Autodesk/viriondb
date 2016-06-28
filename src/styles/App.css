@@ -1,6 +1,6 @@
 @import '../../node_modules/normalize.css/normalize.css';
-@import 'variables.css';
-@import 'base.css';
+@import './variables.css';
+@import './base.css';
 
 .App {
 
@@ -9,4 +9,29 @@
 .App-content {
   max-width: 100vw;
   overflow-x: scroll;
+}
+
+.action {
+  padding: 0.25em 0.5em;
+  color: var(--colors-selected);
+  background-color: var(--colors-white);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+
+  &-dark {
+    background-color: var(--colors-greyLight);
+  }
+
+  &-black {
+    background-color: var(--colors-greyDark);
+    color: var(--colors-white);
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.invisible {
+  opacity: 0;
 }

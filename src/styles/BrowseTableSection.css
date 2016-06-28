@@ -4,20 +4,22 @@
   display: inline-block;
   flex-shrink: 0;
   white-space: nowrap;
-  padding: var(--table-padding);
+  padding: var(--table-padding) 0;
   border-right: 1px solid var(--colors-greyLight);
 
   &-heading {
     color: var(--colors-grey);
     font-size: var(--font-size-table-heading);
+    padding: 0 var(--table-padding);
   }
 
   &-column {
     display: inline-block;
-    padding: 0 var(--table-padding);
+    padding: 0;
   }
 
   &-title {
+    padding: var(--table-padding);
     color: var(--colors-grey);
   }
 
@@ -26,11 +28,22 @@
   }
 
   &-cell {
-    padding: var(--table-padding) 0;
-    min-width: 100px;
+    padding: var(--table-padding);
+    min-width: 50px;
+    text-align: center;
+    transition: opacity 0s;
 
     &:empty {
       background-color: var(--colors-greyLight);
+    }
+
+    &.checked {
+      background-color: var(--colors-blueGreyLight);
+    }
+
+    &.hovered {
+      background-color: var(--colors-blueGreyMed);
+      color: var(--colors-white);
     }
   }
 

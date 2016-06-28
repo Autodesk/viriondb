@@ -8,14 +8,13 @@
   --colors-greyLight: #EEEFF3;
   --colors-white: #ffffff;
 
-  --colors-blueGreyDark: #1D222D;
   --colors-blueGreyMedDark: #292D40;
   --colors-blueGreyMed: #4B505E;
   --colors-blueGreyLight: #DFE2EC;
 
   --colors-selected: #3F82FF;
 
-  --colors-text: var(--colors-blueGreyDark);
+  --colors-text: var(--colors-blueGreyMedDark);
   --colors-bluetext: var(--colors-selected);
 
   /* Backgrounds */
@@ -34,10 +33,14 @@
   /* Layout */
 
   --width-panel: 300px;
-  --table-padding: 0.5em;
+  --table-padding: 0.5rem;
 
   /* Timing */
 
   --timing-extrafast: 0.05s;
   --timing-fast: 0.15s;
+
+  /* Transitions */
+
+  --transition-fast: var(--timing-fast) ease-out;
 }

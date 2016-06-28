@@ -1,9 +1,0 @@
-@import './variables.css';
-
-.BrowseTableRow {
-	
-
-	&:hover {
-		background-color: var(--colors-blueGrey);
-	}
-}

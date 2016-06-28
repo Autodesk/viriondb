@@ -23,6 +23,12 @@ export default class BrowsePage extends Component {
     this.setState({ filters: Object.assign({}, this.state.filters, filter) });
   };
 
+  compareInstances = (...ids) => {
+    //todo
+    debugger;
+    this.context.router.push(`/${ids.join(',')}`);
+  };
+
   render() {
     const instances = _.values(instanceMap);
 
@@ -35,7 +41,8 @@ export default class BrowsePage extends Component {
                      filters={this.state.filters}/>
 
         <div className="BrowsePage-main">
-          <BrowseTable instances={filtered}/>
+          <BrowseTable compareInstances={this.compareInstances}
+                       instances={filtered}/>
           <BrowseCharts />
         </div>
       </div>

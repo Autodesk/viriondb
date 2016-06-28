@@ -8,13 +8,16 @@ export default class BrowseTableSection extends Component {
     name: PropTypes.string.isRequired,
     fields: PropTypes.array.isRequired,
     instances: PropTypes.array.isRequired,
+    onHover: PropTypes.func.isRequired,
+    checked: PropTypes.object.isRequired,
+    hovered: PropTypes.string,
   };
 
   static defaultProps = {};
 
   //todo - componentize
   render() {
-    const { name, fields, instances } = this.props;
+    const { name, fields, instances, onHover, hovered, checked } = this.props;
 
     return (
       <div className="BrowseTableSection">
@@ -31,8 +34,13 @@ export default class BrowseTableSection extends Component {
 
               <div className="BrowseTableSection-values">
                 {instances.map(instance => {
+                  const isChecked = checked.has(instance.id);
+                  const isHovered = hovered === instance.id;
                   return (
-                    <div className="BrowseTableSection-cell"
+                    <div className={'BrowseTableSection-cell' +
+                                   (isHovered ? ' hovered' : '') +
+                                   (isChecked ? ' checked' : '')}
+                         onMouseEnter={() => onHover(instance.id)}
                          key={instance.id}>
                       {instance[field] || '-'}
                     </div>

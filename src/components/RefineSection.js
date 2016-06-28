@@ -26,7 +26,7 @@ export default class RefineSection extends Component {
           {fieldName(name)}
         </div>
 
-        <div className="RefineSection-reset"
+        <div className="RefineSection-reset action"
              onClick={() => this.resetFilter()}>
           Reset
         </div>

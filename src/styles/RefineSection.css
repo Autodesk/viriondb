@@ -11,9 +11,6 @@
   }
 
   &-reset {
-    padding: 0.25em 0.5em;
-    background-color: white;
-    color: var(--colors-selected);
     position: absolute;
     top: 0;
     right: 0;
@@ -24,6 +21,7 @@
   &.active &-reset {
     opacity: 1;
     cursor: pointer;
+    transition: opacity var(--transition-fast);
   }
 
   &-control {
