@@ -34,7 +34,7 @@ export default class BrowseTableSection extends Component {
 
               <div className="BrowseTableSection-values">
                 {instances.map(instance => {
-                  const isChecked = checked.has(instance.id);
+                  const isChecked = checked[instance.id];
                   const isHovered = hovered === instance.id;
                   return (
                     <div className={'BrowseTableSection-cell' +

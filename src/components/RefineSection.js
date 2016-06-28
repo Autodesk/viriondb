@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
-import RefineControl from './RefineControl';
+
+import Discrete from './filters/Discrete';
+import Range from './filters/Range';
 
 import '../styles/RefineSection.css';
 
@@ -8,22 +10,28 @@ export default class RefineSection extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
     filter: PropTypes.any,
-    name: PropTypes.string.isRequired,
+    field: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['discrete', 'range']).isRequired,
+  };
+
+  static componentMap = {
+    discrete: Discrete,
+    range: Range,
   };
 
   resetFilter = () => {
-    this.props.setFilter({ [this.props.name]: null });
+    this.props.setFilter({ [this.props.field]: null });
   };
 
   render() {
-    const { name, filter, setFilter } = this.props;
-
+    const { field, type, filter, setFilter, ...rest } = this.props;
+    const ControlComponent = RefineSection.componentMap[type];
     const isActive = !!filter;
 
     return (
       <div className={'RefineSection' + (isActive ? ' active' : '')}>
         <div className="RefineSection-heading">
-          {fieldName(name)}
+          {fieldName(field)}
         </div>
 
         <div className="RefineSection-reset action"
@@ -32,9 +40,7 @@ export default class RefineSection extends Component {
         </div>
 
         <div className="RefineSection-control">
-          <RefineControl name={name}
-                         filter={filter}
-                         setFilter={setFilter}/>
+          <ControlComponent {...this.props} />
         </div>
       </div>
     );

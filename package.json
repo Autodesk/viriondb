@@ -1,22 +1,24 @@
 {
   "name": "viriondb",
   "version": "1.0.0",
-  "description": "",
+  "description": "Database of Virus Data",
   "main": "index.js",
   "scripts": {
-     "start": "babel-node tools/run start",
-     "build": "babel-node tools/run build"
+    "start": "babel-node tools/run start",
+    "build": "babel-node tools/run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "d3": "^3.5.17",
     "babel-runtime": "^6.6.1",
+    "d3": "^3.5.17",
     "invariant": "^2.2.0",
     "isomorphic-fetch": "^2.1.1",
-    "lodash": "^4.5.1",
+    "lodash": "^4.13.1",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.0",
+    "three": "^0.78.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",

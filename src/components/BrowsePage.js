@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { withRouter } from 'react-router';
 import _ from 'lodash';
 import instanceMap from '../../data/testSet';
 
@@ -8,7 +9,7 @@ import BrowseCharts from './BrowseCharts';
 
 import '../styles/BrowsePage.css';
 
-export default class BrowsePage extends Component {
+export class BrowsePage extends Component {
   static propTypes = {};
 
   static defaultProps = {};
@@ -23,17 +24,15 @@ export default class BrowsePage extends Component {
     this.setState({ filters: Object.assign({}, this.state.filters, filter) });
   };
 
-  compareInstances = (...ids) => {
-    //todo
-    debugger;
-    this.context.router.push(`/${ids.join(',')}`);
+  openInstances = (...ids) => {
+    this.props.router.push(`/${ids.join(',')}`);
   };
 
   render() {
     const instances = _.values(instanceMap);
 
-    //todo
-    const filtered = instances.slice(0, 10);
+    //todo - filter
+    const filtered = instances;
 
     return (
       <div className="BrowsePage">
@@ -41,11 +40,13 @@ export default class BrowsePage extends Component {
                      filters={this.state.filters}/>
 
         <div className="BrowsePage-main">
-          <BrowseTable compareInstances={this.compareInstances}
+          <BrowseTable openInstances={this.openInstances.bind(this)}
                        instances={filtered}/>
           <BrowseCharts />
         </div>
       </div>
     );
   }
-};
+}
+
+export default withRouter(BrowsePage);

@@ -1,23 +1,16 @@
-import React, {PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 
 import '../styles/ComparisonActions.css';
 
 export default class ComparisonActions extends Component {
   static propTypes = {
     instances: PropTypes.array.isRequired,
-  };
-
-  onClickStar = (instanceId) => {
-    console.log('starred ' + instanceId);
-  };
-
-  onClickRemove = (instanceId) => {
-    //todo
-    console.log('remove ' + instanceId);
+    onStar: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
   };
 
   render() {
-    const {instances} = this.props;
+    const { instances, onStar, onRemove } = this.props;
     return (
       <div className="ComparisonActions">
         <div className="ComparisonActions-key"></div>
@@ -28,12 +21,12 @@ export default class ComparisonActions extends Component {
                  className="ComparisonActions-value">
 
               {instances.length > 1 && (<span className="ComparisonActions-remove"
-                                              onClick={() => this.onClickRemove(instance.id)}>
+                                              onClick={() => onRemove(instance.id)}>
                     Remove
                   </span>)}
 
                   <span className="ComparisonActions-star"
-                        onClick={() => this.onClickStar(instance.id)}>
+                        onClick={() => onStar(instance.id)}>
                         ❤️
                   </span>
             </div>

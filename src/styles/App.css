@@ -3,7 +3,7 @@
 @import './base.css';
 
 .App {
-
+  background-color: var(--colors-white);
 }
 
 .App-content {
@@ -25,10 +25,6 @@
   &-black {
     background-color: var(--colors-greyDark);
     color: var(--colors-white);
-  }
-
-  &:hover {
-    opacity: 0.8;
   }
 }
 

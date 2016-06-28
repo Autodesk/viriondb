@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { rows } from '../constants/rows';
+import { filters as filterSections } from '../constants/filters';
 
 import RefineSection from './RefineSection';
 
@@ -14,8 +14,6 @@ export default class RefinePanel extends Component {
 
   static defaultProps = {};
 
-  //todo - specify somewhere which rows to use, format for filters
-
   render() {
     const { setFilter, filters } = this.props;
 
@@ -25,11 +23,14 @@ export default class RefinePanel extends Component {
           Refine By
         </div>
 
-        {['derived_baltimore'].map(name => {
+        {filterSections.map(section => {
+          const { field, type, ...rest } = section;
           return (
-            <RefineSection key={name}
-                           name={name}
-                           filter={filters[name]}
+            <RefineSection key={field}
+                           field={field}
+                           type={type}
+                           {...rest}
+                           filter={filters[field]}
                            setFilter={setFilter}/>
           );
         })}

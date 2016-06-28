@@ -9,13 +9,13 @@ import '../styles/BrowseTable.css';
 export default class BrowseTable extends Component {
   static propTypes = {
     instances: PropTypes.array.isRequired,
-    compareInstances: PropTypes.func.isRequired,
+    openInstances: PropTypes.func.isRequired,
   };
 
   static defaultProps = {};
 
   state = {
-    checked: new Set(['M14008.1']),
+    checked: { 'M14008.1': true },
     hovered: null,
   };
 
@@ -24,17 +24,14 @@ export default class BrowseTable extends Component {
   };
 
   toggleChecked = (id) => {
-    this.state.checked.has(id) ?
-      this.state.checked.delete(id) :
-      this.state.checked.add(id);
-
+    //ideally, delete from object but whatever
     this.setState({
-      checked: this.state.checked,
+      checked: Object.assign({}, this.state.checked, { [id]: !this.state.checked[id] }),
     });
   };
 
-  compareInstances = () => {
-    this.props.compareInstances(this.state.checked);
+  openInstances = () => {
+    this.props.openInstances(...Object.keys(this.state.checked));
   };
 
   render() {
@@ -48,10 +45,8 @@ export default class BrowseTable extends Component {
         <div className="BrowseTable-heading">
           <span>Browse Results</span>
           <span className="BrowseTable-heading-detail">{instances.length}</span>
-
-          <p>Todo - reorganize so each instance gets its own row. give each row fixed width. maybe they can resize
-            later</p>
         </div>
+        <p>Re-architect so each row is a component, can scroll. need to pass width down.</p>
 
         <div className="BrowseTable-values"
              onMouseEnter={(evt) => evt.stopPropagation()}>
@@ -59,7 +54,8 @@ export default class BrowseTable extends Component {
                                    hovered={hovered}
                                    onHover={this.setHovered}
                                    onCheck={this.toggleChecked}
-                                   onCompare={this.compareInstances}
+                                   onOpen={this.openInstances}
+                                   onCompare={this.openInstances}
                                    instances={instances}/>
 
           {rowHierarchy.map(section => {

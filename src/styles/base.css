@@ -9,6 +9,7 @@ html {
   font-size: var(--font-size-text);
   font-family: var(--font-family-base);
   line-height: 1.375; /* ~16.5px */
+  background-color: var(--colors-blueGreyMedDark);
 }
 
 p {
