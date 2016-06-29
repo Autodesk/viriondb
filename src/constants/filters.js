@@ -6,19 +6,21 @@ export const filters = [
   {
     field: 'derived_baltimore',
     type: 'discrete',
+    default: [],
     values: {
-      1: 'I - double stranded DNA',
-      2: 'II - single stranded DNA',
-      3: 'III - double stranded RNA',
-      4: 'IV - positive single stranded RNA',
-      5: 'V - negative single stranded RNA',
-      6: 'VI - positive single stranded DNA, reverse transcribing',
-      7: 'VII - double stranded DNA, reverse transcribing',
+      '1': 'I - double stranded DNA',
+      '2': 'II - single stranded DNA',
+      '3': 'III - double stranded RNA',
+      '4': 'IV - positive single stranded RNA',
+      '5': 'V - negative single stranded RNA',
+      '6': 'VI - positive single stranded DNA, reverse transcribing',
+      '7': 'VII - double stranded DNA, reverse transcribing',
     },
   },
   {
     field: 'capsid_morphology',
     type: 'discrete',
+    default: [],
     values: {
       'helical': 'Helical',
       'spherical': 'Spherical',
@@ -33,6 +35,7 @@ export const filters = [
   {
     field: 'length',
     type: 'range',
+    default: [],
     range: [0, 12],
   },
 

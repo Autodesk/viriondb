@@ -8,6 +8,8 @@
   &-heading {
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: var(--colors-selected);
+    cursor: pointer;
   }
 
   &-reset {
@@ -18,13 +20,21 @@
     cursor: default;
   }
 
-  &.active &-reset {
+  &-control {
+    display: none;
+  }
+
+  &.active &-heading {
+    color: var(--colors-black);
+  }
+
+  &.hasFilter &-reset {
     opacity: 1;
     cursor: pointer;
     transition: opacity var(--transition-fast);
   }
 
-  &-control {
-
+  &.active &-control {
+    display: block;
   }
 }

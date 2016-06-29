@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import _ from 'lodash';
 import instanceMap from '../../data/testSet';
+import { filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
@@ -10,14 +11,15 @@ import BrowseCharts from './BrowseCharts';
 import '../styles/BrowsePage.css';
 
 export class BrowsePage extends Component {
-  static propTypes = {};
+  static propTypes = {
+    router: PropTypes.object.isRequired,
+  };
 
   static defaultProps = {};
 
+  //todo - only include filters we need? or filter very efficiently
   state = {
-    filters: {
-      derived_baltimore: ['2'],
-    },
+    filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: filter.default }), {}),
   };
 
   setFilter = (filter) => {

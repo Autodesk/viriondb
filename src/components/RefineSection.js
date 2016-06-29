@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
+import { filters } from '../constants/filters';
 
 import Discrete from './filters/Discrete';
 import Range from './filters/Range';
@@ -14,23 +15,37 @@ export default class RefineSection extends Component {
     type: PropTypes.oneOf(['discrete', 'range']).isRequired,
   };
 
+  state = {
+    open: false,
+  };
+
   static componentMap = {
     discrete: Discrete,
     range: Range,
   };
 
+  toggleOpen = () => {
+    this.setState({ open: !this.state.open });
+  };
+
   resetFilter = () => {
-    this.props.setFilter({ [this.props.field]: null });
+    const { field } = this.props;
+    this.props.setFilter({ [field]: filters.find(filter => filter.field === field).default });
   };
 
   render() {
     const { field, type, filter, setFilter, ...rest } = this.props;
+    const { open } = this.state;
     const ControlComponent = RefineSection.componentMap[type];
-    const isActive = !!filter;
+    const hasFilter = Array.isArray(filter) ? !!filter.length : !!filter;
+    const isActive = open || hasFilter;
 
     return (
-      <div className={'RefineSection' + (isActive ? ' active' : '')}>
-        <div className="RefineSection-heading">
+      <div className={'RefineSection' +
+                      (isActive ? ' active' : '') +
+                      (hasFilter ? ' hasFilter' : '')}>
+        <div className="RefineSection-heading"
+             onClick={this.toggleOpen}>
           {fieldName(field)}
         </div>
 
