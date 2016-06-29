@@ -1,0 +1,57 @@
+@import './variables.css';
+
+.SearchBar {
+  flex-grow: 1;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: row;
+
+  &-text {
+    color: var(--colors-grey);
+    align-self: center;
+    padding-right: 1em;
+  }
+
+  &-lens {
+    position: absolute;
+    right: 5rem;
+    font-size: 3rem;
+    align-self: center;
+    line-height: 0.6;
+  }
+
+  &-close {
+    font-size: 1.5rem;
+    color: var(--colors-white);
+    padding: 0 1rem;
+    align-self: center;
+  }
+
+  &.closed .SearchBarInput {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.closed &-text {
+    width: 0;
+    opacity: 0;
+  }
+
+  &.closed &-content {
+    opacity: 0;
+    cursor: default;
+  }
+
+  &.closed &-lens {
+    cursor: pointer;
+    right: 0;
+    color: white;
+    font-size: 4rem;
+  }
+
+  &.closed &-close {
+    width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
