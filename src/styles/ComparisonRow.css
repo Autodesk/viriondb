@@ -4,27 +4,42 @@
 
 .ComparisonActions,
 .ComparisonRow {
-	display: table-row;
-	background-color: transparent;
-	transition: background-color var(--timing-fast) ease-out;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  transition: background-color var(--timing-fast) ease-out;
 
-	&-key,
-	&-value {
-		padding: 0.5em 1em;
-		display: table-cell;
-	}
+  &.active {
+    background-color: var(--colors-white);
+  }
 
-	&-key {
-		width: 250px;
-		text-align: right;
-		border-right: 1px solid var(--colors-grey);
-	}
+  &-key,
+  &-value {
+    padding: 0.5rem 1rem;
+  }
 
-	&-value {
+  &.active &-key,
+  &.active &-value {
+    font-size: 1.5em;
+    font-weight: 100;
+    color: var(--colors-grey);
+  }
 
-	}
+  &-key {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 250px;
+    text-align: right;
+    border-right: 1px solid var(--colors-grey);
+  }
 
-	&.active {
-		background-color: var(--colors-white);
-	}
+  &.active &-key {
+    border-right: 0;
+  }
+
+  &-value {
+    flex-grow: 1;
+  }
+
+  &.active &-value {}
 }

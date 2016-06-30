@@ -34,7 +34,7 @@ export default class RefineSection extends Component {
   };
 
   render() {
-    const { field, type, filter, setFilter, ...rest } = this.props;
+    const { field, type, filter } = this.props;
     const { open } = this.state;
     const ControlComponent = RefineSection.componentMap[type];
     const hasFilter = Array.isArray(filter) ? !!filter.length : !!filter;

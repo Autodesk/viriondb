@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { capitalize } from 'lodash';
 import { rows, fieldName, rowNames } from '../constants/rows';
 
+import ComparisonRowDetail from './ComparisonRowDetail';
+
 import '../styles/ComparisonRow.css';
 
 export default class ComparisonRow extends Component {
@@ -14,7 +16,8 @@ export default class ComparisonRow extends Component {
 
   static defaultProps = {
     isActive: false,
-    onClick: () => {},
+    onClick: () => {
+    },
   };
 
   state = {
@@ -34,9 +37,12 @@ export default class ComparisonRow extends Component {
           return (
             <div key={instance.id}
                  className="ComparisonRow-value">
-              {instance[row]}
+              <div className="ComparisonRow-basic">{instance[row]}</div>
+              {isActive && (<ComparisonRowDetail field={row}
+                                                 instance={instance}
+                                                 value={instance[row]}/>)}
             </div>
-          )
+          );
         })}
       </div>
     );
