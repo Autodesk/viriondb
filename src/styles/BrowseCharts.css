@@ -1,6 +1,6 @@
 @import './variables.css';
 
 .BrowseCharts {
-  background-color: var(--colors-blueGreyMedDark);
+  background-color: var(--colors-blueGreyDark);
   min-height: 200px;
 }

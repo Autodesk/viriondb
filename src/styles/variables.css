@@ -8,21 +8,21 @@
   --colors-greyLight: #EEEFF3;
   --colors-white: #ffffff;
 
-  --colors-blueGreyMedDark: #292D40;
+  --colors-blueGreyDark: #292D40;
   --colors-blueGreyMed: #4B505E;
   --colors-blueGreyLight: #DFE2EC;
 
   --colors-selected: #3F82FF;
 
-  --colors-text: var(--colors-blueGreyMedDark);
+  --colors-text: var(--colors-blueGreyDark);
   --colors-bluetext: var(--colors-selected);
 
   /* Backgrounds */
 
   --background-color-page: var(--colors-white);
   --background-color-panel: var(--colors-blueGreyLight);
-  --background-color-header: var(--colors-blueGreyMedDark);
-  --background-color-footer: var(--colors-blueGreyMedDark);
+  --background-color-header: var(--colors-blueGreyDark);
+  --background-color-footer: var(--colors-blueGreyDark);
 
   /* Typography */
 

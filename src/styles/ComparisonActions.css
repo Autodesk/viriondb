@@ -1,18 +1,17 @@
 @import './variables.css';
 
 .ComparisonActions {
-	padding: 0.5em;
 
-	&-remove {
-		padding: 0.5em;
-		font-color: var(--colors-greyDark);
-		background-color: var(--colors-greyLight);
-		margin-right: 1em;
-		cursor: pointer;
-	}
+  &-remove {
+    padding: 0.5em;
+    font-color: var(--colors-greyDark);
+    background-color: var(--colors-greyLight);
+    margin-right: 1em;
+    cursor: pointer;
+  }
 
-	&-star {
-		padding: 0.5em;
-		cursor: pointer;
-	}
+  &-star {
+    padding: 0.5em;
+    cursor: pointer;
+  }
 }
