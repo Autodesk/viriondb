@@ -37,7 +37,9 @@ export default class RefineSection extends Component {
     const { field, type, filter } = this.props;
     const { open } = this.state;
     const ControlComponent = RefineSection.componentMap[type];
-    const hasFilter = Array.isArray(filter) ? !!filter.length : !!filter;
+    const hasFilter = Array.isArray(filter) ? !!filter.length :
+      typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
+      !!filter;
     const isActive = open || hasFilter;
 
     return (

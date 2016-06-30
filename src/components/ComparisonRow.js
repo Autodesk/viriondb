@@ -16,8 +16,7 @@ export default class ComparisonRow extends Component {
 
   static defaultProps = {
     isActive: false,
-    onClick: () => {
-    },
+    onClick: () => {},
   };
 
   state = {

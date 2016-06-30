@@ -6,7 +6,7 @@ export const filters = [
   {
     field: 'derived_baltimore',
     type: 'discrete',
-    default: [],
+    default: {},
     values: {
       '1': 'I - double stranded DNA',
       '2': 'II - single stranded DNA',
@@ -20,7 +20,7 @@ export const filters = [
   {
     field: 'capsid_morphology',
     type: 'discrete',
-    default: [],
+    default: {},
     values: {
       'helical': 'Helical',
       'spherical': 'Spherical',

@@ -46,7 +46,7 @@ export default class BrowseTable extends Component {
           <span>Browse Results</span>
           <span className="BrowseTable-heading-detail">{instances.length}</span>
         </div>
-        <p>Re-architect so each row is a component, can scroll. need to pass width down.</p>
+        <p>Re-architect so each row is a component, can scroll. need to pass width down. Or, use flexbox so header is fixed and contents scroll.</p>
 
         <div className="BrowseTable-values"
              onMouseEnter={(evt) => evt.stopPropagation()}>

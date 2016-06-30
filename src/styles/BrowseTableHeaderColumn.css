@@ -1,9 +1,17 @@
 @import './variables.css';
 
 .BrowseTableHeaderColumn {
-
-
   &-open {
     transition: 0s;
+    margin-right: 1em;
+  }
+
+  .BrowseTableSection-title {
+    text-align: right;
+  }
+
+  .BrowseTableSection-cell {
+    padding-left: 0.5em;
+    padding-right: 1.5em;
   }
 }

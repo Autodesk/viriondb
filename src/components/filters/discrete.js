@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class Discrete extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
-    filter: PropTypes.array.isRequired,
+    filter: PropTypes.object.isRequired,
     field: PropTypes.string.isRequired,
     values: PropTypes.object.isRequired,
   };
@@ -11,12 +11,11 @@ export default class Discrete extends Component {
   toggleValue = (value) => {
     const { field, filter, setFilter } = this.props;
     //treat as immutable, dont overwrite default
-    const next = filter.slice();
-    const index = filter.indexOf(value);
-    if (index >= 0) {
-      next.splice(index, 1);
+    const next = Object.assign({}, filter);
+    if (next[filter]) {
+      delete next[value];
     } else {
-      next.push(value);
+      next[value] = true;
     }
     setFilter({ [field]: next });
   };
@@ -32,7 +31,7 @@ export default class Discrete extends Component {
                  key={value}>
               <input type="checkbox"
                      onChange={(evt) => this.toggleValue(value)}
-                     checked={filter.indexOf(value) >= 0}/>
+                     checked={filter[value]}/>
               {name}
             </div>
           );

@@ -33,7 +33,7 @@ export class BrowsePage extends Component {
   render() {
     const instances = _.values(instanceMap);
 
-    //todo - filter
+    //todo - set up filter (using lodash?) - should be in a shared place
     const filtered = instances;
 
     return (
