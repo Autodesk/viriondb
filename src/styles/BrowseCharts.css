@@ -3,4 +3,14 @@
 .BrowseCharts {
   background-color: var(--colors-blueGreyDark);
   min-height: 200px;
+  color: var(--colors-white);
+
+  &-heading {
+  	font-size: 1.5em;
+  	font-weight: 500;	
+  }
+
+  &-content {
+  	padding: 1em;
+  }
 }

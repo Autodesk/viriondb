@@ -8,6 +8,7 @@ export default class SearchBar extends Component {
 
   state = {
     active: false,
+    tags: [], //todo - move to app state
   };
 
   onClickLens = (evt) => {
@@ -25,7 +26,7 @@ export default class SearchBar extends Component {
       <div className={'SearchBar' + (active ? '' : ' closed')}>
         <div className="SearchBar-text">Search</div>
 
-        <SearchBarInput />
+        <SearchBarInput tags={this.state.tags} />
 
         <div className="SearchBar-lens"
              onClick={this.onClickLens}>{`\u2315`}</div>

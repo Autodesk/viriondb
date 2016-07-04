@@ -36,6 +36,19 @@ export class BrowsePage extends Component {
     //todo - set up filter (using lodash?) - should be in a shared place
     const filtered = instances;
 
+    //todo - compute these when filters change
+    //todo - these fields should be in constants/filters or something
+    const derivedData = ['derived_baltimore'].reduce((acc, field) => {
+      const type = filters[field].type;
+      if (type === 'discrete') {
+        //todo - much more efficient
+        const derived = _.groupBy(instances, field).mapValues(array => array.length);
+        return acc[field] = derived; 
+      }
+      //dont handle other types yet
+      return acc;
+    }, {});
+
     return (
       <div className="BrowsePage">
         <RefinePanel setFilter={this.setFilter}
@@ -44,7 +57,9 @@ export class BrowsePage extends Component {
         <div className="BrowsePage-main">
           <BrowseTable openInstances={this.openInstances.bind(this)}
                        instances={filtered}/>
-          <BrowseCharts />
+
+          <BrowseCharts instances={filtered}
+                        derivedData={derivedData} />
         </div>
       </div>
     );
