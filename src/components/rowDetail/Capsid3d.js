@@ -18,10 +18,10 @@ export default class Capsid3d extends Component {
 
     // Material
     const pinkMat = new three.MeshPhongMaterial({
-      color: new three.Color("rgb(30,30,30)"),
-      emissive: new three.Color("rgb(30,30,30)"),
-      specular: new three.Color("rgb(100,100,100)"),
-      shininess: 10,
+      color: new three.Color("rgb(33,30,50)"),
+      emissive: new three.Color("rgb(33,30,50)"),
+      specular: new three.Color("rgb(100,100,120)"),
+      shininess: 8,
       shading: three.FlatShading,
       transparent: 1,
       opacity: 1,
