@@ -3,6 +3,7 @@
 .BrowseCharts {
   background-color: var(--colors-blueGreyDark);
   min-height: 200px;
+  padding: 1em;
   color: var(--colors-white);
 
   &-heading {
@@ -11,6 +12,6 @@
   }
 
   &-content {
-  	padding: 1em;
+  	padding: 2em;
   }
 }

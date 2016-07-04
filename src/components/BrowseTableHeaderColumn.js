@@ -38,7 +38,8 @@ export default class BrowseTableHeaderColumn extends Component {
                 <div className={'BrowseTableSection-cell' +
                                 (isHovered ? ' hovered' : '') +
                                 (isChecked ? ' checked' : '')}
-                     onMouseEnter={() => onHover(instance.id)}>
+                     onMouseEnter={() => onHover(instance.id)}
+                     key={instance.id}>
                   <a className={'BrowseTableHeaderColumn-open action action-black' + (isHovered ? '' : ' invisible')}
                       onClick={() => onOpen(instance.id)}>
                     Open

@@ -1,11 +1,16 @@
+//todo - reconcile shortname, color, etc with rows.js
+
+//todo - range values should be dynamic, based on processing of data (at least include mix / max)
+
 //todo - sync this with processing
-//todo - range values should be dynamic, based on processing of data
 const unknownValue = 'Unknown';
 
 export const filters = [
   {
     field: 'derived_baltimore',
     type: 'discrete',
+    shortname: 'BC',
+    color: '#eeaaaa',
     default: {},
     values: {
       '1': 'I - double stranded DNA',
@@ -17,10 +22,12 @@ export const filters = [
       '7': 'VII - double stranded DNA, reverse transcribing',
     },
   },
+
   {
     field: 'capsid_morphology',
     type: 'discrete',
-    default: {},
+    color: '#aaeeaa',
+    default: {},    
     values: {
       'helical': 'Helical',
       'spherical': 'Spherical',
@@ -33,10 +40,45 @@ export const filters = [
   },
 
   {
+    field: 'division',
+    type: 'discrete',
+    color: '#aaeeaa',
+    default: {},    
+    values: {
+      "VRL": "VRL",
+      "PHG": "PHG",
+      "ENV": "ENV",
+      "SYN": "SYN",
+    },
+  },
+
+  {
+    field: 'sense',
+    type: 'discrete',
+    color: '#aaeeee',
+    default: {},    
+    values: {
+      "+/-": "+/-",
+      "+": "+",
+      "-": "-",
+      unknownValue: 'Unknown',
+    },
+  },
+
+  {
+    field: 'derived_protein_count',
+    type: 'range',
+    color: '#aaeeee',
+    default: [],
+    range: [0, 2541],
+  },
+
+  {
     field: 'length',
     type: 'range',
+    color: '#aaeeee',
     default: [],
-    range: [0, 12],
+    range: [0, 50000],
   },
 
   /*

@@ -36,16 +36,19 @@ export class BrowsePage extends Component {
     //todo - set up filter (using lodash?) - should be in a shared place
     const filtered = instances;
 
-    //todo - compute these when filters change
-    //todo - these fields should be in constants/filters or something
-    const derivedData = ['derived_baltimore'].reduce((acc, field) => {
-      const type = filters[field].type;
-      if (type === 'discrete') {
-        //todo - much more efficient
-        const derived = _.groupBy(instances, field).mapValues(array => array.length);
-        return acc[field] = derived; 
+    //todo - compute these when filters change, not on every render
+    const derivedData = filters.reduce((acc, cat) => {
+      if (cat.type === 'discrete') {
+        //todo - much more efficient, but still give percentages
+        const derived = _.mapValues(_.groupBy(instances, cat.field), array => Math.floor(array.length / instances.length * 100));
+        acc[cat.field] = derived; 
+      } else if (cat.type === 'range') {
+        //todo
+        const breakdown = [];
+        acc[cat.field] = breakdown;
+      } else {
+        //uh oh
       }
-      //dont handle other types yet
       return acc;
     }, {});
 

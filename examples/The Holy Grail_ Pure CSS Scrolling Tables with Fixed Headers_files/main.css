@@ -1,0 +1,200 @@
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,400italic,900,900italic);
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(font-awesome/css/font-awesome.css);
+
+body {
+    background-color: #f6fffa;
+    padding:0;
+    margin:0;
+    line-height: 150%;
+    font-family: 'Merriweather', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: normal;
+}
+
+#content {
+}
+
+.main {
+    position: relative;
+}
+
+.nav {
+    position: absolute;
+    left:1em;
+    right:0em;
+}
+.nav a {
+    position: absolute;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+}
+.nav a.past {
+    left: 0;
+}
+.nav a.future {
+    right: 0;
+}
+.nav a.past:before {
+    content: '\f0d9';
+    font-family: fontAwesome;
+    position: absolute;
+    left: 0px; /* Adjust as needed */
+    top: 0px; /* Adjust as needed */
+}
+.nav a.future:after {
+    content: '\f0da';
+    font-family: fontAwesome;
+    position: absolute;
+    right: 0px; /* Adjust as needed */
+    top: 0px; /* Adjust as needed */
+}
+
+.main h3 {
+    margin-top: 1.5em;
+    line-height: 150%;
+}
+
+.after, .post-date {
+    font-style: italic;
+}
+.main pre.code {
+    font-family: monospace;
+    border: 1px solid rgba(148, 148, 0, 0.31);
+    border-radius: 0.25em;
+    padding: 1em;
+    background-color: rgba(255, 201, 29, 0.13);
+}
+
+ul.social {
+    padding:0;
+    margin:0;
+}
+ul.social li {
+    list-style: none;
+    display: inline-block;
+    margin:0;
+    padding: 0.5em;
+}
+ul.links li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: #FFB307;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+#sidebar h1, .main h2 {
+    padding:0;
+    margin:0;
+    font-size: 200%;
+    line-height: 120%;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+#sidebar h1 {
+}
+
+#sidebar, .main{
+    padding:0;
+    border: 0px solid black;
+    margin:0;
+    padding-top: 1em;
+}
+
+#sidebar {
+    min-width: 20rem;
+    position: fixed;
+    padding-right: 1em;
+    box-sizing: border-box;
+    text-align: right;
+    top:0;
+    bottom:0;
+}
+.main {
+    margin-left: 20rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 50em;
+    border-left-width: 1px;
+}
+
+.main .post, .main .post-list {
+    padding-top: 0;
+    margin-top: 0;
+    padding:0;
+}
+.main .post-list h2 {
+    padding-bottom: 0;
+}
+
+.main img {
+    max-width: 100%;
+}
+
+/* simple black on white */
+body { color: black;  background-color: white; }
+.main { border-color: black; }
+a {  color: red; }
+h1, h2, h3 { color: black; }
+
+@media(max-width:768px) {
+    #sidebar {
+        min-width: 15rem;
+    }
+    .main {
+        margin-left: 15rem;
+    }
+}
+@media(max-width: 600px) {
+    body {
+        font-size: 85%;
+    }
+    #sidebar {
+        position: static;
+        text-align: left;
+    }
+    .main {
+        margin-left: 0rem;
+        border-left-width: 0px;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    .main h2 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    #sidebar h1 {
+        padding:0;
+        margin: 0;
+        margin-left: 1rem;
+    }
+    ul.social {
+        position: absolute;
+        top:1rem;
+        right:1rem;
+    }
+    ul.links {
+        padding:0;
+        margin-left: 1rem;
+        margin-bottom: 0;
+    }
+    ul.links li {
+        display: inline-block;
+        background-color: red;
+        margin: 0.20em;
+        color: white;
+        padding: 0.20em;
+        font-size: 90%;
+    }
+    ul.links li a {
+        color: white;
+    }
+}
