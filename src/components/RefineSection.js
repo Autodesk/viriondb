@@ -25,6 +25,9 @@ export default class RefineSection extends Component {
   };
 
   toggleOpen = () => {
+    if (this.hasFilter()) {
+      return; 
+    }
     this.setState({ open: !this.state.open });
   };
 
@@ -33,13 +36,18 @@ export default class RefineSection extends Component {
     this.props.setFilter({ [field]: filters.find(filter => filter.field === field).default });
   };
 
+  hasFilter = (forceProps) => {
+    const filter = this.props.filter;
+    return Array.isArray(filter) ? !!filter.length :
+      typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
+      !!filter;
+  }
+
   render() {
     const { field, type, filter } = this.props;
     const { open } = this.state;
     const ControlComponent = RefineSection.componentMap[type];
-    const hasFilter = Array.isArray(filter) ? !!filter.length :
-      typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
-      !!filter;
+    const hasFilter = this.hasFilter();
     const isActive = open || hasFilter;
 
     return (

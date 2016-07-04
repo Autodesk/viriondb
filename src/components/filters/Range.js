@@ -6,7 +6,8 @@ export default class Range extends Component {
   render() {
     return (
       <div className="Range">
-        range
+        <input type="range" />
+    	<span>todo</span>
       </div>
     );
   }

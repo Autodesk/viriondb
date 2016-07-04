@@ -5,14 +5,31 @@ import SearchBarInputTag from './SearchBarInputTag';
 import '../styles/SearchBarInput.css';
 
 export default class SearchBarInput extends Component {
-
 	static propTypes = {
-		tags: PropTypes.array.isRequired,
+		searchInput: PropTypes.string.isRequired,
+    setSearchInput: PropTypes.func.isRequired,
+
+    tags: PropTypes.array.isRequired,
+    addInputTag: PropTypes.func.isRequired,
+    removeTag: PropTypes.func.isRequired,
 	}
 
 	state = {
 		activeTag: -1,
 	};
+
+  onInputKeyDown = (evt) => {
+    if (evt.which !== 13) {
+      return;
+    }
+    evt.preventDefault();
+    this.props.addInputTag(evt.target.value); 
+    this.props.setSearchInput('');
+  };
+
+  onInputChange = (evt) => {
+    this.props.setSearchInput(evt.target.value);
+  };
 
   render() {
     return (
@@ -20,11 +37,16 @@ export default class SearchBarInput extends Component {
         <div className="SearchBarInput-tags">
         	{this.props.tags.map((tag, index) => {
         		<SearchBarInputTag tag={tag}
-        							isActive={this.state.activeTag === index} />
+                               onRemove={() => this.props.removeTag(index)}
+        							         isActive={this.state.activeTag === index} />
         	})}
         </div>
-        <input type="text" 
-        	   placeholder="Add Search Terms"/>
+         {/* need to wrap in form for submit to work */}
+        <input type="text"
+               value={this.props.searchInput}
+               onChange={this.onInputChange}
+               onKeyDown={this.onInputKeyDown}
+        	     placeholder="Add Search Terms"/>
       </div>
     );
   }

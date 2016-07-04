@@ -3,11 +3,11 @@ import { fieldName } from '../../constants/rows';
 import { pie, arc, width, height, radius, keyFn, massageData } from './constants';
 import d3 from 'd3';
 
-export default class PieChart extends Component {
+export default class BarChart extends Component {
   static propTypes = {
   	field: PropTypes.string.isRequired,
   	color: PropTypes.string,
-  	data: PropTypes.object.isRequired,
+  	data: PropTypes.array.isRequired,
   };
 
   static defaultProps = {
