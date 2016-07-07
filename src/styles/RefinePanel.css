@@ -4,7 +4,7 @@
   background-color: var(--colors-blueGreyLight);
   width: var(--width-panel);
   flex-shrink: 0;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
 
   &-heading {
     color: var(--colors-grey);

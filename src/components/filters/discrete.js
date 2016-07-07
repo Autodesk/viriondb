@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Checkbox from '../Checkbox';
 
 import '../../styles/Discrete.css';
 
@@ -12,6 +13,7 @@ export default class Discrete extends Component {
 
   toggleValue = (value) => {
     const { field, filter, setFilter } = this.props;
+    //todo - can remove since clone higher up now
     //treat as immutable, dont overwrite default
     const next = Object.assign({}, filter);
     if (next[value]) {
@@ -33,9 +35,8 @@ export default class Discrete extends Component {
             <div className="Discrete-option"
                  onClick={(evt) => this.toggleValue(value)}
                  key={value}>
-              <input type="checkbox"
-                     className="Discrete-checkbox"
-                     checked={filter[value]}/>
+              <Checkbox className="Discrete-checkbox"
+                        checked={filter[value]}/>
               <span className="Discrete-text">{name}</span>
             </div>
           );

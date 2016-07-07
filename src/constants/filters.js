@@ -69,15 +69,15 @@ export const filters = [
     field: 'derived_protein_count',
     type: 'range',
     color: '#aaeeee',
-    default: [],
+    default: [0, 541],
     range: [0, 2541],
   },
 
   {
     field: 'length',
     type: 'range',
-    color: '#aaeeee',
-    default: [],
+    color: '#aaaaee',
+    default: [0, 50000],
     range: [0, 50000],
   },
 

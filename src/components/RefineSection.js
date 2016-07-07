@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
 import { filters } from '../constants/filters';
+import { cloneDeep, isEqual } from 'lodash';
 
 import Discrete from './filters/Discrete';
 import Range from './filters/Range';
@@ -31,17 +32,25 @@ export default class RefineSection extends Component {
     this.setState({ open: !this.state.open });
   };
 
+  getDefault = () => {
+    const def = filters.find(filter => filter.field === this.props.field).default;
+    return cloneDeep(def);
+  };
+
   resetFilter = () => {
     const { field } = this.props;
-    this.props.setFilter({ [field]: filters.find(filter => filter.field === field).default });
+    this.props.setFilter({ [field]: this.getDefault() });
   };
 
   hasFilter = (forceProps) => {
     const filter = this.props.filter;
-    return Array.isArray(filter) ? !!filter.length :
-      typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
-      !!filter;
-  }
+    const defaultFilter = this.getDefault();
+
+    return !isEqual(filter, defaultFilter) &&
+      (Array.isArray(filter) ? !!filter.length :
+        typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
+        !!filter);
+  };
 
   render() {
     const { field, type, filter } = this.props;

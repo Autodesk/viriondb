@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Checkbox from './Checkbox';
 
 import '../styles/BrowseTableHeaderColumn.css';
 
@@ -44,10 +45,9 @@ export default class BrowseTableHeaderColumn extends Component {
                       onClick={() => onOpen(instance.id)}>
                     Open
                   </a>
-                  <input type="checkbox"
-                         key={instance.id}
-                         onChange={(evt) => onCheck(instance.id)}
-                         checked={isChecked}/>
+                  <Checkbox key={instance.id}
+                            onChange={(evt) => onCheck(instance.id)}
+                            checked={isChecked}/>
                 </div>
               );
             })}
