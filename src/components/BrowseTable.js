@@ -15,7 +15,7 @@ export default class BrowseTable extends Component {
   static defaultProps = {};
 
   state = {
-    checked: { 'M14008.1': true },
+    checked: { 'M14008.1': true, 'AC_000004.1' : true },
     hovered: null,
   };
 

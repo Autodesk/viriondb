@@ -2,6 +2,9 @@
 
 .SearchBarInputTag {
 	padding: 0.25em;
+	margin-right: 0.5em;
+	display: flex;
+	flex-direction: row;
 	background-color: var(--colors-blueGreyLight);
 
 	&-text {

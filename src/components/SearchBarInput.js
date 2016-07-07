@@ -36,9 +36,12 @@ export default class SearchBarInput extends Component {
       <div className="SearchBarInput">
         <div className="SearchBarInput-tags">
         	{this.props.tags.map((tag, index) => {
-        		<SearchBarInputTag tag={tag}
+        		return (
+              <SearchBarInputTag tag={tag}
+                               key={index}
                                onRemove={() => this.props.removeTag(index)}
         							         isActive={this.state.activeTag === index} />
+             );
         	})}
         </div>
          {/* need to wrap in form for submit to work */}

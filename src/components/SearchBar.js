@@ -30,15 +30,14 @@ export default class SearchBar extends Component {
   };
 
   onAddInputTag = (input) => {
-    invariant(false, 'make this working!');
-    
     this.setState({
       tags: this.state.tags.concat({
         text: input,
         source: 'search',
       }),
     });
-  }
+    this.setSearchInput('');
+  };
 
   setSearchInput = (input) => {
     invariant(typeof input === 'string', 'input must be a string');
@@ -46,7 +45,7 @@ export default class SearchBar extends Component {
     this.setState({
       input,
     });
-  }
+  };
 
   onRemoveTag = (index) => {
     const next = this.state.tags.slice();
@@ -54,7 +53,7 @@ export default class SearchBar extends Component {
     this.setState({
       tags: next,
     });
-  }
+  };
 
   render() {
     const { active, input, tags } = this.state;

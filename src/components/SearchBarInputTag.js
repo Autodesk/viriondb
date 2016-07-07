@@ -13,13 +13,13 @@ export default class SearchBarInputTag extends Component {
   }
 
   render() {
-    const { tag, isActive } = this.props;
+    const { tag, isActive, onRemove } = this.props;
 
     return (
       <div className={'SearchBarInputTag' + (isActive ? ' active' : '')}>
         <div className="SearchBarInputTag-text">{tag.text}</div>
         <div className="SearchBarInputTag-close" 
-             onClick={this.onRemove}>x</div>
+             onClick={() => onRemove()}>x</div>
       </div>
     );
   }
