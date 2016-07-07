@@ -5,6 +5,7 @@ import '../../styles/Range.css';
 
 //should be logarithmic... maybe need to pass in std deviation too / some way to know where to weight the scale
 //should handle conversion here, need to relay to handles somehow (or show ourselves)... might be easier to write from scratch
+//also need to handle color passdown, may need to modify component directly
 
 export default class Range extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import d3 from 'd3';
 
-export const width = 150;
-export const height = 150;
+export const width = 120;
+export const height = 120;
 export const radius = Math.min(width, height) / 2;
 
 export const pie = d3.layout.pie()
@@ -12,7 +12,7 @@ export const pie = d3.layout.pie()
 
 export const arc = d3.svg.arc()
 	.outerRadius(radius * 0.9)
-	.innerRadius(radius * 0.75);
+	.innerRadius(radius * 0.7);
 
 export const keyFn = (d) => d.data.key;
 

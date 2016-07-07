@@ -26,6 +26,7 @@ export const filters = [
   {
     field: 'capsid_morphology',
     type: 'discrete',
+    shortname: 'CM',
     color: '#aaeeaa',
     default: {},    
     values: {
@@ -42,6 +43,7 @@ export const filters = [
   {
     field: 'division',
     type: 'discrete',
+    shortname: 'Di',
     color: '#aaeeaa',
     default: {},    
     values: {
@@ -55,6 +57,7 @@ export const filters = [
   {
     field: 'sense',
     type: 'discrete',
+    shortname: 'Se',
     color: '#aaeeee',
     default: {},    
     values: {
@@ -68,6 +71,7 @@ export const filters = [
   {
     field: 'derived_protein_count',
     type: 'range',
+    shortname: 'PN',
     color: '#aaeeee',
     default: [0, 541],
     range: [0, 2541],
@@ -76,6 +80,7 @@ export const filters = [
   {
     field: 'length',
     type: 'range',
+    shortname: 'Le',
     color: '#aaaaee',
     default: [0, 50000],
     range: [0, 50000],
