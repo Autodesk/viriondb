@@ -10,8 +10,7 @@ export default class Header extends Component {
     return (
         <div className="Header">
           <div className="Header-nav">
-            <Link className="Header-home"
-                to="/">Virion DB</Link>
+            <Link className="Header-home" to="/"></Link>
           </div>
           <SearchBar />
         </div>

@@ -11,7 +11,14 @@
   }
 
   &-star {
+    display: inline-block;
     padding: 0.5em;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
+    background-image: url('/images/favorite.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

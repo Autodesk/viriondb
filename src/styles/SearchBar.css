@@ -12,19 +12,38 @@
     padding-right: 1em;
   }
 
+  &-icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-left: 0.5em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
   &-lens {
-    position: absolute;
-    right: 5rem;
-    font-size: 3rem;
-    align-self: center;
-    line-height: 0.6;
+    /* temporary image */
+    display: none;
+    background-image: url('/images/add.svg');
   }
 
   &-close {
-    font-size: 1.5rem;
-    color: var(--colors-white);
-    padding: 0 1rem;
-    align-self: center;
+    background-image: url('/images/close.svg');
+  }
+
+  &-share {
+    background-image: url('/images/share.svg');
+  }
+
+  &-feedback {
+    background-image: url('/images/feedback.svg');
   }
 
   &.closed .SearchBarInput {
@@ -43,15 +62,13 @@
   }
 
   &.closed &-lens {
-    cursor: pointer;
-    right: 0;
-    color: white;
-    font-size: 4rem;
+    display: inline-block;
   }
 
   &.closed &-close {
     width: 0;
     opacity: 0;
+    margin-left: 0;
     pointer-events: none;
   }
 }

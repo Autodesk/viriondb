@@ -30,14 +30,14 @@ app.use(morgan('dev', {
 
 //Static Files
 app.use(express.static(pathContent));
-app.use('/images', express.static('../src/images'));
+app.use('/images', express.static(path.resolve(__dirname, '../src/images')));
 
 app.use('/data', dataRouter);
 
 app.get('*', (req, res) => {
   if (req.url.indexOf('client.js') >= 0) {
     //should only hit this when proxy is not set up (i.e. not in development)
-    res.sendFile(pathClientBundle);
+    res.sendFile(path.resolve(__dirname, pathClientBundle));
   } else {
     //so that any routing is delegated to the client
     res.sendFile(path.resolve(__dirname, pathContent + '/index.html'));

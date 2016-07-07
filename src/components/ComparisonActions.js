@@ -27,7 +27,6 @@ export default class ComparisonActions extends Component {
 
                   <span className="ComparisonActions-star"
                         onClick={() => onStar(instance.id)}>
-                        ❤️
                   </span>
             </div>
           );

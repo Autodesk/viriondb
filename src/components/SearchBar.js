@@ -21,6 +21,14 @@ export default class SearchBar extends Component {
     this.setState({ active: false });
   };
 
+  onClickShare = (evt) => {
+    console.log('todo');
+  };
+
+  onClickFeedback = (evt) => {
+    console.log('todo');
+  };
+
   onAddInputTag = (input) => {
     invariant(false, 'make this working!');
     
@@ -61,10 +69,14 @@ export default class SearchBar extends Component {
                         removeTag={(index) => this.onRemoveTag(index)}
                         addInputTag={(input) => this.onAddInputTag(input)}/>
 
-        <div className="SearchBar-lens"
-             onClick={this.onClickLens}>{`\u2315`}</div>
-        <div className="SearchBar-close"
-             onClick={this.onClickClose}>X</div>
+        <div className={'SearchBar-icon SearchBar-lens'}
+             onClick={this.onClickLens}></div>
+        <div className="SearchBar-icon SearchBar-close"
+             onClick={this.onClickClose}></div>
+        <div className="SearchBar-icon SearchBar-share"
+             onClick={this.onClickShare}></div>
+        <div className="SearchBar-icon SearchBar-feedback"
+             onClick={this.onClickFeedback}></div>
       </div>
     );
   }

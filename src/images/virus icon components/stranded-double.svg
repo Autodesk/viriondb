@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="374px" height="374px" viewBox="0 0 374 374" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>stranded-double</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="264" height="53"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4" transform="translate(55.000000, 164.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <g mask="url(#mask-2)" stroke-linecap="round" stroke-linejoin="round">
+                <g transform="translate(-63.000000, 13.000000)">
+                    <g id="Page-1">
+                        <path d="M267.7612,0 C234.6361,0 229.1152,28 198.7506,28 C168.3859,28 158.7244,0 133.8806,0" id="Stroke-1" stroke="#3168FF" stroke-width="4"></path>
+                        <path d="M133.8806,0 C100.7555,0 95.2346,28 64.87,28 C34.5053,28 24.8438,0 0,0" id="Stroke-3" stroke="#3168FF" stroke-width="4"></path>
+                        <path d="M401.6418,0 C368.5167,0 362.9958,28 332.6311,28 C302.2665,28 292.605,0 267.7612,0" id="Stroke-5" stroke="#3168FF" stroke-width="4"></path>
+                    </g>
+                    <g id="Page-1-Copy" transform="translate(43.000000, 0.000000)">
+                        <path d="M267.7612,0 C234.6361,0 229.1152,28 198.7506,28 C168.3859,28 158.7244,0 133.8806,0" id="Stroke-1" stroke="#3168FF" stroke-width="4"></path>
+                        <path d="M133.8806,0 C100.7555,0 95.2346,28 64.87,28 C34.5053,28 24.8438,0 0,0" id="Stroke-3" stroke="#3168FF" stroke-width="4"></path>
+                        <path d="M401.6418,0 C368.5167,0 362.9958,28 332.6311,28 C302.2665,28 292.605,0 267.7612,0" id="Stroke-5" stroke="#3168FF" stroke-width="4"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
