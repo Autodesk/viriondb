@@ -19,6 +19,7 @@ export const rows = [
   'subfamily',
   'genus',
   'host',
+  'derived_lineage',
   'taxonomy',
 ];
 
@@ -41,7 +42,7 @@ export const rowNames = {
 };
 
 export const fieldName = (field) => {
-  return rowNames[field] || capitalize(field)
+  return rowNames[field] || capitalize(field);
 };
 
 export const rowHierarchy = [
