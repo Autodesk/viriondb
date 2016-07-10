@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 export default class BaltimoreGroup extends Component {
   static propTypes = {	

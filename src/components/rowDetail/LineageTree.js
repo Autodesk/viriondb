@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 
 export default class LineageTree extends Component {
   static propTypes = {	

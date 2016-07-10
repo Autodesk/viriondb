@@ -45,7 +45,7 @@ export default class LineGraph extends Component {
         <span className="LineGraph-heading">
           {longName}
         </span>
-        <svg className="LineGraph-graph" 
+        <svg className="LineGraph-graph">
         	 <g ref={(el) => { if (el) { this.element = el; }}}></g>
         </svg>
       </div>
