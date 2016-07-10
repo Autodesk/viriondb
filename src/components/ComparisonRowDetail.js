@@ -4,7 +4,7 @@ import { rows } from '../constants/rows';
 import Capsid3d from './rowDetail/Capsid3d';
 import BaltimoreGroup from './rowDetail/BaltimoreGroup';
 import Host from './rowDetail/Host';
-import TaxonomyTree from './rowDetail/TaxonomyTree';
+import LineageTree from './rowDetail/LineageTree';
 
 export default class ComparisonRowDetail extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export default class ComparisonRowDetail extends Component {
     capsid_morphology: Capsid3d,
     derived_baltimore: BaltimoreGroup,
     host: Host,
-    taxonomy: TaxonomyTree,
+    derived_lineage: LineageTree,
   };
 
   render() {

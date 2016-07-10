@@ -22,8 +22,8 @@ export class BrowsePage extends Component {
     filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
   };
 
-  setFilter = (filter) => {
-    this.setState({ filters: Object.assign({}, this.state.filters, filter) });
+  setFilter = (filterPatch) => {
+    this.setState({ filters: Object.assign({}, this.state.filters, filterPatch) });
   };
 
   openInstances = (...ids) => {
@@ -43,10 +43,25 @@ export class BrowsePage extends Component {
         const derived = _.mapValues(_.groupBy(instances, cat.field), array => Math.floor(array.length / instances.length * 100));
         acc[cat.field] = derived; 
       } else if (cat.type === 'range') {
-        //todo
-        const breakdown = [];
+        const maximum = cat.range[1];
+        const range = maximum - cat.range[0];
+        const maxCategories = 10;
+        let breakdown;
+        if (range > maxCategories) {
+          //if the range is very large, we need to group it so its looks nicer?
+          //or do this in d3?
+          //need to pass labels or make them deterministic
+          const counter = (instance) => Math.floor(instance[cat.field] / maximum * maxCategories);
+          breakdown = _.countBy(instances, counter);
+        } else {
+          breakdown = _.groupBy(instances, cat.field);
+        }
         acc[cat.field] = breakdown;
       } else {
+        //Bar chart? 
+        //const breakdown = _.groupBy(instances, cat.field)
+
+        //or else...
         //uh oh
       }
       return acc;

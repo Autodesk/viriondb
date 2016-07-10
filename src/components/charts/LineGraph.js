@@ -3,14 +3,14 @@ import { fieldName } from '../../constants/rows';
 import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
 import d3 from 'd3';
 
-export default class BarChart extends Component {
+import '../../styles/LineGraph.css';
+
+export default class LineGraph extends Component {
   static propTypes = {
   	field: PropTypes.string.isRequired,
   	color: PropTypes.string,
-  	data: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired,
-    })).isRequired,
+  	data: PropTypes.object.isRequired,
+    interpolate: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -18,17 +18,13 @@ export default class BarChart extends Component {
   };
 
   componentDidMount() {
-  	//attach the chart to the page
-
-  	this.svg = d3.select(this.element)
-		  .append("g");
+  	this.svg = d3.select(this.element);
 
 	  this.update(this.props.data);
   }
 
   componentDidUpdate() {
   	this.update(this.props.data);
-  	//update the chart
   }
 
   componentWillUnmount() {
@@ -40,12 +36,19 @@ export default class BarChart extends Component {
   }
 
   render() {
-    //todo - get label for tooltip from filters.js
+    const { field, color } = this.props;
+    const longName = fieldName(field);
 
     return (
-        <svg className="BarChart" 
-        	 ref={(el) => { if (el) { this.element = el; }}}>
+      <div className="LineGraph"
+           style={{backgroundColor: color}}>
+        <span className="LineGraph-heading">
+          {longName}
+        </span>
+        <svg className="LineGraph-graph" 
+        	 <g ref={(el) => { if (el) { this.element = el; }}}></g>
         </svg>
+      </div>
     );
   }
 };

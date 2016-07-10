@@ -3,6 +3,7 @@ import { filters } from '../constants/filters';
 
 import PieChart from './charts/PieChart';
 import BarChart from './charts/BarChart';
+import LineGraph from './charts/LineGraph';
 
 export default class BrowseChart extends Component {
   static propTypes = {
@@ -12,7 +13,8 @@ export default class BrowseChart extends Component {
 
   static componentMap = {
     discrete: PieChart,
-    range: BarChart,
+    range: LineGraph,
+    whatMakesItABarInsteadOfAPie: BarChart,
   };
 
   render() {
@@ -25,7 +27,7 @@ export default class BrowseChart extends Component {
     }
 
     return (
-        <ChartComponent {...this.props} {...info} />
+      <ChartComponent {...this.props} {...info} />
     );
   }
 };

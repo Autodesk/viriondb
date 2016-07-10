@@ -4,7 +4,7 @@ import MoleculeViewer from '../MoleculeViewer';
 
 export default class Proteins extends Component {
   static propTypes = {	
-    id: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
   };
 
   makeUrl = () => {

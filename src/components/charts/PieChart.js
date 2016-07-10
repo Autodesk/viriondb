@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { fieldName } from '../../constants/rows';
-import { pie, arc, width, height, radius, keyFn, massageData } from './constants';
+import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
 import d3 from 'd3';
 
 import '../../styles/PieChart.css';
@@ -13,7 +13,7 @@ export default class PieChart extends Component {
   };
 
   static defaultProps = {
-  	color: '#9999dd',
+  	color: defaultColor,
   };
 
   componentDidMount() {
@@ -69,19 +69,19 @@ export default class PieChart extends Component {
     const shortName = field.substring(0,2).toUpperCase();
 
     return (
-        <div className="PieChart">
-          <span className="PieChart-heading"
-                style={{color: color}}>
-            {longName}
-          </span>
-          <span className="PieChart-label"
-                style={{color: color}}>
-            {shortName}
-          </span>
-          <svg className="PieChart-chart">
-          	 <g ref={(el) => { if (el) { this.element = el; }}}></g>
-          </svg>
-        </div>
+      <div className="PieChart">
+        <span className="PieChart-heading"
+              style={{color: color}}>
+          {longName}
+        </span>
+        <span className="PieChart-label"
+              style={{color: color}}>
+          {shortName}
+        </span>
+        <svg className="PieChart-chart">
+        	 <g ref={(el) => { if (el) { this.element = el; }}}></g>
+        </svg>
+      </div>
     );
   }
 };
