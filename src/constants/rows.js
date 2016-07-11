@@ -68,7 +68,7 @@ export const rowHierarchy = [
     name: 'Morphology',
     fields: [
       'capsid_morphology',
-      'capsid_envolope',
+      'capsid_envelope',
       'derived_protein_count',
     ],
   },

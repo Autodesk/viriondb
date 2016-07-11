@@ -6,6 +6,8 @@ import BrowseTableHeaderColumn from './BrowseTableHeaderColumn';
 
 import '../styles/BrowseTable.css';
 
+//todo - ensure selected items are in the filtered list
+
 export default class BrowseTable extends Component {
   static propTypes = {
     instances: PropTypes.array.isRequired,
@@ -18,6 +20,7 @@ export default class BrowseTable extends Component {
     checked: { 'M14008.1': true, 'AC_000004.1': true },
     sections: rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {}),
     hovered: null,
+    tableHeight: 800,
   };
 
   setHovered = (id) => {
@@ -45,10 +48,11 @@ export default class BrowseTable extends Component {
 
   render() {
     const { instances } = this.props;
-    const { hovered, checked, sections } = this.state;
+    const { hovered, checked, sections, tableHeight } = this.state;
 
     return (
       <div className="BrowseTable"
+           style={{maxHeight: `${tableHeight}px`}}
            onMouseLeave={(evt) => this.setHovered(null)}
            onMouseEnter={(evt) => this.setHovered(null)}>
         <div className="BrowseTable-heading">

@@ -33,15 +33,32 @@ export class BrowsePage extends Component {
   render() {
     const instances = _.values(instanceMap);
 
-    //todo - set up filter (using lodash?) - should be in a shared place
-    const filtered = instances;
+    const createFilter = (cat) => {
+      if (cat.type === 'discrete') {
+        return (instance) => Object.keys(this.state.filters[cat.field]).length === 0 || this.state.filters[cat.field][instance[cat.field]];
+      } else if (cat.type === 'range') {
+        return (instance) => _.isEqual(this.state.filters[cat.field], cat.default) || (this.state.filters[cat.field][0] <= instance[cat.field] && this.state.filters[cat.field][1] >= instance[cat.field]);
+      } else {
+        console.warn(`no filter for ${cat.field} (${cat.type})`);
+        return () => true;
+      }
+    };
+
+    //filter the instances
+    //todo - performance
+    //debugger;
+    const currentFilters = Object.keys(this.state.filters).map(filterName => filters.find(cat => cat.field === filterName));
+    console.log(currentFilters);
+    const filterGauntlet = currentFilters.map(createFilter);
+    const filterFunc = instance => _.every(filterGauntlet, filter => filter(instance));
+    const filtered = _.filter(instances, filterFunc);
 
     //todo - compute these when filters change, not on every render
     const derivedData = filters.reduce((acc, cat) => {
       if (cat.type === 'discrete') {
-        //todo - much more efficient, but still give percentages
-        const derived = _.mapValues(_.groupBy(instances, cat.field), array => Math.floor(array.length / instances.length * 100));
-        acc[cat.field] = derived; 
+        //todo - more efficient, but still give percentages
+        const derived = _.mapValues(_.groupBy(filtered, cat.field), array => Math.floor(array.length / filtered.length * 100));
+        acc[cat.field] = derived;
       } else if (cat.type === 'range') {
         const maximum = cat.range[1];
         const range = maximum - cat.range[0];
@@ -52,13 +69,13 @@ export class BrowsePage extends Component {
           //or do this in d3?
           //need to pass labels or make them deterministic
           const counter = (instance) => Math.floor(instance[cat.field] / maximum * maxCategories);
-          breakdown = _.countBy(instances, counter);
+          breakdown = _.countBy(filtered, counter);
         } else {
-          breakdown = _.groupBy(instances, cat.field);
+          breakdown = _.groupBy(filtered, cat.field);
         }
         acc[cat.field] = breakdown;
       } else {
-        //Bar chart? 
+        //Bar chart?
         //const breakdown = _.groupBy(instances, cat.field)
 
         //or else...
