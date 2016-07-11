@@ -1,29 +1,29 @@
 var utils = require('./utils.js');
 
 utils.readData(function (json) {
-	var ignores = ['accession', 'name', 'host', 'description', 'length'];
+  var ignores = ['accession', 'name', 'host', 'description', 'length'];
 
-	var fields = json.reduce(function (acc, item) {
-		Object.keys(item).forEach(function (fieldName) {
-			var fieldVal = item[fieldName] || 'Unknown';
+  var fields = json.reduce(function (acc, item) {
+    Object.keys(item).forEach(function (fieldName) {
+      var fieldVal = item[fieldName] || 'Unknown';
 
-			if (ignores.indexOf(fieldName) >= 0) {
-				return;
-			}
+      if (ignores.indexOf(fieldName) >= 0) {
+        return;
+      }
 
-			if (!acc[fieldName]) {
-				acc[fieldName] = {};
-			}
-			
-			if (!acc[fieldName][fieldVal]) {
-				acc[fieldName][fieldVal] = 0;
-			}
+      if (!acc[fieldName]) {
+        acc[fieldName] = {};
+      }
 
-			acc[fieldName][fieldVal] += 1;
-		});
+      if (!acc[fieldName][fieldVal]) {
+        acc[fieldName][fieldVal] = 0;
+      }
 
-		return acc;
-	}, {});
+      acc[fieldName][fieldVal] += 1;
+    });
 
-	utils.writeFile('fields.json', fields);
+    return acc;
+  }, {});
+
+  utils.writeFile('fields.json', fields);
 });

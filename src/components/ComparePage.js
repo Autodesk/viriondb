@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
-import instanceMap from '../../data/testSet.js';
+import instanceMap from '../../data/testSet';
 import { rows } from '../constants/rows';
 
 import ComparisonRow from './ComparisonRow';
