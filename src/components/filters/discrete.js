@@ -44,4 +44,4 @@ export default class Discrete extends Component {
       </div>
     );
   }
-};
+}

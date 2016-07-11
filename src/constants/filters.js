@@ -28,7 +28,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'CM',
     color: '#aaeeaa',
-    default: {},    
+    default: {},
     values: {
       'helical': 'Helical',
       'spherical': 'Spherical',
@@ -45,7 +45,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'Di',
     color: '#aaeeaa',
-    default: {},    
+    default: {},
     values: {
       "VRL": "VRL",
       "PHG": "PHG",
@@ -59,7 +59,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'Se',
     color: '#aaeeee',
-    default: {},    
+    default: {},
     values: {
       "+/-": "+/-",
       "+": "+",
@@ -87,11 +87,11 @@ export const filters = [
   },
 
   /*
-  //forthcoming
-  {
-    field: 't_number',
-    type: 'range',
-    range: [0, 30],
-  },
-  */
+   //forthcoming
+   {
+   field: 't_number',
+   type: 'range',
+   range: [0, 30],
+   },
+   */
 ];

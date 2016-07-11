@@ -12,18 +12,27 @@ export default class BrowseTableHeaderColumn extends Component {
     onCheck: PropTypes.func.isRequired,
     onOpen: PropTypes.func.isRequired,
     onCompare: PropTypes.func.isRequired,
+    sections: PropTypes.object.isRequired,
+    onToggleSection: PropTypes.func.isRequired,
   };
 
   static defaultProps = {};
 
   render() {
-    const { hovered, checked, onHover, onOpen, onCheck, onCompare, instances } = this.props;
+    const { hovered, checked, onHover, onOpen, onCheck, onCompare, instances, sections, onToggleSection } = this.props;
 
     return (
       <div className="BrowseTableSection">
         <div className="BrowseTableHeaderColumn">
           <div className="BrowseTableSection-heading">
-            • • • • •
+            {Object.keys(sections).map(section => {
+              return (
+                <a onClick={() => onToggleSection(section)}
+                   className={'BrowseTableHeaderColumn-dot' + (sections[section] ? ' active' : '')}
+                   alt={section}
+                   key={section}>•</a>
+              );
+            })}
           </div>
 
           <div className="BrowseTableSection-title">
@@ -42,7 +51,7 @@ export default class BrowseTableHeaderColumn extends Component {
                      onMouseEnter={() => onHover(instance.id)}
                      key={instance.id}>
                   <a className={'BrowseTableHeaderColumn-open action action-black' + (isHovered ? '' : ' invisible')}
-                      onClick={() => onOpen(instance.id)}>
+                     onClick={() => onOpen(instance.id)}>
                     Open
                   </a>
                   <Checkbox key={instance.id}
