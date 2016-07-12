@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
+import keyedInstances from '../../data/testSet';
 
 import '../styles/BrowseTableSection.css';
 
@@ -33,16 +34,16 @@ export default class BrowseTableSection extends Component {
               <div className="BrowseTableSection-title">{nameField}</div>
 
               <div className="BrowseTableSection-values">
-                {instances.map(instance => {
-                  const isChecked = checked[instance.id];
-                  const isHovered = hovered === instance.id;
+                {instances.map(instanceId => {
+                  const isChecked = checked[instanceId];
+                  const isHovered = hovered === instanceId;
                   return (
                     <div className={'BrowseTableSection-cell' +
                                    (isHovered ? ' hovered' : '') +
                                    (isChecked ? ' checked' : '')}
-                         onMouseEnter={() => onHover(instance.id)}
-                         key={instance.id}>
-                      {instance[field] || '-'}
+                         onMouseEnter={() => onHover(instanceId)}
+                         key={instanceId}>
+                      {keyedInstances[instanceId][field] || '-'}
                     </div>
                   );
                 })}

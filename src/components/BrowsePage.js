@@ -48,7 +48,7 @@ export class BrowsePage extends Component {
     //todo - performance
     //debugger;
     const currentFilters = Object.keys(this.state.filters).map(filterName => filters.find(cat => cat.field === filterName));
-    console.log(currentFilters);
+    console.log(this.state.filters, currentFilters);
     const filterGauntlet = currentFilters.map(createFilter);
     const filterFunc = instance => _.every(filterGauntlet, filter => filter(instance));
     const filtered = _.filter(instances, filterFunc);
@@ -84,6 +84,8 @@ export class BrowsePage extends Component {
       return acc;
     }, {});
 
+    const filteredIds = filtered.map(inst => inst.id);
+
     return (
       <div className="BrowsePage">
         <RefinePanel setFilter={this.setFilter}
@@ -91,9 +93,9 @@ export class BrowsePage extends Component {
 
         <div className="BrowsePage-main">
           <BrowseTable openInstances={this.openInstances.bind(this)}
-                       instances={filtered}/>
+                       instances={filteredIds}/>
 
-          <BrowseCharts instances={filtered}
+          <BrowseCharts instances={filteredIds}
                         derivedData={derivedData} />
         </div>
       </div>

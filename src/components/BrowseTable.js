@@ -42,12 +42,14 @@ export default class BrowseTable extends Component {
     });
   };
 
-  openInstances = () => {
-    this.props.openInstances(...Object.keys(this.state.checked));
+  openInstances = (...ids) => {
+    const toOpen = ids.length > 0 ? ids : Object.keys(this.state.checked);
+    this.props.openInstances(...toOpen);
   };
 
   render() {
     const { instances } = this.props;
+    const tableInstances = instances.slice(0, 50);
     const { hovered, checked, sections, tableHeight } = this.state;
 
     return (
@@ -70,7 +72,7 @@ export default class BrowseTable extends Component {
                                    onCheck={this.toggleChecked}
                                    onOpen={this.openInstances}
                                    onCompare={this.openInstances}
-                                   instances={instances}/>
+                                   instances={tableInstances}/>
 
           {rowHierarchy
             .filter(section => sections[section.name])
@@ -82,7 +84,7 @@ export default class BrowseTable extends Component {
                                           onHover={this.setHovered}
                                           hovered={hovered}
                                           checked={checked}
-                                          instances={instances}/>);
+                                          instances={tableInstances}/>);
             })}
         </div>
       </div>

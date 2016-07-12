@@ -37,25 +37,25 @@ export default class BrowseTableHeaderColumn extends Component {
 
           <div className="BrowseTableSection-title">
             <a className="action action-dark"
-               onClick={onCompare}>Compare</a>
+               onClick={() => onCompare()}>Compare</a>
           </div>
 
           <div className="BrowseTableSection-values">
-            {instances.map(instance => {
-              const isChecked = checked[instance.id];
-              const isHovered = hovered === instance.id;
+            {instances.map(instanceId => {
+              const isChecked = checked[instanceId];
+              const isHovered = hovered === instanceId;
               return (
                 <div className={'BrowseTableSection-cell' +
                                 (isHovered ? ' hovered' : '') +
                                 (isChecked ? ' checked' : '')}
-                     onMouseEnter={() => onHover(instance.id)}
-                     key={instance.id}>
+                     onMouseEnter={() => onHover(instanceId)}
+                     key={instanceId}>
                   <a className={'BrowseTableHeaderColumn-open action action-black' + (isHovered ? '' : ' invisible')}
-                     onClick={() => onOpen(instance.id)}>
+                     onClick={() => onOpen(instanceId)}>
                     Open
                   </a>
-                  <Checkbox key={instance.id}
-                            onChange={(evt) => onCheck(instance.id)}
+                  <Checkbox key={instanceId}
+                            onChange={(evt) => onCheck(instanceId)}
                             checked={isChecked}/>
                 </div>
               );

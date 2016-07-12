@@ -9,36 +9,37 @@ import '../../styles/Range.css';
 
 export default class Range extends Component {
   static propTypes = {
-  	setFilter: PropTypes.func.isRequired,
-  	filter: PropTypes.array.isRequired,
+    setFilter: PropTypes.func.isRequired,
+    filter: PropTypes.array.isRequired,
     field: PropTypes.string.isRequired,
-  	range: PropTypes.array.isRequired,
+    range: PropTypes.array.isRequired,
   };
 
   getValue = () => {
-  	if (!this.rangeSlider) { return; }
-  	return this.rangeSlider.getValue();
+    if (!this.rangeSlider) {
+      return null;
+    }
+    return this.rangeSlider.getValue();
   };
 
   onChange = (next) => {
-
-  	this.props.setFilter(next);
-  }
+    this.props.setFilter({ [this.props.field]: next });
+  };
 
   render() {
-  	const { range, field, color, filter } = this.props;
+    const { range, field, color, filter } = this.props;
 
     return (
-  		<ReactSlider onChange={this.onChange}
-      				 value={filter}
-      				 min={range[0]}
-      				 max={range[1]}
-      				 ref={(el) => { if (el) { this.rangeSlider = el; }}}
-      				 withBars
-      				 className="Range"
-      				 handleClassName="Range-handle"
-      				 barClassName="Range-bar"
-      				 pearling />
+      <ReactSlider onChange={this.onChange}
+                   value={filter}
+                   min={range[0]}
+                   max={range[1]}
+                   ref={(el) => { if (el) { this.rangeSlider = el; }}}
+                   withBars
+                   className="Range"
+                   handleClassName="Range-handle"
+                   barClassName="Range-bar"
+                   pearling/>
     );
   }
 };
