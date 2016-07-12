@@ -2,6 +2,7 @@
 
 .BrowseTableSection {
   display: inline-block;
+  position: relative;
   flex-shrink: 0;
   white-space: nowrap;
   padding: var(--table-padding) 0;

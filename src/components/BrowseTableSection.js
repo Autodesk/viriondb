@@ -43,7 +43,7 @@ export default class BrowseTableSection extends Component {
                                    (isChecked ? ' checked' : '')}
                          onMouseEnter={() => onHover(instanceId)}
                          key={instanceId}>
-                      {keyedInstances[instanceId][field] || '-'}
+                      {keyedInstances[instanceId][field] || '\u00a0'}
                     </div>
                   );
                 })}

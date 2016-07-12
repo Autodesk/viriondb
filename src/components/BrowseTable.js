@@ -20,7 +20,14 @@ export default class BrowseTable extends Component {
     checked: { 'M14008.1': true, 'AC_000004.1': true },
     sections: rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {}),
     hovered: null,
-    tableHeight: 800,
+    tableHeight: 500,
+  };
+
+  handleScroll = (evt) => {
+    evt.persist();
+    console.log(evt);
+    //todo
+
   };
 
   setHovered = (id) => {
@@ -28,13 +35,20 @@ export default class BrowseTable extends Component {
   };
 
   toggleChecked = (id) => {
-    //ideally, delete from object but whatever
+    const isChecked = this.state.checked[id];
+    const next = Object.assign({}, this.state.checked);
+    if (isChecked) {
+      delete next[id];
+    } else {
+      next[id] = true;
+    }
+
     this.setState({
-      checked: Object.assign({}, this.state.checked, { [id]: !this.state.checked[id] }),
+      checked: next,
     });
   };
 
-  onToggleSection = (section) => {
+  toggleSection = (section) => {
     const nextSections = Object.assign({}, this.state.sections, { [section]: !this.state.sections[section] });
 
     this.setState({
@@ -49,8 +63,13 @@ export default class BrowseTable extends Component {
 
   render() {
     const { instances } = this.props;
-    const tableInstances = instances.slice(0, 50);
     const { hovered, checked, sections, tableHeight } = this.state;
+    const offset = 0;
+    const fudge = 4;
+    const length = Math.floor((tableHeight / (2 * 16))) + (fudge * 2);
+    const start = Math.max(0, offset - fudge);
+    const end = Math.min(instances.length, start + length + fudge);
+    const tableInstances = instances.slice(start, end);
 
     return (
       <div className="BrowseTable"
@@ -63,11 +82,12 @@ export default class BrowseTable extends Component {
         </div>
 
         <div className="BrowseTable-values"
+             onScroll={this.handleScroll}
              onMouseEnter={(evt) => evt.stopPropagation()}>
           <BrowseTableHeaderColumn checked={checked}
                                    hovered={hovered}
                                    sections={sections}
-                                   onToggleSection={this.onToggleSection}
+                                   onToggleSection={this.toggleSection}
                                    onHover={this.setHovered}
                                    onCheck={this.toggleChecked}
                                    onOpen={this.openInstances}

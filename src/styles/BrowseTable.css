@@ -4,8 +4,11 @@
   min-height: 250px;
   border-bottom: 1px solid var(--colors-greyLight);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   &-heading {
+    flex-shrink: 0;
     padding: 0.5em 0.5em 1em;
     font-size: var(--font-size-table-heading);
     font-weight: 500;
