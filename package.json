@@ -5,19 +5,27 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node tools/run start",
-    "build": "babel-node tools/run build"
+    "build": "babel-node tools/run build",
+    "docker-build": "docker build -t viriondb .",
+    "docker-run": "docker run -ti --rm -p 3000-3002:3000-3002 viriondb",
+    "test": "LOG_LEVEL=error make test | ./node_modules/format-json-log/cli.js",
+    "jenkins": "LOG_LEVEL=error make jenkins | ./node_modules/format-json-log/cli.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-runtime": "^6.6.1",
+    "bluebird": "^3.4.1",
     "d3": "^3.5.17",
     "invariant": "^2.2.0",
     "isomorphic-fetch": "^2.1.1",
-    "lodash": "^4.13.1",
+    "lodash.merge": "^4.5.0",
+    "mkdirp": "^0.5.1",
+    "normalize.css": "^4.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.0",
+    "react-slider": "^0.6.1",
     "three": "^0.78.0"
   },
   "devDependencies": {
