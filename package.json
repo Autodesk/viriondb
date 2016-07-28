@@ -60,6 +60,7 @@
     "jsdom": "^7.0.2",
     "json-loader": "^0.5.4",
     "mocha": "^2.2.5",
+    "mocha-jenkins-reporter": "^0.2.3",
     "morgan": "^1.6.1",
     "mv": "^2.1.1",
     "ncp": "^2.0.0",

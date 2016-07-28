@@ -1,6 +1,9 @@
 service-name: viriondb
 environment: dev
 
+build-compose-file: docker-compose.yml
+jenkins-test-compose-file: docker-compose-jenkins.yml
+
 # parameters used when calling cloudformation update-stack
 # NOTE set this value in the Jenkins job as it varies by environment
 cfn-stack-name: ""
@@ -31,9 +34,6 @@ zip-excludes-input-dirs: .
 tag-latest: true
 lib-prefix: quay.io/bionano/
 lib-push-config: --config /var/jenkins_home/.docker
-
-build-compose-file: docker-compose.yml
-jenkins-test-compose-file: docker-compose-jenkins.yml
 
 npm-package-push: true
 npm-package-name: viriondb
