@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
 import keyedInstances from '../../data/testSet';
+import { unknownValue } from '../constants/filters';
 
 import '../styles/BrowseTableSection.css';
 
@@ -19,6 +20,7 @@ export default class BrowseTableSection extends Component {
   //todo - componentize
   render() {
     const { name, fields, instances, onHover, hovered, checked } = this.props;
+    const defaultValue = '\u00a0'; //unknownValue;
 
     return (
       <div className="BrowseTableSection">
@@ -43,7 +45,7 @@ export default class BrowseTableSection extends Component {
                                    (isChecked ? ' checked' : '')}
                          onMouseEnter={() => onHover(instanceId)}
                          key={instanceId}>
-                      {keyedInstances[instanceId][field] || '\u00a0'}
+                      {keyedInstances[instanceId][field] || defaultValue}
                     </div>
                   );
                 })}
@@ -51,7 +53,6 @@ export default class BrowseTableSection extends Component {
             </div>
           );
         })}
-
       </div>
     );
   }

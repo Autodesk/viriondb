@@ -6,7 +6,6 @@ export const rows = [
   'description',
   'derived_baltimore',
   'nucleid_acid_structure',
-  'nucleic_acid_shape',
   'genome_shape',
   'derived_sense',
   'length',
@@ -31,7 +30,7 @@ export const rowNames = {
   sequence_mol: 'Nucleic Acid Molecule',
   nucleid_acid_structure: 'Nucleic Acid Structure',
   nucleic_acid_shape: 'Nucleid Acid Shape',
-  genome_shape: 'Nucleid Acid Strandedness',
+  genome_shape: 'Nucleid Acid Shape',
   derived_protein_count: 'Protein Number',
   capsid_morphology: 'Capsid Morphology',
   capsid_envelope: 'Capsid Envelope',
@@ -58,7 +57,6 @@ export const rowHierarchy = [
     fields: [
       'derived_baltimore',
       'nucleid_acid_structure',
-      'nucleic_acid_shape',
       'genome_shape',
       'length',
       'derived_sense',
@@ -76,7 +74,7 @@ export const rowHierarchy = [
     name: 'Host',
     fields: [
       'host',
-      'temperature',
+      //'temperature',
     ],
   },
   {
