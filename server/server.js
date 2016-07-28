@@ -34,6 +34,9 @@ app.use('/images', express.static(path.resolve(__dirname, '../src/images')));
 
 app.use('/data', dataRouter);
 
+// for deployment verification
+app.use(require('./version'));
+
 app.get('*', (req, res) => {
   if (req.url.indexOf('client.js') >= 0) {
     //should only hit this when proxy is not set up (i.e. not in development)
