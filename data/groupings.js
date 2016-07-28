@@ -1,7 +1,7 @@
 var utils = require('./utils.js');
 
 utils.readData(function (json) {
-  var ignores = ['accession', 'name', 'host', 'description', 'length'];
+  var ignores = ['accession', 'name', 'description', 'length'];
 
   var fields = json.reduce(function (acc, item) {
     Object.keys(item).forEach(function (fieldName) {

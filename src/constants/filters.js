@@ -3,7 +3,7 @@
 //todo - range values should be dynamic, based on processing of data (at least include mix / max)
 
 //todo - sync this with processing
-const unknownValue = 'Unknown';
+export const unknownValue = 'Unknown';
 
 export const filters = [
   {
