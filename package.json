@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node tools/run start",
+    "start-instance": "babel-node tools/run start-instance",
     "build": "babel-node tools/run build"
   },
   "author": "",
