@@ -6,10 +6,11 @@
   "scripts": {
     "start": "babel-node tools/run start",
     "build": "babel-node tools/run build",
+    "start-instance": "babel-node tools/run start-instance",
     "docker-build": "docker build -t viriondb .",
     "docker-run": "docker run -ti --rm -p 3000-3002:3000-3002 viriondb",
-    "test": "LOG_LEVEL=error make test | ./node_modules/format-json-log/cli.js",
-    "jenkins": "LOG_LEVEL=error make jenkins | ./node_modules/format-json-log/cli.js"
+    "test": "make test",
+    "jenkins": "make jenkins"
   },
   "author": "",
   "license": "ISC",

@@ -31,9 +31,7 @@ WORKDIR /app
 ADD package.json /app/package.json
 RUN npm update -g npm && npm install
 
+# add the rest of the files from the app
 ADD . /app
 
-RUN cd /app
-RUN npm run build
-
-CMD  ["npm" , "run", "start"]
+CMD  ["npm" , "run", "start-instance"]
