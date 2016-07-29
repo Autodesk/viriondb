@@ -16,9 +16,12 @@
     "invariant": "^2.2.0",
     "isomorphic-fetch": "^2.1.1",
     "lodash": "^4.13.1",
+    "mkpath": "^1.0.0",
+    "mv": "^2.1.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.0",
+    "rimraf": "^2.5.4",
     "three": "^0.78.0"
   },
   "devDependencies": {

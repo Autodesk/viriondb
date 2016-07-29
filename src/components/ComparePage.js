@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
-import instanceMap from '../../data/testSet';
+import registry, { onRegister } from '../data/register';
 import { rows } from '../constants/rows';
 
 import ComparisonRow from './ComparisonRow';
@@ -15,6 +15,11 @@ export class ComparePage extends Component {
       instances: PropTypes.string.isRequired,
     }).isRequired,
   };
+
+  constructor() {
+    super();
+    this.listener = onRegister((registry, length) => { if (length > 0) { this.forceUpdate(); } });
+  }
 
   state = {
     activeRow: null,
@@ -40,7 +45,7 @@ export class ComparePage extends Component {
   render() {
     const instances = this.props.params.instances
       .split(',')
-      .map(instanceId => instanceMap[instanceId])
+      .map(instanceId => registry[instanceId])
       .filter(instance => !!instance);
 
     return (

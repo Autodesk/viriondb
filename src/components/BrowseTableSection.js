@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
-import keyedInstances from '../../data/testSet';
+import registry, { onRegister } from '../data/register';
 import { unknownValue } from '../constants/filters';
 
 import '../styles/BrowseTableSection.css';
@@ -16,6 +16,11 @@ export default class BrowseTableSection extends Component {
   };
 
   static defaultProps = {};
+
+  constructor() {
+    super();
+    this.listener = onRegister((registry, length) => { if (length > 0) { this.forceUpdate(); } });
+  }
 
   //todo - componentize
   render() {
@@ -45,7 +50,7 @@ export default class BrowseTableSection extends Component {
                                    (isChecked ? ' checked' : '')}
                          onMouseEnter={() => onHover(instanceId)}
                          key={instanceId}>
-                      {keyedInstances[instanceId][field] || defaultValue}
+                      {registry[instanceId][field] || defaultValue}
                     </div>
                   );
                 })}
