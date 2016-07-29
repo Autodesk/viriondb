@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import _ from 'lodash';
-import instanceMap from '../../data/testSet';
+import registry, { onRegister } from '../data/register';
 import { filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
@@ -17,6 +17,11 @@ export class BrowsePage extends Component {
 
   static defaultProps = {};
 
+  constructor() {
+    super();
+    this.listener = onRegister( (function(register, length) { if (length > 0) this.forceUpdate(); }).bind(this) );
+  }
+
   //todo - only include filters we need? or filter very efficiently
   state = {
     filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
@@ -31,7 +36,7 @@ export class BrowsePage extends Component {
   };
 
   render() {
-    const instances = _.values(instanceMap);
+    const instances = _.values(registry);
 
     const createFilter = (cat) => {
       if (cat.type === 'discrete') {
