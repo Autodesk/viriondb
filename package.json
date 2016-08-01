@@ -21,13 +21,17 @@
     "http-route": "^1.1.0",
     "invariant": "^2.2.0",
     "isomorphic-fetch": "^2.1.1",
+    "lodash": "^4.13.1",
     "lodash.merge": "^4.5.0",
     "mkdirp": "^0.5.1",
+    "mkpath": "^1.0.0",
+    "mv": "^2.1.1",
     "normalize.css": "^4.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.0",
     "react-slider": "^0.6.1",
+    "rimraf": "^2.5.4",
     "three": "^0.78.0"
   },
   "devDependencies": {
