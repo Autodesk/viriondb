@@ -3,3 +3,6 @@
 node_modules
 temp.*
 build/
+VERSION
+build-manifest.txt
+report.xml
