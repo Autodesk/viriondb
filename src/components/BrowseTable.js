@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { rowHierarchy } from '../constants/rows';
+import { tableRowHeight } from '../constants/layout';
 
 import BrowseTableSection from './BrowseTableSection';
 import BrowseTableHeaderColumn from './BrowseTableHeaderColumn';
 
 import '../styles/BrowseTable.css';
 
+const initialSections = rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {});
+
+//todo - dynamic table height
+//todo - infinite scroll
 //todo - ensure selected items are in the filtered list
 
 export default class BrowseTable extends Component {
@@ -14,19 +19,19 @@ export default class BrowseTable extends Component {
     openInstances: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {};
-
   state = {
+    offset: 0,
     checked: { 'M14008.1': true, 'AC_000004.1': true },
-    sections: rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {}),
+    sections: initialSections,
     hovered: null,
-    tableHeight: 500,
+    tableViewHeight: 500,
   };
 
   handleScroll = (evt) => {
     evt.persist();
     console.log(evt);
-    //todo
+    
+    console.log(this.tableValues.scrollTop);
 
   };
 
@@ -63,17 +68,26 @@ export default class BrowseTable extends Component {
 
   render() {
     const { instances } = this.props;
-    const { hovered, checked, sections, tableHeight } = this.state;
-    const offset = 0;
+    const { offset, hovered, checked, sections, tableViewHeight } = this.state;
+
     const fudge = 4;
-    const length = Math.floor((tableHeight / (2 * 16))) + (fudge * 2);
+    const numberInstances = Math.floor((tableViewHeight / (tableRowHeight))) + (fudge * 2);
     const start = Math.max(0, offset - fudge);
-    const end = Math.min(instances.length, start + length + fudge);
+    const end = Math.min(instances.length, start + numberInstances + fudge);
     const tableInstances = instances.slice(start, end);
+
+    /*
+    //table values
+     style={{
+     paddingTop: (start * tableRowHeight) + 'px',
+     paddingBottom: ((instances.length - end) * tableRowHeight) + 'px',
+     height: `${instances.length * tableRowHeight}px`
+     }}
+     */
 
     return (
       <div className="BrowseTable"
-           style={{maxHeight: `${tableHeight}px`}}
+           style={{ maxHeight: `${tableViewHeight}px` }}
            onMouseLeave={(evt) => this.setHovered(null)}
            onMouseEnter={(evt) => this.setHovered(null)}>
         <div className="BrowseTable-heading">
@@ -82,6 +96,7 @@ export default class BrowseTable extends Component {
         </div>
 
         <div className="BrowseTable-values"
+             ref={(el) => { if (el) { this.tableValues = el; }}}
              onScroll={this.handleScroll}
              onMouseEnter={(evt) => evt.stopPropagation()}>
           <BrowseTableHeaderColumn checked={checked}
