@@ -24,13 +24,22 @@ export class BrowsePage extends Component {
     }).bind(this));
   }
 
-  //todo - only include filters we need? or filter very efficiently
   state = {
-    filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
+    //filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
+    filters: {},
   };
 
   setFilter = (filterPatch) => {
-    this.setState({ filters: Object.assign({}, this.state.filters, filterPatch) });
+    const nextFilter = Object.assign({}, this.state.filters, filterPatch);
+
+    //remove nulls from filters
+    Object.keys(nextFilter).forEach(key => {
+      if (nextFilter[key] === null) {
+        delete nextFilter[key];
+      }
+    });
+
+    this.setState({ filters: nextFilter });
   };
 
   openInstances = (...ids) => {

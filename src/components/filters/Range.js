@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import ReactSlider from 'react-slider';
+import { isEqual } from 'lodash';
 
 import '../../styles/Range.css';
 
@@ -10,9 +11,10 @@ import '../../styles/Range.css';
 export default class Range extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
-    filter: PropTypes.array.isRequired,
+    filter: PropTypes.array,
     field: PropTypes.string.isRequired,
     range: PropTypes.array.isRequired,
+    defaultFilter: PropTypes.any.isRequired,
   };
 
   getValue = () => {
@@ -22,16 +24,18 @@ export default class Range extends Component {
     return this.rangeSlider.getValue();
   };
 
-  onChange = (next) => {
+  onChange = (input) => {
+    const next = isEqual(input, this.props.defaultFilter) ? null : input;
     this.props.setFilter({ [this.props.field]: next });
   };
 
   render() {
-    const { range, field, color, filter } = this.props;
+    const { range, field, color, filter, defaultFilter } = this.props;
+    const filterValue = Array.isArray(filter) ? filter : defaultFilter;
 
     return (
       <ReactSlider onChange={this.onChange}
-                   value={filter}
+                   value={filterValue}
                    min={range[0]}
                    max={range[1]}
                    ref={(el) => { if (el) { this.rangeSlider = el; }}}
@@ -42,4 +46,4 @@ export default class Range extends Component {
                    pearling/>
     );
   }
-};
+}
