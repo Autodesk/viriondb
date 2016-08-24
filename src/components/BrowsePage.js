@@ -59,6 +59,7 @@ export class BrowsePage extends Component {
     const filtered = _.filter(instances, filterFunc);
 
     //todo - compute these when filters change, not on every render
+    //todo - much faster
     const derivedData = filters.reduce((acc, cat) => {
       if (cat.type === 'discrete') {
         //todo - more efficient, but still give percentages
