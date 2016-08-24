@@ -27,7 +27,7 @@ export default class RefineSection extends Component {
 
   toggleOpen = () => {
     if (this.hasFilter()) {
-      return; 
+      return;
     }
     this.setState({ open: !this.state.open });
   };
@@ -48,7 +48,7 @@ export default class RefineSection extends Component {
 
     return !isEqual(filter, defaultFilter) &&
       (Array.isArray(filter) ? !!filter.length :
-        typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
+        typeof filter === 'object' ? Object.keys(filter).length > 0 : //todo - only when true
         !!filter);
   };
 

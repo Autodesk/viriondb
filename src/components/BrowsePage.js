@@ -19,7 +19,9 @@ export class BrowsePage extends Component {
 
   constructor() {
     super();
-    this.listener = onRegister( (function(register, length) { if (length > 0) this.forceUpdate(); }).bind(this) );
+    this.listener = onRegister((function browsePageRegister(register, length) {
+      if (length > 0) this.forceUpdate();
+    }).bind(this));
   }
 
   //todo - only include filters we need? or filter very efficiently
@@ -102,7 +104,7 @@ export class BrowsePage extends Component {
                        instances={filteredIds}/>
 
           <BrowseCharts instances={filteredIds}
-                        derivedData={derivedData} />
+                        derivedData={derivedData}/>
         </div>
       </div>
     );
