@@ -12,11 +12,17 @@ const jsonParser = bodyParser.json({
 router.route('/id/:id')
   .all(jsonParser)
   .get((req, res, next) => {
-    const object = data[req.params.id];
-    if (!object || !req.params.id) {
+    if (!req.params.ids) {
+      res.status(404).send();
+    }
+    const ids = req.params.ids.split(',');
+
+    const retrieved = ids.map(id => data[id]);
+    if (!retrieved.every(obj => !!obj) || ids.length < 1) {
       return res.status(404).send();
     }
-    res.json(object);
+
+    res.json(retrieved.reduce((acc, item) => Object.assign(acc, { [item.id]: item }), {}));
   });
 
 router.get('/all', (req, res, next) => {
