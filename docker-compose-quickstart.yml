@@ -1,0 +1,10 @@
+webapp:
+  extends:
+    file: docker-compose-common.yml
+    service: webapp
+  image: quay.io/bionano/viriondb_webapp${BNR_ENV_TAG}
+  ports:
+    - "3000-3002:3000-3002"
+  command:
+    npm run start-instance
+  log_driver: json-file
