@@ -10,7 +10,6 @@ import '../styles/BrowseTable.css';
 const initialSections = rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {});
 
 //todo - dynamic table height
-//todo - infinite scroll
 //todo - ensure selected items are in the filtered list
 
 export default class BrowseTable extends Component {
@@ -21,7 +20,7 @@ export default class BrowseTable extends Component {
 
   state = {
     offset: 0,
-    checked: { 'M14008.1': true, 'AC_000004.1': true },
+    checked: {},
     sections: initialSections,
     hovered: null,
     tableViewHeight: 500,
@@ -29,10 +28,12 @@ export default class BrowseTable extends Component {
 
   handleScroll = (evt) => {
     evt.persist();
-    console.log(evt);
-    
-    console.log(this.tableValues.scrollTop);
+    //console.log(evt);
+    //console.log(this.tableValues.scrollTop, Math.floor(this.tableValues.scrollTop / tableRowHeight));
 
+    this.setState({
+      offset: Math.floor(this.tableValues.scrollTop / tableRowHeight),
+    });
   };
 
   setHovered = (id) => {
@@ -76,15 +77,6 @@ export default class BrowseTable extends Component {
     const end = Math.min(instances.length, start + numberInstances + fudge);
     const tableInstances = instances.slice(start, end);
 
-    /*
-    //table values
-     style={{
-     paddingTop: (start * tableRowHeight) + 'px',
-     paddingBottom: ((instances.length - end) * tableRowHeight) + 'px',
-     height: `${instances.length * tableRowHeight}px`
-     }}
-     */
-
     return (
       <div className="BrowseTable"
            style={{ maxHeight: `${tableViewHeight}px` }}
@@ -95,32 +87,46 @@ export default class BrowseTable extends Component {
           <span className="BrowseTable-heading-detail">{instances.length}</span>
         </div>
 
-        <div className="BrowseTable-values"
-             ref={(el) => { if (el) { this.tableValues = el; }}}
+        <div className="BrowseTable-values-wrap"
+             ref={(el) => {
+               if (el) {
+                 this.tableValues = el;
+               }
+             }}
+             style={{
+               overflowY: 'scroll',
+             }}
              onScroll={this.handleScroll}
              onMouseEnter={(evt) => evt.stopPropagation()}>
-          <BrowseTableHeaderColumn checked={checked}
-                                   hovered={hovered}
-                                   sections={sections}
-                                   onToggleSection={this.toggleSection}
-                                   onHover={this.setHovered}
-                                   onCheck={this.toggleChecked}
-                                   onOpen={this.openInstances}
-                                   onCompare={this.openInstances}
-                                   instances={tableInstances}/>
+          <div className="BrowseTable-values"
+               style={{
+                 paddingTop: (start * tableRowHeight) + 'px',
+                 paddingBottom: ((instances.length - end) * tableRowHeight) + 'px',
+                 height: `${instances.length * tableRowHeight}px`,
+               }}>
+            <BrowseTableHeaderColumn checked={checked}
+                                     hovered={hovered}
+                                     sections={sections}
+                                     onToggleSection={this.toggleSection}
+                                     onHover={this.setHovered}
+                                     onCheck={this.toggleChecked}
+                                     onOpen={this.openInstances}
+                                     onCompare={this.openInstances}
+                                     instances={tableInstances}/>
 
-          {rowHierarchy
-            .filter(section => sections[section.name])
-            .map(section => {
-              const { name, fields } = section;
-              return (<BrowseTableSection key={name}
-                                          name={name}
-                                          fields={fields}
-                                          onHover={this.setHovered}
-                                          hovered={hovered}
-                                          checked={checked}
-                                          instances={tableInstances}/>);
-            })}
+            {rowHierarchy
+              .filter(section => sections[section.name])
+              .map(section => {
+                const { name, fields } = section;
+                return (<BrowseTableSection key={name}
+                                            name={name}
+                                            fields={fields}
+                                            onHover={this.setHovered}
+                                            hovered={hovered}
+                                            checked={checked}
+                                            instances={tableInstances}/>);
+              })}
+          </div>
         </div>
       </div>
     );

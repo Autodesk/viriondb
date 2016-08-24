@@ -30,6 +30,7 @@ export class ComparePage extends Component {
   };
 
   onStar = (id) => {
+    //todo
     console.log('todo');
   };
 
