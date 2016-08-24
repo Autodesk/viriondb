@@ -17,6 +17,11 @@
   &-column {
     display: inline-block;
     padding: 0;
+
+    /*first child is heading*/
+    &:nth-child(2):last-child {
+      width: 100%;
+    }
   }
 
   &-title {

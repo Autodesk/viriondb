@@ -2,8 +2,11 @@
 
 //todo - range values should be dynamic, based on processing of data (at least include mix / max)
 
-//todo - sync this with processing
+//todo - sync this with processing - need to be able to filter based on value not known. or special handling for null
 export const unknownValue = 'Unknown';
+
+//max number of pie sections e.g for a range
+export const maxSections = 8;
 
 export const filters = [
   {

@@ -1,5 +1,7 @@
 import d3 from 'd3';
 
+/* layout */
+
 export const width = 120;
 export const height = 120;
 
