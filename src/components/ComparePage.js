@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
-import registry, { onRegister } from '../data/register';
+import registry, { loadInstance, onRegister } from '../data/register';
 import { rows } from '../constants/rows';
 
 import ComparisonRow from './ComparisonRow';
 import ComparisonActions from './ComparisonActions';
+import Spinner from './Spinner';
 
 import '../styles/ComparePage.css';
 
@@ -44,10 +45,20 @@ export class ComparePage extends Component {
   };
 
   render() {
-    const instances = this.props.params.instances
-      .split(',')
+    const instanceIds = this.props.params.instances.split(',');
+
+    const instances = instanceIds
       .map(instanceId => registry[instanceId])
       .filter(instance => !!instance);
+
+    if (instances.length !== instanceIds.length) {
+      const toFetch = instanceIds.filter(instanceId => !registry[instanceId]);
+
+      //put in request to load these instances. component already registered to update when register is updated
+      loadInstance(...toFetch);
+
+      return <Spinner />;
+    }
 
     return (
       <div className="ComparePage">

@@ -33,5 +33,15 @@ fetch('/data/all')
     safelyRunCallbacks();
   });
 
+export const loadInstance = (...ids) => {
+  return fetch(`/data/id/${ids.join(',')}`)
+    .then(resp => resp.json())
+    .then(instanceMap => {
+      Object.assign(registry, instanceMap);
+      safelyRunCallbacks();
+      return registry;
+    });
+};
+
 export default registry;
 

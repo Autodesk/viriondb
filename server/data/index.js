@@ -9,16 +9,17 @@ const jsonParser = bodyParser.json({
   limit: 20 * 1024 * 1024,
 });
 
-router.route('/id/:id')
+router.route('/id/:ids')
   .all(jsonParser)
   .get((req, res, next) => {
     if (!req.params.ids) {
       res.status(404).send();
     }
-    const ids = req.params.ids.split(',');
 
+    const ids = req.params.ids.split(',');
     const retrieved = ids.map(id => data[id]);
-    if (!retrieved.every(obj => !!obj) || ids.length < 1) {
+
+    if (!retrieved.every(obj => !!obj) || req.params.ids.length === 0) {
       return res.status(404).send();
     }
 
