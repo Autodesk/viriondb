@@ -72,14 +72,22 @@ export class BrowsePage extends Component {
       };
     }
 
+    //this filter is the most expensive
+    if (filter.type === 'textFilter') {
+      return function textFilter(instance) {
+        return activeFilters[field].every(string => instance[field].toLowerCase().indexOf(string.toLowerCase()) >= 0);
+      };
+    }
+
     console.warn(`no filter for ${filter.field} (${filter.type})`);
     return null;
   }
 
   createFilters() {
-    //may want to put the fastest filters first (key lookups rather than array checks)
     return Object.keys(activeFilters)
       .map(fieldName => filters.find(cat => cat.field === fieldName))
+      //put key lookups first, and name filter thing last
+      .sort((one, two) => one.type === 'textFilter' ? 1 : one.type === 'discrete' ? -1 : 0)
       .map((filter) => this.createFilter(filter))
       .filter(func => typeof func === 'function');
   }

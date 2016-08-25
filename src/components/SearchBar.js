@@ -31,15 +31,12 @@ export default class SearchBar extends Component {
   };
 
   updateSearchFilter = () => {
-    setFilter({ name: this.state.tags });
+    setFilter({ name: this.state.tags.concat(this.state.input).filter(term => !!term) });
   };
 
   onAddInputTag = (input) => {
     this.setState({
-      tags: this.state.tags.concat({
-        text: input,
-        source: 'search',
-      }),
+      tags: this.state.tags.concat(input),
     }, this.updateSearchFilter);
     this.setSearchInput('');
   };
@@ -49,7 +46,7 @@ export default class SearchBar extends Component {
 
     this.setState({
       input,
-    });
+    }, this.updateSearchFilter);
   };
 
   onRemoveTag = (index) => {
