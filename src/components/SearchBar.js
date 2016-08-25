@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import invariant from 'invariant';
 
+import { setFilter } from '../data/activeFilters';
 import SearchBarInput from './SearchBarInput';
 
 import '../styles/SearchBar.css';
@@ -22,11 +23,15 @@ export default class SearchBar extends Component {
   };
 
   onClickShare = (evt) => {
-    console.log('todo');
+    alert('todo');
   };
 
   onClickFeedback = (evt) => {
-    console.log('todo');
+    alert('todo');
+  };
+
+  updateSearchFilter = () => {
+    setFilter({ name: this.state.tags });
   };
 
   onAddInputTag = (input) => {
@@ -35,7 +40,7 @@ export default class SearchBar extends Component {
         text: input,
         source: 'search',
       }),
-    });
+    }, this.updateSearchFilter);
     this.setSearchInput('');
   };
 
@@ -52,7 +57,7 @@ export default class SearchBar extends Component {
     next.splice(index, 1);
     this.setState({
       tags: next,
-    });
+    }, this.updateSearchFilter);
   };
 
   render() {

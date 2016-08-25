@@ -61,11 +61,15 @@ export class BrowsePage extends Component {
     const field = filter.field;
 
     if (filter.type === 'discrete') {
-      return function discreteFilter(instance) { return activeFilters[field].hasOwnProperty(instance[field]); };
+      return function discreteFilter(instance) {
+        return activeFilters[field].hasOwnProperty(instance[field]);
+      };
     }
 
     if (filter.type === 'range') {
-      return function rangeFilter(instance) { return activeFilters[field][0] <= instance[field] && activeFilters[field][1] >= instance[field]; };
+      return function rangeFilter(instance) {
+        return activeFilters[field][0] <= instance[field] && activeFilters[field][1] >= instance[field];
+      };
     }
 
     console.warn(`no filter for ${filter.field} (${filter.type})`);
@@ -114,24 +118,26 @@ export class BrowsePage extends Component {
     //todo - only go through data once, and compute each field as needed
 
     //set it up
-    const derivedData = filters.reduce((acc, filter) => {
-      if (filter.type === 'discrete') {
-        const valuesCount = Object.keys(filter.values).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
-        return Object.assign(acc, { [filter.field]: valuesCount });
-      }
+    const derivedData = filters
+      .filter(filter => filter.visible !== false)
+      .reduce((acc, filter) => {
+        if (filter.type === 'discrete') {
+          const valuesCount = Object.keys(filter.values).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
+          return Object.assign(acc, { [filter.field]: valuesCount });
+        }
 
-      if (filter.type === 'range') {
-        //do we want the pie chart to have sections based on the current range, or sections fixed based on total range
-        const [ min, max ] = filter.range;
-        const range = max - min;
-        const sectionsCount = _.range(maxSections).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
+        if (filter.type === 'range') {
+          //do we want the pie chart to have sections based on the current range, or sections fixed based on total range
+          const [ min, max ] = filter.range;
+          const range = max - min;
+          const sectionsCount = _.range(maxSections).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
 
-        return Object.assign(acc, { [filter.field]: sectionsCount });
-      }
+          return Object.assign(acc, { [filter.field]: sectionsCount });
+        }
 
-      invariant(false, 'unknown filter type');
-      return acc;
-    }, {});
+        invariant(false, 'unknown filter type');
+        return acc;
+      }, {});
 
     console.log(JSON.stringify(derivedData));
 

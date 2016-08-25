@@ -22,17 +22,18 @@ export default class RefinePanel extends Component {
           Refine By
         </div>
 
-        {filterSections.map(section => {
-          const { field, type, ...rest } = section;
-          return (
-            <RefineSection key={field}
-                           field={field}
-                           type={type}
-                           {...rest}
-                           filter={filters[field]}
-                           setFilter={setFilter}/>
-          );
-        })}
+        {filterSections.filter(section => section.visible !== false)
+          .map(section => {
+            const { field, type, ...rest } = section;
+            return (
+              <RefineSection key={field}
+                             field={field}
+                             type={type}
+                             {...rest}
+                             filter={filters[field]}
+                             setFilter={setFilter}/>
+            );
+          })}
       </div>
     );
   }
