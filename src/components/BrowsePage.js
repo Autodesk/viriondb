@@ -21,6 +21,7 @@ export class BrowsePage extends Component {
 
   constructor() {
     super();
+    this.shouldUpdate = true;
     this.listener = onRegister((function browsePageRegister(register, length) {
       if (length > 0) this.forceUpdate();
     }).bind(this));
@@ -30,6 +31,16 @@ export class BrowsePage extends Component {
     //filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
     filters: {},
   };
+
+  shouldComponentUpdate() {
+    return this.shouldUpdate;
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      this.shouldUpdate = true;
+    }, 15);
+  }
 
   setFilter = (filterPatch) => {
     const nextFilter = Object.assign({}, this.state.filters, filterPatch);
@@ -73,6 +84,9 @@ export class BrowsePage extends Component {
   }
 
   render() {
+    //tracking so we dont update too often
+    this.shouldUpdate = false;
+
     /* filtering */
 
     const start = performance.now();
