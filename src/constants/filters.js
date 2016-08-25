@@ -26,6 +26,7 @@ export const filters = [
     },
   },
 
+  /*
   {
     field: 'capsid_morphology',
     type: 'discrete',
@@ -42,6 +43,7 @@ export const filters = [
       [unknownValue]: 'Unknown',
     },
   },
+  */
 
   {
     field: 'sense',
