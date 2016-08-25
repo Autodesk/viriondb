@@ -9,6 +9,7 @@ import { maxSections, filters } from '../constants/filters';
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
 import BrowseCharts from './BrowseCharts';
+import Spinner from './Spinner';
 
 import '../styles/BrowsePage.css';
 
@@ -84,6 +85,16 @@ export class BrowsePage extends Component {
   }
 
   render() {
+    if (Object.keys(registry).length === 0) {
+      return (
+        <div className="BrowsePage">
+          <div className="BrowsePage-main" style={{marginTop: '2rem'}}>
+            <Spinner style={{fontSize: '5em', color: 'black' }}/>
+          </div>
+        </div>
+      );
+    }
+
     //tracking so we dont update too often
     this.shouldUpdate = false;
 
@@ -143,35 +154,35 @@ export class BrowsePage extends Component {
 
 
     /* old way
-    console.log(filters.reduce((acc, cat) => {
-      if (cat.type === 'discrete') {
-        const derived = _.mapValues(_.groupBy(filtered, cat.field), array => Math.floor(array.length / filtered.length * 100));
-        acc[cat.field] = derived;
-      } else if (cat.type === 'range') {
-        const maximum = cat.range[1];
-        const range = maximum - cat.range[0];
-        const maxCategories = 10;
-        let breakdown;
-        if (range > maxCategories) {
-          //if the range is very large, we need to group it so its looks nicer?
-          //or do this in d3?
-          //need to pass labels or make them deterministic
-          const counter = (instance) => Math.floor(instance[cat.field] / maximum * maxCategories);
-          breakdown = _.countBy(filtered, counter);
-        } else {
-          breakdown = _.groupBy(filtered, cat.field);
-        }
-        acc[cat.field] = breakdown;
-      } else {
-        //Bar chart?
-        //const breakdown = _.groupBy(instances, cat.field)
+     console.log(filters.reduce((acc, cat) => {
+     if (cat.type === 'discrete') {
+     const derived = _.mapValues(_.groupBy(filtered, cat.field), array => Math.floor(array.length / filtered.length * 100));
+     acc[cat.field] = derived;
+     } else if (cat.type === 'range') {
+     const maximum = cat.range[1];
+     const range = maximum - cat.range[0];
+     const maxCategories = 10;
+     let breakdown;
+     if (range > maxCategories) {
+     //if the range is very large, we need to group it so its looks nicer?
+     //or do this in d3?
+     //need to pass labels or make them deterministic
+     const counter = (instance) => Math.floor(instance[cat.field] / maximum * maxCategories);
+     breakdown = _.countBy(filtered, counter);
+     } else {
+     breakdown = _.groupBy(filtered, cat.field);
+     }
+     acc[cat.field] = breakdown;
+     } else {
+     //Bar chart?
+     //const breakdown = _.groupBy(instances, cat.field)
 
-        //or else...
-        //uh oh
-      }
-      return acc;
-    }, {}));
-    */
+     //or else...
+     //uh oh
+     }
+     return acc;
+     }, {}));
+     */
 
     console.log(performance.now() - start);
 
