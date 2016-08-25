@@ -85,11 +85,11 @@ export class BrowsePage extends Component {
   }
 
   render() {
-    if (Object.keys(registry).length === 0) {
+    if (Object.keys(registry).length < 10) {
       return (
         <div className="BrowsePage">
           <div className="BrowsePage-main" style={{marginTop: '2rem'}}>
-            <Spinner style={{fontSize: '5em', color: 'black' }}/>
+            <Spinner />
           </div>
         </div>
       );
