@@ -26,46 +26,37 @@ export const filters = [
     },
   },
 
-  /*
-   {
-   field: 'capsid_morphology',
-   type: 'discrete',
-   shortname: 'CM',
-   color: '#aaeeaa',
-   default: {},
-   values: {
-   'helical': 'Helical',
-   'spherical': 'Spherical',
-   'icosahedral': 'Icosahedral',
-   'head-and-tail': 'Head-and-Tail',
-   'spindled': 'Spindled',
-   'non-canonical': 'Non-Canonical',
-   [unknownValue]: 'Unknown',
-   },
-   },
-   */
-
   {
-    field: 'sense',
+    field: 'derived_taxonomy_order',
     type: 'discrete',
-    shortname: 'Se',
-    color: '#aaeeee',
+    shortname: 'Or',
+    color: '#aaccff',
     default: {},
     values: {
-      '+/-': '+/-',
-      '+': '+',
-      '-': '-',
+      Nidovirales: 'Nidovirales',
+      Herpesvirales: 'Herpesvirales',
+      Picornavirales: 'Picornavirales',
+      Caudovirales: 'Caudovirales',
+      Tymovirales: 'Tymovirales',
+      Mononegavirales: 'Mononegavirales',
+      Ligamenvirales: 'Ligamenvirales',
       [unknownValue]: 'Unknown',
     },
   },
 
   {
-    field: 'derived_protein_count',
-    type: 'range',
-    shortname: 'PN',
-    color: '#aaeeee',
-    default: [0, 541],
-    range: [0, 2541],
+    field: 'division',
+    type: 'discrete',
+    shortname: 'Di',
+    color: '#aaeeaa',
+    default: {},
+    values: {
+      'VRL': 'VRL',
+      'PHG': 'PHG',
+      'ENV': 'ENV',
+      'SYN': 'SYN',
+      [unknownValue]: 'Unknown',
+    },
   },
 
   {
@@ -107,37 +98,46 @@ export const filters = [
     },
   },
 
+  /*
+   {
+   field: 'capsid_morphology',
+   type: 'discrete',
+   shortname: 'CM',
+   color: '#aaeeaa',
+   default: {},
+   values: {
+   'helical': 'Helical',
+   'spherical': 'Spherical',
+   'icosahedral': 'Icosahedral',
+   'head-and-tail': 'Head-and-Tail',
+   'spindled': 'Spindled',
+   'non-canonical': 'Non-Canonical',
+   [unknownValue]: 'Unknown',
+   },
+   },
+   */
+
   {
-    field: 'division',
+    field: 'sense',
     type: 'discrete',
-    shortname: 'Di',
-    color: '#aaeeaa',
+    shortname: 'Se',
+    color: '#aaeeee',
     default: {},
     values: {
-      'VRL': 'VRL',
-      'PHG': 'PHG',
-      'ENV': 'ENV',
-      'SYN': 'SYN',
+      '+/-': '+/-',
+      '+': '+',
+      '-': '-',
       [unknownValue]: 'Unknown',
     },
   },
 
   {
-    field: 'derived_taxonomy_order',
-    type: 'discrete',
-    shortname: 'Or',
-    color: '#aaccff',
-    default: {},
-    values: {
-      Nidovirales: 'Nidovirales',
-      Herpesvirales: 'Herpesvirales',
-      Picornavirales: 'Picornavirales',
-      Caudovirales: 'Caudovirales',
-      Tymovirales: 'Tymovirales',
-      Mononegavirales: 'Mononegavirales',
-      Ligamenvirales: 'Ligamenvirales',
-      [unknownValue]: 'Unknown',
-    },
+    field: 'derived_protein_count',
+    type: 'range',
+    shortname: 'PN',
+    color: '#aaeeee',
+    default: [0, 541],
+    range: [0, 2541],
   },
 
   {
