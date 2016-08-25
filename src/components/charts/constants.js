@@ -16,13 +16,13 @@ export const radius = Math.min(width, height) / 2;
 
 export const pie = d3.layout.pie()
 //todo - padding
-  .padAngle(0.05)
+  .padAngle(0.025)
   .sort(null)
   .value(d => d.value);
 
 export const arc = d3.svg.arc()
   .outerRadius(radius * 0.9)
-  .innerRadius(radius * 0.7);
+  .innerRadius(radius * 0.72);
 
 export const massageData = (map) => Object.keys(map).map(key => ({
   key,

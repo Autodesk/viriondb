@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
+import filters from '../../constants/filters';
 import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
 import d3 from 'd3';
 
@@ -48,7 +49,9 @@ export default class PieChart extends Component {
       .append("path")
       .style("fill", d => this.props.color)
       .attr("class", "slice")
-      .each(function(d) {this._current = d});
+      .each(function (d) {
+        this._current = d
+      });
 
     slice
       .transition().duration(500)
@@ -65,23 +68,26 @@ export default class PieChart extends Component {
   render() {
     const { field, color } = this.props;
     const longName = fieldName(field);
-    //temp, also center bettere
-    const shortName = field.substring(0, 2).toUpperCase();
+    const shortName = filters.find(filter => filter.field === field).shortname;
 
     return (
-      <div className="PieChart">
+      <div className="Chart PieChart">
         <span className="PieChart-heading"
-              style={{color: color}}>
+              style={{ color: color }}>
           {longName}
         </span>
         <span className="PieChart-label"
-              style={{color: color}}>
+              style={{ color: color }}>
           {shortName}
         </span>
         <svg className="PieChart-chart">
-          <g ref={(el) => { if (el) { this.element = el; }}}></g>
+          <g ref={(el) => {
+            if (el) {
+              this.element = el;
+            }
+          }}/>
         </svg>
       </div>
     );
   }
-};
+}

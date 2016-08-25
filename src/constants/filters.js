@@ -26,6 +26,78 @@ export const filters = [
     },
   },
 
+  {
+    field: 'derived_taxonomy_order',
+    type: 'discrete',
+    shortname: 'Or',
+    color: '#aaccff',
+    default: {},
+    values: {
+      Nidovirales: 'Nidovirales',
+      Herpesvirales: 'Herpesvirales',
+      Picornavirales: 'Picornavirales',
+      Caudovirales: 'Caudovirales',
+      Tymovirales: 'Tymovirales',
+      Mononegavirales: 'Mononegavirales',
+      Ligamenvirales: 'Ligamenvirales',
+      [unknownValue]: 'Unknown',
+    },
+  },
+
+  {
+    field: 'division',
+    type: 'discrete',
+    shortname: 'Di',
+    color: '#aaeeaa',
+    default: {},
+    values: {
+      'VRL': 'VRL',
+      'PHG': 'PHG',
+      'ENV': 'ENV',
+      'SYN': 'SYN',
+      [unknownValue]: 'Unknown',
+    },
+  },
+
+  {
+    field: 'length',
+    type: 'range',
+    shortname: 'Le',
+    color: '#aaaaee',
+    default: [0, 2473870],
+    range: [0, 2473870],
+  },
+
+  {
+    field: 'genome_shape',
+    type: 'discrete',
+    shortname: 'GS',
+    color: '#ffccaa',
+    default: {},
+    values: {
+      circular: 'Circular',
+      linear: 'Linear',
+    },
+  },
+
+  {
+    field: 'sequenced_mol',
+    type: 'discrete',
+    shortname: 'Mo',
+    color: '#ccffaa',
+    default: {},
+    values: {
+      'ss-DNA': 'ss-DNA',
+      'ss-RNA': 'ss-RNA',
+      'DNA': 'DNA',
+      'RNA': 'RNA',
+      'mRNA': 'mRNA',
+      'cRNA': 'cRNA',
+      'ds-RNA': 'ds-RNA',
+      'ms-DNA': 'ms-DNA',
+    },
+  },
+
   /*
    {
    field: 'capsid_morphology',
@@ -69,78 +141,6 @@ export const filters = [
   },
 
   {
-    field: 'length',
-    type: 'range',
-    shortname: 'Le',
-    color: '#aaaaee',
-    default: [0, 2473870],
-    range: [0, 2473870],
-  },
-
-  {
-    field: 'genome_shape',
-    type: 'discrete',
-    shortname: 'GS',
-    color: '#ffccaa',
-    default: {},
-    values: {
-      circular: 'Circular',
-      linear: 'Linear',
-    },
-  },
-
-  {
-    field: 'sequenced_mol',
-    type: 'discrete',
-    shortname: 'Mo',
-    color: '#ccffaa',
-    default: {},
-    values: {
-      'ss-DNA': 'ss-DNA',
-      'ss-RNA': 'ss-RNA',
-      'DNA': 'DNA',
-      'RNA': 'RNA',
-      'mRNA': 'mRNA',
-      'cRNA': 'cRNA',
-      'ds-RNA': 'ds-RNA',
-      'ms-DNA': 'ms-DNA',
-    },
-  },
-
-  {
-    field: 'division',
-    type: 'discrete',
-    shortname: 'Di',
-    color: '#aaeeaa',
-    default: {},
-    values: {
-      'VRL': 'VRL',
-      'PHG': 'PHG',
-      'ENV': 'ENV',
-      'SYN': 'SYN',
-      [unknownValue]: 'Unknown',
-    },
-  },
-
-  {
-    field: 'derived_taxonomy_order',
-    type: 'discrete',
-    shortname: 'Or',
-    color: '#aaccff',
-    default: {},
-    values: {
-      Nidovirales: 'Nidovirales',
-      Herpesvirales: 'Herpesvirales',
-      Picornavirales: 'Picornavirales',
-      Caudovirales: 'Caudovirales',
-      Tymovirales: 'Tymovirales',
-      Mononegavirales: 'Mononegavirales',
-      Ligamenvirales: 'Ligamenvirales',
-      [unknownValue]: 'Unknown',
-    },
-  },
-
-  {
     field: 'name',
     visible: false,
     type: 'textFilter',
@@ -156,3 +156,5 @@ export const filters = [
    },
    */
 ];
+
+export default filters;

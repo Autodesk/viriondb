@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
 import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
 import d3 from 'd3';
@@ -7,32 +7,32 @@ import '../../styles/LineGraph.css';
 
 export default class LineGraph extends Component {
   static propTypes = {
-  	field: PropTypes.string.isRequired,
-  	color: PropTypes.string,
-  	data: PropTypes.object.isRequired,
+    field: PropTypes.string.isRequired,
+    color: PropTypes.string,
+    data: PropTypes.object.isRequired,
     interpolate: PropTypes.bool,
   };
 
   static defaultProps = {
-  	color: defaultColor,
+    color: defaultColor,
   };
 
   componentDidMount() {
-  	this.svg = d3.select(this.element);
+    this.svg = d3.select(this.element);
 
-	  this.update(this.props.data);
+    this.update(this.props.data);
   }
 
   componentDidUpdate() {
-  	this.update(this.props.data);
+    this.update(this.props.data);
   }
 
   componentWillUnmount() {
-  	//todo - cleanup
+    //todo - cleanup
   }
 
   update(data) {
-  	//todo
+    //todo
   }
 
   render() {
@@ -40,13 +40,17 @@ export default class LineGraph extends Component {
     const longName = fieldName(field);
 
     return (
-      <div className="LineGraph"
-           style={{backgroundColor: color}}>
+      <div className="Chart LineGraph"
+           style={{ backgroundColor: color }}>
         <span className="LineGraph-heading">
           {longName}
         </span>
         <svg className="LineGraph-graph">
-        	 <g ref={(el) => { if (el) { this.element = el; }}}></g>
+          <g ref={(el) => {
+            if (el) {
+              this.element = el;
+            }
+          }}/>
         </svg>
       </div>
     );
