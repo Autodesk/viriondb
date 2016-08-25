@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import { favorites } from '../data/favorites';
 
 import '../styles/ComparisonActions.css';
 
@@ -16,6 +17,7 @@ export default class ComparisonActions extends Component {
         <div className="ComparisonActions-key"></div>
 
         {instances.map(instance => {
+          const isStarred = favorites.indexOf(instance.id) >= 0;
           return (
             <div key={instance.id}
                  className="ComparisonActions-value">
@@ -25,7 +27,7 @@ export default class ComparisonActions extends Component {
                     Remove
                   </span>)}
 
-                  <span className="ComparisonActions-star"
+                  <span className={'ComparisonActions-star' + (isStarred ? ' active' : '')}
                         onClick={() => onStar(instance.id)}>
                   </span>
             </div>
