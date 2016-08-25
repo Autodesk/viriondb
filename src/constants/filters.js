@@ -156,3 +156,5 @@ export const filters = [
    },
    */
 ];
+
+export default filters;
