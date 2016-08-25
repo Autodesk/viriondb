@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import invariant from 'invariant';
 
+import { setFilter } from '../data/activeFilters';
 import SearchBarInput from './SearchBarInput';
 
 import '../styles/SearchBar.css';
@@ -22,20 +23,21 @@ export default class SearchBar extends Component {
   };
 
   onClickShare = (evt) => {
-    console.log('todo');
+    alert('todo');
   };
 
   onClickFeedback = (evt) => {
-    console.log('todo');
+    alert('todo');
+  };
+
+  updateSearchFilter = () => {
+    setFilter({ name: this.state.tags.concat(this.state.input).filter(term => !!term) });
   };
 
   onAddInputTag = (input) => {
     this.setState({
-      tags: this.state.tags.concat({
-        text: input,
-        source: 'search',
-      }),
-    });
+      tags: this.state.tags.concat(input),
+    }, this.updateSearchFilter);
     this.setSearchInput('');
   };
 
@@ -44,7 +46,7 @@ export default class SearchBar extends Component {
 
     this.setState({
       input,
-    });
+    }, this.updateSearchFilter);
   };
 
   onRemoveTag = (index) => {
@@ -52,7 +54,7 @@ export default class SearchBar extends Component {
     next.splice(index, 1);
     this.setState({
       tags: next,
-    });
+    }, this.updateSearchFilter);
   };
 
   render() {

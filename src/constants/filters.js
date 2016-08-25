@@ -27,23 +27,23 @@ export const filters = [
   },
 
   /*
-  {
-    field: 'capsid_morphology',
-    type: 'discrete',
-    shortname: 'CM',
-    color: '#aaeeaa',
-    default: {},
-    values: {
-      'helical': 'Helical',
-      'spherical': 'Spherical',
-      'icosahedral': 'Icosahedral',
-      'head-and-tail': 'Head-and-Tail',
-      'spindled': 'Spindled',
-      'non-canonical': 'Non-Canonical',
-      [unknownValue]: 'Unknown',
-    },
-  },
-  */
+   {
+   field: 'capsid_morphology',
+   type: 'discrete',
+   shortname: 'CM',
+   color: '#aaeeaa',
+   default: {},
+   values: {
+   'helical': 'Helical',
+   'spherical': 'Spherical',
+   'icosahedral': 'Icosahedral',
+   'head-and-tail': 'Head-and-Tail',
+   'spindled': 'Spindled',
+   'non-canonical': 'Non-Canonical',
+   [unknownValue]: 'Unknown',
+   },
+   },
+   */
 
   {
     field: 'sense',
@@ -122,7 +122,6 @@ export const filters = [
     },
   },
 
-
   {
     field: 'derived_taxonomy_order',
     type: 'discrete',
@@ -139,6 +138,13 @@ export const filters = [
       Ligamenvirales: 'Ligamenvirales',
       [unknownValue]: 'Unknown',
     },
+  },
+
+  {
+    field: 'name',
+    visible: false,
+    type: 'textFilter',
+    default: [],
   },
 
   /*
