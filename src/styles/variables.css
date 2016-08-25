@@ -43,4 +43,5 @@
   /* Transitions */
 
   --transition-fast: var(--timing-fast) ease-out;
+  --transition-extrafast: var(--timing-fast) ease-out;
 }

@@ -27,7 +27,7 @@ export const rowNames = {
   accession: 'Accession Number',
   derived_baltimore: 'Baltimore Group',
   derived_sense: 'Sense',
-  sequence_mol: 'Nucleic Acid Molecule',
+  sequenced_mol: 'Nucleic Acid Molecule',
   nucleid_acid_structure: 'Nucleic Acid Structure',
   nucleic_acid_shape: 'Nucleid Acid Shape',
   genome_shape: 'Nucleid Acid Shape',

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import _ from 'lodash';
+import invariant from 'invariant';
+
 import registry, { onRegister } from '../data/register';
-import { filters } from '../constants/filters';
+import { maxSections, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
@@ -19,50 +21,116 @@ export class BrowsePage extends Component {
 
   constructor() {
     super();
-    this.listener = onRegister( (function(register, length) { if (length > 0) this.forceUpdate(); }).bind(this) );
+    this.listener = onRegister((function browsePageRegister(register, length) {
+      if (length > 0) this.forceUpdate();
+    }).bind(this));
   }
 
-  //todo - only include filters we need? or filter very efficiently
   state = {
-    filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
+    //filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
+    filters: {},
   };
 
   setFilter = (filterPatch) => {
-    this.setState({ filters: Object.assign({}, this.state.filters, filterPatch) });
+    const nextFilter = Object.assign({}, this.state.filters, filterPatch);
+
+    //remove nulls from filters
+    Object.keys(nextFilter).forEach(key => {
+      if (nextFilter[key] === null) {
+        delete nextFilter[key];
+      }
+    });
+
+    this.setState({ filters: nextFilter });
   };
 
   openInstances = (...ids) => {
     this.props.router.push(`/${ids.join(',')}`);
   };
 
+  createFilter(filter) {
+    //use hasOwnProperty
+    const field = filter.field;
+
+    if (filter.type === 'discrete') {
+      return (instance) => this.state.filters[field].hasOwnProperty(instance[field]);
+    }
+
+    if (filter.type === 'range') {
+      return (instance) => (this.state.filters[field][0] <= instance[field] && this.state.filters[field][1] >= instance[field]);
+    }
+
+    console.warn(`no filter for ${filter.field} (${filter.type})`);
+    return null;
+  }
+
+  createFilters() {
+    //may want to put the fastest filters first (key lookups rather than array checks)
+    return Object.keys(this.state.filters)
+      .map(fieldName => filters.find(cat => cat.field === fieldName))
+      .map((filter) => this.createFilter(filter))
+      .filter(func => typeof func === 'function');
+  }
+
   render() {
-    const instances = _.values(registry);
+    /* filtering */
 
-    const createFilter = (cat) => {
-      if (cat.type === 'discrete') {
-        return (instance) => Object.keys(this.state.filters[cat.field]).length === 0 || this.state.filters[cat.field][instance[cat.field]];
-      } else if (cat.type === 'range') {
-        return (instance) => _.isEqual(this.state.filters[cat.field], cat.default) || (this.state.filters[cat.field][0] <= instance[cat.field] && this.state.filters[cat.field][1] >= instance[cat.field]);
-      } else {
-        console.warn(`no filter for ${cat.field} (${cat.type})`);
-        return () => true;
+    const start = performance.now();
+
+    const filterFunc = instance => _.every(this.createFilters(), filter => filter(instance));
+    const filtered = _.filter(_.values(registry), filterFunc);
+    const filteredIds = filtered.map(item => item.id);
+
+    /* derived data */
+
+    //may want to compute alongside filtering so only pass through once
+    //todo - only go through data once, and compute each field as needed
+
+    //set it up
+    const derivedData = filters.reduce((acc, filter) => {
+      if (filter.type === 'discrete') {
+        const valuesCount = Object.keys(filter.values).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
+        return Object.assign(acc, { [filter.field]: valuesCount });
       }
-    };
 
-    //filter the instances
-    //todo - performance
-    //debugger;
-    const currentFilters = Object.keys(this.state.filters).map(filterName => filters.find(cat => cat.field === filterName));
-    console.log(this.state.filters, currentFilters);
-    const filterGauntlet = currentFilters.map(createFilter);
-    const filterFunc = instance => _.every(filterGauntlet, filter => filter(instance));
-    const filtered = _.filter(instances, filterFunc);
+      if (filter.type === 'range') {
+        //do we want the pie chart to have sections based on the current range, or sections fixed based on total range
+        const [ min, max ] = filter.range;
+        const range = max - min;
+        const sectionsCount = _.range(maxSections).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
 
-    //todo - compute these when filters change, not on every render
-    //todo - much faster
-    const derivedData = filters.reduce((acc, cat) => {
+        return Object.assign(acc, { [filter.field]: sectionsCount });
+      }
+
+      invariant(false, 'unknown filter type');
+      return acc;
+    }, {});
+
+    console.log(JSON.stringify(derivedData));
+
+    //go through instances and count derivedData
+    filters.forEach(filter => {
+      const { type, field } = filter;
+
+      if (type === 'discrete') {
+        _.forEach(filtered, instance => {
+          derivedData[field][instance[filter.field]] += 1;
+        });
+      } else if (type === 'range') {
+        const [ min, max ] = filter.range;
+        const range = max - min;
+        _.forEach(filtered, instance => {
+          derivedData[field][Math.floor((instance[field] / max) * maxSections)] += 1;
+        });
+      }
+    });
+
+    //todo - may want to process e.g. discrete ones to give percentages (or do this in charts)
+
+
+    /* old way
+    console.log(filters.reduce((acc, cat) => {
       if (cat.type === 'discrete') {
-        //todo - more efficient, but still give percentages
         const derived = _.mapValues(_.groupBy(filtered, cat.field), array => Math.floor(array.length / filtered.length * 100));
         acc[cat.field] = derived;
       } else if (cat.type === 'range') {
@@ -88,9 +156,10 @@ export class BrowsePage extends Component {
         //uh oh
       }
       return acc;
-    }, {});
+    }, {}));
+    */
 
-    const filteredIds = filtered.map(inst => inst.id);
+    console.log(performance.now() - start);
 
     return (
       <div className="BrowsePage">
@@ -102,7 +171,7 @@ export class BrowsePage extends Component {
                        instances={filteredIds}/>
 
           <BrowseCharts instances={filteredIds}
-                        derivedData={derivedData} />
+                        derivedData={derivedData}/>
         </div>
       </div>
     );

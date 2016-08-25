@@ -27,7 +27,7 @@ export default class RefineSection extends Component {
 
   toggleOpen = () => {
     if (this.hasFilter()) {
-      return; 
+      return;
     }
     this.setState({ open: !this.state.open });
   };
@@ -39,17 +39,34 @@ export default class RefineSection extends Component {
 
   resetFilter = () => {
     const { field } = this.props;
-    this.props.setFilter({ [field]: this.getDefault() });
+
+    //set to default
+    //this.props.setFilter({ [field]: this.getDefault() });
+
+    this.props.setFilter({ [field]: null });
   };
 
-  hasFilter = (forceProps) => {
-    const filter = this.props.filter;
+  hasFilter = (forceProps = {}) => {
+    const filter = forceProps.filter || this.props.filter;
+    if (!filter) {
+      return false;
+    }
+
     const defaultFilter = this.getDefault();
 
-    return !isEqual(filter, defaultFilter) &&
-      (Array.isArray(filter) ? !!filter.length :
-        typeof filter === 'object' ? Object.keys(filter).length > 0: //todo - only when true
-        !!filter);
+    if (isEqual(filter, defaultFilter)) {
+      return false;
+    }
+
+    if (Array.isArray(filter)) {
+      return filter.length > 0;
+    }
+
+    if (typeof filter === 'object') {
+      return Object.keys(filter).length > 0;
+    }
+
+    return !!filter;
   };
 
   render() {
@@ -58,11 +75,12 @@ export default class RefineSection extends Component {
     const ControlComponent = RefineSection.componentMap[type];
     const hasFilter = this.hasFilter();
     const isActive = open || hasFilter;
+    const defaultFilter = this.getDefault();
 
     return (
       <div className={'RefineSection' +
-                      (isActive ? ' active' : '') +
-                      (hasFilter ? ' hasFilter' : '')}>
+      (isActive ? ' active' : '') +
+      (hasFilter ? ' hasFilter' : '')}>
         <div className="RefineSection-heading"
              onClick={this.toggleOpen}>
           {fieldName(field)}
@@ -74,7 +92,8 @@ export default class RefineSection extends Component {
         </div>
 
         <div className="RefineSection-control">
-          <ControlComponent {...this.props} />
+          <ControlComponent {...this.props}
+                            defaultFilter={defaultFilter} />
         </div>
       </div>
     );
