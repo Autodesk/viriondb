@@ -89,7 +89,7 @@ export class BrowsePage extends Component {
     //set it up
     const derivedData = filters.reduce((acc, filter) => {
       if (filter.type === 'discrete') {
-        const valuesCount = _.mapValues(filter.values, 0);
+        const valuesCount = Object.keys(filter.values).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
         return Object.assign(acc, { [filter.field]: valuesCount });
       }
 
@@ -106,22 +106,31 @@ export class BrowsePage extends Component {
       return acc;
     }, {});
 
+    console.log(JSON.stringify(derivedData));
+
     //go through instances and count derivedData
-    _.forEach(filtered, instance => {
-      filters.forEach(filter => {
-        derivedData[filter.field][instance[filter.field]] += 1;
-      });
+    filters.forEach(filter => {
+      const { type, field } = filter;
+
+      if (type === 'discrete') {
+        _.forEach(filtered, instance => {
+          derivedData[field][instance[filter.field]] += 1;
+        });
+      } else if (type === 'range') {
+        const [ min, max ] = filter.range;
+        const range = max - min;
+        _.forEach(filtered, instance => {
+          derivedData[field][Math.floor((instance[field] / max) * maxSections)] += 1;
+        });
+      }
     });
 
-    //todo - do we have to calculate beyond this?
-
-    console.log(derivedData);
+    //todo - may want to process e.g. discrete ones to give percentages (or do this in charts)
 
 
-   /* //todo - much faster
-    const derivedData = filters.reduce((acc, cat) => {
+    /* old way
+    console.log(filters.reduce((acc, cat) => {
       if (cat.type === 'discrete') {
-        //todo - more efficient, but still give percentages
         const derived = _.mapValues(_.groupBy(filtered, cat.field), array => Math.floor(array.length / filtered.length * 100));
         acc[cat.field] = derived;
       } else if (cat.type === 'range') {
@@ -147,9 +156,8 @@ export class BrowsePage extends Component {
         //uh oh
       }
       return acc;
-    }, {});
-
-*/
+    }, {}));
+    */
 
     console.log(performance.now() - start);
 

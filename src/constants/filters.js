@@ -3,7 +3,7 @@
 //todo - range values should be dynamic, based on processing of data (at least include mix / max)
 
 //todo - sync this with processing - need to be able to filter based on value not known. or special handling for null
-export const unknownValue = 'Unknown';
+export const unknownValue = null;
 
 //max number of pie sections e.g for a range
 export const maxSections = 8;
@@ -39,21 +39,7 @@ export const filters = [
       'head-and-tail': 'Head-and-Tail',
       'spindled': 'Spindled',
       'non-canonical': 'Non-Canonical',
-      unknownValue: 'Unknown',
-    },
-  },
-
-  {
-    field: 'division',
-    type: 'discrete',
-    shortname: 'Di',
-    color: '#aaeeaa',
-    default: {},
-    values: {
-      "VRL": "VRL",
-      "PHG": "PHG",
-      "ENV": "ENV",
-      "SYN": "SYN",
+      [unknownValue]: 'Unknown',
     },
   },
 
@@ -64,10 +50,10 @@ export const filters = [
     color: '#aaeeee',
     default: {},
     values: {
-      "+/-": "+/-",
-      "+": "+",
-      "-": "-",
-      unknownValue: 'Unknown',
+      '+/-': '+/-',
+      '+': '+',
+      '-': '-',
+      [unknownValue]: 'Unknown',
     },
   },
 
@@ -85,8 +71,69 @@ export const filters = [
     type: 'range',
     shortname: 'Le',
     color: '#aaaaee',
-    default: [0, 50000],
-    range: [0, 50000],
+    default: [0, 2473870],
+    range: [0, 2473870],
+  },
+
+  {
+    field: 'genome_shape',
+    type: 'discrete',
+    shortname: 'GS',
+    color: '#ffccaa',
+    values: {
+      circular: 'Circular',
+      linear: 'Linear',
+    },
+  },
+
+  {
+    field: 'sequenced_mol',
+    type: 'discrete',
+    shortname: 'Mo',
+    color: '#ccffaa',
+    values: {
+      'ss-DNA': 'ss-DNA',
+      'ss-RNA': 'ss-RNA',
+      'DNA': 'DNA',
+      'RNA': 'RNA',
+      'mRNA': 'mRNA',
+      'cRNA': 'cRNA',
+      'ds-RNA': 'ds-RNA',
+      'ms-DNA': 'ms-DNA',
+    },
+  },
+
+  {
+    field: 'division',
+    type: 'discrete',
+    shortname: 'Di',
+    color: '#aaeeaa',
+    default: {},
+    values: {
+      'VRL': 'VRL',
+      'PHG': 'PHG',
+      'ENV': 'ENV',
+      'SYN': 'SYN',
+      [unknownValue]: 'Unknown',
+    },
+  },
+
+
+  {
+    field: 'derived_taxonomy_order',
+    type: 'discrete',
+    shortname: 'Or',
+    color: '#aaccff',
+    values: {
+      Nidovirales: 'Nidovirales',
+      Herpesvirales: 'Herpesvirales',
+      Picornavirales: 'Picornavirales',
+      Caudovirales: 'Caudovirales',
+      Tymovirales: 'Tymovirales',
+      Mononegavirales: 'Mononegavirales',
+      Ligamenvirales: 'Ligamenvirales',
+      [unknownValue]: 'Unknown',
+    },
   },
 
   /*
