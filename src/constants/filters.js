@@ -82,6 +82,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'GS',
     color: '#ffccaa',
+    default: {},
     values: {
       circular: 'Circular',
       linear: 'Linear',
@@ -93,6 +94,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'Mo',
     color: '#ccffaa',
+    default: {},
     values: {
       'ss-DNA': 'ss-DNA',
       'ss-RNA': 'ss-RNA',
@@ -126,6 +128,7 @@ export const filters = [
     type: 'discrete',
     shortname: 'Or',
     color: '#aaccff',
+    default: {},
     values: {
       Nidovirales: 'Nidovirales',
       Herpesvirales: 'Herpesvirales',
