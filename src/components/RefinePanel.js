@@ -8,7 +8,6 @@ import '../styles/RefinePanel.css';
 
 export default class RefinePanel extends Component {
   static propTypes = {
-    setFilter: PropTypes.func.isRequired,
     filters: PropTypes.object.isRequired,
   };
 

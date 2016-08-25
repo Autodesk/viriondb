@@ -4,6 +4,7 @@ import _ from 'lodash';
 import invariant from 'invariant';
 
 import registry, { onRegister } from '../data/register';
+import activeFilters, { setFilter, onRegisterFilter } from '../data/activeFilters';
 import { maxSections, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
@@ -33,6 +34,10 @@ export class BrowsePage extends Component {
     filters: {},
   };
 
+  componentDidMount() {
+    this.filterListener = onRegisterFilter((filters) => this.setState({ filters }));
+  }
+
   shouldComponentUpdate() {
     return this.shouldUpdate;
   }
@@ -40,21 +45,12 @@ export class BrowsePage extends Component {
   componentDidUpdate() {
     setTimeout(() => {
       this.shouldUpdate = true;
-    }, 15);
+    }, 30);
   }
 
-  setFilter = (filterPatch) => {
-    const nextFilter = Object.assign({}, this.state.filters, filterPatch);
-
-    //remove nulls from filters
-    Object.keys(nextFilter).forEach(key => {
-      if (nextFilter[key] === null) {
-        delete nextFilter[key];
-      }
-    });
-
-    this.setState({ filters: nextFilter });
-  };
+  componentWillUnmount() {
+    this.filterListener();
+  }
 
   openInstances = (...ids) => {
     this.props.router.push(`/${ids.join(',')}`);
@@ -65,11 +61,11 @@ export class BrowsePage extends Component {
     const field = filter.field;
 
     if (filter.type === 'discrete') {
-      return (instance) => this.state.filters[field].hasOwnProperty(instance[field]);
+      return function discreteFilter(instance) { return activeFilters[field].hasOwnProperty(instance[field]); };
     }
 
     if (filter.type === 'range') {
-      return (instance) => (this.state.filters[field][0] <= instance[field] && this.state.filters[field][1] >= instance[field]);
+      return function rangeFilter(instance) { return activeFilters[field][0] <= instance[field] && activeFilters[field][1] >= instance[field]; };
     }
 
     console.warn(`no filter for ${filter.field} (${filter.type})`);
@@ -78,7 +74,7 @@ export class BrowsePage extends Component {
 
   createFilters() {
     //may want to put the fastest filters first (key lookups rather than array checks)
-    return Object.keys(this.state.filters)
+    return Object.keys(activeFilters)
       .map(fieldName => filters.find(cat => cat.field === fieldName))
       .map((filter) => this.createFilter(filter))
       .filter(func => typeof func === 'function');
@@ -88,7 +84,7 @@ export class BrowsePage extends Component {
     if (Object.keys(registry).length < 10) {
       return (
         <div className="BrowsePage">
-          <div className="BrowsePage-main" style={{marginTop: '2rem'}}>
+          <div className="BrowsePage-main" style={{ marginTop: '2rem' }}>
             <Spinner />
           </div>
         </div>
@@ -101,9 +97,15 @@ export class BrowsePage extends Component {
     /* filtering */
 
     const start = performance.now();
+    console.log(activeFilters);
 
-    const filterFunc = instance => _.every(this.createFilters(), filter => filter(instance));
+    const createdFilters = this.createFilters();
+    const filterFunc = createdFilters.length === 0 ?
+      () => true :
+      instance => _.every(createdFilters, filter => filter(instance));
+    const filterMakeTime = performance.now();
     const filtered = _.filter(_.values(registry), filterFunc);
+    const filterTime = performance.now();
     const filteredIds = filtered.map(item => item.id);
 
     /* derived data */
@@ -134,7 +136,7 @@ export class BrowsePage extends Component {
     console.log(JSON.stringify(derivedData));
 
     //go through instances and count derivedData
-    filters.forEach(filter => {
+    _.forEach(filters, filter => {
       const { type, field } = filter;
 
       if (type === 'discrete') {
@@ -184,12 +186,15 @@ export class BrowsePage extends Component {
      }, {}));
      */
 
-    console.log(performance.now() - start);
+    const end = performance.now();
+    console.log(end - start, filterMakeTime - start, filterTime - start);
+
+    // could let refine panel get filter func etc itself...
 
     return (
       <div className="BrowsePage">
-        <RefinePanel setFilter={this.setFilter}
-                     filters={this.state.filters}/>
+        <RefinePanel setFilter={setFilter}
+                     filters={activeFilters}/>
 
         <div className="BrowsePage-main">
           <BrowseTable openInstances={this.openInstances.bind(this)}

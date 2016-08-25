@@ -10,10 +10,10 @@ export default class Header extends Component {
     return (
         <div className="Header">
           <div className="Header-nav">
-            <Link className="Header-home" to="/"></Link>
+            <Link className="Header-home" to="/" />
           </div>
           <SearchBar />
         </div>
     );
   }
-};
+}
