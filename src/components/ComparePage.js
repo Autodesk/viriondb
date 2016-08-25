@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import registry, { onRegister } from '../data/register';
 import { rows } from '../constants/rows';
+import { star } from '../data/favorites';
 
 import ComparisonRow from './ComparisonRow';
 import ComparisonActions from './ComparisonActions';
@@ -18,7 +19,11 @@ export class ComparePage extends Component {
 
   constructor() {
     super();
-    this.listener = onRegister((registry, length) => { if (length > 0) { this.forceUpdate(); } });
+    this.listener = onRegister((registry, length) => {
+      if (length > 0) {
+        this.forceUpdate();
+      }
+    });
   }
 
   state = {
@@ -30,8 +35,8 @@ export class ComparePage extends Component {
   };
 
   onStar = (id) => {
-    //todo
-    console.log('todo');
+    star(id);
+    this.forceUpdate();
   };
 
   onRemove = (id) => {
