@@ -3,6 +3,7 @@ import { capitalize } from 'lodash';
 export const rows = [
   'name',
   'accession',
+  'derived_segment_count',
   'description',
   'derived_baltimore',
   'nucleid_acid_structure',
@@ -32,6 +33,7 @@ export const rowNames = {
   nucleic_acid_shape: 'Nucleid Acid Shape',
   genome_shape: 'Nucleid Acid Shape',
   derived_protein_count: 'Protein Number',
+  derived_segment_count: 'Segments',
   capsid_morphology: 'Capsid Morphology',
   capsid_envelope: 'Capsid Envelope',
   taxonomy: 'Host Taxonomy',
@@ -49,6 +51,7 @@ export const rowHierarchy = [
     name: 'Name Data',
     fields: [
       'name',
+      'derived_segment_count',
       'accession',
     ],
   },
