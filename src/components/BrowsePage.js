@@ -5,7 +5,7 @@ import invariant from 'invariant';
 
 import registry, { onRegister } from '../data/register';
 import activeFilters, { setFilter, onRegisterFilter } from '../data/activeFilters';
-import { maxSections, filters } from '../constants/filters';
+import { unknownValue, maxSections, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
@@ -109,7 +109,6 @@ export class BrowsePage extends Component {
     /* filtering */
 
     const start = performance.now();
-    console.log(activeFilters);
 
     const createdFilters = this.createFilters();
     const filterFunc = createdFilters.length === 0 ?
@@ -123,11 +122,11 @@ export class BrowsePage extends Component {
     /* derived data */
 
     //may want to compute alongside filtering so only pass through once
-    //todo - only go through data once, and compute each field as needed
 
     //set it up
-    const derivedData = filters
+    const derivedData = filters.slice()
       .filter(filter => filter.visible !== false)
+      .sort((one, two) => one.type === 'discrete' ? -1 : 1)
       .reduce((acc, filter) => {
         if (filter.type === 'discrete') {
           const valuesCount = Object.keys(filter.values).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
@@ -135,19 +134,34 @@ export class BrowsePage extends Component {
         }
 
         if (filter.type === 'range') {
-          //do we want the pie chart to have sections based on the current range, or sections fixed based on total range
-          const [ min, max ] = filter.range;
-          const range = max - min;
-          const sectionsCount = _.range(maxSections).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
+          //treating these as line graphs. can set up and go through at same time
+          Object.assign(acc, { [filter.field]: {} });
+          const innerAcc = acc[filter.field];
 
-          return Object.assign(acc, { [filter.field]: sectionsCount });
+          _.forEach(filtered, inst => {
+            //todo - handle scaling (e.g. for length - can do it in the chart)
+            if (!innerAcc.hasOwnProperty(inst[filter.field])) {
+              innerAcc[inst[filter.field]] = 0;
+            }
+            innerAcc[inst[filter.field]] += 1;
+          });
+
+          delete innerAcc[unknownValue];
+
+          return acc;
+
+          /*
+           //do we want the pie chart to have sections based on the current range, or sections fixed based on total range
+           const [ min, max ] = filter.range;
+           const range = max - min;
+           const sectionsCount = _.range(maxSections).reduce((acc, section) => Object.assign(acc, { [section]: 0 }), {});
+           return Object.assign(acc, { [filter.field]: sectionsCount });
+           */
         }
 
         invariant(false, 'unknown filter type');
         return acc;
       }, {});
-
-    console.log(JSON.stringify(derivedData));
 
     //go through instances and count derivedData
     _.forEach(filters, filter => {
@@ -158,11 +172,12 @@ export class BrowsePage extends Component {
           derivedData[field][instance[filter.field]] += 1;
         });
       } else if (type === 'range') {
-        const [ min, max ] = filter.range;
-        const range = max - min;
-        _.forEach(filtered, instance => {
-          derivedData[field][Math.floor((instance[field] / max) * maxSections)] += 1;
-        });
+        /*const [ min, max ] = filter.range;
+         const range = max - min; //use range if need to normalize, i.e. dont start at 0
+         _.forEach(filtered, instance => {
+         derivedData[field][Math.floor((instance[field] / max) * maxSections)] += 1;
+         });
+         */
       }
     });
 

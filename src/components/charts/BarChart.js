@@ -3,6 +3,8 @@ import { fieldName } from '../../constants/rows';
 import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
 import d3 from 'd3';
 
+import '../../styles/BarChart.css';
+
 export default class BarChart extends Component {
   static propTypes = {
     field: PropTypes.string.isRequired,
@@ -40,13 +42,14 @@ export default class BarChart extends Component {
   }
 
   render() {
-    const { field, color } = this.props;
+    const { field, data, color } = this.props;
     const longName = fieldName(field);
 
+    console.log(field, data);
+
     return (
-      <div className="Chart BarChart">
-        <span className="Chart-heading"
-              style={{ color: color }}>
+      <div className="Chart BarChart" style={{ backgroundColor: color, color: color }}>
+        <span className="BarChart-heading">
           {longName}
         </span>
         <svg className="BarChart-chart">

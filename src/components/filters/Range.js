@@ -21,8 +21,9 @@ export default class Range extends Component {
   componentWillMount() {
     //todo - correct scaling - exponential scaling different in each direction
     //todo - choose exponent based on range
-    const up = d3.scale.pow().exponent(4).domain([0, 100]).range(this.props.range);
-    const down = d3.scale.pow().exponent(4).domain(this.props.range).range([0, 100]);
+    const exp = Math.floor(Math.log10((this.props.range[1] - this.props.range[0]) / 100)) + 1;
+    const up = d3.scale.pow().exponent(exp).domain([0, 100]).range(this.props.range);
+    const down = d3.scale.pow().exponent(exp).domain(this.props.range).range([0, 100]);
 
     this.scaleUpFn = (val) => Math.round(up(val));
     this.scaleDownFn = (val) => Math.round(down(val));
