@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import three from 'three';
 
 export default class Capsid3d extends Component {
-  static propTypes = {};
+  static propTypes = {
+    field: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    instance: PropTypes.object.isRequired,
+  };
 
   componentDidMount() {
     this.renderer = new three.WebGLRenderer({ antialias: true, alpha: true });
@@ -39,24 +43,43 @@ export default class Capsid3d extends Component {
     L2.position.x = -100;
     scene.add(L2);
 
-    // IcoSphere -> three.IcosahedronGeometry(80, 1) 1-4
-    const Ico = new three.Mesh(new three.IcosahedronGeometry(75, 0), pinkMat);
-    Ico.rotation.z = 0.5;
-    scene.add(Ico);
-
-    function update() {
-      Ico.rotation.x += 2 / 150;
-      Ico.rotation.y += 2 / 300;
+    let shape;
+    const value = this.props.value.toLowerCase();
+    if (value.indexOf('icosahedr') >= 0) {
+      //todo - intelligent based on T number
+      shape = new three.IcosahedronGeometry(75, 0);
+    } else if (value.indexOf('spher') >= 0) {
+      shape = new three.SphereGeometry(75, 100, 100);
+    } else if (value.indexOf('rod') >= 0) {
+      shape = new three.CylinderGeometry(50, 50, 150, 40);
+    } else if (value.indexOf('ovoid') >= 0) {
+      //todo
+      shape = new three.SphereGeometry(75, 100, 100);
+    } else if (value.indexOf('budded') >= 0) {
+      //todo;
+      shape = new three.CylinderGeometry(50, 50, 150, 40);
     }
 
-    // Render
-    const render = () => {
-      this.rafId = requestAnimationFrame(render);
-      this.renderer.render(scene, camera);
-      update();
-    }
+    if (shape) {
+      const mesh = new three.Mesh(shape, pinkMat);
+      mesh.rotation.z = 0.5;
+      scene.add(mesh);
 
-    render();
+      function update() {
+        mesh.rotation.x += 2 / 150;
+        mesh.rotation.y += 2 / 300;
+        mesh.rotation.z -= 2 / 500;
+      }
+
+      // Render
+      const render = () => {
+        this.rafId = requestAnimationFrame(render);
+        this.renderer.render(scene, camera);
+        update();
+      };
+
+      render();
+    }
   }
 
   componentWillUnmount() {
@@ -69,8 +92,10 @@ export default class Capsid3d extends Component {
     return (
       <div className="Capsid3d"
            ref={(el) => {
-                 if (el) { this.element = el; }
-               }}>
+             if (el) {
+               this.element = el;
+             }
+           }}>
       </div>
     );
   }
