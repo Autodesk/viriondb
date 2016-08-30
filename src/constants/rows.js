@@ -2,10 +2,10 @@ import { capitalize } from 'lodash';
 
 export const rows = [
   'name',
-  'accession',
-  'derived_segment_count',
+  'id', //accession-version (not just accession)
   'description',
   'derived_baltimore',
+  'derived_segment_count',
   'nucleid_acid_structure',
   'genome_shape',
   'derived_sense',
@@ -13,18 +13,19 @@ export const rows = [
   'derived_protein_count',
   'capsid_morphology',
   'capsid_envelope',
-  'temperature',
+  //'temperature',
+  'host',
+  'derived_lineage',
+  'taxonomy',
   'order',
   'family',
   'subfamily',
   'genus',
-  'host',
-  'derived_lineage',
-  'taxonomy',
 ];
 
 //otherwise, just uppsercase it
 export const rowNames = {
+  id: 'Accession Number',
   accession: 'Accession Number',
   derived_baltimore: 'Baltimore Group',
   derived_sense: 'Sense',
@@ -37,6 +38,7 @@ export const rowNames = {
   capsid_morphology: 'Capsid Morphology',
   capsid_envelope: 'Capsid Envelope',
   taxonomy: 'Host Taxonomy',
+  derived_lineage: 'Lineage',
   derived_taxonomy_family: 'Family',
   derived_taxonomy_order: 'Order',
   derived_taxonomy_genus: 'Genus',
@@ -52,7 +54,7 @@ export const rowHierarchy = [
     fields: [
       'name',
       'derived_segment_count',
-      'accession',
+      'id',
     ],
   },
   {

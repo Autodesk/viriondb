@@ -4,6 +4,7 @@ import { rows } from '../constants/rows';
 import Capsid3d from './rowDetail/Capsid3d';
 import BaltimoreGroup from './rowDetail/BaltimoreGroup';
 import Host from './rowDetail/Host';
+import NCBI from './rowDetail/NCBI';
 import LineageTree from './rowDetail/LineageTree';
 
 export default class ComparisonRowDetail extends Component {
@@ -14,6 +15,7 @@ export default class ComparisonRowDetail extends Component {
   };
 
   static componentMap = {
+    id: NCBI,
     capsid_morphology: Capsid3d,
     derived_baltimore: BaltimoreGroup,
     host: Host,
@@ -27,7 +29,7 @@ export default class ComparisonRowDetail extends Component {
     if (!DetailComponent) {
       return null;
     }
-    
+
     return (<DetailComponent {...this.props} />);
   }
 }
