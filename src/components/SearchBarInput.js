@@ -11,6 +11,7 @@ export default class SearchBarInput extends Component {
     tags: PropTypes.array.isRequired,
     addInputTag: PropTypes.func.isRequired,
     removeTag: PropTypes.func.isRequired,
+    clearTags: PropTypes.func.isRequired,
   };
 
   state = {
@@ -28,6 +29,10 @@ export default class SearchBarInput extends Component {
 
   onInputChange = (evt) => {
     this.props.setSearchInput(evt.target.value);
+  };
+
+  onClickClear = (evt) => {
+    this.props.clearTags();
   };
 
   render() {
@@ -49,6 +54,8 @@ export default class SearchBarInput extends Component {
                onChange={this.onInputChange}
                onKeyDown={this.onInputKeyDown}
                placeholder="Add Search Terms"/>
+        {(this.props.tags.length > 0 || this.props.searchInput.length > 0) && (<div className="SearchBar-icon SearchBarInput-clear"
+             onClick={this.onClickClear}></div>)}
       </div>
     );
   }

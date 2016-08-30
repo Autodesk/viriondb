@@ -4,6 +4,7 @@
   background-color: var(--background-color-header);
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
 
@@ -13,12 +14,46 @@
 
   &-home {
     display: block;
-    height: 45px;
+    height: 48px;
     width: 256px;
     color: var(--colors-white);
     text-decoration: none;
     background-image: url('/images/logo.svg');
     background-size: contain;
     background-repeat: no-repeat;
+  }
+
+  &-icons {
+    padding-right: 1em;
+  }
+
+  &-icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-left: 0.5em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
+
+  &-lens {
+    cursor: default;
+    /* temporary image */
+    background-image: url('/images/add.svg');
+  }
+
+  &-share {
+    background-image: url('/images/share.svg');
+  }
+
+  &-feedback {
+    background-image: url('/images/feedback.svg');
   }
 }

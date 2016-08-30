@@ -43,7 +43,7 @@ export const rowNames = {
 };
 
 export const fieldName = (field) => {
-  return rowNames[field] || capitalize(field);
+  return rowNames[field] || capitalize(field.replace('_', ' '));
 };
 
 export const rowHierarchy = [

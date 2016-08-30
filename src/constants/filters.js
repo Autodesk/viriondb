@@ -1,9 +1,6 @@
-//todo - reconcile shortname, color, etc with rows.js
-
 //todo - range values should be dynamic, based on processing of data (at least include mix / max)
 
-//todo - sync this with processing - need to be able to filter based on value not known. or special handling for null
-export const unknownValue = null;
+export const unknownValue = 'Unknown';
 
 //max number of pie sections e.g for a range
 export const maxSections = 8;
@@ -16,13 +13,14 @@ export const filters = [
     color: '#eeaaaa',
     default: {},
     values: {
-      '1': 'I - double stranded DNA',
-      '2': 'II - single stranded DNA',
-      '3': 'III - double stranded RNA',
-      '4': 'IV - positive single stranded RNA',
-      '5': 'V - negative single stranded RNA',
-      '6': 'VI - positive single stranded DNA, reverse transcribing',
-      '7': 'VII - double stranded DNA, reverse transcribing',
+      'I': 'I - double stranded DNA',
+      'II': 'II - single stranded DNA',
+      'III': 'III - double stranded RNA',
+      'IV': 'IV - positive single stranded RNA',
+      'V': 'V - negative single stranded RNA',
+      'VI': 'VI - positive single stranded DNA, reverse transcribing',
+      'VII': 'VII - double stranded DNA, reverse transcribing',
+      [unknownValue]: 'Unknown',
     },
   },
 
@@ -40,6 +38,7 @@ export const filters = [
       Tymovirales: 'Tymovirales',
       Mononegavirales: 'Mononegavirales',
       Ligamenvirales: 'Ligamenvirales',
+      Unassigned: 'Unassigned',
       [unknownValue]: 'Unknown',
     },
   },
@@ -99,26 +98,27 @@ export const filters = [
   },
 
   /*
-   {
-   field: 'capsid_morphology',
-   type: 'discrete',
-   shortname: 'CM',
-   color: '#aaeeaa',
-   default: {},
-   values: {
-   'helical': 'Helical',
-   'spherical': 'Spherical',
-   'icosahedral': 'Icosahedral',
-   'head-and-tail': 'Head-and-Tail',
-   'spindled': 'Spindled',
-   'non-canonical': 'Non-Canonical',
-   [unknownValue]: 'Unknown',
-   },
-   },
-   */
+  //too many options
+  {
+    field: 'capsid_morphology',
+    type: 'discrete',
+    shortname: 'CM',
+    color: '#aaeeaa',
+    default: {},
+    values: {
+      'helical': 'Helical',
+      'spherical': 'Spherical',
+      'icosahedral': 'Icosahedral',
+      'head-and-tail': 'Head-and-Tail',
+      'spindled': 'Spindled',
+      'non-canonical': 'Non-Canonical',
+      [unknownValue]: 'Unknown',
+    },
+  },
+  */
 
   {
-    field: 'sense',
+    field: 'derived_sense',
     type: 'discrete',
     shortname: 'Se',
     color: '#aaeeee',
@@ -150,7 +150,7 @@ export const filters = [
   /*
    //forthcoming
    {
-   field: 't_number',
+   field: 'derived_t_number',
    type: 'range',
    range: [0, 30],
    },

@@ -17,9 +17,12 @@ export default class BrowseTableSection extends Component {
 
   static defaultProps = {};
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.listener = onRegister((registry, length) => { if (length > 0) { this.forceUpdate(); } });
+  }
+
+  componentWillUnmount() {
+    this.listener();
   }
 
   //todo - componentize

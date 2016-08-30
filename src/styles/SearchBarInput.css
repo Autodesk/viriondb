@@ -1,11 +1,12 @@
 @import "./variables";
 
 .SearchBarInput {
-  padding: 0 3rem 0 0;
+  padding: 0 0.5em 0 0;
   flex-grow: 1;
   background-color: var(--colors-white);
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   input {
     border: 0;
@@ -15,12 +16,19 @@
   }
 
   &-tags {
-    padding: 0.5em;
+    padding: 0.25em 0.5em;
     display: flex;
     flex-direction: row;
 
     &:empty {
       padding: 0;
     }
+  }
+
+  div&-clear {
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url('/images/close.svg');
+    cursor: pointer;
   }
 }
