@@ -91,10 +91,10 @@ export default class RefineSection extends Component {
           Reset
         </div>
 
-        <div className="RefineSection-control">
+        {isActive && (<div className="RefineSection-control">
           <ControlComponent {...this.props}
                             defaultFilter={defaultFilter} />
-        </div>
+        </div>)}
       </div>
     );
   }
