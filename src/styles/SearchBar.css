@@ -12,42 +12,6 @@
     padding-right: 1em;
   }
 
-  &-icon {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-left: 0.5em;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-
-    &.disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-  }
-
-  &-lens {
-    /* temporary image */
-    display: none;
-    background-image: url('/images/add.svg');
-  }
-
-  &-close {
-    width: 21px;
-    padding-top: 4px;
-    background-image: url('/images/close.svg');
-  }
-
-  &-share {
-    background-image: url('/images/share.svg');
-  }
-
-  &-feedback {
-    background-image: url('/images/feedback.svg');
-  }
-
   &.closed .SearchBarInput {
     opacity: 0;
     pointer-events: none;

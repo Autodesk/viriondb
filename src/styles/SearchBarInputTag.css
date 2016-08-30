@@ -1,26 +1,28 @@
 @import './variables.css';
 
 .SearchBarInputTag {
-	padding: 0.25em;
-	margin-right: 0.5em;
-	display: flex;
-	flex-direction: row;
-	background-color: var(--colors-blueGreyLight);
+  padding: 0.25em 0.5em;
+  margin-right: 0.5em;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--colors-blueGreyLight);
+  transition: background-color var(--transition-fast);
 
-	&-text {
+  &-text {
 
-	}
+  }
 
-	&-close {
-		padding-left: 0.5em;
-		opacity: 0.5;
+  &-close {
+    padding-left: 0.5em;
+    opacity: 0.5;
 
-		&:hover {
-			opacity: 1;
-		}
-	}
+    &:hover {
+      opacity: 1;
+    }
+  }
 
-	&.active {
-		background-color: var(--colors-blueGreyDark);
-	}
+  &.active {
+    color: var(--colors-white);
+    background-color: var(--colors-selected);
+  }
 }

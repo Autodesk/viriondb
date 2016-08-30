@@ -11,12 +11,14 @@ export default class App extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    params: PropTypes.object,
   };
 
   render() {
+    const onCompare = this.props.params && !!this.props.params.instances;
     return (
       <div className="App">
-        <Header />
+        <Header showSearch={!onCompare}/>
         <div className="App-content">
           {this.props.children}
         </div>
