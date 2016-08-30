@@ -18,8 +18,11 @@ export class ComparePage extends Component {
     }).isRequired,
   };
 
-  constructor() {
-    super();
+  state = {
+    activeRow: null,
+  };
+
+  componentDidMount() {
     this.listener = onRegister((registry, length) => {
       if (length > 0) {
         this.forceUpdate();
@@ -27,9 +30,9 @@ export class ComparePage extends Component {
     });
   }
 
-  state = {
-    activeRow: null,
-  };
+  componentWillUnmount() {
+    this.listener();
+  }
 
   onClickRow = (row) => {
     this.setState({ activeRow: row });

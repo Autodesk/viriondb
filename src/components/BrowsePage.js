@@ -19,22 +19,18 @@ export class BrowsePage extends Component {
     router: PropTypes.object.isRequired,
   };
 
-  static defaultProps = {};
-
-  constructor() {
-    super();
-    this.shouldUpdate = true;
-    this.listener = onRegister((function browsePageRegister(register, length) {
-      if (length > 0) this.forceUpdate();
-    }).bind(this));
-  }
-
   state = {
     //filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
     filters: {},
   };
 
   componentDidMount() {
+    this.shouldUpdate = true;
+    this.listener = onRegister((function browsePageRegister(register, length) {
+      if (length > 0) {
+        this.forceUpdate();
+      }
+    }).bind(this));
     this.filterListener = onRegisterFilter((filters) => this.setState({ filters }));
   }
 
@@ -49,6 +45,7 @@ export class BrowsePage extends Component {
   }
 
   componentWillUnmount() {
+    this.listener();
     this.filterListener();
   }
 
