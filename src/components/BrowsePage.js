@@ -20,7 +20,6 @@ export class BrowsePage extends Component {
   };
 
   state = {
-    //filters: filters.reduce((acc, filter) => Object.assign(acc, { [filter.field]: _.cloneDeep(filter.default) }), {}),
     filters: {},
   };
 
@@ -39,6 +38,7 @@ export class BrowsePage extends Component {
   }
 
   componentDidUpdate() {
+    //lame debouncing
     setTimeout(() => {
       this.shouldUpdate = true;
     }, 30);
@@ -54,7 +54,6 @@ export class BrowsePage extends Component {
   };
 
   createFilter(filter) {
-    //use hasOwnProperty
     const field = filter.field;
 
     if (filter.type === 'discrete') {
@@ -100,7 +99,7 @@ export class BrowsePage extends Component {
       );
     }
 
-    //tracking so we dont update too often
+    //tracking so we dont update too often. check componentDidUpdate
     this.shouldUpdate = false;
 
     /* filtering */

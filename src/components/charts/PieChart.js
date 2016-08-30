@@ -51,7 +51,8 @@ export default class PieChart extends Component {
       .attr("class", "slice")
       .each(function (d) {
         this._current = d;
-      });
+      })
+      .attr('title', d => d.value); //todo - tooltip
 
     slice
       .transition().duration(500)
