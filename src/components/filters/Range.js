@@ -23,7 +23,7 @@ export default class Range extends Component {
     //todo - choose exponent based on range
     const exp = Math.floor(Math.log10((this.props.range[1] - this.props.range[0]) / 100)) + 1;
     const up = d3.scale.pow().exponent(exp).domain([0, 100]).range(this.props.range);
-    const down = d3.scale.pow().exponent(exp).domain(this.props.range).range([0, 100]);
+    const down = up.invert;
 
     this.scaleUpFn = (val) => Math.round(up(val));
     this.scaleDownFn = (val) => Math.round(down(val));
