@@ -44,6 +44,9 @@ export default class Range extends Component {
 
     console.log('rendering', this.props.field, scaledValue, filterValue);
 
+    const left = scaledValue[0];
+    const right = 100 - scaledValue[1];
+
     return (
       <div className="Range">
         <ReactSlider onChange={this.onChange}
@@ -56,8 +59,14 @@ export default class Range extends Component {
                      barClassName="Range-bar"
                      pearling/>
         <div className="Range-labels">
-          <div className="Range-label" style={{ left: scaledValue[0] + '%'}}>{filterValue[0]}</div>
-          <div className="Range-label" style={{ right: (100 - scaledValue[1]) + '%'}}>{filterValue[1]}</div>
+          <div className="Range-label"
+               style={{ left: left + '%', opacity: (right > 90 ? '0' : '1') }}>
+            {filterValue[0]}
+            </div>
+          <div className="Range-label"
+               style={{ right: right + '%', opacity: (left > 70 ? '0' : '1') }}>
+            {filterValue[1]}
+            </div>
         </div>
       </div>
     );

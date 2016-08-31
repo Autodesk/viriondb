@@ -36,5 +36,6 @@
   &-label {
     position: absolute;
     top: 2px;
+    transition: opacity var(--transition-extrafast);
   }
 }

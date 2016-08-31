@@ -19,12 +19,15 @@ export default class SearchBarInput extends Component {
   };
 
   onInputKeyDown = (evt) => {
-    if (evt.which !== 13) {
-      return;
+    //enter
+    if (evt.which === 13) {
+      evt.preventDefault();
+      this.props.addInputTag(evt.target.value);
+      this.props.setSearchInput('');
+    } else if (evt.keyCode === 27) {
+      evt.preventDefault();
+      this.onClickClear(evt);
     }
-    evt.preventDefault();
-    this.props.addInputTag(evt.target.value);
-    this.props.setSearchInput('');
   };
 
   onInputChange = (evt) => {
@@ -54,8 +57,9 @@ export default class SearchBarInput extends Component {
                onChange={this.onInputChange}
                onKeyDown={this.onInputKeyDown}
                placeholder="Add Search Terms"/>
-        {(this.props.tags.length > 0 || this.props.searchInput.length > 0) && (<div className="SearchBar-icon SearchBarInput-clear"
-             onClick={this.onClickClear}></div>)}
+        {(this.props.tags.length > 0 || this.props.searchInput.length > 0) && (
+          <div className="SearchBar-icon SearchBarInput-clear"
+               onClick={this.onClickClear}></div>)}
       </div>
     );
   }
