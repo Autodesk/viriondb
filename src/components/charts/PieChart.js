@@ -50,8 +50,9 @@ export default class PieChart extends Component {
       .style("fill", d => this.props.color)
       .attr("class", "slice")
       .each(function (d) {
-        this._current = d
-      });
+        this._current = d;
+      })
+      .attr('title', d => d.value); //todo - tooltip
 
     slice
       .transition().duration(500)
@@ -71,9 +72,8 @@ export default class PieChart extends Component {
     const shortName = filters.find(filter => filter.field === field).shortname;
 
     return (
-      <div className="Chart PieChart">
-        <span className="PieChart-heading"
-              style={{ color: color }}>
+      <div className="Chart PieChart" style={{ color: color }}>
+        <span className="PieChart-heading">
           {longName}
         </span>
         <span className="PieChart-label"

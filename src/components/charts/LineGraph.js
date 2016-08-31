@@ -20,6 +20,8 @@ export default class LineGraph extends Component {
   componentDidMount() {
     this.svg = d3.select(this.element);
 
+    //todo - draw a line
+
     this.update(this.props.data);
   }
 
@@ -36,8 +38,10 @@ export default class LineGraph extends Component {
   }
 
   render() {
-    const { field, color } = this.props;
+    const { field, data, color } = this.props;
     const longName = fieldName(field);
+
+    //console.log(field, data);
 
     return (
       <div className="Chart LineGraph"

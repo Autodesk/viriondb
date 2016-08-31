@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import ReactSlider from 'react-slider';
+import d3 from 'd3';
 import { isEqual } from 'lodash';
 
 import '../../styles/Range.css';
@@ -14,36 +15,60 @@ export default class Range extends Component {
     filter: PropTypes.array,
     field: PropTypes.string.isRequired,
     range: PropTypes.array.isRequired,
-    defaultFilter: PropTypes.any.isRequired,
+    defaultFilter: PropTypes.array.isRequired,
   };
 
-  getValue = () => {
-    if (!this.rangeSlider) {
-      return null;
-    }
-    return this.rangeSlider.getValue();
-  };
+  componentWillMount() {
+    //todo - correct scaling - exponential scaling different in each direction
+    //todo - choose exponent based on range
+    const exp = Math.floor(Math.log10((this.props.range[1] - this.props.range[0]) / 100)) + 1;
+    const up = d3.scale.pow().exponent(exp).domain([0, 100]).range(this.props.range);
+    const down = up.invert;
+
+    this.scaleUpFn = (val) => Math.round(up(val));
+    this.scaleDownFn = (val) => Math.round(down(val));
+  }
 
   onChange = (input) => {
     const next = isEqual(input, this.props.defaultFilter) ? null : input;
-    this.props.setFilter({ [this.props.field]: next });
+    const scaled = !!next ? next.map(this.scaleUpFn) : next;
+    console.log('setting', scaled);
+
+    this.props.setFilter({ [this.props.field]: scaled });
   };
 
   render() {
     const { range, field, color, filter, defaultFilter } = this.props;
     const filterValue = Array.isArray(filter) ? filter : defaultFilter;
+    const scaledValue = filterValue.map(this.scaleDownFn);
+
+    console.log('rendering', this.props.field, scaledValue, filterValue);
+
+    const left = scaledValue[0];
+    const right = 100 - scaledValue[1];
 
     return (
-      <ReactSlider onChange={this.onChange}
-                   value={filterValue}
-                   min={range[0]}
-                   max={range[1]}
-                   ref={(el) => { if (el) { this.rangeSlider = el; }}}
-                   withBars
-                   className="Range"
-                   handleClassName="Range-handle"
-                   barClassName="Range-bar"
-                   pearling/>
+      <div className="Range">
+        <ReactSlider onChange={this.onChange}
+                     value={scaledValue}
+                     min={0}
+                     max={100}
+                     withBars
+                     className="Range-slider"
+                     handleClassName="Range-handle"
+                     barClassName="Range-bar"
+                     pearling/>
+        <div className="Range-labels">
+          <div className="Range-label"
+               style={{ left: left + '%', opacity: (right > 90 ? '0' : '1') }}>
+            {filterValue[0]}
+            </div>
+          <div className="Range-label"
+               style={{ right: right + '%', opacity: (left > 70 ? '0' : '1') }}>
+            {filterValue[1]}
+            </div>
+        </div>
+      </div>
     );
   }
 }

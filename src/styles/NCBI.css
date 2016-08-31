@@ -1,0 +1,17 @@
+@import './variables.css';
+
+.NCBI {
+  padding-top: 1rem;
+
+  a {
+    display: block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--colors-blueGreyMed);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--colors-grey);
+    }
+  }
+}

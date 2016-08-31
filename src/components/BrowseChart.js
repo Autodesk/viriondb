@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import { filters } from '../constants/filters';
 
 import PieChart from './charts/PieChart';
@@ -8,18 +8,18 @@ import LineGraph from './charts/LineGraph';
 export default class BrowseChart extends Component {
   static propTypes = {
     field: PropTypes.string.isRequired,
-  	data: PropTypes.any.isRequired,
+    data: PropTypes.any.isRequired,
   };
 
   static componentMap = {
     discrete: PieChart,
     range: LineGraph,
-    whatMakesItABarInsteadOfAPie: BarChart,
+    //whatMakesItALineInsteadOfABar: LineGraph,
   };
 
   render() {
-    const { field, data } = this.props;
-  	const info = filters.find(filter => filter.field === field);
+    const { field } = this.props;
+    const info = filters.find(filter => filter.field === field);
     const ChartComponent = BrowseChart.componentMap[info.type];
 
     if (!ChartComponent) {

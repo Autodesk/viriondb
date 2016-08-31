@@ -27,7 +27,8 @@ export const arc = d3.svg.arc()
 export const massageData = (map) => Object.keys(map).map(key => ({
   key,
   value: map[key],
-}));
+}))
+  .filter(obj => obj.value > 0);
 
 export const keyFn = (d) => d.data.key;
 

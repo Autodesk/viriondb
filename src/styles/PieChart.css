@@ -10,6 +10,7 @@
 .PieChart {
   &-heading {
     font-weight: bold;
+    color: inherit;
   }
 
   &-label {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { capitalize } from 'lodash';
-import { rows, fieldName, rowNames } from '../constants/rows';
+import { fieldName } from '../constants/rows';
 
 import ComparisonRowDetail from './ComparisonRowDetail';
 

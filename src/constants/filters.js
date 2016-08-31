@@ -136,8 +136,17 @@ export const filters = [
     type: 'range',
     shortname: 'PN',
     color: '#aaeeee',
-    default: [0, 541],
+    default: [0, 2541],
     range: [0, 2541],
+  },
+
+  {
+    field: 'derived_segment_count',
+    type: 'range',
+    shortname: 'Sg',
+    color: '#eeeeee',
+    default: [0, 105],
+    range: [0, 105],
   },
 
   {
