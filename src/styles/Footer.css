@@ -25,7 +25,13 @@
 
   &-link {
     display: block;
-    color: var(--colors-greyLight);
+    color: var(--colors-greyDark);
+    transition: color var(--transition-extrafast);
+
+    &:hover {
+      cursor: pointer;
+      color: var(--colors-grey);
+    }
 
     &:first-child {
       padding-bottom: 1em;
