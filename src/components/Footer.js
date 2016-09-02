@@ -9,16 +9,21 @@ export default class Footer extends Component {
         <div className="Footer-autodesk"/>
         <div className="Footer-right">
           <div className="Footer-links">
-            <a className="Footer-link">About VirionDB</a>
-            <a className="Footer-link">FAQ</a>
-            <a className="Footer-link">Community</a>
-            <a className="Footer-link">Feedback</a>
-            <a className="Footer-link">Support</a>
-            <a className="Footer-link">More Bio Nano Tools</a>
+            <a className="Footer-link"
+               target="_blank"
+               href="https://forum.bionano.autodesk.com/t/about-viriondb/">About VirionDB</a>
+            <a className="Footer-link"
+               target="_blank">Community</a>
+            <a className="Footer-link"
+               target="_blank"
+               href="https://forum.bionano.autodesk.com/t/feedback/127">Feedback</a>
+            <a className="Footer-link"
+               target="_blank"
+               href="http://bionano.autodesk.com/">More Bio Nano Tools</a>
           </div>
           <div className="Footer-logo"/>
         </div>
       </div>
     );
   }
-};
+}

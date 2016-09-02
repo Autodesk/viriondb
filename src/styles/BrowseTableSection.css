@@ -10,6 +10,7 @@
 
   &-heading {
     color: var(--colors-grey);
+    font-weight: 100;
     font-size: var(--font-size-table-heading);
     padding: 0 var(--table-padding);
   }

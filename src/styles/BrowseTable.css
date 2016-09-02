@@ -12,11 +12,11 @@
     padding: 0.5em 0.5em 1em;
     font-size: var(--font-size-table-heading);
     font-weight: 500;
-    color: var(--colors-grey);
+    color: var(--colors-greyDark);
 
     &-detail {
       padding-left: 0.5em;
-      color: var(--colors-greyLight);
+      color: var(--colors-grey);
     }
   }
 

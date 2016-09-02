@@ -7,7 +7,7 @@
   padding: 1rem 1.5rem;
 
   &-heading {
-    color: var(--colors-grey);
+    color: var(--colors-greyDark);
     font-size: 1.25rem;
     margin-bottom: 1rem;
   }

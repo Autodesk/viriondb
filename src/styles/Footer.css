@@ -1,7 +1,7 @@
 @import './variables.css';
 
 .Footer {
-  padding: 1em 0;
+  padding: 1.5em 0;
   background-color: var(--background-color-footer);
   display: flex;
   flex-direction: row;
@@ -27,6 +27,7 @@
     display: block;
     color: var(--colors-greyDark);
     transition: color var(--transition-extrafast);
+    text-decoration: none;
 
     &:hover {
       cursor: pointer;
