@@ -5,13 +5,26 @@
 
   a {
     display: block;
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-decoration: none;
     color: var(--colors-blueGreyMed);
     transition: color var(--transition-fast);
 
     &:hover {
       color: var(--colors-grey);
+    }
+  }
+
+  &-link {
+    &:after {
+      content: '';
+      display: inline-block;
+      margin-left: 0.5em;
+      width: 0.8rem;
+      height: 0.8rem;
+      background-image: url('/images/offsiteLink.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
 }
