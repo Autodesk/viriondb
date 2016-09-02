@@ -46,7 +46,7 @@
   &-lens {
     cursor: default;
     /* temporary image */
-    background-image: url('/images/add.svg');
+    background-image: url('/images/search.svg');
   }
 
   &-share {

@@ -42,6 +42,7 @@ export const rowNames = {
   derived_taxonomy_family: 'Family',
   derived_taxonomy_order: 'Order',
   derived_taxonomy_genus: 'Genus',
+  length: 'Sequence Length',
 };
 
 export const fieldName = (field) => {

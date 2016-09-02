@@ -2,8 +2,13 @@
 
 .ComparisonActions {
 
+  &-value {
+    display: flex;
+    align-items: flex-start;
+  }
+
   &-remove {
-    padding: 0.5em;
+    padding: 5px 0.5em;
     font-color: var(--colors-greyDark);
     background-color: var(--colors-greyLight);
     margin-right: 1em;
@@ -22,7 +27,7 @@
     background-size: contain;
 
     &.active {
-      background-color: red;
+      background-image: url('/images/favorite-selected.svg');
     }
   }
 }

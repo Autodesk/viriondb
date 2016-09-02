@@ -7,10 +7,11 @@
   display: flex;
   flex-direction: row;
   background-color: transparent;
-  /* transition: background-color var(--timing-fast) ease-out; */
+  transition: background-color 0s;
 
   &.active {
     background-color: var(--colors-white);
+    /* transition: background-color var(--timing-fast) ease-out; */
   }
 
   &-key,
@@ -44,7 +45,8 @@
     flex-basis: 0;
   }
 
-  &.active &-value {}
+  &.active &-value {
+  }
 
   /* padding on row past active */
   &.active + & &-key,
@@ -53,7 +55,7 @@
   }
 
   &:first-child &-key {
-    padding-bottom: 2em;
+    padding-bottom: 2.75em;
   }
 
   &:last-child &-key {
