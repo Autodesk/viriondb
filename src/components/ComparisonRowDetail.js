@@ -5,6 +5,7 @@ import Capsid3d from './rowDetail/Capsid3d';
 import BaltimoreGroup from './rowDetail/BaltimoreGroup';
 import Host from './rowDetail/Host';
 import NCBI from './rowDetail/NCBI';
+import Sequence from './rowDetail/Sequence';
 import LineageTree from './rowDetail/LineageTree';
 
 export default class ComparisonRowDetail extends Component {
@@ -20,6 +21,7 @@ export default class ComparisonRowDetail extends Component {
     derived_baltimore: BaltimoreGroup,
     host: Host,
     derived_lineage: LineageTree,
+    length: Sequence,
   };
 
   render() {

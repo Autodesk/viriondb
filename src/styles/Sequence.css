@@ -1,0 +1,22 @@
+@import './variables.css';
+
+.Sequence {
+
+  &-fasta {
+    padding: 0.5rem 0;
+    display: block;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--colors-blueGreyMed);
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--colors-grey);
+    }
+  }
+
+  &-string {
+    font-size: 12px;
+    text-overflow: ellipsis;
+  }
+}
