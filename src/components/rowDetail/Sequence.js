@@ -14,7 +14,6 @@
  limitations under the License.
  */
 import React, { PropTypes, Component } from 'react';
-import Spinner from '../Spinner';
 import getSequence from '../../data/sequence';
 
 import '../../styles/Sequence.css';
@@ -22,6 +21,7 @@ import '../../styles/Sequence.css';
 export default class Sequence extends Component {
   static propTypes = {
     instance: PropTypes.shape({
+      name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
     }).isRequired,
   };
@@ -37,17 +37,24 @@ export default class Sequence extends Component {
 
   render() {
     const fasta = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${this.props.instance.id}&rettype=fasta&retmode=text`;
+    const genbank = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${this.props.instance.id}&rettype=gb&retmode=text`;
 
     const sequence = !this.state.sequence ?
-      <Spinner /> :
-      <div className="Sequence">{this.state.sequence.substring(0, 25) + '...'}</div>;
+      '...' :
+    this.state.sequence.substring(0, 25) + '...';
 
     return (
       <div className="Sequence">
-        <a className="Sequence-fasta"
-           download
-           href={fasta}
-           target="_blank">Fasta</a>
+        <div className="Sequence-downloads">
+          <a className="Sequence-link"
+             download={this.props.instance.name + '.gb'}
+             href={genbank}
+             target="_blank">Genbank</a>
+          <a className="Sequence-link"
+             download={this.props.instance.name + '.gb'}
+             href={fasta}
+             target="_blank">Fasta</a>
+        </div>
         <div className="Sequence-string">{sequence}</div>
       </div>
     );
