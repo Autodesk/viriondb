@@ -6,6 +6,7 @@ import { isEqual } from 'lodash';
 import '../../styles/Range.css';
 
 //todo - handle color passdown, may need to modify component directly
+//todo - better hiding of labels, based on what handle is hovered
 
 export default class Range extends Component {
   static propTypes = {
@@ -42,6 +43,8 @@ export default class Range extends Component {
 
     const left = scaledValue[0];
     const right = 100 - scaledValue[1];
+    const hideLeft = (scaledValue[1] - left) < 30;
+    const hideRight = right > 90;
 
     return (
       <div className="Range">
@@ -53,14 +56,15 @@ export default class Range extends Component {
                      className="Range-slider"
                      handleClassName="Range-handle"
                      barClassName="Range-bar"
+                     style={{backgroundColor: color}}
                      pearling/>
         <div className="Range-labels">
           <div className="Range-label"
-               style={{ left: left + '%', opacity: (right > 90 ? '0' : '1') }}>
+               style={{ left: left + '%', opacity: (hideLeft ? '0' : '1') }}>
             {filterValue[0]}
           </div>
           <div className="Range-label"
-               style={{ right: right + '%', opacity: (left > 70 ? '0' : '1') }}>
+               style={{ right: right + '%', opacity: (hideRight ? '0' : '1') }}>
             {filterValue[1]}
           </div>
         </div>
