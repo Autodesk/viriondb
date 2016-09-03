@@ -93,3 +93,31 @@ export const rowHierarchy = [
     ],
   },
 ];
+
+//todo - should not be in flow of page (put it somewhere else)
+const roughMeasure = (string) => {
+  const div = document.createElement('span');
+  div.className = 'BrowseTableSection-title';
+  div.innerText = string;
+  document.body.appendChild(div);
+  const dim = div.getBoundingClientRect();
+  document.body.removeChild(div);
+  return Math.floor(dim.width) + 1;
+};
+
+export const rowSizes = Object.assign(rows.reduce((acc, row) => {
+  return Object.assign(acc, {
+    [row]: roughMeasure(fieldName(row)) + 12,
+  });
+}, {}), {
+  name: 300,
+  capsid_morphology: 150,
+  host: 200,
+  derived_taxonomy_family: 120,
+  derived_taxonomy_order: 120,
+  derived_taxonomy_genus: 120,
+});
+
+export const setRowSize = (field, width) => {
+  Object.assign(rowSizes, { [field]: width });
+};

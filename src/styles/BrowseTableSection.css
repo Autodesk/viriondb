@@ -38,6 +38,8 @@
     padding: var(--table-padding);
     min-width: 50px;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: opacity 0s;
 
     &:empty {
