@@ -7,23 +7,34 @@ export default class Checkbox extends Component {
     checked: PropTypes.bool,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
+    color: PropTypes.string,
+  };
+
+  static defaultProps = {
+    checked: false,
+    disabled: false,
   };
 
   onClick = (evt) => {
     evt.preventDefault();
     const { checked, disabled, onChange } = this.props;
-    if (disabled) { return; }
-    if (!onChange) { return; }
+    if (disabled) {
+      return;
+    }
+    if (!onChange) {
+      return;
+    }
     onChange(!checked);
   };
 
   render() {
-    const { checked, disabled } = this.props;
+    const { color, checked, disabled } = this.props;
     return (
       <div className={'Checkbox' +
-                      (checked ? ' checked' : '') +
-                      (disabled ? ' disabled': '')} 
-           onClick={(evt) => this.onClick(evt)} />
+      (checked ? ' checked' : '') +
+      (disabled ? ' disabled' : '')}
+           style={{backgroundColor: ((checked && color) ? color : null)}}
+           onClick={(evt) => this.onClick(evt)}/>
     );
   }
 };

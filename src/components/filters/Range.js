@@ -13,6 +13,7 @@ export default class Range extends Component {
     setFilter: PropTypes.func.isRequired,
     filter: PropTypes.array,
     field: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     range: PropTypes.array.isRequired,
     defaultFilter: PropTypes.array.isRequired,
   };
