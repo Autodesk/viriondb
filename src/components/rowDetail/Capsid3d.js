@@ -59,12 +59,21 @@ export default class Capsid3d extends Component {
       //todo - intelligent based on T number
       shape = new three.IcosahedronGeometry(75, 0);
     } else if (value.indexOf('spher') >= 0) {
-      shape = new three.SphereGeometry(75, 100, 100);
+      shape = new three.SphereGeometry(75, 50, 50);
     } else if (value.indexOf('rod') >= 0) {
       shape = new three.CylinderGeometry(50, 50, 150, 40);
     } else if (value.indexOf('ovoid') >= 0) {
-      //todo
-      shape = new three.SphereGeometry(75, 100, 100);
+      // points - (x, y) pairs are rotated around the y-axis
+      const points = [];
+      const scale = 100;
+      for ( let deg = 0; deg <= 180; deg += 6 ) {
+        const rad = Math.PI * deg / 180;
+        const point = new three.Vector2( scale * ( 0.72 + 0.08 * Math.cos( rad ) ) * Math.sin( rad ), - scale * Math.cos( rad ) ); // the "egg equation"
+        // x-coord should be greater than zero to avoid degenerate triangles; it is not guaranteed in this formula.
+        points.push( point );
+      }
+      shape = new three.LatheBufferGeometry( points, 50 );
+      console.log(shape);
     } else if (value.indexOf('budded') >= 0) {
       //todo;
       shape = new three.CylinderGeometry(50, 50, 150, 40);
@@ -90,7 +99,7 @@ export default class Capsid3d extends Component {
 
       render();
     }
-  }
+  };
 
   render() {
     return (

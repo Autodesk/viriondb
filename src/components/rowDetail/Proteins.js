@@ -12,6 +12,7 @@ export default class Proteins extends Component {
   };
 
   render() {
+    //todo - verify this
     const id = this.props.instance.id;
     const nuccore = `https://www.ncbi.nlm.nih.gov/nuccore/${id}`;
 
