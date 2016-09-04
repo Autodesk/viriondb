@@ -56,6 +56,11 @@
     }
   }
 
+  /* hack - should be shared column width var */
+  &:first-child {
+    width: 96px;
+  }
+
   &:last-child {
     border-right: 0;
   }

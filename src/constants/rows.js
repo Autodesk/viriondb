@@ -99,15 +99,17 @@ const roughMeasure = (string) => {
   const div = document.createElement('span');
   div.className = 'BrowseTableSection-title';
   div.innerText = string;
+  div.style.display = 'inline-block';
   document.body.appendChild(div);
   const dim = div.getBoundingClientRect();
   document.body.removeChild(div);
   return Math.floor(dim.width) + 1;
 };
 
+const extraPadding = 12;
 export const rowSizes = Object.assign(rows.reduce((acc, row) => {
   return Object.assign(acc, {
-    [row]: roughMeasure(fieldName(row)) + 12,
+    [row]: roughMeasure(fieldName(row)) + extraPadding,
   });
 }, {}), {
   name: 300,
@@ -117,6 +119,8 @@ export const rowSizes = Object.assign(rows.reduce((acc, row) => {
   derived_taxonomy_order: 120,
   derived_taxonomy_genus: 120,
 });
+
+export const headerColumnWidth = 96;
 
 export const setRowSize = (field, width) => {
   Object.assign(rowSizes, { [field]: width });
