@@ -9,7 +9,8 @@
 
   &-heading {
     flex-shrink: 0;
-    padding: 0.5em 0.5em 1em;
+    flex-grow: 0;
+    padding: 0.5em;
     font-size: var(--font-size-table-heading);
     font-weight: 500;
     color: var(--colors-greyDark);
@@ -20,11 +21,31 @@
     }
   }
 
-  &-values {
+  &-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    overflow-x: scroll;
+  }
+
+  &-headers {
     display: flex;
     flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: scroll;
+  }
+
+  &-values {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-headers {
+    flex-shrink: 0;
+    flex-grow: 1;
+  }
+
+  &-valuesWrap {
     min-height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }

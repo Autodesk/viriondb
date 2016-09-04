@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { fieldName } from '../constants/rows';
+import { fieldName, rowSizes, setRowSize } from '../constants/rows';
 import registry, { onRegister } from '../data/register';
-import { unknownValue } from '../constants/filters';
 
 import '../styles/BrowseTableSection.css';
 
@@ -40,6 +39,7 @@ export default class BrowseTableSection extends Component {
           const nameField = fieldName(field);
           return (
             <div className="BrowseTableSection-column"
+                 style={{width: rowSizes[field]}}
                  key={field}>
               <div className="BrowseTableSection-title">{nameField}</div>
 
@@ -51,6 +51,7 @@ export default class BrowseTableSection extends Component {
                     <div className={'BrowseTableSection-cell' +
                                    (isHovered ? ' hovered' : '') +
                                    (isChecked ? ' checked' : '')}
+                         title={registry[instanceId][field]}
                          onMouseEnter={() => onHover(instanceId)}
                          key={instanceId}>
                       {registry[instanceId][field] || defaultValue}

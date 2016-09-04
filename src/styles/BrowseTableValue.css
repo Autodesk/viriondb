@@ -1,0 +1,55 @@
+@import './variables.css';
+
+.BrowseTableValue {
+  display: flex;
+  flex-direction: row;
+  transition: background-color 0s;
+
+  &-section {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-grow: 0;
+    white-space: nowrap;
+    border-right: 1px solid var(--colors-greyLight);
+
+    /* hack - should be shared column width var */
+    &:first-child {
+      width: 96px;
+    }
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+
+  &-cell {
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    padding: var(--table-padding);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-open {
+    opacity: 0;
+    transition: 0s;
+    margin-right: 1em;
+  }
+
+  &.checked {
+    background-color: var(--colors-blueGreyLight);
+  }
+
+  &:hover {
+    background-color: var(--colors-blueGreyMed);
+    color: var(--colors-white);
+
+    & .BrowseTableValue-open {
+      opacity: 1;
+    }
+  }
+
+}
