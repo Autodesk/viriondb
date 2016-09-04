@@ -22,7 +22,7 @@ export default class BrowseTableSection extends Component {
     return (
       <div className={'BrowseTableValue' + (checked ? ' checked' : '')}>
 
-        <div className="BrowseTableValue-section">
+        <div className="BrowseTableSection">
           <div className="BrowseTableValue-cell">
             <a className="BrowseTableValue-open action action-black"
                onClick={() => onOpen(instanceId)}>
@@ -37,7 +37,7 @@ export default class BrowseTableSection extends Component {
         {sections.map(section => {
           const { name, fields } = section;
           return (
-            <div className="BrowseTableValue-section"
+            <div className="BrowseTableSection"
                  key={name}>
               {fields.map(field => {
                 return (

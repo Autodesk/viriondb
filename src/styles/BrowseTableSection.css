@@ -1,11 +1,8 @@
 @import './variables';
 
 .BrowseTableSection {
-  display: inline-block;
-  position: relative;
   flex-shrink: 0;
   white-space: nowrap;
-  padding: var(--table-padding) 0;
   border-right: 1px solid var(--colors-greyLight);
 
   &-heading {
@@ -29,7 +26,7 @@
     text-align: right;
   }
 
-  /* hack - should be shared column width var */
+  /* see also constant for headerColumnWidth */
   &:first-child {
     width: 96px;
   }
