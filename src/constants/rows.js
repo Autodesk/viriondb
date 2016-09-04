@@ -33,7 +33,7 @@ export const rowNames = {
   nucleid_acid_structure: 'Nucleic Acid Structure',
   nucleic_acid_shape: 'Nucleid Acid Shape',
   genome_shape: 'Nucleid Acid Shape',
-  derived_protein_count: 'Protein Number',
+  derived_protein_count: 'Protein Count',
   derived_segment_count: 'Segments',
   capsid_morphology: 'Capsid Morphology',
   capsid_envelope: 'Capsid Envelope',
