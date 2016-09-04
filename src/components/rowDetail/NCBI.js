@@ -23,17 +23,13 @@ export default function NCBI({ field, value, instance }) {
   }
 
   const nuccore = `https://www.ncbi.nlm.nih.gov/nuccore/${value}`;
-
   const fasta = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${value}&rettype=fasta&retmode=text`;
 
   return (
     <div className="NCBI">
-      <a className="NCBI-nuccore"
+      <a className="NCBI-link"
          href={nuccore}
-         target="_blank">Nuccore</a>
-      <a className="NCBI-fasta"
-         href={fasta}
-         target="_blank">Fasta</a>
+         target="_blank">NCBI</a>
     </div>
   );
 }

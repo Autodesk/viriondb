@@ -163,7 +163,7 @@ export const clientConfig = merge({}, config, {
 
   // Choose a developer tool to enhance debugging
   // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: DEBUG ? 'eval-cheap-module-source-map' : false,
+  devtool: DEBUG ? 'inline-module-source-map' : false,
 });
 
 export const serverConfig = merge({}, config, {

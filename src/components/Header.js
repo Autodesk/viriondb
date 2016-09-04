@@ -11,6 +11,13 @@ export default class Header extends Component {
   };
 
   render() {
+    const loc = window.location;
+    const subject = 'Virion DB Link'.replace(' ', '%20');
+    const body = encodeURIComponent(`Check out this page on Virion DB:
+
+${loc}`);
+    const mailLink = `mailto:?subject=${subject}&body=${body}`;
+
     return (
       <div className="Header">
         <div className="Header-nav">
@@ -20,10 +27,11 @@ export default class Header extends Component {
         <div className="Header-icons">
           {this.props.showSearch && (<div className={'Header-icon Header-lens'}
                                           onClick={this.onClickLens}></div>)}
-          <div className="Header-icon Header-share"
-               onClick={this.onClickShare}></div>
-          <div className="Header-icon Header-feedback"
-               onClick={this.onClickFeedback}></div>
+          <a className="Header-icon Header-share"
+             href={mailLink}/>
+          <a className="Header-icon Header-feedback"
+             href="https://forum.bionano.autodesk.com/t/feedback/127"
+             target="_blank"/>
         </div>
       </div>
     );

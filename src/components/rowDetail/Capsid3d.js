@@ -9,6 +9,16 @@ export default class Capsid3d extends Component {
   };
 
   componentDidMount() {
+    setTimeout(this.renderThree);
+  }
+
+  componentWillUnmount() {
+    if (typeof this.rafId !== 'undefined') {
+      window.cancelAnimationFrame(this.rafId);
+    }
+  }
+
+  renderThree = () => {
     this.renderer = new three.WebGLRenderer({ antialias: true, alpha: true });
     const camera = new three.PerspectiveCamera(80, 1, 0.1, 10000);
     const scene = new three.Scene();
@@ -82,15 +92,10 @@ export default class Capsid3d extends Component {
     }
   }
 
-  componentWillUnmount() {
-    if (typeof this.rafId !== 'undefined') {
-      window.cancelAnimationFrame(this.rafId);
-    }
-  }
-
   render() {
     return (
       <div className="Capsid3d"
+           style={{ width: '300px', height: '300px' }}
            ref={(el) => {
              if (el) {
                this.element = el;

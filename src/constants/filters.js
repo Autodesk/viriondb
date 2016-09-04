@@ -98,24 +98,24 @@ export const filters = [
   },
 
   /*
-  //too many options
-  {
-    field: 'capsid_morphology',
-    type: 'discrete',
-    shortname: 'CM',
-    color: '#aaeeaa',
-    default: {},
-    values: {
-      'helical': 'Helical',
-      'spherical': 'Spherical',
-      'icosahedral': 'Icosahedral',
-      'head-and-tail': 'Head-and-Tail',
-      'spindled': 'Spindled',
-      'non-canonical': 'Non-Canonical',
-      [unknownValue]: 'Unknown',
-    },
-  },
-  */
+   //too many options
+   {
+   field: 'capsid_morphology',
+   type: 'discrete',
+   shortname: 'CM',
+   color: '#aaeeaa',
+   default: {},
+   values: {
+   'helical': 'Helical',
+   'spherical': 'Spherical',
+   'icosahedral': 'Icosahedral',
+   'head-and-tail': 'Head-and-Tail',
+   'spindled': 'Spindled',
+   'non-canonical': 'Non-Canonical',
+   [unknownValue]: 'Unknown',
+   },
+   },
+   */
 
   {
     field: 'derived_sense',
@@ -144,7 +144,7 @@ export const filters = [
     field: 'derived_segment_count',
     type: 'range',
     shortname: 'Sg',
-    color: '#eeeeee',
+    color: '#ee9999',
     default: [0, 105],
     range: [0, 105],
   },
@@ -165,5 +165,10 @@ export const filters = [
    },
    */
 ];
+
+export const getRange = (field) => {
+  const filter = filters.find(filter => filter.field === field);
+  return filter ? filter.range : [0, 0];
+};
 
 export default filters;

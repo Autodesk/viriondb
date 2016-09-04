@@ -8,6 +8,10 @@ export const height = 120;
 export const widthLarge = 160;
 export const heightLarge = 160;
 
+//todo - smarter
+export const widthLargeInner = 110;
+export const heightLargeInner = 70;
+
 export const defaultColor = '#9999dd';
 
 /* pie chart */

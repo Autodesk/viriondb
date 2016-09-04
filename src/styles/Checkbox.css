@@ -1,23 +1,23 @@
 @import './variables.css';
 
 .Checkbox {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	border: 1px solid var(--colors-grey);
-	background-color: var(--colors-white);
-	cursor: pointer;
-	user-select: none;
-	vertical-align: text-top;
-	transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 1px solid var(--colors-grey);
+  background-color: var(--colors-white);
+  cursor: pointer;
+  user-select: none;
+  vertical-align: text-top;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 
-	&.checked {
-		background-color: var(--colors-selected);
-		border-color: transparent;
-	}
+  &.checked {
+    background-color: var(--colors-selected);
+    border-color: transparent;
+  }
 
-	&-disabled {
-		opacity: 0.5;
-		cursor: not-allowed;
-	}
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

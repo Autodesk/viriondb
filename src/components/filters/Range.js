@@ -5,22 +5,20 @@ import { isEqual } from 'lodash';
 
 import '../../styles/Range.css';
 
-//should be logarithmic... maybe need to pass in std deviation too / some way to know where to weight the scale
-//should handle conversion here, need to relay to handles somehow (or show ourselves)... might be easier to write from scratch
-//also need to handle color passdown, may need to modify component directly
+//todo - handle color passdown, may need to modify component directly
+//todo - better hiding of labels, based on what handle is hovered
 
 export default class Range extends Component {
   static propTypes = {
     setFilter: PropTypes.func.isRequired,
     filter: PropTypes.array,
     field: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     range: PropTypes.array.isRequired,
     defaultFilter: PropTypes.array.isRequired,
   };
 
   componentWillMount() {
-    //todo - correct scaling - exponential scaling different in each direction
-    //todo - choose exponent based on range
     const exp = Math.floor(Math.log10((this.props.range[1] - this.props.range[0]) / 100)) + 1;
     const up = d3.scale.pow().exponent(exp).domain([0, 100]).range(this.props.range);
     const down = up.invert;
@@ -32,7 +30,7 @@ export default class Range extends Component {
   onChange = (input) => {
     const next = isEqual(input, this.props.defaultFilter) ? null : input;
     const scaled = !!next ? next.map(this.scaleUpFn) : next;
-    console.log('setting', scaled);
+    //console.log('setting', scaled);
 
     this.props.setFilter({ [this.props.field]: scaled });
   };
@@ -42,10 +40,12 @@ export default class Range extends Component {
     const filterValue = Array.isArray(filter) ? filter : defaultFilter;
     const scaledValue = filterValue.map(this.scaleDownFn);
 
-    console.log('rendering', this.props.field, scaledValue, filterValue);
+    //console.log('rendering', this.props.field, scaledValue, filterValue);
 
     const left = scaledValue[0];
     const right = 100 - scaledValue[1];
+    const hideLeft = (scaledValue[1] - left) < 30;
+    const hideRight = right > 90;
 
     return (
       <div className="Range">
@@ -57,16 +57,17 @@ export default class Range extends Component {
                      className="Range-slider"
                      handleClassName="Range-handle"
                      barClassName="Range-bar"
+                     style={{backgroundColor: color}}
                      pearling/>
         <div className="Range-labels">
           <div className="Range-label"
-               style={{ left: left + '%', opacity: (right > 90 ? '0' : '1') }}>
+               style={{ left: left + '%', opacity: (hideLeft ? '0' : '1') }}>
             {filterValue[0]}
-            </div>
+          </div>
           <div className="Range-label"
-               style={{ right: right + '%', opacity: (left > 70 ? '0' : '1') }}>
+               style={{ right: right + '%', opacity: (hideRight ? '0' : '1') }}>
             {filterValue[1]}
-            </div>
+          </div>
         </div>
       </div>
     );

@@ -39,6 +39,7 @@ export class BrowsePage extends Component {
 
   componentDidUpdate() {
     //lame debouncing
+    //todo - use real debouncing
     setTimeout(() => {
       this.shouldUpdate = true;
     }, 30);

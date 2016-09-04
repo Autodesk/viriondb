@@ -17,4 +17,10 @@
     color: white;
     font-weight: bold;
   }
+
+  .line {
+    fill: none;
+    stroke: white;
+    stroke-width: 3px;
+  }
 }

@@ -30,6 +30,7 @@ export default class RefinePanel extends Component {
                              field={field}
                              type={type}
                              {...rest}
+                             color={section.color}
                              filter={filters[field]}
                              setFilter={setFilter}/>
             );
