@@ -49,22 +49,21 @@ export default class LineGraph extends Component {
       .domain(domain);
 
     this.y = d3.scale.log()
-      .base(10)
       .range([height, 0]);
 
     this.line = d3.svg.line()
-      .defined(function(d) { return d && Number.isFinite(+d.value); })
+      .defined(function (d) {
+        return d && Number.isFinite(+d.value);
+      })
       .interpolate('basis')
       .x((d) => this.x(d.key))
       .y((d) => this.y(d.value) || 0);
 
     this.area = d3.svg.area()
-      //.defined(this.line.defined())
+    //.defined(this.line.defined())
       .x(this.line.x())
       .y1(this.line.y())
       .y0(this.y(1));
-
-    //todo - re-enable fill
 
     this.update(this.props.data);
   }
@@ -74,18 +73,33 @@ export default class LineGraph extends Component {
   }
 
   componentWillUnmount() {
-    //todo - cleanup
+
   }
 
   update(data) {
-    const massaged = massageData(data);
+    //insert values at start and end of domain
+    const ends = this.x.domain().reduce((acc, x) => Object.assign(acc, { [x]: 0 }), {});
+
+    const massaged = massageData(Object.assign(ends, data), true);
+
+    //todo - need default values, which are 0 when undefined
+    //todo - dynamic scaling
+    //todo - ideally, dont use log scale, so can show 0
+
+    //console.log(massaged.map(d => `${d.key} - ${d.value}`));
 
     const rangeMax = Math.max(...massaged.map(datum => parseInt(datum.value, 10) || 0));
-    this.y.domain([1, rangeMax]); //1 because log
+    const exp = Math.floor(Math.log10(rangeMax)) || 1;
+
+    console.log(this.props.field, rangeMax, this.x.domain()[1], exp);
+
+    this.y
+      .base(10 * exp)
+      .domain([1, rangeMax]); //1 because log, but doesnt handle zero...
 
     this.path.datum(massaged)
-      .attr('d', this.line);
-      //.attr('d', this.area);
+    //.attr('d', this.line);
+      .attr('d', this.area);
   }
 
   render() {
