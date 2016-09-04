@@ -15,45 +15,18 @@
     padding: 0 var(--table-padding);
   }
 
-  &-column {
-    display: inline-block;
-    padding: 0;
-
-    /*first child is heading*/
-    &:nth-child(2):last-child {
-      width: 100%;
-    }
+  &-columns {
+    display: flex;
+    flex-direction: row;
   }
 
-  &-title {
+  &-columnName {
     padding: var(--table-padding);
     color: var(--colors-grey);
   }
 
-  &-values {
-
-  }
-
-  &-cell {
-    padding: var(--table-padding);
-    min-width: 50px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: opacity 0s;
-
-    &:empty {
-      background-color: var(--colors-greyLight);
-    }
-
-    &.checked {
-      background-color: var(--colors-blueGreyLight);
-    }
-
-    &.hovered {
-      background-color: var(--colors-blueGreyMed);
-      color: var(--colors-white);
-    }
+  &-compare {
+    text-align: right;
   }
 
   /* hack - should be shared column width var */

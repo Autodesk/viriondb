@@ -24,7 +24,6 @@ export default class BrowseTable extends Component {
     offset: 0,
     checked: {},
     sections: initialSections,
-    hovered: null,
     tableViewHeight: 400,
   };
 
@@ -36,10 +35,6 @@ export default class BrowseTable extends Component {
     this.setState({
       offset: Math.floor(this.tableValues.scrollTop / tableRowHeight),
     });
-  };
-
-  setHovered = (id) => {
-    this.setState({ hovered: id });
   };
 
   toggleChecked = (id) => {
@@ -87,9 +82,7 @@ export default class BrowseTable extends Component {
     const tableInstances = instances.slice(start, end);
 
     return (
-      <div className="BrowseTable"
-           onMouseLeave={(evt) => this.setHovered(null)}
-           onMouseEnter={(evt) => this.setHovered(null)}>
+      <div className="BrowseTable">
         <div className="BrowseTable-heading">
           <span>Browse Results</span>
           <span className="BrowseTable-heading-detail">{instances.length}</span>
@@ -112,7 +105,7 @@ export default class BrowseTable extends Component {
                   })}
                 </div>
 
-                <div className="BrowseTableSection-title">
+                <div className="BrowseTableSection-columnName BrowseTableSection-compare">
                   <a className="action action-dark"
                      onClick={() => this.openInstances()}>Compare</a>
                 </div>
@@ -127,16 +120,16 @@ export default class BrowseTable extends Component {
                   <div className="BrowseTableSection-heading">
                     {name}
                   </div>
-                  {fields.map(field => {
-                    const nameField = fieldName(field);
-                    return (
-                      <div className="BrowseTableSection-column"
-                           style={{ width: rowSizes[field] }}
-                           key={field}>
-                        <div className="BrowseTableSection-title">{nameField}</div>
-                      </div>
-                    );
-                  })}
+                  <div className="BrowseTableSection-columns">
+                    {fields.map(field => {
+                      const nameField = fieldName(field);
+                      return (
+                        <div className="BrowseTableSection-columnName"
+                             style={{ width: rowSizes[field] }}
+                             key={field}>{nameField}</div>
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })}
@@ -173,48 +166,6 @@ export default class BrowseTable extends Component {
             </div>
           </div>
         </div>
-
-        {/*
-         <div className="BrowseTable-values-wrap"
-         ref={(el) => {
-         if (el) {
-         this.tableValues = el;
-         }
-         }}
-         style={{
-         overflowY: 'scroll',
-         }}
-         onScroll={this.handleScroll}
-         onMouseEnter={(evt) => evt.stopPropagation()}>
-         <div className="BrowseTable-values"
-         style={{
-         paddingTop: (start * tableRowHeight) + 'px',
-         paddingBottom: ((instances.length - end) * tableRowHeight) + 'px',
-         height: `${instances.length * tableRowHeight}px`,
-         }}>
-         <BrowseTableHeaderColumn checked={checked}
-         hovered={hovered}
-         sections={sections}
-         onToggleSection={this.toggleSection}
-         onHover={this.setHovered}
-         onCheck={this.toggleChecked}
-         onOpen={this.openInstances}
-         onCompare={this.openInstances}
-         instances={tableInstances}/>
-
-         {activeSections.map(section => {
-         const { name, fields } = section;
-         return (<BrowseTableSection key={name}
-         name={name}
-         fields={fields}
-         onHover={this.setHovered}
-         hovered={hovered}
-         checked={checked}
-         instances={tableInstances}/>);
-         })}
-         </div>
-         </div>
-         */}
       </div>
     );
   }

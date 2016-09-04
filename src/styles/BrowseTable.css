@@ -46,5 +46,6 @@
   &-valuesWrap {
     min-height: 200px;
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
