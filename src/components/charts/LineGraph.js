@@ -42,6 +42,30 @@ export default class LineGraph extends Component {
     this.path = this.group.append('path')
       .attr('class', 'line');
 
+    const domain = getRange(this.props.field);
+
+    this.x = d3.scale.linear()
+      .range([0, width])
+      .domain(domain);
+
+    this.y = d3.scale.log()
+      .base(10)
+      .range([height, 0]);
+
+    this.line = d3.svg.line()
+      .defined(function(d) { return d && Number.isFinite(+d.value); })
+      .interpolate('basis')
+      .x((d) => this.x(d.key))
+      .y((d) => this.y(d.value) || 0);
+
+    this.area = d3.svg.area()
+      //.defined(this.line.defined())
+      .x(this.line.x())
+      .y1(this.line.y())
+      .y0(this.y(1));
+
+    //todo - re-enable fill
+
     this.update(this.props.data);
   }
 
@@ -56,35 +80,12 @@ export default class LineGraph extends Component {
   update(data) {
     const massaged = massageData(data);
 
-    const domain = getRange(this.props.field);
-
     const rangeMax = Math.max(...massaged.map(datum => parseInt(datum.value, 10) || 0));
-
-    const x = d3.scale.linear()
-      .range([0, width])
-      .domain(domain);
-
-    const y = d3.scale.log()
-      .base(10)
-      .range([height, 0])
-      .domain([1, rangeMax]); //1 because log
-
-    //console.log(this.props.field, x.domain(), y.domain());
-
-    const line = d3.svg.line().interpolate('basis');
-
-    //todo - show line at zero even if no data
-    //todo - interpolate line, transitions
-
-    line.x(function (d) {
-      return x(d.key);
-    });
-    line.y(function (d) {
-      return y(d.value) || 0;
-    });
+    this.y.domain([1, rangeMax]); //1 because log
 
     this.path.datum(massaged)
-      .attr('d', line);
+      .attr('d', this.line);
+      //.attr('d', this.area);
   }
 
   render() {
