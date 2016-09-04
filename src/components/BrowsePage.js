@@ -30,7 +30,12 @@ export class BrowsePage extends Component {
         this.forceUpdate();
       }
     }).bind(this));
-    this.filterListener = onRegisterFilter((filters) => this.setState({ filters }));
+    this.filterListener = onRegisterFilter((filters, force) => {
+      this.setState({ filters });
+      if (force) {
+        this.shouldUpdate = true;
+      }
+    });
   }
 
   shouldComponentUpdate() {

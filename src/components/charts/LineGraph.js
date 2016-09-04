@@ -71,7 +71,7 @@ export default class LineGraph extends Component {
 
     //console.log(this.props.field, x.domain(), y.domain());
 
-    const line = d3.svg.line();
+    const line = d3.svg.line().interpolate('basis');
 
     //todo - show line at zero even if no data
     //todo - interpolate line, transitions

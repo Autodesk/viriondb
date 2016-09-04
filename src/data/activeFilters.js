@@ -18,16 +18,16 @@ export const activeFilters = {};
 
 const callbacks = [];
 
-const safelyRunCallback = (cb) => {
+const safelyRunCallback = (cb, force) => {
   try {
-    cb(activeFilters);
+    cb(activeFilters, force);
   } catch (err) {
     console.error(err);
   }
 };
 
-const safelyRunCallbacks = () => {
-  callbacks.forEach(cb => safelyRunCallback(cb));
+const safelyRunCallbacks = (force) => {
+  callbacks.forEach(cb => safelyRunCallback(cb, force));
 };
 
 export const onRegisterFilter = (cb) => {
@@ -38,7 +38,7 @@ export const onRegisterFilter = (cb) => {
   };
 };
 
-export const setFilter = (filterPatch) => {
+export const setFilter = (filterPatch, force = false) => {
   Object.assign(activeFilters, filterPatch);
 
   //remove nulls from filters
@@ -48,7 +48,7 @@ export const setFilter = (filterPatch) => {
     }
   });
 
-  safelyRunCallbacks();
+  safelyRunCallbacks(force);
 
   return activeFilters;
 };

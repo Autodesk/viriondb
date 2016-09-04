@@ -56,7 +56,7 @@ export default class Capsid3d extends Component {
     let shape;
     const value = this.props.value.toLowerCase();
     if (value.indexOf('icosahedr') >= 0) {
-      //todo - intelligent based on T number
+      //todo - intelligent based on T number - will have to generate geometry from scratch
       shape = new three.IcosahedronGeometry(75, 0);
     } else if (value.indexOf('spher') >= 0) {
       shape = new three.SphereGeometry(75, 50, 50);
@@ -73,7 +73,6 @@ export default class Capsid3d extends Component {
         points.push( point );
       }
       shape = new three.LatheBufferGeometry( points, 50 );
-      console.log(shape);
     } else if (value.indexOf('budded') >= 0) {
       //todo;
       shape = new three.CylinderGeometry(50, 50, 150, 40);

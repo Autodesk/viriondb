@@ -43,18 +43,12 @@ export default class RefineSection extends Component {
     //set to default
     //this.props.setFilter({ [field]: this.getDefault() });
 
-    this.props.setFilter({ [field]: null });
+    this.props.setFilter({ [field]: null }, true);
   };
 
   hasFilter = (forceProps = {}) => {
     const filter = forceProps.filter || this.props.filter;
     if (!filter) {
-      return false;
-    }
-
-    const defaultFilter = this.getDefault();
-
-    if (isEqual(filter, defaultFilter)) {
       return false;
     }
 
@@ -93,7 +87,8 @@ export default class RefineSection extends Component {
 
         {isActive && (<div className="RefineSection-control">
           <ControlComponent {...this.props}
-                            defaultFilter={defaultFilter} />
+                            setFilter={this.setFilter}
+                            defaultFilter={defaultFilter}/>
         </div>)}
       </div>
     );
