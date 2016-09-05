@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 
 export default class Host extends Component {
-  static propTypes = {	
+  static propTypes = {
     value: PropTypes.string.isRequired,
   };
 

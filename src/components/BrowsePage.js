@@ -230,7 +230,7 @@ export class BrowsePage extends Component {
           <BrowseTable openInstances={this.openInstances.bind(this)}
                        instances={filteredIds}/>
 
-          <BrowseCharts instances={filteredIds}
+          <BrowseCharts noInstances={filteredIds.length === 0}
                         derivedData={derivedData}/>
         </div>
       </div>
