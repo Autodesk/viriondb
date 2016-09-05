@@ -19,6 +19,9 @@ export default class LineageTree extends Component {
      .split(', ');
      */
 
+    return null;
+
+    /*
     return (
       <div className="LineageTree">
         <ul>
@@ -26,5 +29,6 @@ export default class LineageTree extends Component {
         </ul>
       </div>
     );
+    */
   }
 };
