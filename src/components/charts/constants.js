@@ -22,7 +22,7 @@ export const pie = d3.layout.pie()
 //todo - padding
   .padAngle(0.025)
   .sort(null)
-  .value(d => d.value);
+  .value(d => typeof d === 'number' ? d : d.value);
 
 export const arc = d3.svg.arc()
   .outerRadius(radius * 0.9)

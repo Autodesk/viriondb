@@ -47,7 +47,7 @@ export default class PieChart extends Component {
 
     slice.enter()
       .append("path")
-      .style("fill", d => this.props.color)
+      .style("fill", () => this.props.color)
       .attr("class", "slice")
       .each(function (d) {
         this._current = d;
@@ -63,6 +63,11 @@ export default class PieChart extends Component {
       });
 
     slice.exit()
+      .transition()
+      .attrTween('d', function attrTween(d) {
+        const interpolate = d3.interpolate(this._current, { value: 0 });
+        return (t) => arc(interpolate(t));
+      })
       .remove();
   }
 

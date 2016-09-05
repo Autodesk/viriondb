@@ -94,7 +94,7 @@ export default class LineGraph extends Component {
     ].filter(key => key >= 0).reduce((acc, x) => Object.assign(acc, { [+x + 1]: ymin }), {});
     //const ends = {};
 
-    console.log(this.props.field, keys, ends);
+    //console.log(this.props.field, keys, ends);
 
     const massaged = massageData(Object.assign(ends, data), true);
 
