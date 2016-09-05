@@ -29,6 +29,11 @@
   &-chart {
     display: inline-block;
     margin: 0 90px;
-    overflow: visible;
+    overflow: visible !important;
+  }
+
+  &-line {
+    fill: transparent;
+    stroke-width: 1px;
   }
 }

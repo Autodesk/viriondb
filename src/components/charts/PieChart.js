@@ -52,11 +52,13 @@ export default class PieChart extends Component {
   }
 
   update(data) {
+
+    const pieData = pie(massageData(data));
     // PATHS
 
     //update the pie sections
     const slice = this.svg.select(".slices").selectAll("path.slice")
-      .data(pie(massageData(data)), keyFn);
+      .data(pieData, keyFn);
 
     slice.enter()
       .append("path")
@@ -93,7 +95,7 @@ export default class PieChart extends Component {
     //todo - only show text when pie section is large enough
 
     const text = this.svg.select(".labels").selectAll('text')
-      .data(pie(massageData(data)), keyFn);
+      .data(pieData, keyFn);
 
     text.enter()
       .append('text')
@@ -112,21 +114,21 @@ export default class PieChart extends Component {
     text.transition().duration(transitionDuration)
       .style('opacity', 1)
       .attrTween("transform", function (d) {
-        var interpolate = d3.interpolate(this._current, d);
+        const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function (t) {
-          var d2 = interpolate(t);
-          var pos = outerArc.centroid(d2);
-          pos[0] = radius * ((midAngle(d2) < Math.PI) ? 1 : -1);
+          const d2 = interpolate(t);
+          const pos = outerArc.centroid(d2);
+          pos[0] = radius * ((midAngle(d2) <= Math.PI) ? 1 : -1);
           return "translate(" + pos + ")";
         };
       })
       .styleTween("text-anchor", function (d) {
-        var interpolate = d3.interpolate(this._current, d);
+        const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function (t) {
-          var d2 = interpolate(t);
-          return (midAngle(d2) < Math.PI) ? "start" : "end";
+          const d2 = interpolate(t);
+          return (midAngle(d2) <= Math.PI) ? "start" : "end";
         };
       });
 
@@ -137,7 +139,35 @@ export default class PieChart extends Component {
 
     //POLYLINES
 
-    //todo
+    const polyline = this.svg.select(".lines").selectAll("polyline")
+      .data(pieData, keyFn);
+
+    polyline.enter()
+      .append('polyline')
+      .attr('class', 'PieChart-line')
+      .each(function (d) {
+        this._current = d;
+      })
+      .style('stroke', d => this.props.color)
+      .style('opacity', 0);
+
+    polyline.transition().duration(transitionDuration)
+      .style('opacity', 1)
+      .attrTween("points", function(d){
+        const interpolate = d3.interpolate(this._current, d);
+        this._current = interpolate(0);
+        return function(t) {
+          const d2 = interpolate(t);
+          const pos = outerArc.centroid(d2);
+          pos[0] = radius * 0.95 * (midAngle(d2) <= Math.PI ? 1 : -1);
+          return [arc.centroid(d2), outerArc.centroid(d2), pos];
+        };
+      });
+
+    polyline.exit()
+      .transition().duration(transitionDuration)
+      .style('opacity', 0)
+      .remove();
   }
 
   render() {
