@@ -25,8 +25,8 @@ export const pie = d3.layout.pie()
   .value(d => typeof d === 'number' ? d : d.value);
 
 export const arc = d3.svg.arc()
-  .outerRadius(radius * 0.8)
-  .innerRadius(radius * 0.65);
+  .outerRadius(radius * 0.75)
+  .innerRadius(radius * 0.6);
 
 export const outerArc = d3.svg.arc()
   .outerRadius(radius * 0.95)

@@ -52,8 +52,8 @@ export default class PieChart extends Component {
   }
 
   update(data) {
-
     const pieData = pie(massageData(data));
+
     // PATHS
 
     //update the pie sections
