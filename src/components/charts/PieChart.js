@@ -72,18 +72,20 @@ export default class PieChart extends Component {
   }
 
   render() {
-    const { field, color } = this.props;
+    const { data, field, color } = this.props;
     const longName = fieldName(field);
     const shortName = filters.find(filter => filter.field === field).shortname;
+    const hasData = Object.keys(data).some(key => !!data[key]);
+    const label = hasData ? shortName : 'No Data';
 
     return (
       <div className="Chart PieChart" style={{ color: color }}>
         <span className="PieChart-heading">
           {longName}
         </span>
-        <span className="PieChart-label"
+        <span className={'PieChart-label' + (!hasData ? ' PieChart-label-empty' : '')}
               style={{ color: color }}>
-          {shortName}
+          {label}
         </span>
         <svg className="PieChart-chart">
           <g ref={(el) => {

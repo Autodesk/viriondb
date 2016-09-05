@@ -20,7 +20,7 @@ export const filters = [
       'V': 'V - negative single stranded RNA',
       'VI': 'VI - positive single stranded DNA, reverse transcribing',
       'VII': 'VII - double stranded DNA, reverse transcribing',
-      [unknownValue]: 'Unknown',
+      //[unknownValue]: 'Unknown',
     },
   },
 
@@ -39,7 +39,7 @@ export const filters = [
       Mononegavirales: 'Mononegavirales',
       Ligamenvirales: 'Ligamenvirales',
       Unassigned: 'Unassigned',
-      [unknownValue]: 'Unknown',
+      //[unknownValue]: 'Unknown',
     },
   },
 
@@ -54,7 +54,7 @@ export const filters = [
       'PHG': 'PHG',
       'ENV': 'ENV',
       'SYN': 'SYN',
-      [unknownValue]: 'Unknown',
+      //[unknownValue]: 'Unknown',
     },
   },
 
@@ -127,7 +127,7 @@ export const filters = [
       '+/-': '+/-',
       '+': '+',
       '-': '-',
-      [unknownValue]: 'Unknown',
+      //[unknownValue]: 'Unknown',
     },
   },
 
