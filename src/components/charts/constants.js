@@ -32,6 +32,7 @@ export const massageData = (map, skipFilter = false) => Object.keys(map).map(key
   key,
   value: map[key],
 }))
+  .filter(obj => obj.key !== 'null')
   .filter(obj => skipFilter || obj.value > 0);
 
 export const keyFn = (d) => d.data.key;
