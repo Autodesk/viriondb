@@ -1,7 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
 import filters from '../../constants/filters';
-import { pie, arc, width, height, radius, keyFn, massageData, defaultColor } from './constants';
+import {
+  pie,
+  arc,
+  outerArc,
+  width,
+  height,
+  radius,
+  keyFn,
+  massageData,
+  defaultColor,
+  transitionDuration
+} from './constants';
 import d3 from 'd3';
 
 import '../../styles/PieChart.css';
@@ -41,21 +52,26 @@ export default class PieChart extends Component {
   }
 
   update(data) {
+    // PATHS
+
     //update the pie sections
     const slice = this.svg.select(".slices").selectAll("path.slice")
-      .data(pie(massageData(data)));
+      .data(pie(massageData(data)), keyFn);
 
     slice.enter()
       .append("path")
-      .style("fill", () => this.props.color)
       .attr("class", "slice")
+      .style("fill", () => this.props.color)
       .each(function (d) {
         this._current = d;
-      })
-      .attr('title', d => d.value); //todo - tooltip
+      });
+
+    //basic mouseover tooltip
+    slice.append('title')
+      .text(keyFn);
 
     slice
-      .transition().duration(500)
+      .transition().duration(transitionDuration)
       .attrTween("d", function attrTween(d) {
         const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
@@ -63,12 +79,65 @@ export default class PieChart extends Component {
       });
 
     slice.exit()
-      .transition()
-      .attrTween('d', function attrTween(d) {
-        const interpolate = d3.interpolate(this._current, { value: 0 });
-        return (t) => arc(interpolate(t));
-      })
+    /*
+     .transition().duration(transitionDuration)
+     .attrTween('d', function attrTween(d) {
+     const interpolate = d3.interpolate(this._current, { value: 0 });
+     return (t) => arc(interpolate(t));
+     })
+     */
       .remove();
+
+    //TEXT
+
+    //todo - only show text when pie section is large enough
+
+    const text = this.svg.select(".labels").selectAll('text')
+      .data(pie(massageData(data)), keyFn);
+
+    text.enter()
+      .append('text')
+      .attr('class', 'label')
+      .style('opacity', 0)
+      .style("fill", d => this.props.color)
+      .each(function (d) {
+        this._current = d;
+      })
+      .text(keyFn);
+
+    function midAngle(d) {
+      return d.startAngle + (d.endAngle - d.startAngle) / 2;
+    }
+
+    text.transition().duration(transitionDuration)
+      .style('opacity', 1)
+      .attrTween("transform", function (d) {
+        var interpolate = d3.interpolate(this._current, d);
+        this._current = interpolate(0);
+        return function (t) {
+          var d2 = interpolate(t);
+          var pos = outerArc.centroid(d2);
+          pos[0] = radius * ((midAngle(d2) < Math.PI) ? 1 : -1);
+          return "translate(" + pos + ")";
+        };
+      })
+      .styleTween("text-anchor", function (d) {
+        var interpolate = d3.interpolate(this._current, d);
+        this._current = interpolate(0);
+        return function (t) {
+          var d2 = interpolate(t);
+          return (midAngle(d2) < Math.PI) ? "start" : "end";
+        };
+      });
+
+    text.exit()
+      .transition().duration(transitionDuration / 2)
+      .style('opacity', 0)
+      .remove();
+
+    //POLYLINES
+
+    //todo
   }
 
   render() {

@@ -25,8 +25,12 @@ export const pie = d3.layout.pie()
   .value(d => typeof d === 'number' ? d : d.value);
 
 export const arc = d3.svg.arc()
-  .outerRadius(radius * 0.9)
-  .innerRadius(radius * 0.72);
+  .outerRadius(radius * 0.8)
+  .innerRadius(radius * 0.65);
+
+export const outerArc = d3.svg.arc()
+  .outerRadius(radius * 0.95)
+  .innerRadius(radius * 0.95);
 
 export const massageData = (map, skipFilter = false) => Object.keys(map).map(key => ({
   key,
@@ -38,5 +42,7 @@ export const massageData = (map, skipFilter = false) => Object.keys(map).map(key
 export const keyFn = (d) => d.data.key;
 
 /* line and bar */
+
+export const transitionDuration = 500;
 
 export const lineWidth = 5;
