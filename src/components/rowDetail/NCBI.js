@@ -27,7 +27,7 @@ export default function NCBI({ field, value, instance }) {
 
   return (
     <div className="NCBI">
-      <a className="NCBI-link"
+      <a className="ComparisonRow-link ComparisonRow-offsite"
          href={nuccore}
          target="_blank">NCBI</a>
     </div>
