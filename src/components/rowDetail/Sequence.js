@@ -31,8 +31,10 @@ export default class Sequence extends Component {
   };
 
   componentDidMount() {
-    getSequence(this.props.instance.id)
-      .then(sequence => this.setState({ sequence }));
+    /*
+     getSequence(this.props.instance.id)
+     .then(sequence => this.setState({ sequence }));
+     */
   }
 
   render() {
@@ -46,16 +48,16 @@ export default class Sequence extends Component {
     return (
       <div className="Sequence">
         <div className="Sequence-downloads">
-          <a className="Sequence-link"
+          <a className="ComparisonRow-link ComparisonRow-download"
              download={this.props.instance.name + '.gb'}
              href={genbank}
              target="_blank">Genbank</a>
-          <a className="Sequence-link"
+          <a className="ComparisonRow-link ComparisonRow-download"
              download={this.props.instance.name + '.gb'}
              href={fasta}
              target="_blank">Fasta</a>
         </div>
-        <div className="Sequence-string">{sequence}</div>
+        {/*<div className="Sequence-string">{sequence}</div>*/}
       </div>
     );
   }

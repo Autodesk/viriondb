@@ -1,17 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-
 import { filters as filterSections } from '../constants/filters';
-
 import RefineSection from './RefineSection';
 
 import '../styles/RefinePanel.css';
 
 export default class RefinePanel extends Component {
   static propTypes = {
+    setFilter: PropTypes.func.isRequired,
     filters: PropTypes.object.isRequired,
   };
-
-  static defaultProps = {};
 
   render() {
     const { setFilter, filters } = this.props;

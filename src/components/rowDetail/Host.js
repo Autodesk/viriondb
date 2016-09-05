@@ -7,10 +7,7 @@ export default class Host extends Component {
 
   render() {
     return (
-      <div className="Host">
-      	<p>host is {this.props.value}</p>
-        <p>todo - link + detail</p>
-      </div>
+      <div className="Host"></div>
     );
   }
 };

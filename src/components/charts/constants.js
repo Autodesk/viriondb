@@ -28,11 +28,12 @@ export const arc = d3.svg.arc()
   .outerRadius(radius * 0.9)
   .innerRadius(radius * 0.72);
 
-export const massageData = (map) => Object.keys(map).map(key => ({
+export const massageData = (map, skipFilter = false) => Object.keys(map).map(key => ({
   key,
   value: map[key],
 }))
-  .filter(obj => obj.value > 0);
+  .filter(obj => obj.key !== 'null')
+  .filter(obj => skipFilter || obj.value > 0);
 
 export const keyFn = (d) => d.data.key;
 

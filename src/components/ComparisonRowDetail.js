@@ -28,7 +28,7 @@ export default class ComparisonRowDetail extends Component {
     const { field, value, instance } = this.props;
     const DetailComponent = ComparisonRowDetail.componentMap[field];
 
-    if (!DetailComponent) {
+    if (!DetailComponent || !value) {
       return null;
     }
 

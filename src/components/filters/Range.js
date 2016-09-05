@@ -28,11 +28,12 @@ export default class Range extends Component {
   }
 
   onChange = (input) => {
-    const next = isEqual(input, this.props.defaultFilter) ? null : input;
-    const scaled = !!next ? next.map(this.scaleUpFn) : next;
+    const scaled = input.map(this.scaleUpFn);
+    const isDefault = isEqual(scaled, this.props.defaultFilter);
+    const next = isDefault ? null : scaled;
     //console.log('setting', scaled);
 
-    this.props.setFilter({ [this.props.field]: scaled });
+    this.props.setFilter({ [this.props.field]: next }, isDefault);
   };
 
   render() {

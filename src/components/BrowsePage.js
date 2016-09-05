@@ -30,7 +30,12 @@ export class BrowsePage extends Component {
         this.forceUpdate();
       }
     }).bind(this));
-    this.filterListener = onRegisterFilter((filters) => this.setState({ filters }));
+    this.filterListener = onRegisterFilter((filters, force) => {
+      this.setState({ filters });
+      if (force) {
+        this.shouldUpdate = true;
+      }
+    });
   }
 
   shouldComponentUpdate() {
@@ -131,12 +136,11 @@ export class BrowsePage extends Component {
         }
 
         if (filter.type === 'range') {
-          //treating these as line graphs. can set up and go through at same time
+          //can set up and go through at same time
           Object.assign(acc, { [filter.field]: {} });
           const innerAcc = acc[filter.field];
 
           _.forEach(filtered, inst => {
-            //todo - handle scaling (e.g. for length - can do it in the chart)
             if (!innerAcc.hasOwnProperty(inst[filter.field])) {
               innerAcc[inst[filter.field]] = 0;
             }

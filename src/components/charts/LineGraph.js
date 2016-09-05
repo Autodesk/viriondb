@@ -42,6 +42,35 @@ export default class LineGraph extends Component {
     this.path = this.group.append('path')
       .attr('class', 'line');
 
+    const domain = getRange(this.props.field);
+
+    this.x = d3.scale.pow()
+      .range([0, width])
+      .domain(domain);
+
+    this.y = d3.scale.log()
+      .range([height, 0]);
+
+    //shouldnt hit this - log data not handled in graph
+    const log = (d) => {
+      console.warn('problematic data point:', this.props.field, d);
+      return 0;
+    };
+
+    this.line = d3.svg.line()
+      .defined(function (d) {
+        return d && Number.isFinite(+d.value);
+      })
+      .interpolate('basis')
+      .x((d) => this.x(+d.key) || log(d))
+      .y((d) => this.y(+d.value) || 0);
+
+    this.area = d3.svg.area()
+      .defined(this.line.defined())
+      .x(this.line.x())
+      .y1(this.line.y())
+      .y0(this.y(1));
+
     this.update(this.props.data);
   }
 
@@ -50,41 +79,36 @@ export default class LineGraph extends Component {
   }
 
   componentWillUnmount() {
-    //todo - cleanup
+
   }
 
   update(data) {
-    const massaged = massageData(data);
+    //insert values at start and end of domain
+    const ends = this.x.domain().reduce((acc, x) => Object.assign(acc, { [+x + 1]: this.y.domain()[0] }), {});
+    //const ends = {};
 
-    const domain = getRange(this.props.field);
+    const massaged = massageData(Object.assign(ends, data), true);
+
+    //ideally, we have default values, which are 0 for all points of domain when value undefined (can achieve by wrapping around each defined point with a point at 0)
 
     const rangeMax = Math.max(...massaged.map(datum => parseInt(datum.value, 10) || 0));
 
-    const x = d3.scale.linear()
-      .range([0, width])
-      .domain(domain);
+    //calculate domain scaling same way as sliders
+    const expX = Math.floor(Math.log10((this.x.domain()[1]) / 100)) + 1;
+    const expY = Math.floor(Math.log10(rangeMax)) || 1;
 
-    const y = d3.scale.log()
-      .base(10)
-      .range([height, 0])
-      .domain([1, rangeMax]); //1 because log
+    //scale x domain (like sliders), except 1/exp because scaling other way
+    this.x.exponent(1 / expX);
 
-    //console.log(this.props.field, x.domain(), y.domain());
-
-    const line = d3.svg.line();
-
-    //todo - show line at zero even if no data
-    //todo - interpolate line, transitions
-
-    line.x(function (d) {
-      return x(d.key);
-    });
-    line.y(function (d) {
-      return y(d.value) || 0;
-    });
+    //scale y domain (according to range)
+    this.y
+      .base(Math.pow(10, expY)) //this is pretty arbitrary
+      .domain([1, rangeMax + 1]); //1 because log, but doesnt handle zero...
 
     this.path.datum(massaged)
-      .attr('d', line);
+    //.transition().duration(500) - transition requires points at each domain value
+    //.attr('d', this.line);
+      .attr('d', this.area);
   }
 
   render() {
