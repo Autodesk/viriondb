@@ -31,8 +31,10 @@ export default class Sequence extends Component {
   };
 
   componentDidMount() {
-    getSequence(this.props.instance.id)
-      .then(sequence => this.setState({ sequence }));
+    /*
+     getSequence(this.props.instance.id)
+     .then(sequence => this.setState({ sequence }));
+     */
   }
 
   render() {
@@ -55,7 +57,7 @@ export default class Sequence extends Component {
              href={fasta}
              target="_blank">Fasta</a>
         </div>
-        <div className="Sequence-string">{sequence}</div>
+        {/*<div className="Sequence-string">{sequence}</div>*/}
       </div>
     );
   }
