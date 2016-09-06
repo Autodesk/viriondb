@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { rowSizes, headerColumnWidth } from '../constants/rows';
+import { rowSizes } from '../constants/rows';
 import registry from '../data/register';
 import Checkbox from './Checkbox';
 
 import '../styles/BrowseTableValue.css';
 
-export default class BrowseTableSection extends Component {
+export default class BrowseTableValue extends Component {
   static propTypes = {
     instanceId: PropTypes.string.isRequired,
     sections: PropTypes.array.isRequired,
@@ -14,7 +14,17 @@ export default class BrowseTableSection extends Component {
     onOpen: PropTypes.func.isRequired,
   };
 
+  componentWillReceiveProps() {
+    performance.mark(`value ${this.props.instanceId} - receive props`);
+  }
+
+  componentDidUpdate() {
+    performance.mark(`value ${this.props.instanceId} - updated`);
+  }
+
   render() {
+    performance.mark(`value ${this.props.instanceId} - rendering`);
+
     const { instanceId, sections, checked, onOpen, onCheck } = this.props;
     const instance = registry[instanceId];
     const defaultValue = '\u00a0'; //unknownValue;

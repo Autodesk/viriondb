@@ -4,6 +4,7 @@
   background-color: var(--colors-blueGreyDark);
   min-height: 200px;
   padding: 1em;
+  flex-grow: 1;
   color: var(--colors-white);
 
   &-heading {
@@ -13,5 +14,11 @@
 
   &-content {
   	padding: 2em;
+  }
+
+  &-empty {
+    padding: 2rem;
+    font-size: 1.25rem;
+    text-align: center;
   }
 }

@@ -23,6 +23,10 @@ export default class Range extends Component {
     const up = d3.scale.pow().exponent(exp).domain([0, 100]).range(this.props.range);
     const down = up.invert;
 
+    this.state = {
+      value: this.props.filter || this.props.defaultFilter,
+    };
+
     this.scaleUpFn = (val) => Math.round(up(val));
     this.scaleDownFn = (val) => Math.round(down(val));
   }
@@ -31,22 +35,27 @@ export default class Range extends Component {
     const scaled = input.map(this.scaleUpFn);
     const isDefault = isEqual(scaled, this.props.defaultFilter);
     const next = isDefault ? null : scaled;
-    //console.log('setting', scaled);
 
-    this.props.setFilter({ [this.props.field]: next }, isDefault);
+    this.setState({
+      value: next,
+    }, () => this.props.setFilter({ [this.props.field]: next }, isDefault));
   };
 
   render() {
+    const { value } = this.state;
     const { range, field, color, filter, defaultFilter } = this.props;
-    const filterValue = Array.isArray(filter) ? filter : defaultFilter;
+    //prefer state value to props since filter takes a while to propagate
+    const filterValue = Array.isArray(value) ? value : (Array.isArray(filter) ? filter : defaultFilter); //eslint-disable-line no-nested-ternary
     const scaledValue = filterValue.map(this.scaleDownFn);
 
     //console.log('rendering', this.props.field, scaledValue, filterValue);
 
     const left = scaledValue[0];
     const right = 100 - scaledValue[1];
-    const hideLeft = (scaledValue[1] - left) < 30;
+    const hideLeft = (scaledValue[1] - left) < 25;
     const hideRight = right > 90;
+    const leftLabel = filterValue[0] > 1000 ? `${Math.round(filterValue[0] / 1000)}k` : filterValue[0];
+    const rightLabel = filterValue[1] > 1000 ? `${Math.round(filterValue[1] / 1000)}k` : filterValue[1];
 
     return (
       <div className="Range">
@@ -58,16 +67,16 @@ export default class Range extends Component {
                      className="Range-slider"
                      handleClassName="Range-handle"
                      barClassName="Range-bar"
-                     style={{backgroundColor: color}}
+                     style={{ backgroundColor: color }}
                      pearling/>
         <div className="Range-labels">
           <div className="Range-label"
                style={{ left: left + '%', opacity: (hideLeft ? '0' : '1') }}>
-            {filterValue[0]}
+            {leftLabel}
           </div>
           <div className="Range-label"
                style={{ right: right + '%', opacity: (hideRight ? '0' : '1') }}>
-            {filterValue[1]}
+            {rightLabel}
           </div>
         </div>
       </div>

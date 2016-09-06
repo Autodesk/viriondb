@@ -15,6 +15,7 @@ import { getRange } from '../../constants/filters';
 
 import '../../styles/LineGraph.css';
 
+//todo - need to wrap points with 0 points
 //todo - add a mouseover to see (scaled) value
 
 export default class LineGraph extends Component {
@@ -83,9 +84,17 @@ export default class LineGraph extends Component {
   }
 
   update(data) {
+    const ymin = this.y.domain()[0]; //technically the max, so it graphs like zero
+    const keys = Object.keys(data).map(key => parseInt(key, 10) || 0).sort((a, b) => a - b);
     //insert values at start and end of domain
-    const ends = this.x.domain().reduce((acc, x) => Object.assign(acc, { [+x + 1]: this.y.domain()[0] }), {});
+    const ends = [
+      ...this.x.domain(),
+      keys[0] - 2,
+      keys[keys.length - 1],
+    ].filter(key => key >= 0).reduce((acc, x) => Object.assign(acc, { [+x + 1]: ymin }), {});
     //const ends = {};
+
+    //console.log(this.props.field, keys, ends);
 
     const massaged = massageData(Object.assign(ends, data), true);
 
@@ -118,12 +127,12 @@ export default class LineGraph extends Component {
     //console.log(field, data);
 
     return (
-      <div className="Chart LineGraph"
-           style={{ backgroundColor: color }}>
+      <div className="Chart LineGraph">
         <span className="LineGraph-heading">
           {longName}
         </span>
-        <svg className="LineGraph-graph">
+        <svg className="LineGraph-graph"
+             style={{ backgroundColor: color }}>
           <g ref={(el) => {
             if (el) {
               this.element = el;

@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { rowHierarchy, fieldName, rowSizes, headerColumnWidth } from '../constants/rows';
-import { tableRowHeight } from '../constants/layout';
+import { throttle } from 'lodash';
 
-import BrowseTableValue from './BrowseTableValue';
-import BrowseTableSection from './BrowseTableSection';
-import BrowseTableHeaderColumn from './BrowseTableHeaderColumn';
+import BrowseTableHeaders from './BrowseTableHeaders';
+import BrowseTableValues from './BrowseTableValues';
 
 import '../styles/BrowseTable.css';
+import '../styles/BrowseTableSection.css';
 
 const initialSections = rowHierarchy.map(section => section.name).reduce((acc, name) => Object.assign(acc, { [name]: true }), {});
 
 //todo - scroll to top on filter change
-//todo - dynamic table height
+//todo - dynamic table height - should be drag-handle resizable
 //todo - ensure selected items are in the filtered list
 
 export default class BrowseTable extends Component {
@@ -21,20 +21,8 @@ export default class BrowseTable extends Component {
   };
 
   state = {
-    offset: 0,
     checked: {},
-    sections: initialSections,
-    tableViewHeight: 400,
-  };
-
-  handleScroll = (evt) => {
-    //evt.persist();
-    //console.log(evt);
-    //console.log(this.tableValues.scrollTop, Math.floor(this.tableValues.scrollTop / tableRowHeight));
-
-    this.setState({
-      offset: Math.floor(this.tableValues.scrollTop / tableRowHeight),
-    });
+    activeSections: initialSections,
   };
 
   toggleChecked = (id) => {
@@ -51,11 +39,11 @@ export default class BrowseTable extends Component {
     });
   };
 
-  toggleSection = (section) => {
-    const nextSections = Object.assign({}, this.state.sections, { [section]: !this.state.sections[section] });
+  toggleSection = (sectionKey) => {
+    const nextSections = Object.assign({}, this.state.activeSections, { [sectionKey]: !this.state.activeSections[sectionKey] });
 
     this.setState({
-      sections: nextSections,
+      activeSections: nextSections,
     });
   };
 
@@ -66,20 +54,14 @@ export default class BrowseTable extends Component {
 
   render() {
     const { instances } = this.props;
-    const { offset, checked, sections, tableViewHeight } = this.state;
+    const { checked, activeSections } = this.state;
 
-    const activeSections = rowHierarchy.filter(section => sections[section.name]);
+    const activeSectionObjects = rowHierarchy.filter(section => activeSections[section.name]);
 
-    const totalWidth = activeSections.reduce((acc, section) => {
+    const totalWidth = activeSectionObjects.reduce((acc, section) => {
       //1 is border
       return acc + 1 + section.fields.reduce((acc, field) => acc + rowSizes[field], 0);
     }, headerColumnWidth + 1);
-
-    const fudge = 4;
-    const numberInstances = Math.floor((tableViewHeight / (tableRowHeight))) + (fudge * 2);
-    const start = Math.max(0, offset - fudge);
-    const end = Math.min(instances.length, start + numberInstances + fudge);
-    const tableInstances = instances.slice(start, end);
 
     return (
       <div className="BrowseTable">
@@ -89,82 +71,17 @@ export default class BrowseTable extends Component {
         </div>
 
         <div className="BrowseTable-content">
-          <div className="BrowseTable-headers"
-               style={{ width: totalWidth + 'px' }}>
+          <BrowseTableHeaders totalWidth={totalWidth}
+                              toggleSection={this.toggleSection}
+                              sections={activeSectionObjects}
+                              openInstances={this.openInstances}/>
 
-            <div className="BrowseTableSection">
-              <div className="BrowseTableHeaderColumn">
-                <div className="BrowseTableSection-heading">
-                  {Object.keys(sections).map(section => {
-                    return (
-                      <a onClick={() => this.toggleSection(section)}
-                         className={'BrowseTableHeaderColumn-dot' + (sections[section] ? ' active' : '')}
-                         alt={section}
-                         key={section}>•</a>
-                    );
-                  })}
-                </div>
-
-                <div className="BrowseTableSection-columnName BrowseTableSection-compare">
-                  <a className="action action-dark"
-                     onClick={() => this.openInstances()}>Compare</a>
-                </div>
-              </div>
-            </div>
-
-            {activeSections.map(section => {
-              const { name, fields } = section;
-              return (
-                <div className="BrowseTableSection"
-                     key={name}>
-                  <div className="BrowseTableSection-heading">
-                    {name}
-                  </div>
-                  <div className="BrowseTableSection-columns">
-                    {fields.map(field => {
-                      const nameField = fieldName(field);
-                      return (
-                        <div className="BrowseTableSection-columnName"
-                             style={{ width: rowSizes[field] }}
-                             key={field}>{nameField}</div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="BrowseTable-valuesWrap"
-               ref={(el) => {
-                 if (el) {
-                   this.tableValues = el;
-                 }
-               }}
-               style={{
-                 width: totalWidth + 'px',
-                 maxHeight: `${tableViewHeight}px`,
-               }}
-               onScroll={this.handleScroll}
-               onMouseEnter={(evt) => evt.stopPropagation()}>
-            <div className="BrowseTable-values"
-                 style={{
-                   paddingTop: (start * tableRowHeight) + 'px',
-                   paddingBottom: ((instances.length - end) * tableRowHeight) + 'px',
-                   height: `${instances.length * tableRowHeight}px`,
-                 }}>
-              {tableInstances.map((instanceId) => {
-                return (
-                  <BrowseTableValue instanceId={instanceId}
-                                    key={instanceId}
-                                    sections={activeSections}
-                                    onOpen={this.openInstances}
-                                    onCheck={this.toggleChecked}
-                                    checked={checked[instanceId] === true}/>
-                );
-              })}
-            </div>
-          </div>
+          <BrowseTableValues instances={instances}
+                             sections={activeSectionObjects}
+                             checkInstance={this.toggleChecked}
+                             checked={checked}
+                             openInstances={this.openInstances}
+                             totalWidth={totalWidth}/>
         </div>
       </div>
     );

@@ -1,5 +1,8 @@
 import d3 from 'd3';
 
+export const graphWidth = 300;
+export const graphHeight = 170; //pie (line is 150)
+
 /* layout */
 
 export const width = 120;
@@ -22,11 +25,15 @@ export const pie = d3.layout.pie()
 //todo - padding
   .padAngle(0.025)
   .sort(null)
-  .value(d => d.value);
+  .value(d => typeof d === 'number' ? d : d.value);
 
 export const arc = d3.svg.arc()
-  .outerRadius(radius * 0.9)
-  .innerRadius(radius * 0.72);
+  .outerRadius(radius * 0.75)
+  .innerRadius(radius * 0.6);
+
+export const outerArc = d3.svg.arc()
+  .outerRadius(radius * 0.95)
+  .innerRadius(radius * 0.95);
 
 export const massageData = (map, skipFilter = false) => Object.keys(map).map(key => ({
   key,
@@ -38,5 +45,7 @@ export const massageData = (map, skipFilter = false) => Object.keys(map).map(key
 export const keyFn = (d) => d.data.key;
 
 /* line and bar */
+
+export const transitionDuration = 500;
 
 export const lineWidth = 5;

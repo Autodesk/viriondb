@@ -25,11 +25,13 @@ export class BrowsePage extends Component {
 
   componentDidMount() {
     this.shouldUpdate = true;
-    this.listener = onRegister((function browsePageRegister(register, length) {
+
+    this.registerListener = onRegister((function browsePageRegister(register, length) {
       if (length > 0) {
         this.forceUpdate();
       }
     }).bind(this));
+
     this.filterListener = onRegisterFilter((filters, force) => {
       this.setState({ filters });
       if (force) {
@@ -43,15 +45,24 @@ export class BrowsePage extends Component {
   }
 
   componentDidUpdate() {
+    performance.mark('page - update done');
+    if (process.env.NODE_ENV !== 'production') {
+      const marks = performance.getEntriesByType('mark');
+      const start = marks[0].startTime;
+      marks.forEach((mark) => {
+        console.log(mark.name, mark.startTime - start);
+      });
+    }
+
     //lame debouncing
     //todo - use real debouncing
     setTimeout(() => {
       this.shouldUpdate = true;
-    }, 30);
+    }, 0);
   }
 
   componentWillUnmount() {
-    this.listener();
+    this.registerListener();
     this.filterListener();
   }
 
@@ -95,6 +106,7 @@ export class BrowsePage extends Component {
   }
 
   render() {
+    //check in case they came in on the compare page
     if (Object.keys(registry).length < 10) {
       return (
         <div className="BrowsePage">
@@ -110,16 +122,20 @@ export class BrowsePage extends Component {
 
     /* filtering */
 
-    const start = performance.now();
+    performance.clearMarks();
+    performance.mark('page - renderStart');
 
     const createdFilters = this.createFilters();
     const filterFunc = createdFilters.length === 0 ?
       () => true :
       instance => _.every(createdFilters, filter => filter(instance));
-    const filterMakeTime = performance.now();
+
+    performance.mark('page - madeFilters');
+
     const filtered = _.filter(_.values(registry), filterFunc);
-    const filterTime = performance.now();
     const filteredIds = filtered.map(item => item.id);
+
+    performance.mark('page - filtered');
 
     /* derived data */
 
@@ -216,8 +232,7 @@ export class BrowsePage extends Component {
      }, {}));
      */
 
-    const end = performance.now();
-    console.log(end - start, filterMakeTime - start, filterTime - start);
+    performance.mark('page - derived data');
 
     // could let refine panel get filter func etc itself...
 
@@ -230,7 +245,7 @@ export class BrowsePage extends Component {
           <BrowseTable openInstances={this.openInstances.bind(this)}
                        instances={filteredIds}/>
 
-          <BrowseCharts instances={filteredIds}
+          <BrowseCharts noInstances={filteredIds.length === 0}
                         derivedData={derivedData}/>
         </div>
       </div>

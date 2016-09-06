@@ -120,7 +120,7 @@ export const rowSizes = Object.assign(rows.reduce((acc, row) => {
   derived_taxonomy_genus: 120,
 });
 
-export const headerColumnWidth = 96;
+export const headerColumnWidth = 96; //see css for table section
 
 export const setRowSize = (field, width) => {
   Object.assign(rowSizes, { [field]: width });
