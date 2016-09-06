@@ -7,7 +7,7 @@ import invariant from 'invariant';
 import { mark, reset, dump } from '../data/performance';
 import registry, { onRegister } from '../data/register';
 import activeFilters, { setFilter, onRegisterFilter } from '../data/activeFilters';
-import { unknownValue, maxSections, filters } from '../constants/filters';
+import { unknownValue, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
 import BrowseTable from './BrowseTable';
