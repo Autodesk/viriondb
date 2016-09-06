@@ -79,10 +79,6 @@ export default class LineGraph extends Component {
     this.update(this.props.data);
   }
 
-  componentWillUnmount() {
-
-  }
-
   update(data) {
     const ymin = this.y.domain()[0]; //technically the max, so it graphs like zero
     const keys = Object.keys(data).map(key => parseInt(key, 10) || 0).sort((a, b) => a - b);

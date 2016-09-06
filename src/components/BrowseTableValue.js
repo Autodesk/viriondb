@@ -18,6 +18,12 @@ export default class BrowseTableValue extends Component {
     performance.mark(`value ${this.props.instanceId} - receive props`);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.instanceId !== nextProps.instanceId ||
+      this.props.sections.length !== nextProps.sections.length ||
+      this.props.checked !== nextProps.checked;
+  }
+
   componentDidUpdate() {
     performance.mark(`value ${this.props.instanceId} - updated`);
   }

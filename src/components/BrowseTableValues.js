@@ -16,6 +16,7 @@
 import React, { Component, PropTypes } from 'react';
 import { tableRowHeight } from '../constants/layout';
 import { throttle } from 'lodash';
+import { mark } from '../data/performance';
 
 import BrowseTableValue from './BrowseTableValue';
 
@@ -35,11 +36,11 @@ export default class BrowseTableValues extends Component {
   };
 
   componentWillReceiveProps() {
-    performance.mark('table - receive props');
+    mark('table - receive props');
   }
 
   componentDidUpdate() {
-    performance.mark('table - update done');
+    mark('table - update done');
   }
 
   handleScroll = (evt) => {
@@ -53,12 +54,12 @@ export default class BrowseTableValues extends Component {
   };
 
   render() {
-    performance.mark('table - render start');
+    mark('table - render start');
 
     const { sections, checked, instances, totalWidth, openInstances, checkInstance } = this.props;
     const { tableHeight, offset } = this.state;
 
-    const fudge = 4;
+    const fudge = 3;
     const numberDisplay = Math.floor((tableHeight / (tableRowHeight))) + (fudge * 2);
     const countStart = Math.max(0, offset - fudge);
     const countEnd = Math.min(this.props.instances.length, countStart + numberDisplay + (fudge * 2));
