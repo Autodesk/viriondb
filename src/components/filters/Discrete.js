@@ -41,7 +41,6 @@ export default class Discrete extends Component {
                  onClick={(evt) => this.toggleValue(value)}
                  key={value}>
               <Checkbox className="Discrete-checkbox"
-                        color={color}
                         checked={checked}/>
               <span className="Discrete-text">{name}</span>
             </div>
