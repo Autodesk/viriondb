@@ -1,6 +1,6 @@
 //todo - range values should be dynamic, based on processing of data (at least include mix / max)
 
-export const unknownValue = 'Unknown';
+export const unknownValue = 'null';
 
 //max number of pie sections e.g for a range
 export const maxSections = 8;
@@ -20,7 +20,7 @@ export const filters = [
       'V': 'V - negative single stranded RNA',
       'VI': 'VI - positive single stranded DNA, reverse transcribing',
       'VII': 'VII - double stranded DNA, reverse transcribing',
-      //[unknownValue]: 'Unknown',
+      [unknownValue]: 'Unknown',
     },
   },
 
@@ -39,7 +39,7 @@ export const filters = [
       Mononegavirales: 'Mononegavirales',
       Ligamenvirales: 'Ligamenvirales',
       Unassigned: 'Unassigned',
-      //[unknownValue]: 'Unknown',
+      [unknownValue]: 'Unknown',
     },
   },
 
@@ -127,7 +127,7 @@ export const filters = [
       '+/-': '+/-',
       '+': '+',
       '-': '-',
-      //[unknownValue]: 'Unknown',
+      [unknownValue]: 'Unknown',
     },
   },
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
-import filters from '../../constants/filters';
+import filters, { unknownValue } from '../../constants/filters';
 import {
   pie,
   arc,

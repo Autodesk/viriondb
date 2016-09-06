@@ -180,7 +180,11 @@ export class BrowsePage extends Component {
         _.forEach(filtered, instance => {
           derivedData[field][instance[filter.field]] += 1;
         });
-      } else if (type === 'range') {
+
+        if (derivedData[field][unknownValue] > 0) {
+          derivedData[field]['Unknown'] = derivedData[field][unknownValue];
+          delete derivedData[field][unknownValue];
+        }
       }
     });
 
