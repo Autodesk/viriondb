@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import fetch from 'isomorphic-fetch';
 
 import MoleculeViewer from '../MoleculeViewer';
 
@@ -15,9 +16,18 @@ export default class Proteins extends Component {
   componentWillUpdate(nextProps) {
     this.ncbiLink = null;
 
-    const id = this.props.instance.id;
+    const id = this.props.instance.ncbi_uid;
 
-    //todo - fetch and set ncbiLink for proteins
+    if (!!id) {
+      this.ncbiLink = `https://www.ncbi.nlm.nih.gov/protein?LinkName=nuccore_protein&from_uid=${id}`;
+      /*
+      const proteinUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=protein&retmode=json&id=${id}`;
+      fetch(proteinUrl)
+        .then(resp => resp.json())
+        .then(json => json.result[id])
+        .then(result => )
+      */
+    }
   }
 
   render() {
@@ -28,8 +38,8 @@ export default class Proteins extends Component {
         {moleculeViewer}
 
         {this.ncbiLink && <a className="ComparisonRow-link ComparisonRow-offsite"
-           href={this.ncbiLink}
-           target="_blank">NCBI Proteins</a>
+                             href={this.ncbiLink}
+                             target="_blank">NCBI Proteins</a>}
       </div>
     );
   }
