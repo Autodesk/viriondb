@@ -6,5 +6,5 @@ webapp:
   ports:
     - "3000-3002:3000-3002"
   command:
-    npm run start-instance
+    npm run start-instance -- --release
   log_driver: json-file

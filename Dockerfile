@@ -34,4 +34,4 @@ RUN npm update -g npm && npm install
 # add the rest of the files from the app
 ADD . /app
 
-CMD  ["npm" , "run", "start-instance"]
+CMD  ["npm" , "run", "start-instance", "--", "--release"]
