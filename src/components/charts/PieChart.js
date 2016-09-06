@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
-import filters from '../../constants/filters';
+import filters, { unknownValue } from '../../constants/filters';
 import {
   pie,
   arc,
@@ -47,10 +47,6 @@ export default class PieChart extends Component {
   componentDidUpdate() {
     this.update(this.props.data);
     //update the chart
-  }
-
-  componentWillUnmount() {
-    //todo - cleanup
   }
 
   update(data) {

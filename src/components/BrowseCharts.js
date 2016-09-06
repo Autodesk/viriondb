@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { mark } from '../data/performance';
 
 import BrowseChart from './BrowseChart';
 
@@ -11,15 +12,15 @@ export default class BrowseCharts extends Component {
   };
 
   componentWillReceiveProps() {
-    performance.mark('charts - receive props');
+    mark('charts - receive props');
   }
 
   componentDidUpdate() {
-    performance.mark('charts - update done');
+    mark('charts - update done');
   }
 
   render() {
-    performance.mark('charts - render start');
+    mark('charts - render start');
     const { noInstances, derivedData } = this.props;
 
     return (

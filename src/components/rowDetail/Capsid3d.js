@@ -19,7 +19,7 @@ export default class Capsid3d extends Component {
   }
 
   makeLink = () => {
-    if (this.props.value.indexOf('icosahedr') < 0) {
+    if (this.props.value.toLowerCase().indexOf('icosahe') < 0) {
       return null;
     }
 
@@ -84,9 +84,9 @@ export default class Capsid3d extends Component {
     let shape;
     const value = this.props.value.toLowerCase();
     if (value.indexOf('icosahedr') >= 0) {
-      //todo - iideally, ntelligent based on T number - will have to generate each geometry from scratch
+      //todo - ideally, ntelligent based on T number - will have to generate each geometry from scratch
       shape = new three.IcosahedronGeometry(75, 0);
-    } else if (value.indexOf('spher') >= 0) {
+    } else if (value.indexOf('spher') >= 0 || value.indexOf('budded') >= 0) {
       shape = new three.SphereGeometry(75, 50, 50);
     } else if (value.indexOf('rod') >= 0) {
       shape = new three.CylinderGeometry(50, 50, 150, 40);
@@ -101,9 +101,6 @@ export default class Capsid3d extends Component {
         points.push(point);
       }
       shape = new three.LatheBufferGeometry(points, 50);
-    } else if (value.indexOf('budded') >= 0) {
-      //todo - how different than just a normal sphere?
-      shape = new three.SphereGeometry(75, 50, 50);
     }
 
     if (shape) {
@@ -140,9 +137,11 @@ export default class Capsid3d extends Component {
                }
              }}>
         </div>
-        {link && (<a className="ComparisonRow-link ComparisonRow-offsite"
-                     href={link}
-                     target="_blank">Viral Zone</a>)}
+        <div>
+          {link && (<a className="ComparisonRow-link ComparisonRow-offsite"
+                       href={link}
+                       target="_blank">T Number Describes affects Capsid Morphology: Viral Zone</a>)}
+        </div>
       </div>
     );
   }
