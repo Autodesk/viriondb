@@ -85,7 +85,7 @@ export default class LineGraph extends Component {
 
   update(data) {
     const ymin = this.y.domain()[0]; //technically the max, so it graphs like zero
-    const keys = Object.keys(data).map(key => parseInt(key, 10) || 0).sort((a,b) => a-b);
+    const keys = Object.keys(data).map(key => parseInt(key, 10) || 0).sort((a, b) => a - b);
     //insert values at start and end of domain
     const ends = [
       ...this.x.domain(),
@@ -127,12 +127,12 @@ export default class LineGraph extends Component {
     //console.log(field, data);
 
     return (
-      <div className="Chart LineGraph"
-           style={{ backgroundColor: color }}>
+      <div className="Chart LineGraph">
         <span className="LineGraph-heading">
           {longName}
         </span>
-        <svg className="LineGraph-graph">
+        <svg className="LineGraph-graph"
+             style={{ backgroundColor: color }}>
           <g ref={(el) => {
             if (el) {
               this.element = el;

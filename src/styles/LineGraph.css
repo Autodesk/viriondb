@@ -1,12 +1,17 @@
 @import './variables.css';
 
 .LineGraph {
-  height: 150px;
-  width: 150px;
   position: relative;
-  border-radius: 50%;
-  margin: 0 75px;
-  display: inline-block;
+  padding: 0 75px;
+  height: 150px;
+  margin: 1em 0;
+
+  &-graph {
+    border-radius: 50%;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+  }
 
   &-heading {
     position: absolute;

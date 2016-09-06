@@ -11,7 +11,9 @@ import {
   keyFn,
   massageData,
   defaultColor,
-  transitionDuration
+  transitionDuration,
+  graphWidth,
+  graphHeight,
 } from './constants';
 import d3 from 'd3';
 
@@ -37,7 +39,7 @@ export default class PieChart extends Component {
     this.svg.append("g").attr("class", "labels");
     this.svg.append("g").attr("class", "lines");
 
-    this.svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    this.svg.attr("transform", "translate(" + (graphWidth / 2) + "," + (height / 2) + ")");
 
     this.update(this.props.data);
   }
@@ -53,6 +55,7 @@ export default class PieChart extends Component {
 
   update(data) {
     const pieData = pie(massageData(data));
+    const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.25);
 
     // PATHS
 
@@ -95,7 +98,7 @@ export default class PieChart extends Component {
     //todo - only show text when pie section is large enough
 
     const text = this.svg.select(".labels").selectAll('text')
-      .data(pieData, keyFn);
+      .data(filtered, keyFn);
 
     text.enter()
       .append('text')
@@ -110,6 +113,7 @@ export default class PieChart extends Component {
     function midAngle(d) {
       return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
+    const PiIsh = Math.PI + 0.05;
 
     text.transition().duration(transitionDuration)
       .style('opacity', 1)
@@ -119,7 +123,7 @@ export default class PieChart extends Component {
         return function (t) {
           const d2 = interpolate(t);
           const pos = outerArc.centroid(d2);
-          pos[0] = radius * ((midAngle(d2) <= Math.PI) ? 1 : -1);
+          pos[0] = radius * ((midAngle(d2) <= PiIsh) ? 1 : -1);
           return "translate(" + pos + ")";
         };
       })
@@ -128,7 +132,7 @@ export default class PieChart extends Component {
         this._current = interpolate(0);
         return function (t) {
           const d2 = interpolate(t);
-          return (midAngle(d2) <= Math.PI) ? "start" : "end";
+          return (midAngle(d2) <= PiIsh) ? "start" : "end";
         };
       });
 
@@ -140,7 +144,7 @@ export default class PieChart extends Component {
     //POLYLINES
 
     const polyline = this.svg.select(".lines").selectAll("polyline")
-      .data(pieData, keyFn);
+      .data(filtered, keyFn);
 
     polyline.enter()
       .append('polyline')
@@ -159,7 +163,7 @@ export default class PieChart extends Component {
         return function(t) {
           const d2 = interpolate(t);
           const pos = outerArc.centroid(d2);
-          pos[0] = radius * 0.95 * (midAngle(d2) <= Math.PI ? 1 : -1);
+          pos[0] = radius * 0.95 * (midAngle(d2) <= PiIsh ? 1 : -1);
           return [arc.centroid(d2), outerArc.centroid(d2), pos];
         };
       });

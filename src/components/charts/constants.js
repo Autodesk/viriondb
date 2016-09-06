@@ -1,5 +1,8 @@
 import d3 from 'd3';
 
+export const graphWidth = 300;
+export const graphHeight = 170;
+
 /* layout */
 
 export const width = 120;
