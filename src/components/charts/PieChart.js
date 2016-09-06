@@ -55,7 +55,7 @@ export default class PieChart extends Component {
 
   update(data) {
     const pieData = pie(massageData(data));
-    const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.5);
+    const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.25);
 
     // PATHS
 
