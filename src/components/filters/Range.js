@@ -31,6 +31,15 @@ export default class Range extends Component {
     this.scaleDownFn = (val) => Math.round(down(val));
   }
 
+  componentDidMount() {
+    //set the color on the slider... no real good way to do this (inheriting doesn't work without DOM element hack, so lets just do this)
+    try {
+      this.rangeSlider.refs.slider.style.backgroundColor = this.props.color;
+    } catch (err) {
+      //just let it stick to the default
+    }
+  }
+
   onChange = (input) => {
     const scaled = input.map(this.scaleUpFn);
     const isDefault = isEqual(scaled, this.props.defaultFilter);
@@ -67,7 +76,11 @@ export default class Range extends Component {
                      className="Range-slider"
                      handleClassName="Range-handle"
                      barClassName="Range-bar"
-                     style={{ backgroundColor: color }}
+                     ref={(el) => {
+                       if (el) {
+                         this.rangeSlider = el;
+                       }
+                     }}
                      pearling/>
         <div className="Range-labels">
           <div className="Range-label"

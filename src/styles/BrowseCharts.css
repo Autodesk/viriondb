@@ -14,6 +14,13 @@
 
   &-content {
   	padding: 2em;
+    min-width: 950px;
+    max-width: 1199px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   &-empty {
@@ -21,4 +28,11 @@
     font-size: 1.25rem;
     text-align: center;
   }
+}
+
+.Chart {
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  max-height: 175px;
 }

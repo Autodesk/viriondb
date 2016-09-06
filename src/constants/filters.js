@@ -2,15 +2,12 @@
 
 export const unknownValue = 'null';
 
-//max number of pie sections e.g for a range
-export const maxSections = 8;
-
 export const filters = [
   {
     field: 'derived_baltimore',
     type: 'discrete',
     shortname: 'BC',
-    color: '#eeaaaa',
+    color: '#D28482',
     default: {},
     values: {
       'I': 'I - double stranded DNA',
@@ -28,7 +25,7 @@ export const filters = [
     field: 'derived_taxonomy_order',
     type: 'discrete',
     shortname: 'Or',
-    color: '#aaccff',
+    color: '#efac7e',
     default: {},
     values: {
       Nidovirales: 'Nidovirales',
@@ -47,7 +44,7 @@ export const filters = [
     field: 'division',
     type: 'discrete',
     shortname: 'Di',
-    color: '#aaeeaa',
+    color: '#F1D26C',
     default: {},
     values: {
       'VRL': 'VRL',
@@ -62,7 +59,7 @@ export const filters = [
     field: 'length',
     type: 'range',
     shortname: 'Le',
-    color: '#aaaaee',
+    color: '#65AAB1',
     default: [0, 2473870],
     range: [0, 2473870],
   },
@@ -71,7 +68,7 @@ export const filters = [
     field: 'genome_shape',
     type: 'discrete',
     shortname: 'GS',
-    color: '#ffccaa',
+    color: '#D3D34F',
     default: {},
     values: {
       circular: 'Circular',
@@ -83,7 +80,7 @@ export const filters = [
     field: 'sequenced_mol',
     type: 'discrete',
     shortname: 'Mo',
-    color: '#ccffaa',
+    color: '#8EC78D',
     default: {},
     values: {
       'ss-DNA': 'ss-DNA',
@@ -121,7 +118,7 @@ export const filters = [
     field: 'derived_sense',
     type: 'discrete',
     shortname: 'Se',
-    color: '#aaeeee',
+    color: '#65AAB1',
     default: {},
     values: {
       '+/-': '+/-',
@@ -135,7 +132,7 @@ export const filters = [
     field: 'derived_protein_count',
     type: 'range',
     shortname: 'PN',
-    color: '#aaeeee',
+    color: '#FE8DD8',
     default: [0, 2541],
     range: [0, 2541],
   },
@@ -144,7 +141,7 @@ export const filters = [
     field: 'derived_segment_count',
     type: 'range',
     shortname: 'Sg',
-    color: '#ee9999',
+    color: '#AF5DDA',
     default: [0, 105],
     range: [0, 105],
   },

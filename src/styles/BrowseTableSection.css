@@ -11,6 +11,7 @@
     line-height: 1rem;
     cursor: pointer;
     color: var(--colors-grey);
+    user-select: none;
 
     &.active {
       color: var(--colors-selected);
