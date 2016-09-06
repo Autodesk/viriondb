@@ -83,10 +83,10 @@ export default class BrowseTableValues extends Component {
                paddingBottom: ((instances.length - countEnd) * tableRowHeight) + 'px',
                height: `${instances.length * tableRowHeight}px`,
              }}>
-          {tableInstances.map((instanceId) => {
+          {tableInstances.map((instanceId, index) => {
             return (
               <BrowseTableValue instanceId={instanceId}
-                                key={instanceId}
+                                key={index}
                                 sections={sections}
                                 onOpen={openInstances}
                                 onCheck={checkInstance}

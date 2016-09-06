@@ -23,6 +23,8 @@ export default class BrowseTableValue extends Component {
   }
 
   render() {
+    performance.mark(`value ${this.props.instanceId} - rendering`);
+
     const { instanceId, sections, checked, onOpen, onCheck } = this.props;
     const instance = registry[instanceId];
     const defaultValue = '\u00a0'; //unknownValue;
