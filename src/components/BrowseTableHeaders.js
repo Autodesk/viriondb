@@ -15,7 +15,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { isEqual } from 'lodash';
-import { rowHierarchy, fieldName, rowSizes, headerColumnWidth } from '../constants/rows';
+import { rowHierarchy, fieldName, rowSizes } from '../constants/rows';
 
 export default class BrowseTableHeaders extends Component {
   static propTypes = {
@@ -37,8 +37,7 @@ export default class BrowseTableHeaders extends Component {
       <div className="BrowseTable-headers"
            style={{ width: totalWidth + 'px' }}>
 
-        <div className="BrowseTableSection"
-             style={{ width: headerColumnWidth }}>
+        <div className="BrowseTableSection">
           <div className="BrowseTableHeaderColumn">
             <div className="BrowseTableSection-heading">
               {rowHierarchy.map(({ name, fields }) => {

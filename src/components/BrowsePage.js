@@ -45,7 +45,7 @@ export class BrowsePage extends Component {
   }
 
   componentDidUpdate() {
-    performance.mark('update done');
+    performance.mark('page - update done');
     if (process.env.NODE_ENV !== 'production') {
       const marks = performance.getEntriesByType('mark');
       const start = marks[0].startTime;
@@ -123,19 +123,19 @@ export class BrowsePage extends Component {
     /* filtering */
 
     performance.clearMarks();
-    performance.mark('renderStart');
+    performance.mark('page - renderStart');
 
     const createdFilters = this.createFilters();
     const filterFunc = createdFilters.length === 0 ?
       () => true :
       instance => _.every(createdFilters, filter => filter(instance));
 
-    performance.mark('madeFilters');
+    performance.mark('page - madeFilters');
 
     const filtered = _.filter(_.values(registry), filterFunc);
     const filteredIds = filtered.map(item => item.id);
 
-    performance.mark('filtered');
+    performance.mark('page - filtered');
 
     /* derived data */
 
@@ -232,7 +232,7 @@ export class BrowsePage extends Component {
      }, {}));
      */
 
-    performance.mark('derived data');
+    performance.mark('page - derived data');
 
     // could let refine panel get filter func etc itself...
 

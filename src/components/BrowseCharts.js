@@ -10,7 +10,16 @@ export default class BrowseCharts extends Component {
     derivedData: PropTypes.object.isRequired,
   };
 
+  componentWillReceiveProps() {
+    performance.mark('charts - receive props');
+  }
+
+  componentDidUpdate() {
+    performance.mark('charts - update done');
+  }
+
   render() {
+    performance.mark('charts - render start');
     const { noInstances, derivedData } = this.props;
 
     return (

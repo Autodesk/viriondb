@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { rowSizes, headerColumnWidth } from '../constants/rows';
+import { rowSizes } from '../constants/rows';
 import registry from '../data/register';
 import Checkbox from './Checkbox';
 
@@ -13,6 +13,14 @@ export default class BrowseTableValue extends Component {
     onCheck: PropTypes.func.isRequired,
     onOpen: PropTypes.func.isRequired,
   };
+
+  componentWillReceiveProps() {
+    performance.mark(`value ${this.props.instanceId} - receive props`);
+  }
+
+  componentDidUpdate() {
+    performance.mark(`value ${this.props.instanceId} - updated`);
+  }
 
   render() {
     const { instanceId, sections, checked, onOpen, onCheck } = this.props;
