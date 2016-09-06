@@ -53,7 +53,6 @@ export class BrowsePage extends Component {
         console.log(mark.name, mark.startTime - start);
       });
     }
-    performance.clearMarks();
 
     //lame debouncing
     //todo - use real debouncing
@@ -123,6 +122,7 @@ export class BrowsePage extends Component {
 
     /* filtering */
 
+    performance.clearMarks();
     performance.mark('renderStart');
 
     const createdFilters = this.createFilters();

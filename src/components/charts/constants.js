@@ -1,7 +1,7 @@
 import d3 from 'd3';
 
 export const graphWidth = 300;
-export const graphHeight = 170;
+export const graphHeight = 170; //pie (line is 150)
 
 /* layout */
 

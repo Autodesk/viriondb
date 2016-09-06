@@ -55,9 +55,11 @@ export default class PieChart extends Component {
 
   update(data) {
     const pieData = pie(massageData(data));
-    const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.25);
+    const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.5);
 
     // PATHS
+
+    //todo - ideally enter from right location and exit by collapsing, not just disappearing
 
     //update the pie sections
     const slice = this.svg.select(".slices").selectAll("path.slice")
@@ -84,18 +86,16 @@ export default class PieChart extends Component {
       });
 
     slice.exit()
-    /*
-     .transition().duration(transitionDuration)
-     .attrTween('d', function attrTween(d) {
-     const interpolate = d3.interpolate(this._current, { value: 0 });
-     return (t) => arc(interpolate(t));
-     })
-     */
+      /*
+      .transition().duration(transitionDuration)
+      .attrTween('d', function attrTween(d) {
+        const interpolate = d3.interpolate(this._current, { value: 0 });
+        return (t) => arc(interpolate(t));
+      })
+      */
       .remove();
 
     //TEXT
-
-    //todo - only show text when pie section is large enough
 
     const text = this.svg.select(".labels").selectAll('text')
       .data(filtered, keyFn);
@@ -113,6 +113,7 @@ export default class PieChart extends Component {
     function midAngle(d) {
       return d.startAngle + (d.endAngle - d.startAngle) / 2;
     }
+
     const PiIsh = Math.PI + 0.05;
 
     text.transition().duration(transitionDuration)
@@ -157,10 +158,10 @@ export default class PieChart extends Component {
 
     polyline.transition().duration(transitionDuration)
       .style('opacity', 1)
-      .attrTween("points", function(d){
+      .attrTween("points", function (d) {
         const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
-        return function(t) {
+        return function (t) {
           const d2 = interpolate(t);
           const pos = outerArc.centroid(d2);
           pos[0] = radius * 0.95 * (midAngle(d2) <= PiIsh ? 1 : -1);

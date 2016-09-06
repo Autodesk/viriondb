@@ -5,7 +5,7 @@ import Checkbox from './Checkbox';
 
 import '../styles/BrowseTableValue.css';
 
-export default class BrowseTableSection extends Component {
+export default class BrowseTableValue extends Component {
   static propTypes = {
     instanceId: PropTypes.string.isRequired,
     sections: PropTypes.array.isRequired,
