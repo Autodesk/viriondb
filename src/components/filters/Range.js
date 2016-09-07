@@ -40,6 +40,12 @@ export default class Range extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.filter) {
+      this.setState({ value: this.props.defaultFilter });
+    }
+  }
+
   onChange = (input) => {
     const scaled = input.map(this.scaleUpFn);
     const isDefault = isEqual(scaled, this.props.defaultFilter);
@@ -49,6 +55,16 @@ export default class Range extends Component {
       value: next,
     }, () => this.props.setFilter({ [this.props.field]: next }, isDefault));
   };
+
+  round(num) {
+    if (num > 100000) {
+      return `${Math.round(num / 1000)}k`;
+    }
+    if (num > 1000) {
+      return `${Math.round(num / 100) / 10}k`;
+    }
+    return num;
+  }
 
   render() {
     const { value } = this.state;
@@ -63,8 +79,8 @@ export default class Range extends Component {
     const right = 100 - scaledValue[1];
     const hideLeft = (scaledValue[1] - left) < 25;
     const hideRight = right > 90;
-    const leftLabel = filterValue[0] > 1000 ? `${Math.round(filterValue[0] / 1000)}k` : filterValue[0];
-    const rightLabel = filterValue[1] > 1000 ? `${Math.round(filterValue[1] / 1000)}k` : filterValue[1];
+    const leftLabel = this.round(filterValue[0]);
+    const rightLabel = this.round(filterValue[1]);
 
     return (
       <div className="Range">
