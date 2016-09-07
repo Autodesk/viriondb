@@ -20,12 +20,6 @@ export default class RefineSection extends Component {
     open: false,
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.open !== nextState.open ||
-      !isEqual(this.props.filter, nextProps.filter) ||
-      this.props.field !== nextProps.field;
-  }
-
   static componentMap = {
     discrete: Discrete,
     range: Range,
