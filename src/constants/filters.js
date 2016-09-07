@@ -6,7 +6,7 @@ export const filters = [
   {
     field: 'derived_baltimore',
     type: 'discrete',
-    shortname: 'BC',
+    shortname: 'BG',
     color: '#D28482',
     default: {},
     values: {
