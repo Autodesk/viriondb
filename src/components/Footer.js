@@ -13,6 +13,7 @@ export default class Footer extends Component {
                target="_blank"
                href="https://forum.bionano.autodesk.com/t/about-viriondb/">About VirionDB</a>
             <a className="Footer-link"
+               href="https://forum.bionano.autodesk.com/c/viriondb"
                target="_blank">Community</a>
             <a className="Footer-link"
                target="_blank"
