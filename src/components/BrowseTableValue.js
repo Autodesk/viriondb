@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { rowSizes } from '../constants/rows';
+import { mark } from '../data/performance';
 import registry from '../data/register';
 import Checkbox from './Checkbox';
 
@@ -15,7 +16,7 @@ export default class BrowseTableValue extends Component {
   };
 
   componentWillReceiveProps() {
-    performance.mark(`value ${this.props.instanceId} - receive props`);
+    mark(`value ${this.props.instanceId} - receive props`);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -25,11 +26,11 @@ export default class BrowseTableValue extends Component {
   }
 
   componentDidUpdate() {
-    performance.mark(`value ${this.props.instanceId} - updated`);
+    mark(`value ${this.props.instanceId} - updated`);
   }
 
   render() {
-    performance.mark(`value ${this.props.instanceId} - rendering`);
+    mark(`value ${this.props.instanceId} - rendering`);
 
     const { instanceId, sections, checked, onOpen, onCheck } = this.props;
     const instance = registry[instanceId];
