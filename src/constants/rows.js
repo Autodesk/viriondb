@@ -31,7 +31,7 @@ export const rowNames = {
   derived_sense: 'Sense',
   sequenced_mol: 'Nucleic Acid Molecule',
   nucleid_acid_structure: 'Nucleic Acid Structure',
-  nucleic_acid_shape: 'Nucleid Acid Shape',
+  nucleic_acid_shape: 'Nucleic Acid Shape',
   genome_shape: 'Genome Shape',
   derived_protein_count: 'Protein Count',
   derived_segment_count: 'Segments',
