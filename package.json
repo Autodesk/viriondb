@@ -17,6 +17,7 @@
   "dependencies": {
     "babel-runtime": "^6.6.1",
     "bluebird": "^3.4.1",
+    "compression": "^1.6.2",
     "d3": "^3.5.17",
     "http-route": "^1.1.0",
     "invariant": "^2.2.0",
