@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs';
+import compression from 'compression';
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
@@ -27,6 +27,7 @@ app.use(morgan('dev', {
   skip: (req, res) => req.path.indexOf('browser-sync') >= 0 || req.path.indexOf('__webpack') >= 0,
 }));
 
+app.use(compression());
 
 //Static Files
 app.use(express.static(pathContent));
