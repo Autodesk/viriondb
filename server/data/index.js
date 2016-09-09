@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import compression from 'compression';
 
 import data from '../../data/keyedData';
 
@@ -9,8 +8,6 @@ const jsonParser = bodyParser.json({
   strict: false, //allow values other than arrays and objects,
   limit: 20 * 1024 * 1024,
 });
-
-router.use(compression());
 
 router.route('/id/:ids')
   .all(jsonParser)
