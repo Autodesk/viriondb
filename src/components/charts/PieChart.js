@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../../constants/rows';
 import filters, { unknownValue } from '../../constants/filters';
+import { toggleDiscreteFilter } from '../../data/activeFilters';
 import {
   pie,
   arc,
@@ -49,11 +50,8 @@ export default class PieChart extends Component {
     //update the chart
   }
 
-  onSectionClick = (section) => {
-
-  };
-
   update(data) {
+    const handleClick = (value) => toggleDiscreteFilter(this.props.field, value);
     const pieData = pie(massageData(data));
     const filtered = pieData.filter(d => (d.endAngle - d.startAngle) > 0.25);
 
@@ -71,6 +69,10 @@ export default class PieChart extends Component {
       .style("fill", () => this.props.color)
       .each(function (d) {
         this._current = d;
+      })
+      .style('cursor', 'pointer')
+      .on('click', function (d) {
+        handleClick(d.data.key);
       });
 
     //basic mouseover tooltip
@@ -86,13 +88,13 @@ export default class PieChart extends Component {
       });
 
     slice.exit()
-      /*
-      .transition().duration(transitionDuration)
-      .attrTween('d', function attrTween(d) {
-        const interpolate = d3.interpolate(this._current, { value: 0 });
-        return (t) => arc(interpolate(t));
-      })
-      */
+    /*
+     .transition().duration(transitionDuration)
+     .attrTween('d', function attrTween(d) {
+     const interpolate = d3.interpolate(this._current, { value: 0 });
+     return (t) => arc(interpolate(t));
+     })
+     */
       .remove();
 
     //TEXT
@@ -107,6 +109,10 @@ export default class PieChart extends Component {
       .style("fill", d => this.props.color)
       .each(function (d) {
         this._current = d;
+      })
+      .style('cursor', 'pointer')
+      .on('click', function (d) {
+        handleClick(d.data.key);
       })
       .text(keyFn);
 

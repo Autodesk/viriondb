@@ -13,6 +13,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
+import { getDefaultFilter } from '../constants/filters';
 
 export const activeFilters = {};
 
@@ -51,6 +52,24 @@ export const setFilter = (filterPatch, force = false) => {
   safelyRunCallbacks(force);
 
   return activeFilters;
+};
+
+export const toggleDiscreteFilter = (field, value) => {
+  const filter = activeFilters[field];
+  const defaultFilter = getDefaultFilter(field);
+
+  let next = Object.assign({}, defaultFilter, filter);
+  if (next[value]) {
+    delete next[value];
+  } else {
+    next[value] = true;
+  }
+
+  if (Object.keys(next).length === 0) {
+    next = null;
+  }
+
+  setFilter({ [field]: next });
 };
 
 export const resetFilter = (field, force) => {

@@ -163,6 +163,11 @@ export const filters = [
    */
 ];
 
+export const getDefaultFilter = field => {
+  const filter = filters.find(filter => filter.field === field);
+  return filter['default'];
+};
+
 export const getRange = (field) => {
   const filter = filters.find(filter => filter.field === field);
   return filter ? filter.range : [0, 0];
