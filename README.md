@@ -13,6 +13,10 @@ Install node v4+ and npm v3
 `npm install`
 `npm start`
 
+### Download Data
+
+You can download the latest complete dataset from http://viriondb.com/data/all
+
 ### License
 
 Copyright 2016 Autodesk Inc.

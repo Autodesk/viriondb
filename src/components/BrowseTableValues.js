@@ -17,6 +17,7 @@ import React, { Component, PropTypes } from 'react';
 import { tableRowHeight } from '../constants/layout';
 import { throttle } from 'lodash';
 import { mark } from '../data/performance';
+import { onFilterChange } from '../data/activeFilters';
 
 import BrowseTableValue from './BrowseTableValue';
 
@@ -35,12 +36,23 @@ export default class BrowseTableValues extends Component {
     tableHeight: 400,
   };
 
+  componentDidMount() {
+    this.listener = onFilterChange((function scrollTopOnFilterChange() {
+      this.setState({ offset: 0 });
+      this.tableValues.scrollTop = 0;
+    }).bind(this));
+  }
+
   componentWillReceiveProps() {
     mark('table - receive props');
   }
 
   componentDidUpdate() {
     mark('table - update done');
+  }
+
+  componentWillUnmount() {
+    this.listener();
   }
 
   handleScroll = (evt) => {

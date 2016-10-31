@@ -6,7 +6,7 @@ import invariant from 'invariant';
 
 import { mark, reset, dump } from '../data/performance';
 import registry, { onRegister } from '../data/register';
-import activeFilters, { setFilter, onRegisterFilter } from '../data/activeFilters';
+import activeFilters, { setFilter, onFilterChange } from '../data/activeFilters';
 import { unknownValue, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
@@ -34,7 +34,7 @@ export class BrowsePage extends Component {
       }
     }).bind(this));
 
-    this.filterListener = onRegisterFilter((filters, force) => {
+    this.filterListener = onFilterChange((filters, force) => {
       this.setState({ filters });
       if (force) {
         this.shouldUpdate = true;
@@ -194,8 +194,7 @@ export class BrowsePage extends Component {
 
     return (
       <div className="BrowsePage">
-        <RefinePanel setFilter={setFilter}
-                     filters={activeFilters}/>
+        <RefinePanel filters={activeFilters}/>
 
         <div className="BrowsePage-main">
           <BrowseTable openInstances={this.openInstances.bind(this)}
