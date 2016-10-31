@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import ReactSlider from 'react-slider';
 import d3 from 'd3';
 import { isEqual } from 'lodash';
+import { setFilter } from '../../data/activeFilters';
 
 import '../../styles/Range.css';
 
@@ -10,7 +11,6 @@ import '../../styles/Range.css';
 
 export default class Range extends Component {
   static propTypes = {
-    setFilter: PropTypes.func.isRequired,
     filter: PropTypes.array,
     field: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
@@ -53,7 +53,7 @@ export default class Range extends Component {
 
     this.setState({
       value: next,
-    }, () => this.props.setFilter({ [this.props.field]: next }, isDefault));
+    }, () => setFilter({ [this.props.field]: next }, isDefault));
   };
 
   round(num) {

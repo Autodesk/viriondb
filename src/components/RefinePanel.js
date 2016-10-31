@@ -6,12 +6,11 @@ import '../styles/RefinePanel.css';
 
 export default class RefinePanel extends Component {
   static propTypes = {
-    setFilter: PropTypes.func.isRequired,
     filters: PropTypes.object.isRequired,
   };
 
   render() {
-    const { setFilter, filters } = this.props;
+    const { filters } = this.props;
 
     return (
       <div className="RefinePanel">
@@ -28,8 +27,7 @@ export default class RefinePanel extends Component {
                              type={type}
                              {...rest}
                              color={section.color}
-                             filter={filters[field]}
-                             setFilter={setFilter}/>
+                             filter={filters[field]}/>
             );
           })}
       </div>

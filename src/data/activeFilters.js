@@ -30,7 +30,7 @@ const safelyRunCallbacks = (force) => {
   callbacks.forEach(cb => safelyRunCallback(cb, force));
 };
 
-export const onRegisterFilter = (cb) => {
+export const onFilterChange = (cb) => {
   callbacks.push(cb);
   safelyRunCallback(cb);
   return function deregister() {
@@ -51,6 +51,10 @@ export const setFilter = (filterPatch, force = false) => {
   safelyRunCallbacks(force);
 
   return activeFilters;
+};
+
+export const resetFilter = (field, force) => {
+  return setFilter({ [ field ]: null }, force);
 };
 
 export default activeFilters;

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Checkbox from '../Checkbox';
+import { setFilter } from '../../data/activeFilters';
 
 import '../../styles/Discrete.css';
 
@@ -14,7 +15,7 @@ export default class Discrete extends Component {
   };
 
   toggleValue = (value) => {
-    const { field, filter, setFilter, defaultFilter } = this.props;
+    const { field, filter, defaultFilter } = this.props;
     let next = Object.assign({}, defaultFilter, filter);
     if (next[value]) {
       delete next[value];

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { fieldName } from '../constants/rows';
 import { filters } from '../constants/filters';
 import { cloneDeep, isEqual } from 'lodash';
+import { resetFilter } from '../data/activeFilters';
 
 import Discrete from './filters/Discrete';
 import Range from './filters/Range';
@@ -10,7 +11,6 @@ import '../styles/RefineSection.css';
 
 export default class RefineSection extends Component {
   static propTypes = {
-    setFilter: PropTypes.func.isRequired,
     filter: PropTypes.any,
     field: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['discrete', 'range']).isRequired,
@@ -37,13 +37,9 @@ export default class RefineSection extends Component {
     return cloneDeep(def);
   };
 
-  resetFilter = () => {
+  resetThisFilter = () => {
     const { field } = this.props;
-
-    //set to default
-    //this.props.setFilter({ [field]: this.getDefault() });
-
-    this.props.setFilter({ [field]: null }, true);
+    resetFilter(field);
   };
 
   hasFilter = (forceProps = {}) => {
@@ -64,7 +60,7 @@ export default class RefineSection extends Component {
   };
 
   render() {
-    const { field, type, filter } = this.props;
+    const { field, type } = this.props;
     const { open } = this.state;
     const ControlComponent = RefineSection.componentMap[type];
     const hasFilter = this.hasFilter();
@@ -81,7 +77,7 @@ export default class RefineSection extends Component {
         </div>
 
         <div className="RefineSection-reset action"
-             onClick={() => this.resetFilter()}>
+             onClick={() => this.resetThisFilter()}>
           Reset
         </div>
 
