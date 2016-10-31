@@ -15,7 +15,10 @@
  */
 import { getDefaultFilter } from '../constants/filters';
 
-export const activeFilters = {};
+//starting filters
+export const activeFilters = {
+  sort: 'name',
+};
 
 const callbacks = [];
 
@@ -70,6 +73,15 @@ export const toggleDiscreteFilter = (field, value) => {
   }
 
   setFilter({ [field]: next });
+};
+
+export const toggleSortFilter = (field) => {
+  const filter = activeFilters.sort;
+  if (!filter || filter !== field) {
+    setFilter({ sort: field });
+    return;
+  }
+  setFilter({ sort: 'name' });
 };
 
 export const resetFilter = (field, force) => {

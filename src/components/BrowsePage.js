@@ -109,6 +109,11 @@ export class BrowsePage extends Component {
       };
     }
 
+    if (filter.type === 'sort') {
+      //dont do anything
+      return null;
+    }
+
     console.warn(`no filter for ${filter.field} (${filter.type})`);
     return null;
   }
@@ -148,9 +153,15 @@ export class BrowsePage extends Component {
       instance => _.every(createdFilters, filter => filter(instance));
 
     const filtered = _.filter(_.values(registry), filterFunc);
-    const filteredIds = filtered.map(item => item.id);
 
     mark('page - filtered');
+
+    const sortFilter = activeFilters.sort;
+    const sorted = (sortFilter !== 'name') ? _.sortBy(filtered, [ sortFilter ]) : filtered;
+
+    mark('page - sorted');
+
+    const filteredIds = sorted.map(item => item.id);
 
     /* derived data */
 

@@ -11,6 +11,7 @@
 }
 
 .App-content {
+  background-color: var(--colors-white);
   display: flex;
   flex-grow: 1;
   min-width: 1270px;
