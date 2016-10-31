@@ -15,6 +15,7 @@
  */
 import React, { Component, PropTypes } from 'react';
 import { isEqual } from 'lodash';
+import activeFilters, { onFilterChange, toggleSortFilter } from '../data/activeFilters';
 import { rowHierarchy, fieldName, rowSizes } from '../constants/rows';
 
 export default class BrowseTableHeaders extends Component {
@@ -25,13 +26,29 @@ export default class BrowseTableHeaders extends Component {
     toggleSection: PropTypes.func.isRequired,
   };
 
+  componentDidMount() {
+    this.lastSort = 'name';
+
+    this.listener = onFilterChange(function handleSortFilterChange() {
+      if (this.lastSort !== activeFilters.sort) {
+        this.lastSort = activeFilters.sort;
+        this.forceUpdate();
+      }
+    }.bind(this));
+  }
+
   shouldComponentUpdate(nextProps) {
     return this.props.sections.length !== nextProps.sections.length ||
       this.props.totalWidth !== nextProps.totalWidth;
   }
 
+  componentWillUnmount() {
+    this.listener();
+  }
+
   render() {
     const { openInstances, toggleSection, totalWidth, sections } = this.props;
+    const sortFilter = activeFilters.sort;
 
     return (
       <div className="BrowseTable-headers"
@@ -72,7 +89,8 @@ export default class BrowseTableHeaders extends Component {
                 {fields.map(field => {
                   const nameField = fieldName(field);
                   return (
-                    <div className="BrowseTableSection-columnName"
+                    <div className={'BrowseTableSection-columnName' + (sortFilter === field ? ' filtering' : '')}
+                         onClick={() => toggleSortFilter(field)}
                          style={{ width: rowSizes[field] }}
                          key={field}>{nameField}</div>
                   );
