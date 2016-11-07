@@ -1,3 +1,18 @@
+/*
+ Copyright 2016 Autodesk,Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import Perf from 'react-addons-perf';
@@ -6,7 +21,7 @@ import invariant from 'invariant';
 
 import { mark, reset, dump } from '../data/performance';
 import registry, { onRegister } from '../data/register';
-import activeFilters, { setFilter, onRegisterFilter } from '../data/activeFilters';
+import activeFilters, { setFilter, onFilterChange } from '../data/activeFilters';
 import { unknownValue, filters } from '../constants/filters';
 
 import RefinePanel from './RefinePanel';
@@ -34,7 +49,7 @@ export class BrowsePage extends Component {
       }
     }).bind(this));
 
-    this.filterListener = onRegisterFilter((filters, force) => {
+    this.filterListener = onFilterChange((filters, force) => {
       this.setState({ filters });
       if (force) {
         this.shouldUpdate = true;
@@ -94,6 +109,11 @@ export class BrowsePage extends Component {
       };
     }
 
+    if (filter.type === 'sort') {
+      //dont do anything
+      return null;
+    }
+
     console.warn(`no filter for ${filter.field} (${filter.type})`);
     return null;
   }
@@ -133,9 +153,15 @@ export class BrowsePage extends Component {
       instance => _.every(createdFilters, filter => filter(instance));
 
     const filtered = _.filter(_.values(registry), filterFunc);
-    const filteredIds = filtered.map(item => item.id);
 
     mark('page - filtered');
+
+    const sortFilter = activeFilters.sort;
+    const sorted = (sortFilter !== 'name') ? _.sortBy(filtered, [ sortFilter ]) : filtered;
+
+    mark('page - sorted');
+
+    const filteredIds = sorted.map(item => item.id);
 
     /* derived data */
 
@@ -194,8 +220,7 @@ export class BrowsePage extends Component {
 
     return (
       <div className="BrowsePage">
-        <RefinePanel setFilter={setFilter}
-                     filters={activeFilters}/>
+        <RefinePanel filters={activeFilters}/>
 
         <div className="BrowsePage-main">
           <BrowseTable openInstances={this.openInstances.bind(this)}

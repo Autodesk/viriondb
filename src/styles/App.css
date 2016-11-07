@@ -5,14 +5,16 @@
 .App {
   background-color: var(--colors-white);
   min-height: 100vh;
+  min-width: 650px;
   display: flex;
   flex-direction: column;
 }
 
 .App-content {
+  background-color: var(--colors-white);
   display: flex;
   flex-grow: 1;
-  max-width: 100vw;
+  min-width: 1270px;
   overflow-x: scroll;
 }
 

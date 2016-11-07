@@ -31,8 +31,13 @@
   }
 
   &-columnName {
+    cursor: pointer;
     padding: var(--table-padding);
     color: var(--colors-grey);
+
+    &.filtering {
+      color: var(--colors-selected);
+    }
   }
 
   &-compare {
