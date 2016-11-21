@@ -52,14 +52,12 @@ export const outerArc = d3.svg.arc()
   .innerRadius(radius * 0.95);
 
 export const massageData = (map, skipFilter = false) => {
-  const total = _.reduce(map, (acc, val, key) => acc + val, 0);
-
-  console.log(total);
+  //const total = _.reduce(map, (acc, val, key) => acc + val, 0);
 
   return _.map(map, (val, key) => ({
     key,
     value: val,
-    percent: (val / total * 100).toPrecision(2),
+    //percent: (val / total * 100).toPrecision(2),
   }))
     .filter(obj => obj.key !== 'null')
     .filter(obj => skipFilter || obj.value > 0);
