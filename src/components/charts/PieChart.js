@@ -129,7 +129,7 @@ export default class PieChart extends Component {
       .on('click', function (d) {
         handleClick(d.data.key);
       })
-      .text(keyFn);
+      .text(d => `${d.data.key} (${d.data.value})`);
 
     function midAngle(d) {
       return d.startAngle + (d.endAngle - d.startAngle) / 2;

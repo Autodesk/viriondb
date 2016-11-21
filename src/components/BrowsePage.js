@@ -168,8 +168,9 @@ export class BrowsePage extends Component {
     //may want to compute alongside filtering so only pass through once
 
     //set it up
-    const derivedData = filters.slice()
+    const derivedData = filters
       .filter(filter => filter.visible !== false)
+      //sort so the pie charts show up first
       .sort((one, two) => one.type === 'discrete' ? -1 : 1)
       .reduce((acc, filter) => {
         if (filter.type === 'discrete') {
