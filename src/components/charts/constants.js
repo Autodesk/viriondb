@@ -5,15 +5,16 @@
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+ http://www.apache.org/licenses/LICENSE-2.0
 
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
-*/
+ */
 import d3 from 'd3';
+import _ from 'lodash';
 
 export const graphWidth = 300;
 export const graphHeight = 170; //pie (line is 150)
@@ -50,12 +51,19 @@ export const outerArc = d3.svg.arc()
   .outerRadius(radius * 0.95)
   .innerRadius(radius * 0.95);
 
-export const massageData = (map, skipFilter = false) => Object.keys(map).map(key => ({
-  key,
-  value: map[key],
-}))
-  .filter(obj => obj.key !== 'null')
-  .filter(obj => skipFilter || obj.value > 0);
+export const massageData = (map, skipFilter = false) => {
+  const total = _.reduce(map, (acc, val, key) => acc + val, 0);
+
+  console.log(total);
+
+  return _.map(map, (val, key) => ({
+    key,
+    value: val,
+    percent: (val / total * 100).toPrecision(2),
+  }))
+    .filter(obj => obj.key !== 'null')
+    .filter(obj => skipFilter || obj.value > 0);
+};
 
 export const keyFn = (d) => d.data.key;
 
